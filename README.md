@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Najma Spa — Static Website
 
-## Getting Started
+Frontend-only rebuild of [nagmspa.com](https://nagmspa.com) from the WordPress backup. No WordPress, CMS, or database dependency.
 
-First, run the development server:
+## Pages
+
+| URL | Description |
+|-----|-------------|
+| `/` | Landing page (WordPress front page) |
+| `/home/` | Main homepage with services |
+| `/about/` | About Najma Spa |
+| `/contact/` | Contact information and map |
+
+Blog (`/المدونة/`) is excluded per project requirements.
+
+## Development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Production build (static export)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Output is written to `out/`.
 
-## Learn More
+## Analytics
 
-To learn more about Next.js, take a look at the following resources:
+Set environment variables to enable tracking (disabled by default):
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```env
+NEXT_PUBLIC_ANALYTICS_ENABLED=true
+NEXT_PUBLIC_GTM_ID=GTM-PFN9DZZS
+NEXT_PUBLIC_GA4_ID=G-WMC25VLYMD
+NEXT_PUBLIC_SNAP_PIXEL_ID=3c73e8eb-b2e1-4eb7-b0b3-28d717ed3e31
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+See `src/content/analytics.ts` for the full configuration.
 
-## Deploy on Vercel
+## Content source
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Page HTML is extracted from the WordPress backup `_elementor_element_cache` into `src/content/html/`. Images are copied to `public/assets/`. The original backup in `../public_html (1)/` and `../u211700373_24zbX.sql` is never modified.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Forms
+
+See [docs/FORMS.md](docs/FORMS.md) for the WPForms appointment form that requires an external service.

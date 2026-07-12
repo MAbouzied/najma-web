@@ -39,3 +39,14 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# WordPress backup artifacts (not part of the Next.js app)
+/src/content/html/
+/src/components/ElementorContent.tsx
+/public/assets/2021/
+/public/assets/2022/
+/public/assets/2023/
+/public/assets/2024/
+/public/assets/elementor/
+/public/المدونة/
+/public/نجم-سبا/
