@@ -1,0 +1,8 @@
+name = "najma-web"
+compatibility_date = "2026-07-12"
+
+# Static Next.js export (output: "export" ? ./out). Not OpenNext/Workers SSR.
+[assets]
+directory = "./out"
+html_handling = "auto-trailing-slash"
+not_found_handling = "404-page"

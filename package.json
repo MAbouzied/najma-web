@@ -4,9 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build --turbopack",
+    "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "deploy": "npm run build && wrangler deploy",
+    "preview:cf": "npm run build && wrangler dev"
   },
   "dependencies": {
     "react": "19.1.0",
@@ -22,6 +24,7 @@
     "tailwindcss": "^4",
     "eslint": "^9",
     "eslint-config-next": "15.5.20",
-    "@eslint/eslintrc": "^3"
+    "@eslint/eslintrc": "^3",
+    "wrangler": "^4.110.0"
   }
 }

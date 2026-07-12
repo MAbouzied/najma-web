@@ -28,6 +28,29 @@ npm run build
 
 Output is written to `out/`.
 
+## Deploy to Cloudflare
+
+This site is a **static export** (`output: "export"`). Deploy the `out/` folder — do **not** use OpenNext / Workers SSR.
+
+### Cloudflare Workers (static assets)
+
+`wrangler.toml` is already configured to serve `./out`.
+
+| Setting | Value |
+|---------|-------|
+| Build command | `npm run build` |
+| Deploy command | `npx wrangler deploy` |
+
+Or locally: `npm run deploy`
+
+### Cloudflare Pages
+
+| Setting | Value |
+|---------|-------|
+| Framework preset | None |
+| Build command | `npm run build` |
+| Build output directory | `out` |
+
 ## Analytics
 
 Set environment variables to enable tracking (disabled by default):
