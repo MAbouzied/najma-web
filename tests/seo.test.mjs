@@ -23,11 +23,11 @@ test('renders complete canonical and social metadata on every page', () => {
     assert.match(html, /<meta property="og:locale" content="ar_SA">/);
     assert.match(html, /<meta property="og:title" content="[^"]+">/);
     assert.match(html, /<meta property="og:description" content="[^"]+">/);
-    assert.match(html, /<meta property="og:image" content="https:\/\/nagmspa\.com\/assets\/og\/nagm-spa-share\.jpg">/);
+    assert.match(html, /<meta property="og:image" content="https:\/\/najma-web\.mohamed-abouzied\.workers\.dev\/assets\/og\/nagm-spa-share\.jpg">/);
     assert.match(html, /<meta property="og:image:width" content="1200">/);
     assert.match(html, /<meta property="og:image:height" content="630">/);
     assert.match(html, /<meta name="twitter:card" content="summary_large_image">/);
-    assert.match(html, /<meta name="twitter:image" content="https:\/\/nagmspa\.com\/assets\/og\/nagm-spa-share\.jpg">/);
+    assert.match(html, /<meta name="twitter:image" content="https:\/\/najma-web\.mohamed-abouzied\.workers\.dev\/assets\/og\/nagm-spa-share\.jpg">/);
     assert.match(html, /<meta name="robots" content="index, follow, max-image-preview:large">/);
     assert.match(html, /<link rel="icon" href="\/favicon\.ico" sizes="any">/);
     assert.match(html, /<link rel="apple-touch-icon" sizes="180x180" href="\/apple-touch-icon\.png">/);
@@ -102,12 +102,12 @@ test('adds breadcrumb schema to About and Contact pages', () => {
 test('serves crawl and LLM discovery files without placeholder origins', () => {
   assert.match(robotsText, /^User-agent: \*/);
   assert.match(robotsText, /Allow: \//);
-  assert.match(robotsText, /Sitemap: https:\/\/nagmspa\.com\/sitemap-index\.xml/);
+  assert.match(robotsText, /Sitemap: https:\/\/najma-web\.mohamed-abouzied\.workers\.dev\/sitemap-index\.xml/);
   assert.doesNotMatch(robotsText, /localhost|example\.com/);
 
   assert.match(llmsText, /^# نجم سبا/);
   assert.match(llmsText, /## الصفحات الرئيسية/);
-  assert.match(llmsText, /\[من نحن\]\(https:\/\/nagmspa\.com\/about\/\)/);
-  assert.match(llmsText, /\[الأسئلة الشائعة\]\(https:\/\/nagmspa\.com\/#faq\)/);
+  assert.match(llmsText, /\[من نحن\]\(https:\/\/najma-web\.mohamed-abouzied\.workers\.dev\/about\/\)/);
+  assert.match(llmsText, /\[الأسئلة الشائعة\]\(https:\/\/najma-web\.mohamed-abouzied\.workers\.dev\/#faq\)/);
   assert.doesNotMatch(llmsText, /localhost|example\.com/);
 });
