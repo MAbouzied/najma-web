@@ -1,0 +1,74 @@
+---
+import SectionHeading from './SectionHeading.astro';
+import type { SiteAction } from '../data/site';
+
+export interface Props {
+  eyebrow: string;
+  title: string;
+  paragraphs: string[];
+  image: string;
+  imageAlt: string;
+  imagePosition?: 'left' | 'right';
+  surface?: 'primary' | 'secondary';
+  primaryAction?: SiteAction;
+  secondaryAction?: SiteAction;
+}
+
+const {
+  eyebrow,
+  title,
+  paragraphs,
+  image,
+  imageAlt,
+  imagePosition = 'right',
+  surface = 'secondary',
+  primaryAction,
+  secondaryAction,
+} = Astro.props;
+
+const imageDesktopOrder = imagePosition === 'left' ? 'lg:order-1' : 'lg:order-2';
+const contentDesktopOrder = imagePosition === 'left' ? 'lg:order-2' : 'lg:order-1';
+---
+
+<section
+  data-split-media
+  class:list={['section-block', surface === 'primary' ? 'bg-bg-primary' : 'bg-bg-secondary']}
+>
+  <div class="page-container grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16" dir="ltr">
+    <div class:list={['order-1', contentDesktopOrder]} dir="rtl">
+      <SectionHeading eyebrow={eyebrow} title={title} />
+      <div class="mt-4 flex flex-col gap-4">
+        {paragraphs.map((paragraph) => <p class="text-base leading-6 text-text-muted">{paragraph}</p>)}
+      </div>
+      <slot />
+      {
+        (primaryAction || secondaryAction) && (
+          <div class="mt-8 flex flex-wrap gap-4">
+            {primaryAction && (
+              <a href={primaryAction.href} class="gold-button">
+                <img src="/assets/icons/arrow.svg" alt="" width="16" height="16" class="size-4" />
+                {primaryAction.label}
+              </a>
+            )}
+            {secondaryAction && (
+              <a href={secondaryAction.href} class="outline-button">
+                {secondaryAction.label}
+              </a>
+            )}
+          </div>
+        )
+      }
+    </div>
+
+    <figure class:list={['order-2 overflow-hidden rounded-3xl border border-border-card', imageDesktopOrder]}>
+      <img
+        src={image}
+        alt={imageAlt}
+        width="576"
+        height="520"
+        class="h-auto min-h-[320px] w-full object-cover lg:h-[520px]"
+        loading="eager"
+      />
+    </figure>
+  </div>
+</section>

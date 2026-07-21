@@ -1,0 +1,33 @@
+---
+import type { Faq } from '../data/home';
+
+export interface Props {
+  items: Faq[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="mx-auto flex max-w-[896px] flex-col gap-3" dir="rtl">
+  {items.map((item, index) => (
+    <details class="group rounded-2xl border border-border-card bg-bg-card px-5 sm:px-6" open={index === 0}>
+      <summary class="flex min-h-16 cursor-pointer list-none items-center justify-between gap-6 py-4 text-right font-semibold text-text-primary">
+        <span>{item.question}</span>
+        <img
+          src="/assets/home/faq-chevron.png"
+          alt=""
+          width="16"
+          height="16"
+          class="size-4 shrink-0 transition-transform group-open:rotate-180"
+        />
+      </summary>
+      <p class="border-t border-border-card pb-5 pt-4 text-sm leading-7 text-text-muted">{item.answer}</p>
+    </details>
+  ))}
+</div>
+
+<style>
+  summary::-webkit-details-marker {
+    display: none;
+  }
+</style>

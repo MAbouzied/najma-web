@@ -1,0 +1,89 @@
+---
+import type { SiteAction } from '../data/site';
+
+export interface Props {
+  eyebrow: string;
+  title: string;
+  highlightedTitle: string;
+  description: string;
+  descriptionLine2?: string;
+  image: string;
+  primaryAction: SiteAction;
+  secondaryAction: SiteAction;
+  proofPoints: string[];
+}
+
+const {
+  eyebrow,
+  title,
+  highlightedTitle,
+  description,
+  descriptionLine2,
+  image,
+  primaryAction,
+  secondaryAction,
+  proofPoints,
+} = Astro.props;
+
+const isExternalLink = (href: string) => /^(https?:\/\/|tel:|mailto:)/.test(href);
+---
+
+<section data-home-hero class="overflow-hidden bg-transparent">
+  <div class="mx-auto flex w-full max-w-[896px] flex-col items-center px-5 py-16 text-center sm:px-8 lg:py-24" dir="rtl">
+    <div>
+      <div class="inline-flex items-center gap-2 rounded-full border border-border-badge bg-bg-badge px-4 py-1.5">
+        <img src="/assets/icons/star.svg" alt="" width="14" height="14" class="size-3.5" />
+        <span class="text-xs font-medium text-gold">{eyebrow}</span>
+      </div>
+      <h1 class="mt-5 py-2 text-4xl font-bold leading-[1.25] tracking-[0.48px] sm:text-5xl lg:text-[60px]">
+        <span class="text-text-primary">{title}</span><br />
+        <span class="text-gold-gradient">{highlightedTitle}</span>
+      </h1>
+      <div class="mx-auto mt-4 max-w-[672px] text-base leading-[1.625] text-text-muted sm:text-lg">
+        <p>{description}</p>
+        {descriptionLine2 && <p>{descriptionLine2}</p>}
+      </div>
+
+      <div class="mt-7 flex flex-wrap justify-center gap-4">
+        <a
+          href={secondaryAction.href}
+          {...(isExternalLink(secondaryAction.href) ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+          class="outline-button"
+        >
+          {secondaryAction.label}
+        </a>
+        <a
+          href={primaryAction.href}
+          {...(isExternalLink(primaryAction.href) ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+          class="gold-button"
+        >
+          <img src="/assets/icons/arrow.svg" alt="" width="16" height="16" class="size-4" />
+          {primaryAction.label}
+        </a>
+      </div>
+
+      <ul class="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-3 text-sm text-text-muted" aria-label="مزايا نجم سبا">
+        {proofPoints.map((point) => (
+          <li class="flex items-center gap-2">
+            <span class="size-1.5 rounded-full bg-gold" aria-hidden="true"></span>
+            {point}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+
+  <div class="page-container pb-2">
+    <figure class="relative overflow-hidden rounded-[32px] border-[3px] border-border-card sm:rounded-[48px] lg:rounded-[62px]">
+      <img
+        src={image}
+        alt="حمام سبا فاخر بإضاءة هادئة داخل نجم سبا"
+        width="1216"
+        height="588"
+        class="h-[300px] w-full object-cover sm:h-[440px] lg:h-[588px]"
+        fetchpriority="high"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-bg-primary/80 via-bg-primary/15 to-transparent"></div>
+    </figure>
+  </div>
+</section>

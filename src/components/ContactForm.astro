@@ -1,0 +1,112 @@
+---
+import { WHATSAPP_PHONE } from '../lib/whatsapp';
+
+export interface Props {
+  sectionLabel?: string;
+  title: string;
+  description: string;
+}
+
+const { sectionLabel, title, description } = Astro.props;
+---
+
+<article id="contact-form" class="rounded-3xl bg-bg-form p-6 sm:p-8">
+  {sectionLabel && <span class="text-sm font-medium text-gold">{sectionLabel}</span>}
+  <h2 class="text-gold-gradient mt-2 text-right text-4xl font-bold leading-tight tracking-[0.48px] sm:text-5xl">
+    {title}
+  </h2>
+  <p class="mt-3 text-right text-sm leading-6 text-text-muted sm:text-base">{description}</p>
+
+  <form id="contact-form" class="mt-5 flex w-full flex-col gap-4" dir="rtl">
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <div class="flex flex-col gap-2">
+        <label for="phone" class="text-sm text-text-muted">رقم الجوال</label>
+        <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+٩٦٦" required />
+      </div>
+      <div class="flex flex-col gap-2">
+        <label for="name" class="text-sm text-text-muted">الاسم الكامل</label>
+        <input id="name" name="name" type="text" autocomplete="name" placeholder="اكتب اسمك" required />
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-2">
+      <label for="email" class="text-sm text-text-muted">البريد الإلكتروني</label>
+      <input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" />
+    </div>
+
+    <div class="flex flex-col gap-2">
+      <label for="service" class="text-sm text-text-muted">الخدمة المطلوبة</label>
+      <input id="service" name="service" type="text" placeholder="مثال: مساج سويدي، حمام مغربي..." />
+    </div>
+
+    <div class="flex flex-col gap-2 pb-1.5">
+      <label for="message" class="text-sm text-text-muted">رسالتك</label>
+      <textarea id="message" name="message" placeholder="اكتب تفاصيل طلبك هنا..." rows="5" required></textarea>
+    </div>
+
+    <button type="submit" class="gold-button self-start">
+      <img src="/assets/icons/send.svg" alt="" width="16" height="16" class="size-4" />
+      إرسال عبر واتساب
+    </button>
+  </form>
+</article>
+
+<script define:vars={{ whatsappPhone: WHATSAPP_PHONE }}>
+  document.getElementById('contact-form')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.querySelector('[name="name"]')?.value || '';
+    const phone = form.querySelector('[name="phone"]')?.value || '';
+    const email = form.querySelector('[name="email"]')?.value || '';
+    const service = form.querySelector('[name="service"]')?.value || '';
+    const message = form.querySelector('[name="message"]')?.value || '';
+
+    const body = [
+      `*اسمي:* ${name}`,
+      `*رقمي:* ${phone}`,
+      `*بريدي:* ${email}`,
+      `*الخدمة:* ${service}`,
+      ``,
+      `*الرسالة:*`,
+      message,
+    ].join('\n');
+
+    const url = `https://api.whatsapp.com/send/?phone=${whatsappPhone}&text=${encodeURIComponent(body)}&type=phone_number&app_absent=0`;
+    window.open(url, '_blank');
+  });
+</script>
+
+<style>
+  input,
+  textarea {
+    width: 100%;
+    border: 1px solid var(--color-border-input);
+    border-radius: 16px;
+    background: var(--color-bg-input);
+    color: var(--color-text-primary);
+    font-size: 14px;
+    text-align: right;
+  }
+
+  input {
+    min-height: 42px;
+    padding: 10px 17px;
+  }
+
+  textarea {
+    min-height: 130px;
+    resize: vertical;
+    padding: 13px 17px;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--color-text-placeholder);
+  }
+
+  input:focus,
+  textarea:focus {
+    border-color: var(--color-gold);
+    outline: none;
+  }
+</style>

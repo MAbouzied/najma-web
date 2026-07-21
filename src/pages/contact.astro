@@ -1,0 +1,59 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import Header from '../components/Header.astro';
+import HeroSection from '../components/HeroSection.astro';
+import InfoCards from '../components/InfoCards.astro';
+import ContactForm from '../components/ContactForm.astro';
+import BranchesSection from '../components/BranchesSection.astro';
+import CTASection from '../components/CTASection.astro';
+import { branches } from '../data/branches';
+import { bookingAction, contactDetails } from '../data/site';
+import { buildGeneralContactUrl } from '../lib/whatsapp';
+---
+
+<SiteLayout
+  title="اتصل بنا - نجم سبا"
+  description="تواصل مع نجم سبا للحجز والاستفسار — نسعد بخدمتك."
+  pathname="/contact/"
+  pageType="ContactPage"
+  image="/assets/contact-cta.jpg"
+  breadcrumbLabel="اتصل بنا"
+>
+  <div data-hero-shell class="bg-bg-hero">
+    <Header currentPage="contact" />
+    <HeroSection
+      badge="تواصل معنا"
+      title="اتصل بنا"
+      description="نسعد بخدمتك — تواصل معنا لحجز موعدك أو الاستفسار عن خدماتنا."
+    />
+  </div>
+
+  <InfoCards
+    cards={[
+      { icon: "/assets/icons/phone.svg", label: "الهاتف", value: contactDetails.phoneDisplay, href: contactDetails.phoneHref },
+      { icon: "/assets/icons/whatsapp.svg", label: "واتساب", value: "راسلنا الآن", href: bookingAction.href },
+      { icon: "/assets/icons/mail.svg", label: "البريد الإلكتروني", value: "info@nagmspa.com", href: "mailto:info@nagmspa.com" },
+      { icon: "/assets/icons/clock.svg", label: "ساعات العمل", value: "يوميًا ١٠ص – ١٢م", href: "#branches" },
+    ]}
+  />
+
+  <section class="bg-bg-tertiary">
+    <div class="page-container section-block">
+      <div class="grid grid-cols-1 items-start gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
+        <BranchesSection sectionLabel="موقعنا" branches={branches} />
+        <ContactForm
+          sectionLabel="راسلنا"
+          title="أرسل رسالتك"
+          description="اترك بياناتك وسنعاود التواصل معك في أقرب وقت لتأكيد الحجز أو الرد على استفسارك."
+        />
+      </div>
+    </div>
+  </section>
+
+  <CTASection
+    title="جاهز لتجربة الاسترخاء؟"
+    description="احجز موعدك الآن عبر واتساب أو اتصل بنا مباشرة — فريقنا في انتظارك"
+    primaryAction={{ label: 'تواصل عبر واتساب', href: bookingAction.href }}
+    secondaryAction={{ label: 'راسلنا على واتساب', href: buildGeneralContactUrl() }}
+  />
+</SiteLayout>

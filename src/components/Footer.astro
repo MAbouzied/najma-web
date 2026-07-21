@@ -1,0 +1,68 @@
+---
+import BrandLogo from './BrandLogo.astro';
+import SocialLinks from './SocialLinks.astro';
+import {
+  brandDescription,
+  contactDetails,
+  quickLinks,
+  serviceLinks,
+} from '../data/site';
+---
+
+<footer data-site-footer class="w-full bg-bg-footer" dir="rtl">
+  <div class="page-container py-24">
+    <div class="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
+      <div class="flex flex-col items-start gap-4">
+        <BrandLogo size="footer" />
+        <p class="max-w-[290px] text-right text-sm leading-[1.65] text-text-muted">{brandDescription}</p>
+        <SocialLinks />
+      </div>
+
+      <div>
+        <h2 class="text-sm font-bold tracking-[0.14px] text-gold">روابط سريعة</h2>
+        <ul class="mt-4 flex flex-col gap-2">
+          {quickLinks.map((link) => (
+            <li>
+              <a href={link.href} class="text-sm text-text-muted transition-colors hover:text-gold">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="text-sm font-bold tracking-[0.14px] text-gold">خدماتنا</h2>
+        <ul class="mt-4 flex flex-col gap-2">
+          {
+            serviceLinks.map((link) => (
+              <li>
+                <a href={link.href} class="text-sm text-text-muted transition-colors hover:text-gold">
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="text-sm font-bold tracking-[0.14px] text-gold">تواصل معنا</h2>
+        <ul class="mt-4 flex flex-col gap-2 text-xs text-text-muted">
+          <li class="flex items-center gap-2">
+            <img src="/assets/icons/branch-phone.svg" alt="" width="14" height="14" class="size-3.5" />
+            <a href={contactDetails.phoneHref} target="_blank" rel="noopener noreferrer">{contactDetails.phoneDisplay}</a>
+          </li>
+          <li class="flex items-center gap-2">
+            <img src="/assets/icons/hours.svg" alt="" width="14" height="14" class="size-3.5" />
+            <span>{contactDetails.hours}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-12 flex flex-col-reverse items-start justify-between gap-4 border-t border-border-card pt-6 sm:flex-row sm:items-center">
+      <p class="text-xs text-text-muted">© 2026 نجم سبا. جميع الحقوق محفوظة.</p>
+    </div>
+  </div>
+</footer>

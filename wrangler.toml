@@ -1,8 +1,7 @@
 name = "najma-web"
-compatibility_date = "2026-07-12"
+compatibility_date = "2026-07-21"
 
-# Static Next.js export writes to ./out. Not OpenNext/Workers SSR.
 [assets]
-directory = "./out"
+directory = "./dist"
 html_handling = "auto-trailing-slash"
 not_found_handling = "404-page"

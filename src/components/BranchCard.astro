@@ -1,0 +1,60 @@
+---
+import type { Branch } from '../data/branches';
+import { buildWhatsAppUrl } from '../lib/whatsapp';
+
+export interface Props {
+  branch: Branch;
+}
+
+const { branch } = Astro.props;
+const branchBookingHref = buildWhatsAppUrl(`أهلاً، أريد الحجز في ${branch.title}`);
+---
+
+<article data-branch-card class="rounded-[20px] border border-border-card bg-bg-card p-6 text-right sm:p-8" dir="rtl">
+  <h3 class="text-xl font-semibold leading-7 tracking-[0.2px] text-text-primary">{branch.title}</h3>
+  <dl class="mt-4 flex flex-col gap-3 text-sm leading-5 text-text-muted">
+    <div class="flex items-center gap-2">
+      <img src="/assets/icons/location.svg" alt="" width="16" height="16" class="size-4 shrink-0" />
+      <dt class="sr-only">العنوان</dt>
+      <dd>{branch.address}</dd>
+    </div>
+    <div class="flex items-center gap-2">
+      <img src="/assets/icons/hours.svg" alt="" width="16" height="16" class="size-4 shrink-0" />
+      <dt class="sr-only">ساعات العمل</dt>
+      <dd>{branch.hours}</dd>
+    </div>
+    <div class="flex items-center gap-2">
+      <img src="/assets/icons/branch-phone.svg" alt="" width="16" height="16" class="size-4 shrink-0" />
+      <dt class="sr-only">الهاتف</dt>
+      <dd>
+        {branch.phoneHref ? (
+          <a href={branch.phoneHref} class="transition-colors hover:text-gold">
+            {branch.phone}
+          </a>
+        ) : (
+          branch.phone
+        )}
+      </dd>
+    </div>
+  </dl>
+  <div class="mt-6 flex gap-2">
+    <a
+      href={branchBookingHref}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="gold-button min-h-0 flex-1 px-4 py-2 text-xs font-semibold"
+    >
+      احجز في هذا الفرع
+    </a>
+    {branch.mapsHref && (
+      <a
+        href={branch.mapsHref}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="outline-button min-h-0 flex-1 px-4 py-2 text-xs font-normal text-text-muted"
+      >
+        الاتجاهات
+      </a>
+    )}
+  </div>
+</article>

@@ -1,0 +1,80 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import Header from '../../components/Header.astro';
+import CTASection from '../../components/CTASection.astro';
+import { packages } from '../../data/home';
+import { buildPackageBookingUrl } from '../../lib/whatsapp';
+
+export function getStaticPaths() {
+  return packages.map((pkg) => ({
+    params: { slug: pkg.slug },
+    props: { packageItem: pkg },
+  }));
+}
+
+const { packageItem } = Astro.props;
+const packageBookingHref = buildPackageBookingUrl(packageItem.name);
+const pkgServices = packageItem.features;
+---
+
+<SiteLayout
+  title={`${packageItem.name} - نجم سبا`}
+  description={packageItem.subtitle}
+  pathname={`/packages/${packageItem.slug}/`}
+  pageType="WebPage"
+  image="/assets/contact-cta.jpg"
+  breadcrumbLabel={packageItem.name}
+>
+  <div data-hero-shell class="bg-bg-hero">
+    <Header />
+  </div>
+
+  <section class="section-block bg-bg-primary">
+    <div class="page-container">
+      <div class="mx-auto max-w-3xl" dir="rtl">
+        <a href="/#packages" class="mb-6 inline-flex items-center gap-2 text-sm text-text-muted transition-colors hover:text-gold">
+          ← العودة للباقات
+        </a>
+
+        {packageItem.featured && (
+          <span class="mb-4 inline-block rounded-full bg-gold-gradient px-4 py-1 text-xs font-bold text-text-btn">
+            الأكثر طلبًا
+          </span>
+        )}
+
+        <h1 class="text-4xl font-bold leading-tight text-text-primary">{packageItem.name}</h1>
+        <p class="mt-3 text-lg text-text-muted">{packageItem.subtitle}</p>
+        <p class="mt-6 text-4xl font-bold text-gold">{packageItem.price}</p>
+
+        <div class="mt-8 rounded-2xl border border-border-card bg-bg-card p-6">
+          <h2 class="mb-4 text-lg font-bold text-text-primary">مكونات الباقة</h2>
+          <ul class="flex flex-col gap-3">
+            {pkgServices.map((feature) => (
+              <li class="flex items-center gap-3 text-sm leading-6 text-text-muted">
+                <span class="flex size-6 shrink-0 items-center justify-center rounded-full bg-gold/20 text-xs text-gold">✓</span>
+                {feature}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="mt-8 flex flex-wrap gap-4">
+          <a href={packageBookingHref} target="_blank" rel="noopener noreferrer" class="gold-button">
+            <img src="/assets/icons/whatsapp.svg" alt="" width="16" height="16" class="size-4" />
+            تواصل عبر واتساب
+          </a>
+          <a href="/contact" class="outline-button">
+            نموذج التواصل
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CTASection
+    title="جاهز لتجربة الاسترخاء؟"
+    description="احجز موعدك الآن عبر واتساب — فريقنا في انتظارك"
+    primaryAction={{ label: 'تواصل عبر واتساب', href: packageBookingHref }}
+    secondaryAction={{ label: 'نموذج التواصل', href: '/contact' }}
+  />
+</SiteLayout>

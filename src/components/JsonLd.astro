@@ -1,0 +1,12 @@
+---
+import type { StructuredDataDocument } from '../lib/structured-data';
+
+export interface Props {
+  data: StructuredDataDocument;
+}
+
+const { data } = Astro.props;
+const serializedData = JSON.stringify(data).replaceAll('<', '\\u003c');
+---
+
+<script type="application/ld+json" data-structured-data set:html={serializedData} is:inline></script>

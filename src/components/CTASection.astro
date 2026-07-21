@@ -1,0 +1,58 @@
+---
+import type { SiteAction } from '../data/site';
+
+export interface Props {
+  title: string;
+  description: string;
+  primaryAction?: SiteAction;
+  secondaryAction?: SiteAction;
+  backgroundImage?: string;
+}
+
+const {
+  title,
+  description,
+  primaryAction,
+  secondaryAction,
+  backgroundImage = '/assets/contact-cta.jpg',
+} = Astro.props;
+
+function isExternal(href: string) {
+  return href.startsWith('http') || href.startsWith('tel:') || href.startsWith('mailto:');
+}
+---
+
+<section data-site-cta class="w-full overflow-hidden bg-bg-primary">
+  <div class="page-container section-block">
+    <div class="relative min-h-[390px] overflow-hidden rounded-3xl">
+      <img
+        src={backgroundImage}
+        alt=""
+        width="1280"
+        height="774"
+        class="absolute inset-0 size-full object-cover opacity-30"
+      />
+      <div class="cta-overlay absolute inset-0"></div>
+      <div class="relative z-10 mx-auto flex max-w-[768px] flex-col items-center justify-center gap-4 px-6 py-28 text-center">
+        <h2 class="text-gold-gradient text-center text-4xl font-bold leading-tight tracking-[0.48px] sm:text-5xl">
+          {title}
+        </h2>
+        <p class="max-w-[576px] text-center text-base leading-6 text-text-muted">
+          {description}
+        </p>
+        <div class="flex flex-wrap items-center justify-center gap-4 pt-4">
+          {primaryAction && (
+            <a href={primaryAction.href} target={isExternal(primaryAction.href) ? '_blank' : undefined} rel={isExternal(primaryAction.href) ? 'noopener noreferrer' : undefined} class="gold-button">
+              {primaryAction.label}
+            </a>
+          )}
+          {secondaryAction && (
+            <a href={secondaryAction.href} target={isExternal(secondaryAction.href) ? '_blank' : undefined} rel={isExternal(secondaryAction.href) ? 'noopener noreferrer' : undefined} class="outline-button">
+              {secondaryAction.label}
+            </a>
+          )}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

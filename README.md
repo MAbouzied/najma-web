@@ -1,73 +1,46 @@
-# Najma Spa — Static Website
+# Najma Spa
 
-Frontend-only rebuild of [nagmspa.com](https://nagmspa.com) from the WordPress backup. No WordPress, CMS, or database dependency.
+Static Astro website for Najma Spa, deployed to Cloudflare Workers.
 
-## Pages
+## Requirements
 
-| URL | Description |
-|-----|-------------|
-| `/` | Landing page (WordPress front page) |
-| `/home/` | Main homepage with services |
-| `/about/` | About Najma Spa |
-| `/contact/` | Contact information and map |
+- Node.js 22.12 or newer
+- npm
 
-Blog (`/المدونة/`) is excluded per project requirements.
+## Local development
 
-## Development
-
-```bash
+```sh
 npm install
 npm run dev
 ```
 
-## Production build (static export)
+## Validation
 
-```bash
-npm run build
+```sh
+npm test
 ```
 
-Output is written to `out/`.
+This builds the production site and runs the automated tests.
 
-## Deploy to Cloudflare
+## Cloudflare deployment
 
-This site is a **static export** (`output: "export"`). Deploy the `out/` folder — do **not** use OpenNext / Workers SSR.
+The production site is built into `dist/` and served by the existing
+`najma-web` Cloudflare Worker.
 
-### Cloudflare Workers (static assets)
-
-`wrangler.toml` is already configured to serve `./out`.
-
-| Setting | Value |
-|---------|-------|
-| Build command | `npm run build` |
-| Deploy command | `npx wrangler deploy` |
-
-Or locally: `npm run deploy`
-
-### Cloudflare Pages
-
-| Setting | Value |
-|---------|-------|
-| Framework preset | None |
-| Build command | `npm run build` |
-| Build output directory | `out` |
-
-## Analytics
-
-Set environment variables to enable tracking (disabled by default):
-
-```env
-NEXT_PUBLIC_ANALYTICS_ENABLED=true
-NEXT_PUBLIC_GTM_ID=GTM-PFN9DZZS
-NEXT_PUBLIC_GA4_ID=G-WMC25VLYMD
-NEXT_PUBLIC_SNAP_PIXEL_ID=3c73e8eb-b2e1-4eb7-b0b3-28d717ed3e31
+```sh
+npm run preview:cf
+npm run deploy
 ```
 
-See `src/content/analytics.ts` for the full configuration.
+For Cloudflare Git integration, use:
 
-## Content source
+- Production branch: `main`
+- Build command: `npm run build`
+- Deploy command: `npx wrangler deploy`
+- Build output directory: `dist` (only when the dashboard requests it)
+- Node.js version: `22`
 
-Page HTML is extracted from the WordPress backup `_elementor_element_cache` into `src/content/html/`. Images are copied to `public/assets/`. The original backup in `../public_html (1)/` and `../u211700373_24zbX.sql` is never modified.
+Set `SITE_URL` to the site's final HTTPS origin in Cloudflare if it differs
+from the default `https://nagmspa.com`.
 
-## Forms
-
-See [docs/FORMS.md](docs/FORMS.md) for the WPForms appointment form that requires an external service.
+The previous Next.js implementation is preserved on the `nextjs` branch.

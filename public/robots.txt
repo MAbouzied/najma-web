@@ -1,6 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://nagmspa.com/sitemap.xml
-
-# Blog spam URLs excluded - no legitimate blog content

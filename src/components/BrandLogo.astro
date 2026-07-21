@@ -1,0 +1,27 @@
+---
+export interface Props {
+  size?: 'header' | 'footer';
+  current?: boolean;
+}
+
+const { size = 'header', current = false } = Astro.props;
+const imageSize = size === 'footer' ? 'size-[71px]' : 'size-[45px]';
+---
+
+<a
+  href="/"
+  class="inline-flex items-center gap-2"
+  aria-label="نجم سبا - الرئيسية"
+  aria-current={current ? 'page' : undefined}
+>
+  <img
+    src="/assets/nagm-logo.png"
+    alt=""
+    width={size === 'footer' ? 71 : 45}
+    height={size === 'footer' ? 71 : 45}
+    class:list={['block object-contain', imageSize]}
+  />
+  <span class:list={['text-gold-gradient font-bold tracking-[0.2px]', size === 'footer' ? 'text-xl' : 'text-xl']}>
+    نجم سبا
+  </span>
+</a>

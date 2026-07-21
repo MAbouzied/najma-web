@@ -1,0 +1,41 @@
+---
+export interface Card {
+  icon: string;
+  label: string;
+  value: string;
+  href?: string;
+}
+
+export interface Props {
+  cards: Card[];
+}
+
+const { cards } = Astro.props;
+
+function isExternal(href: string | undefined) {
+  return !!href && (href.startsWith('http') || href.startsWith('tel:') || href.startsWith('mailto:'));
+}
+---
+
+<section class="w-full bg-bg-secondary">
+  <div class="page-container section-block">
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4" dir="rtl">
+      {cards.map((card) => (
+        <a
+          href={card.href}
+          target={isExternal(card.href) ? '_blank' : undefined}
+          rel={isExternal(card.href) ? 'noopener noreferrer' : undefined}
+          class="flex min-h-[178px] flex-col items-center justify-center gap-1 rounded-[20px] border border-border-card bg-bg-card p-6 text-center transition-transform hover:-translate-y-1"
+        >
+          <div class="mb-2 flex size-12 items-center justify-center rounded-2xl bg-gold-gradient">
+            <img src={card.icon} alt="" width="24" height="24" class="size-6" />
+          </div>
+          <h2 class="pt-1 text-lg font-semibold leading-7 text-text-primary">{card.label}</h2>
+          <span class="text-sm leading-5 text-text-muted" dir={card.label === 'البريد الإلكتروني' ? 'ltr' : 'auto'}>
+            {card.value}
+          </span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

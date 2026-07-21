@@ -1,0 +1,14 @@
+---
+import ServiceCard from './ServiceCard.astro';
+import type { Service } from '../data/home';
+
+export interface Props {
+  services: Service[];
+}
+
+const { services } = Astro.props;
+---
+
+<div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+  {services.map((service) => <ServiceCard service={service} />)}
+</div>

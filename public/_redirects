@@ -1,4 +1,0 @@
-# Cloudflare Pages — trailing-slash routes from Next static export
-/about /about/ 301
-/contact /contact/ 301
-/home /home/ 301

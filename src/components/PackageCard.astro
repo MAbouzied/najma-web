@@ -1,0 +1,53 @@
+---
+import type { Package } from '../data/home';
+import { buildPackageBookingUrl } from '../lib/whatsapp';
+
+export interface Props {
+  packageItem: Package;
+}
+
+const { packageItem } = Astro.props;
+const detailHref = `/packages/${packageItem.slug}/`;
+const bookingHref = buildPackageBookingUrl(packageItem.name);
+---
+
+<article
+  data-package-card
+  class:list={[
+    'relative flex h-full flex-col rounded-3xl border p-7 text-right transition-transform hover:-translate-y-1 sm:p-8',
+    packageItem.featured
+      ? 'border-gold bg-bg-form shadow-[0_24px_70px_-35px_var(--color-gold)] lg:-translate-y-4'
+      : 'border-border-card bg-bg-card',
+  ]}
+  dir="rtl"
+>
+  {packageItem.featured && (
+    <span class="absolute -top-3 right-8 rounded-full bg-gold-gradient px-4 py-1 text-xs font-bold text-text-btn">
+      الأكثر طلبًا
+    </span>
+  )}
+  <a href={detailHref} class="flex flex-1 flex-col">
+    <h3 class="text-2xl font-bold text-text-primary">{packageItem.name}</h3>
+    <p class="mt-2 text-sm text-text-muted">{packageItem.subtitle}</p>
+    <p class="mt-6 text-3xl font-bold text-gold">{packageItem.price}</p>
+    <ul class="mt-6 flex flex-1 flex-col gap-3">
+      {packageItem.features.map((feature) => (
+        <li class="flex items-start gap-3 text-sm leading-6 text-text-muted">
+          <span class="mt-2 size-1.5 shrink-0 rounded-full bg-gold" aria-hidden="true"></span>
+          {feature}
+        </li>
+      ))}
+    </ul>
+    <span class="outline-button mt-8 w-full text-center">عرض التفاصيل</span>
+  </a>
+  <a
+    href={bookingHref}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="gold-button mt-4 w-full"
+    aria-label={`تواصل عبر واتساب لحجز ${packageItem.name}`}
+  >
+    <img src="/assets/icons/whatsapp.svg" alt="" width="16" height="16" class="size-4" />
+    تواصل عبر واتساب
+  </a>
+</article>

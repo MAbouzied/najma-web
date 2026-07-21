@@ -1,0 +1,14 @@
+---
+import PackageCard from './PackageCard.astro';
+import type { Package } from '../data/home';
+
+export interface Props {
+  packages: Package[];
+}
+
+const { packages } = Astro.props;
+---
+
+<div class="grid grid-cols-1 items-stretch gap-6 pt-4 lg:grid-cols-3 lg:pt-8">
+  {packages.map((packageItem) => <PackageCard packageItem={packageItem} />)}
+</div>

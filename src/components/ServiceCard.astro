@@ -1,0 +1,56 @@
+---
+import type { Service } from '../data/home';
+import { buildServiceBookingUrl } from '../lib/whatsapp';
+
+export interface Props {
+  service: Service;
+}
+
+const { service } = Astro.props;
+const detailHref = `/services/${service.slug}/`;
+const bookingHref = buildServiceBookingUrl(service.title);
+---
+
+<article
+  data-service-card
+  class="group flex h-full flex-col overflow-hidden rounded-[20px] border border-border-card bg-bg-card transition-transform hover:-translate-y-1"
+>
+  <a href={detailHref} class="block flex-1">
+    <div class="relative h-56 overflow-hidden">
+      <img
+        src={service.image}
+        alt=""
+        width="592"
+        height="352"
+        class="size-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+        loading="lazy"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-bg-card via-transparent to-transparent"></div>
+    </div>
+    <div class="p-6 pb-4 text-right" dir="rtl">
+      <h3 class="text-xl font-bold text-text-primary">{service.title}</h3>
+      <p class="mt-2 min-h-12 text-sm leading-6 text-text-muted">{service.description}</p>
+      <div class="mt-5 flex items-center justify-between border-t border-border-card pt-4">
+        <span class="font-bold text-gold">{service.price}</span>
+        {service.duration && (
+          <span class="flex items-center gap-2 text-xs text-text-muted">
+            <img src="/assets/icons/hours.svg" alt="" width="15" height="15" class="size-[15px]" />
+            {service.duration}
+          </span>
+        )}
+      </div>
+    </div>
+  </a>
+  <div class="px-6 pb-6" dir="rtl">
+    <a
+      href={bookingHref}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="gold-button w-full"
+      aria-label={`تواصل عبر واتساب لحجز ${service.title}`}
+    >
+      <img src="/assets/icons/whatsapp.svg" alt="" width="16" height="16" class="size-4" />
+      تواصل عبر واتساب
+    </a>
+  </div>
+</article>

@@ -1,0 +1,39 @@
+---
+import BrandLogo from './BrandLogo.astro';
+import { bookingAction, navigationLinks, type PageId } from '../data/site';
+
+export interface Props {
+  currentPage?: PageId;
+}
+
+const { currentPage } = Astro.props;
+---
+
+<header data-site-header class="relative z-20 h-20 bg-transparent" dir="rtl">
+  <div class="page-container flex h-full items-center justify-between gap-6">
+    <BrandLogo current={currentPage === 'home'} />
+
+    <nav class="hidden items-center gap-7 lg:flex" aria-label="التنقل الرئيسي">
+      {
+        navigationLinks.map((link) => (
+          <a
+            href={link.href}
+            aria-current={link.page === currentPage ? 'page' : undefined}
+            class:list={[
+              'whitespace-nowrap text-sm text-text-nav transition-colors hover:text-gold',
+              link.page === currentPage && 'font-bold text-gold',
+            ]}
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <a href={bookingAction.href} target="_blank" rel="noopener noreferrer" class="gold-button shrink-0">
+      <img src="/assets/icons/arrow.svg" alt="" width="16" height="16" class="size-4" />
+      <span class="hidden sm:inline">{bookingAction.label}</span>
+      <span class="sm:hidden">احجز الآن</span>
+    </a>
+  </div>
+</header>

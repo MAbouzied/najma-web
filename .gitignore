@@ -1,56 +1,26 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# build output
+dist/
+# generated types
+.astro/
 
 # dependencies
-/node_modules
-/.pnp
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/versions
+node_modules/
+.wrangler/
 
-# testing
-/coverage
-
-# next.js
-/.next/
-/out/
-
-# production
-/build
-
-# misc
-.DS_Store
-*.pem
-
-# debug
+# logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-.pnpm-debug.log*
+pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
+
+# environment variables
 .env*
+!.env.example
+.dev.vars*
 
-# vercel
-.vercel
+# macOS-specific files
+.DS_Store
 
-# cloudflare
-.wrangler/
-.dev.vars
-
-# typescript
-*.tsbuildinfo
-next-env.d.ts
-
-# WordPress backup artifacts (not part of the Next.js app)
-/src/content/html/
-/src/components/ElementorContent.tsx
-/public/assets/2021/
-/public/assets/2022/
-/public/assets/2023/
-/public/assets/2024/
-/public/assets/elementor/
-/public/المدونة/
-/public/نجم-سبا/
+# jetbrains setting folder
+.idea/

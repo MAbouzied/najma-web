@@ -1,0 +1,100 @@
+---
+import '../styles/global.css';
+import { ClientRouter } from 'astro:transitions';
+import Footer from '../components/Footer.astro';
+import JsonLd from '../components/JsonLd.astro';
+import type { Faq, Service } from '../data/home';
+import {
+  buildStructuredData,
+  resolveSeoUrl,
+  type PageSchemaType,
+} from '../lib/structured-data';
+
+export interface Props {
+  title: string;
+  description: string;
+  pathname?: string;
+  pageType?: PageSchemaType;
+  image?: string;
+  socialImage?: string;
+  faqItems?: Faq[];
+  services?: Service[];
+  breadcrumbLabel?: string;
+}
+
+const {
+  title,
+  description,
+  pathname = Astro.url.pathname,
+  pageType = 'WebPage',
+  image = '/assets/home/hero-interior.png',
+  socialImage = '/assets/og/nagm-spa-share.jpg',
+  faqItems = [],
+  services = [],
+  breadcrumbLabel,
+} = Astro.props;
+const siteOrigin = Astro.site?.href;
+const canonicalUrl = resolveSeoUrl(pathname, siteOrigin);
+const socialImageUrl = resolveSeoUrl(socialImage, siteOrigin);
+const structuredData = buildStructuredData({
+  title,
+  description,
+  pathname,
+  pageType,
+  image,
+  siteOrigin,
+  faqItems,
+  services,
+  breadcrumbLabel,
+});
+---
+
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap"
+    />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <meta property="og:locale" content="ar_SA" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="نجم سبا" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={socialImageUrl} />
+    {siteOrigin && <meta property="og:image:secure_url" content={socialImageUrl} />}
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={title} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImageUrl} />
+    <meta name="twitter:image:alt" content={title} />
+    <title>{title}</title>
+    <JsonLd data={structuredData} />
+    <ClientRouter />
+  </head>
+  <body>
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
