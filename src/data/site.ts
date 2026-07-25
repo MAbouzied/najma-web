@@ -4,7 +4,7 @@ import {
   WHATSAPP_PHONE_DISPLAY,
 } from '../lib/whatsapp';
 
-export type PageId = 'home' | 'about' | 'contact';
+export type PageId = 'home' | 'about' | 'services' | 'packages' | 'contact';
 
 export interface SiteLink {
   label: string;
@@ -20,27 +20,29 @@ export interface SiteAction {
 export const navigationLinks: SiteLink[] = [
   { label: 'الرئيسية', href: '/', page: 'home' },
   { label: 'من نحن', href: '/about', page: 'about' },
-  { label: 'خدماتنا', href: '/#services' },
+  { label: 'خدماتنا', href: '/services/', page: 'services' },
+  { label: 'باقاتنا', href: '/packages/', page: 'packages' },
   { label: 'اتصل بنا', href: '/contact', page: 'contact' },
 ];
 
 export const quickLinks: SiteLink[] = [
   { label: 'الرئيسية', href: '/' },
   { label: 'من نحن', href: '/about' },
+  { label: 'خدماتنا', href: '/services/' },
+  { label: 'باقاتنا', href: '/packages/' },
   { label: 'اتصل بنا', href: '/contact' },
-  { label: 'خدماتنا', href: '/#services' },
 ];
 
 export const serviceLinks: SiteLink[] = [
-  { label: 'مساج استرخاء', href: '/#services' },
-  { label: 'مساج شياتسو (ياباني)', href: '/#services' },
-  { label: 'المساج التايلندي', href: '/#services' },
-  { label: 'مساج الأحجار الساخنة', href: '/#services' },
-  { label: 'مساج بنتوسا (كاسات الهواء)', href: '/#services' },
-  { label: 'مساج القدمين', href: '/#services' },
-  { label: 'حمام مغربي كلاسيك', href: '/#services' },
-  { label: 'التدليك العلاجي', href: '/#services' },
-  { label: 'المساج السويدي', href: '/#services' },
+  { label: 'مساج استرخاء', href: '/services/massage-relaxation/' },
+  { label: 'مساج شياتسو (ياباني)', href: '/services/shiatsu/' },
+  { label: 'المساج التايلندي', href: '/services/thai-massage/' },
+  { label: 'مساج الأحجار الساخنة', href: '/services/hot-stone/' },
+  { label: 'مساج بنتوسا (كاسات الهواء)', href: '/services/ventosa-cupping/' },
+  { label: 'مساج القدمين', href: '/services/foot-massage/' },
+  { label: 'حمام مغربي كلاسيك', href: '/services/moroccan-bath/' },
+  { label: 'التدليك العلاجي', href: '/services/therapeutic-massage/' },
+  { label: 'المساج السويدي', href: '/services/swedish-massage/' },
 ];
 
 export const socialLinks = [

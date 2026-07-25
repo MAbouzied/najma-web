@@ -31,7 +31,7 @@ const serviceBookingHref = buildServiceBookingUrl(service.title);
   <section class="section-block bg-bg-primary">
     <div class="page-container">
       <div class="mx-auto max-w-3xl" dir="rtl">
-        <a href="/#services" class="mb-6 inline-flex items-center gap-2 text-sm text-text-muted transition-colors hover:text-gold">
+        <a href="/services/" class="mb-6 inline-flex items-center gap-2 text-sm text-text-muted transition-colors hover:text-gold">
           ← العودة للخدمات
         </a>
 
@@ -52,13 +52,15 @@ const serviceBookingHref = buildServiceBookingUrl(service.title);
           <div class="text-2xl font-bold text-gold">{service.price}</div>
         </div>
 
-        <div class="mt-8 flex flex-wrap gap-4">
-          <a href={serviceBookingHref} target="_blank" rel="noopener noreferrer" class="gold-button">
+        <div class="mt-8">
+          <a
+            href={serviceBookingHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="gold-button inline-flex items-center gap-2"
+          >
             <img src="/assets/icons/whatsapp.svg" alt="" width="16" height="16" class="size-4" />
             تواصل عبر واتساب
-          </a>
-          <a href="/contact" class="outline-button">
-            نموذج التواصل
           </a>
         </div>
       </div>
@@ -69,6 +71,5 @@ const serviceBookingHref = buildServiceBookingUrl(service.title);
     title="جاهز لتجربة الاسترخاء؟"
     description="احجز موعدك الآن عبر واتساب — فريقنا في انتظارك"
     primaryAction={{ label: 'تواصل عبر واتساب', href: serviceBookingHref }}
-    secondaryAction={{ label: 'نموذج التواصل', href: '/contact' }}
   />
 </SiteLayout>
