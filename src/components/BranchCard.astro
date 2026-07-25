@@ -28,7 +28,7 @@ const branchBookingHref = buildWhatsAppUrl(`أهلاً، أريد الحجز ف�
       <dt class="sr-only">الهاتف</dt>
       <dd>
         {branch.phoneHref ? (
-          <a href={branch.phoneHref} class="transition-colors hover:text-gold">
+          <a href={branch.phoneHref} class="transition-colors hover:text-gold" dir="ltr">
             {branch.phone}
           </a>
         ) : (

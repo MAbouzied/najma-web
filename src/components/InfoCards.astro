@@ -31,7 +31,7 @@ function isExternal(href: string | undefined) {
             <img src={card.icon} alt="" width="24" height="24" class="size-6" />
           </div>
           <h2 class="pt-1 text-lg font-semibold leading-7 text-text-primary">{card.label}</h2>
-          <span class="text-sm leading-5 text-text-muted" dir={card.label === 'البريد الإلكتروني' ? 'ltr' : 'auto'}>
+          <span class="text-sm leading-5 text-text-muted" dir={card.value.startsWith('+') || card.label === 'البريد الإلكتروني' ? 'ltr' : 'auto'}>
             {card.value}
           </span>
         </a>
