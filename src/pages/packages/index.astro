@@ -1,0 +1,45 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import Header from '../../components/Header.astro';
+import HeroSection from '../../components/HeroSection.astro';
+import PackageGrid from '../../components/PackageGrid.astro';
+import CTASection from '../../components/CTASection.astro';
+import { packages } from '../../data/home';
+import { bookingAction } from '../../data/site';
+---
+
+<SiteLayout
+  title="باقاتنا - نجم سبا"
+  description="تصفح باقات نجم سبا المميزة: باقة العرسان لتجهيز يوم الزفاف، باقة الرفاهية للاسترخاء التام، وباقة الإهداء لمن تحب — تجارب متكاملة بأسعار تنافسية."
+  pathname="/packages/"
+  pageType="WebPage"
+  image="/assets/home/hero-interior.png"
+  breadcrumbLabel="باقاتنا"
+  packages={packages}
+>
+  <div data-hero-shell class="bg-bg-hero">
+    <Header currentPage="packages" />
+    <HeroSection
+      badge="باقاتنا"
+      description="جربنا باقاتنا المتكاملة المصممة بعناية لتمنحك أقصى درجات الاسترخاء والعناية — اختر الباقة التي تناسب احتياجك."
+    >
+      <Fragment slot="title">
+        <span class="text-gold-gradient">باقات</span>
+        <span class="text-text-primary"> العناية المثالية</span>
+      </Fragment>
+    </HeroSection>
+  </div>
+
+  <section class="section-block bg-bg-primary">
+    <div class="page-container">
+      <PackageGrid packages={packages} />
+    </div>
+  </section>
+
+  <CTASection
+    title="باقة تناسب احتياجك"
+    description="اختر باقتك المفضلة واحجزها الآن عبر واتساب — فريقنا جاهز لخدمتك"
+    primaryAction={{ label: 'احجز باقتك الآن', href: bookingAction.href }}
+    secondaryAction={{ label: 'تواصل معنا', href: '/contact' }}
+  />
+</SiteLayout>
