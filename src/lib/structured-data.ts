@@ -1,5 +1,5 @@
 import { businessProfile } from '../data/business';
-import type { Faq, Service } from '../data/home';
+import type { Faq, Package, Service } from '../data/home';
 
 export type PageSchemaType = 'WebPage' | 'AboutPage' | 'ContactPage';
 
@@ -12,6 +12,7 @@ export interface StructuredDataOptions {
   siteOrigin?: string;
   faqItems?: Faq[];
   services?: Service[];
+  packages?: Package[];
   breadcrumbLabel?: string;
 }
 
@@ -44,6 +45,7 @@ export function buildStructuredData({
   siteOrigin,
   faqItems = [],
   services = [],
+  packages = [],
   breadcrumbLabel,
 }: StructuredDataOptions): StructuredDataDocument {
   const businessId = resolveSeoUrl('/#business', siteOrigin);
@@ -78,8 +80,10 @@ export function buildStructuredData({
     },
   };
 
+  const catalogs: Record<string, unknown>[] = [];
+
   if (services.length > 0) {
-    business.hasOfferCatalog = {
+    catalogs.push({
       '@type': 'OfferCatalog',
       name: 'خدمات نجم سبا',
       itemListElement: services.map((service, index) => ({
@@ -98,7 +102,36 @@ export function buildStructuredData({
           url: resolveSeoUrl('/#services', siteOrigin),
         },
       })),
-    };
+    });
+  }
+
+  if (packages.length > 0) {
+    catalogs.push({
+      '@type': 'OfferCatalog',
+      name: 'باقات نجم سبا',
+      itemListElement: packages.map((pkg, index) => ({
+        '@type': 'Offer',
+        '@id': resolveSeoUrl(`/#package-offer-${index + 1}`, siteOrigin),
+        url: resolveSeoUrl(`/packages/${pkg.slug}/`, siteOrigin),
+        price: toSchemaPrice(pkg.price),
+        priceCurrency: 'SAR',
+        itemOffered: {
+          '@type': 'Service',
+          '@id': resolveSeoUrl(`/#package-${index + 1}`, siteOrigin),
+          name: pkg.name,
+          description: pkg.description,
+          serviceType: pkg.name,
+          provider: { '@id': businessId },
+          url: resolveSeoUrl(`/packages/${pkg.slug}/`, siteOrigin),
+        },
+      })),
+    });
+  }
+
+  if (catalogs.length === 1) {
+    business.hasOfferCatalog = catalogs[0];
+  } else if (catalogs.length > 1) {
+    business.hasOfferCatalog = catalogs;
   }
 
   if (businessProfile.localDetails.status === 'verified') {

@@ -3,7 +3,7 @@ import '../styles/global.css';
 import { ClientRouter } from 'astro:transitions';
 import Footer from '../components/Footer.astro';
 import JsonLd from '../components/JsonLd.astro';
-import type { Faq, Service } from '../data/home';
+import type { Faq, Package, Service } from '../data/home';
 import {
   buildStructuredData,
   resolveSeoUrl,
@@ -19,6 +19,7 @@ export interface Props {
   socialImage?: string;
   faqItems?: Faq[];
   services?: Service[];
+  packages?: Package[];
   breadcrumbLabel?: string;
 }
 
@@ -31,6 +32,7 @@ const {
   socialImage = '/assets/og/nagm-spa-share.jpg',
   faqItems = [],
   services = [],
+  packages = [],
   breadcrumbLabel,
 } = Astro.props;
 const siteOrigin = Astro.site?.href;
@@ -45,6 +47,7 @@ const structuredData = buildStructuredData({
   siteOrigin,
   faqItems,
   services,
+  packages,
   breadcrumbLabel,
 });
 ---

@@ -17,6 +17,7 @@ export interface Package {
   slug: string;
   name: string;
   subtitle: string;
+  description: string;
   price: string;
   features: string[];
   featured?: boolean;
@@ -57,6 +58,7 @@ export const packages: Package[] = [
     slug: 'wedding',
     name: 'باقة العرسان',
     subtitle: 'تجهيز العرسان مع أفضل خدمات العناية',
+    description: 'باقة متكاملة لتجهيز العرسان تشمل حمام مغربي ملكي ومساج استرخاء مع عناية كاملة بالبشرة والأظافر لإطلالة مثالية في يوم الزفاف.',
     price: '٦٩٠ ر.س',
     features: ['حمام مغربي ملكي', 'مساج استرخاء', 'بدكير ومنكير', 'عناية بالبشرة'],
   },
@@ -64,6 +66,7 @@ export const packages: Package[] = [
     slug: 'luxury',
     name: 'باقة الرفاهية',
     subtitle: 'تجربة متكاملة للاسترخاء التام',
+    description: 'أفخم باقات نجم سبا — حمام مغربي كلاسيك مع مساج سويدي طويل وجاكوزي وعناية متقدمة بالبشرة لتجربة استرخاء لا تُضاهى.',
     price: '٨٩٠ ر.س',
     featured: true,
     features: ['حمام مغربي كلاسيك', 'مساج سويدي ٧٥ دقيقة', 'جاكوزي', 'عناية بالبشرة'],
@@ -72,6 +75,7 @@ export const packages: Package[] = [
     slug: 'gift',
     name: 'باقة الإهداء',
     subtitle: 'بطاقة هدية لمن تحب',
+    description: 'بطاقة هدية أنيقة تتيح للشخص الذي تهديه اختيار الخدمة التي تناسبه من قائمة خدمات نجم سبا — هدية مثالية للعناية والاسترخاء.',
     price: '٥٩٠ ر.س',
     features: ['اختيار الخدمة', 'بطاقة إهداء شخصية', 'شهادة هدية', 'توصيل مجاني'],
   },
