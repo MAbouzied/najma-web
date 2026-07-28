@@ -42,31 +42,96 @@ export const benefits: Benefit[] = [
 ];
 
 export const services: Service[] = [
-  { slug: 'massage-relaxation', image: '/assets/home/services/swedish-massage.jpg', title: 'مساج استرخاء', description: 'جلسة مساج هادئة لتخفيف التوتر واستعادة توازن الجسم والعقل', price: '٣٠٠ ر.س' },
-  { slug: 'shiatsu', image: '/assets/home/services/deep-tissue.jpg', title: 'مساج شياتسو (ياباني)', description: 'تقنية يابانية تعتمد على الضغط بالأصابع لتحفيز نقاط الطاقة في الجسم', price: '٣٥٠ ر.س' },
-  { slug: 'thai-massage', image: '/assets/home/services/moroccan-bath.jpg', title: 'المساج التايلندي', description: 'مساج تايلندي تقليدي يجمع بين التمدد والضغط العميق لمرونة أفضل', price: '٣٥٠ ر.س' },
-  { slug: 'hot-stone', image: '/assets/home/services/hot-stone.jpg', title: 'مساج الأحجار الساخنة', description: 'أحجار بركانية دافئة تخترق العضلات وتمنحك استرخاءً عميقاً', price: '٤٠٠ ر.س' },
-  { slug: 'ventosa-cupping', image: '/assets/home/services/aromatherapy.jpg', title: 'مساج بنتوسا (كاسات الهواء)', description: 'علاج بالكاسات الهوائية لتحسين الدورة الدموية وتخفيف آلام العضلات', price: '٣٥٠ ر.س' },
-  { slug: 'foot-massage', image: '/assets/home/services/facial-care.jpg', title: 'مساج القدمين', description: 'عناية متخصصة بالقدمين تريح الجسم كاملاً عبر نقاط الانعكاس', price: '٢٥٠ ر.س' },
-  { slug: 'moroccan-bath', image: '/assets/home/services/hot-stone.jpg', title: 'حمام مغربي كلاسيك', description: 'حمام مغربي أصيل مع تنظيف البشرة والبخار لنضارة وانتعاش فوري', price: '٤٥٠ ر.س' },
-  { slug: 'therapeutic-massage', image: '/assets/home/services/aromatherapy.jpg', title: 'التدليك العلاجي', description: 'علاج متخصص للظهر والأبهر وكبار السن بأيدي خبراء معتمدين', price: '٤٠٠ ر.س' },
-  { slug: 'swedish-massage', image: '/assets/home/services/facial-care.jpg', title: 'المساج السويدي', description: 'تقنيات سويدية كلاسيكية لتحسين الدورة الدموية واسترخاء العضلات', price: '٣٠٠ ر.س' },
+  {
+    slug: 'massage-relaxation',
+    image: '/assets/home/services/swedish-massage.jpg',
+    title: 'مساج استرخاء',
+    description:
+      'احجز مساج استرخاء في نجم سبا — جلسة هادئة تُخفف التوتر وتستعيد توازن الجسم والعقل بأيدي أخصائيين محترفين. تجربة مريحة — احجز عبر واتساب الآن.',
+    price: '٣٠٠ ر.س',
+  },
+  {
+    slug: 'shiatsu',
+    image: '/assets/home/services/deep-tissue.jpg',
+    title: 'مساج شياتسو (ياباني)',
+    description:
+      'مساج شياتسو ياباني في نجم سبا — ضغط إيقاعي على مسارات الطاقة لتحفيز الدورة الدموية وإطلاق التشنجات العميقة. تجربة أصيلة — احجز عبر واتساب الآن.',
+    price: '٣٥٠ ر.س',
+  },
+  {
+    slug: 'thai-massage',
+    image: '/assets/home/services/moroccan-bath.jpg',
+    title: 'المساج التايلندي',
+    description:
+      'المساج التايلندي في نجم سبا يجمع التمدد والضغط العميق لزيادة المرونة وتجديد طاقة الجسم. تجربة أصيلة بأيدي محترفين — احجز موعدك عبر واتساب الآن.',
+    price: '٣٥٠ ر.س',
+  },
+  {
+    slug: 'hot-stone',
+    image: '/assets/home/services/hot-stone.jpg',
+    title: 'مساج الأحجار الساخنة',
+    description:
+      'مساج الأحجار الساخنة في نجم سبا — أحجار بركانية دافئة تخفف شد العضلات وتمنحك استرخاءً عميقًا ومريحًا للجسم كله. احجز جلستك عبر واتساب الآن بسهولة.',
+    price: '٤٠٠ ر.س',
+  },
+  {
+    slug: 'ventosa-cupping',
+    image: '/assets/home/services/aromatherapy.jpg',
+    title: 'مساج بنتوسا (كاسات الهواء)',
+    description:
+      'مساج بنتوسا بكاسات الهواء في نجم سبا يُنشّط الدورة الدموية ويخفف آلام الظهر والعضلات المتراكمة. علاج فعّال للتوتر — احجز موعدك عبر واتساب الآن.',
+    price: '٣٥٠ ر.س',
+  },
+  {
+    slug: 'foot-massage',
+    image: '/assets/home/services/facial-care.jpg',
+    title: 'مساج القدمين',
+    description:
+      'مساج القدمين في نجم سبا — عناية انعكاسية متخصصة تُريح الجسم بالكامل وتخفف الإرهاق من أخمص القدمين حتى الرأس. تجربة منعشة — احجز عبر واتساب الآن.',
+    price: '٢٥٠ ر.س',
+  },
+  {
+    slug: 'moroccan-bath',
+    image: '/assets/home/services/hot-stone.jpg',
+    title: 'حمام مغربي كلاسيك',
+    description:
+      'حمام مغربي كلاسيك في نجم سبا يجمع البخار والصابون البلدي وتقشير البشرة لنضارة وانتعاش فوري وعميق. تجربة أصيلة فاخرة — احجز موعدك عبر واتساب.',
+    price: '٤٥٠ ر.س',
+  },
+  {
+    slug: 'therapeutic-massage',
+    image: '/assets/home/services/aromatherapy.jpg',
+    title: 'التدليك العلاجي',
+    description:
+      'التدليك العلاجي في نجم سبا مخصص لآلام الظهر والرقبة والمفاصل بأيدي أخصائيين محترفين. جلسة تناسب احتياجك تمامًا — احجز موعدك عبر واتساب الآن.',
+    price: '٤٠٠ ر.س',
+  },
+  {
+    slug: 'swedish-massage',
+    image: '/assets/home/services/facial-care.jpg',
+    title: 'المساج السويدي',
+    description:
+      'المساج السويدي في نجم سبا بحركات انسيابية كلاسيكية لتحسين الدورة الدموية وتهدئة العضلات واستعادة الراحة اليومية. احجز موعدك عبر واتساب الآن.',
+    price: '٣٠٠ ر.س',
+  },
 ];
 
 export const packages: Package[] = [
   {
     slug: 'wedding',
     name: 'باقة العرسان',
-    subtitle: 'تجهيز العرسان مع أفضل خدمات العناية',
-    description: 'باقة متكاملة لتجهيز العرسان تشمل حمام مغربي ملكي ومساج استرخاء مع عناية كاملة بالبشرة والأظافر لإطلالة مثالية في يوم الزفاف.',
+    subtitle: 'تحضير متكامل لإطلالة يوم الزفاف',
+    description:
+      'باقة العرسان من نجم سبا — حمام مغربي ملكي ومساج استرخاء وعناية بالبشرة والأظافر لإطلالة مثالية يوم الزفاف. احجز باقتك عبر واتساب الآن بسهولة.',
     price: '٦٩٠ ر.س',
     features: ['حمام مغربي ملكي', 'مساج استرخاء', 'بدكير ومنكير', 'عناية بالبشرة'],
   },
   {
     slug: 'luxury',
     name: 'باقة الرفاهية',
-    subtitle: 'تجربة متكاملة للاسترخاء التام',
-    description: 'أفخم باقات نجم سبا — حمام مغربي كلاسيك مع مساج سويدي طويل وجاكوزي وعناية متقدمة بالبشرة لتجربة استرخاء لا تُضاهى.',
+    subtitle: 'تجربة سبا فاخرة من البداية حتى النهاية',
+    description:
+      'باقة الرفاهية من نجم سبا: حمام مغربي كلاسيك ومساج سويدي طويل وجاكوزي وعناية بالبشرة ليوم استرخاء فاخر كامل. احجز باقتك عبر واتساب الآن بسهولة.',
     price: '٨٩٠ ر.س',
     featured: true,
     features: ['حمام مغربي كلاسيك', 'مساج سويدي ٧٥ دقيقة', 'جاكوزي', 'عناية بالبشرة'],
@@ -74,8 +139,9 @@ export const packages: Package[] = [
   {
     slug: 'gift',
     name: 'باقة الإهداء',
-    subtitle: 'بطاقة هدية لمن تحب',
-    description: 'بطاقة هدية أنيقة تتيح للشخص الذي تهديه اختيار الخدمة التي تناسبه من قائمة خدمات نجم سبا — هدية مثالية للعناية والاسترخاء.',
+    subtitle: 'هدية أنيقة قابلة للاختيار',
+    description:
+      'باقة الإهداء من نجم سبا — بطاقة هدية أنيقة تتيح اختيار الخدمة المناسبة مع شهادة شخصية وتوصيل مجاني. هدية راحة مثالية — اطلبها عبر واتساب الآن.',
     price: '٥٩٠ ر.س',
     features: ['اختيار الخدمة', 'بطاقة إهداء شخصية', 'شهادة هدية', 'توصيل مجاني'],
   },
