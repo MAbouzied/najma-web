@@ -3,13 +3,16 @@ import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 
 const readDist = (path) => readFile(new URL(`../dist/${path}`, import.meta.url), 'utf8');
-const [homeHtml, aboutHtml, contactHtml, robotsText, llmsText] = await Promise.all([
-  readDist('index.html'),
-  readDist('about/index.html'),
-  readDist('contact/index.html'),
-  readDist('robots.txt'),
-  readDist('llms.txt'),
-]);
+const [homeHtml, aboutHtml, contactHtml, serviceDetailHtml, packageDetailHtml, robotsText, llmsText] =
+  await Promise.all([
+    readDist('index.html'),
+    readDist('about/index.html'),
+    readDist('contact/index.html'),
+    readDist('services/massage-relaxation/index.html'),
+    readDist('packages/luxury/index.html'),
+    readDist('robots.txt'),
+    readDist('llms.txt'),
+  ]);
 
 const parseJsonLd = (html) => {
   const match = html.match(/<script type="application\/ld\+json" data-structured-data>([\s\S]*?)<\/script>/);
@@ -97,6 +100,26 @@ test('adds breadcrumb schema to About and Contact pages', () => {
     assert.equal(breadcrumb.itemListElement[0].name, 'الرئيسية');
     assert.equal(breadcrumb.itemListElement[1].position, 2);
   }
+});
+
+test('adds nested breadcrumb schema and UI for service and package detail pages', () => {
+  const serviceGraph = parseJsonLd(serviceDetailHtml)['@graph'];
+  const serviceBreadcrumb = serviceGraph.find((node) => node['@type'] === 'BreadcrumbList');
+  assert.equal(serviceBreadcrumb.itemListElement.length, 3);
+  assert.equal(serviceBreadcrumb.itemListElement[0].name, 'الرئيسية');
+  assert.equal(serviceBreadcrumb.itemListElement[1].name, 'خدماتنا');
+  assert.equal(serviceBreadcrumb.itemListElement[2].name, 'مساج استرخاء');
+  assert.match(serviceDetailHtml, /data-breadcrumbs/);
+  assert.doesNotMatch(serviceDetailHtml, /العودة للخدمات/);
+
+  const packageGraph = parseJsonLd(packageDetailHtml)['@graph'];
+  const packageBreadcrumb = packageGraph.find((node) => node['@type'] === 'BreadcrumbList');
+  assert.equal(packageBreadcrumb.itemListElement.length, 3);
+  assert.equal(packageBreadcrumb.itemListElement[0].name, 'الرئيسية');
+  assert.equal(packageBreadcrumb.itemListElement[1].name, 'باقاتنا');
+  assert.equal(packageBreadcrumb.itemListElement[2].name, 'باقة الرفاهية');
+  assert.match(packageDetailHtml, /data-breadcrumbs/);
+  assert.doesNotMatch(packageDetailHtml, /العودة للباقات/);
 });
 
 test('serves crawl and LLM discovery files without placeholder origins', () => {

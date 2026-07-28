@@ -1,6 +1,7 @@
 ---
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import Header from '../../components/Header.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import CTASection from '../../components/CTASection.astro';
 import { packages } from '../../data/home';
 import { buildPackageBookingUrl } from '../../lib/whatsapp';
@@ -15,6 +16,11 @@ export function getStaticPaths() {
 const { packageItem } = Astro.props;
 const packageBookingHref = buildPackageBookingUrl(packageItem.name);
 const pkgServices = packageItem.features;
+const breadcrumbs = [
+  { label: 'الرئيسية', href: '/' },
+  { label: 'باقاتنا', href: '/packages/' },
+  { label: packageItem.name, href: `/packages/${packageItem.slug}/` },
+];
 ---
 
 <SiteLayout
@@ -23,7 +29,7 @@ const pkgServices = packageItem.features;
   pathname={`/packages/${packageItem.slug}/`}
   pageType="WebPage"
   image="/assets/contact-cta.jpg"
-  breadcrumbLabel={packageItem.name}
+  breadcrumbs={breadcrumbs}
 >
   <div data-hero-shell class="bg-bg-hero">
     <Header />
@@ -32,9 +38,7 @@ const pkgServices = packageItem.features;
   <section class="section-block bg-bg-primary">
     <div class="page-container">
       <div class="mx-auto max-w-3xl" dir="rtl">
-        <a href="/packages/" class="mb-6 inline-flex items-center gap-2 text-sm text-text-muted transition-colors hover:text-gold">
-          ← العودة للباقات
-        </a>
+        <Breadcrumbs items={breadcrumbs} />
 
         {packageItem.featured && (
           <span class="mb-4 inline-block rounded-full bg-gold-gradient px-4 py-1 text-xs font-bold text-text-btn">

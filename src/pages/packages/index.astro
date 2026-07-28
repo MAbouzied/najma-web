@@ -1,11 +1,17 @@
 ---
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import Header from '../../components/Header.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import HeroSection from '../../components/HeroSection.astro';
 import PackageGrid from '../../components/PackageGrid.astro';
 import CTASection from '../../components/CTASection.astro';
 import { packages } from '../../data/home';
 import { bookingAction } from '../../data/site';
+
+const breadcrumbs = [
+  { label: 'الرئيسية', href: '/' },
+  { label: 'باقاتنا', href: '/packages/' },
+];
 ---
 
 <SiteLayout
@@ -14,11 +20,14 @@ import { bookingAction } from '../../data/site';
   pathname="/packages/"
   pageType="WebPage"
   image="/assets/home/hero-interior.png"
-  breadcrumbLabel="باقاتنا"
+  breadcrumbs={breadcrumbs}
   packages={packages}
 >
   <div data-hero-shell class="bg-bg-hero">
     <Header currentPage="packages" />
+    <div class="page-container pt-6">
+      <Breadcrumbs items={breadcrumbs} class="mb-0" />
+    </div>
     <HeroSection
       badge="باقاتنا"
       description="جربنا باقاتنا المتكاملة المصممة بعناية لتمنحك أقصى درجات الاسترخاء والعناية — اختر الباقة التي تناسب احتياجك."

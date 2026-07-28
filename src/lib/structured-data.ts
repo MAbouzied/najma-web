@@ -3,6 +3,11 @@ import type { Faq, Package, Service } from '../data/home';
 
 export type PageSchemaType = 'WebPage' | 'AboutPage' | 'ContactPage';
 
+export interface BreadcrumbItem {
+  label: string;
+  href?: string;
+}
+
 export interface StructuredDataOptions {
   title: string;
   description: string;
@@ -14,6 +19,7 @@ export interface StructuredDataOptions {
   services?: Service[];
   packages?: Package[];
   breadcrumbLabel?: string;
+  breadcrumbs?: BreadcrumbItem[];
 }
 
 export interface StructuredDataDocument {
@@ -47,6 +53,7 @@ export function buildStructuredData({
   services = [],
   packages = [],
   breadcrumbLabel,
+  breadcrumbs,
 }: StructuredDataOptions): StructuredDataDocument {
   const businessId = resolveSeoUrl('/#business', siteOrigin);
   const websiteId = resolveSeoUrl('/#website', siteOrigin);
@@ -198,26 +205,28 @@ export function buildStructuredData({
 
   const graph: Record<string, unknown>[] = [business, website, primaryImage, page];
 
-  if (breadcrumbLabel) {
+  const breadcrumbTrail: BreadcrumbItem[] =
+    breadcrumbs && breadcrumbs.length > 0
+      ? breadcrumbs
+      : breadcrumbLabel
+        ? [
+            { label: 'الرئيسية', href: '/' },
+            { label: breadcrumbLabel, href: pathname },
+          ]
+        : [];
+
+  if (breadcrumbTrail.length > 0) {
     const breadcrumbId = `${pageId}-breadcrumb`;
     page.breadcrumb = { '@id': breadcrumbId };
     graph.push({
       '@type': 'BreadcrumbList',
       '@id': breadcrumbId,
-      itemListElement: [
-        {
-          '@type': 'ListItem',
-          position: 1,
-          name: 'الرئيسية',
-          item: resolveSeoUrl('/', siteOrigin),
-        },
-        {
-          '@type': 'ListItem',
-          position: 2,
-          name: breadcrumbLabel,
-          item: pageUrl,
-        },
-      ],
+      itemListElement: breadcrumbTrail.map((crumb, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        name: crumb.label,
+        item: resolveSeoUrl(crumb.href ?? pathname, siteOrigin),
+      })),
     });
   }
 

@@ -1,11 +1,17 @@
 ---
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import Header from '../../components/Header.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import HeroSection from '../../components/HeroSection.astro';
 import ServiceGrid from '../../components/ServiceGrid.astro';
 import CTASection from '../../components/CTASection.astro';
 import { services } from '../../data/home';
 import { bookingAction } from '../../data/site';
+
+const breadcrumbs = [
+  { label: 'الرئيسية', href: '/' },
+  { label: 'خدماتنا', href: '/services/' },
+];
 ---
 
 <SiteLayout
@@ -14,11 +20,14 @@ import { bookingAction } from '../../data/site';
   pathname="/services/"
   pageType="WebPage"
   image="/assets/home/hero-interior.png"
-  breadcrumbLabel="خدماتنا"
+  breadcrumbs={breadcrumbs}
   services={services}
 >
   <div data-hero-shell class="bg-bg-hero">
     <Header currentPage="services" />
+    <div class="page-container pt-6">
+      <Breadcrumbs items={breadcrumbs} class="mb-0" />
+    </div>
     <HeroSection
       badge="خدماتنا"
       description="نقدم لك تشكيلة متكاملة من خدمات المساج والحمام المغربي بأيدي أخصائيين محترفين — كل خدمة صممت لتمنحك لحظة استرخاء لا تُنسى."

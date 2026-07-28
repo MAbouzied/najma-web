@@ -1,0 +1,48 @@
+---
+import type { BreadcrumbItem } from '../lib/structured-data';
+
+export type { BreadcrumbItem };
+
+export interface Props {
+  items: BreadcrumbItem[];
+  class?: string;
+}
+
+const { items, class: className } = Astro.props;
+---
+
+{
+  items.length > 0 && (
+    <nav
+      data-breadcrumbs
+      class:list={['mb-6', className]}
+      aria-label="مسار التنقل"
+      dir="rtl"
+    >
+      <ol class="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-text-muted">
+        {items.map((item, index) => {
+          const isLast = index === items.length - 1;
+
+          return (
+            <li class="inline-flex min-w-0 items-center gap-2">
+              {index > 0 && (
+                <span class="shrink-0 text-gold/50" aria-hidden="true">
+                  /
+                </span>
+              )}
+              {isLast || !item.href ? (
+                <span class="truncate font-medium text-text-primary" aria-current="page">
+                  {item.label}
+                </span>
+              ) : (
+                <a href={item.href} class="truncate transition-colors hover:text-gold">
+                  {item.label}
+                </a>
+              )}
+            </li>
+          );
+        })}
+      </ol>
+    </nav>
+  )
+}

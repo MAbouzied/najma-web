@@ -1,12 +1,18 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
 import Header from '../components/Header.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
 import HeroSection from '../components/HeroSection.astro';
 import SplitMediaSection from '../components/SplitMediaSection.astro';
 import FeatureGrid from '../components/FeatureGrid.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import CTASection from '../components/CTASection.astro';
 import { bookingAction } from '../data/site';
+
+const breadcrumbs = [
+  { label: 'الرئيسية', href: '/' },
+  { label: 'من نحن', href: '/about/' },
+];
 
 const values = [
   {
@@ -55,10 +61,13 @@ const stats = [
   pathname="/about/"
   pageType="AboutPage"
   image="/assets/about/mission.jpg"
-  breadcrumbLabel="من نحن"
+  breadcrumbs={breadcrumbs}
 >
   <div data-hero-shell class="bg-bg-hero">
     <Header currentPage="about" />
+    <div class="page-container pt-6">
+      <Breadcrumbs items={breadcrumbs} class="mb-0" />
+    </div>
     <HeroSection
       badge="قصتنا"
       description="وُلد نجم سبا من شغفٍ عميق بتقديم تجربة استرخاء تتجاوز التوقعات، تجربة تحتفي بالتفاصيل الصغيرة وتمنحك لحظة"

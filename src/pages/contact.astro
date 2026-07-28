@@ -1,6 +1,7 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
 import Header from '../components/Header.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
 import HeroSection from '../components/HeroSection.astro';
 import InfoCards from '../components/InfoCards.astro';
 import ContactForm from '../components/ContactForm.astro';
@@ -9,6 +10,11 @@ import CTASection from '../components/CTASection.astro';
 import { branches } from '../data/branches';
 import { bookingAction, contactDetails } from '../data/site';
 import { buildGeneralContactUrl } from '../lib/whatsapp';
+
+const breadcrumbs = [
+  { label: 'الرئيسية', href: '/' },
+  { label: 'اتصل بنا', href: '/contact/' },
+];
 ---
 
 <SiteLayout
@@ -17,10 +23,13 @@ import { buildGeneralContactUrl } from '../lib/whatsapp';
   pathname="/contact/"
   pageType="ContactPage"
   image="/assets/contact-cta.jpg"
-  breadcrumbLabel="اتصل بنا"
+  breadcrumbs={breadcrumbs}
 >
   <div data-hero-shell class="bg-bg-hero">
     <Header currentPage="contact" />
+    <div class="page-container pt-6">
+      <Breadcrumbs items={breadcrumbs} class="mb-0" />
+    </div>
     <HeroSection
       badge="تواصل معنا"
       title="اتصل بنا"

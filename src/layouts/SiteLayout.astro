@@ -7,6 +7,7 @@ import type { Faq, Package, Service } from '../data/home';
 import {
   buildStructuredData,
   resolveSeoUrl,
+  type BreadcrumbItem,
   type PageSchemaType,
 } from '../lib/structured-data';
 
@@ -21,6 +22,7 @@ export interface Props {
   services?: Service[];
   packages?: Package[];
   breadcrumbLabel?: string;
+  breadcrumbs?: BreadcrumbItem[];
 }
 
 const {
@@ -34,6 +36,7 @@ const {
   services = [],
   packages = [],
   breadcrumbLabel,
+  breadcrumbs,
 } = Astro.props;
 const siteOrigin = Astro.site?.href;
 const canonicalUrl = resolveSeoUrl(pathname, siteOrigin);
@@ -49,6 +52,7 @@ const structuredData = buildStructuredData({
   services,
   packages,
   breadcrumbLabel,
+  breadcrumbs,
 });
 ---
 
