@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import { ClientRouter } from 'astro:transitions';
 import Footer from '../components/Footer.astro';
+import Gtm from '../components/Gtm.astro';
 import JsonLd from '../components/JsonLd.astro';
 import type { Faq, Package, Service } from '../data/home';
 import {
@@ -96,6 +97,7 @@ const structuredData = buildStructuredData({
     <meta name="twitter:image:alt" content={title} />
     <title>{title}</title>
     <JsonLd data={structuredData} />
+    <Gtm />
     <ClientRouter />
   </head>
   <body>
