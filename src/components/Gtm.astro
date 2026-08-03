@@ -1,0 +1,158 @@
+---
+import {
+  GTM_CONTAINER_ID,
+  isGaMeasurementId,
+  isGtmContainerConfigured,
+  isGtmContainerId,
+} from '../lib/gtm';
+---
+
+<meta name="gtm-container-id" content={GTM_CONTAINER_ID} />
+
+<script
+  is:inline
+  define:vars={{
+    gtmId: GTM_CONTAINER_ID,
+    gtmEnabled: isGtmContainerConfigured,
+    useGa: isGaMeasurementId,
+    useGtm: isGtmContainerId,
+  }}
+>
+  window.dataLayer = window.dataLayer || [];
+
+  if (gtmEnabled && useGa) {
+    function gtag() {
+      window.dataLayer.push(arguments);
+    }
+    window.gtag = gtag;
+    gtag('js', new Date());
+    gtag('config', gtmId);
+
+    var gaScript = document.createElement('script');
+    gaScript.async = true;
+    gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + gtmId;
+    document.head.appendChild(gaScript);
+  } else {
+    window.dataLayer.push({
+      'gtm.start': new Date().getTime(),
+      event: 'gtm.js',
+    });
+
+    if (gtmEnabled && useGtm) {
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        var f = d.getElementsByTagName(s)[0];
+        var j = d.createElement(s);
+        var dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, 'script', 'dataLayer', gtmId);
+    }
+  }
+</script>
+
+<script>
+  import { pushGtmEvent } from '../lib/gtm';
+
+  const SAME_TAB_PROTOCOLS = ['tel:', 'mailto:'];
+  const NAVIGATION_DELAY_MS = 150;
+
+  function readDataset(el: HTMLElement, key: 'gtmEvent' | 'gtmLocation') {
+    return el.dataset[key]?.trim() || undefined;
+  }
+
+  function isSameTabContactLink(el: HTMLAnchorElement) {
+    const href = el.getAttribute('href')?.toLowerCase() ?? '';
+    return SAME_TAB_PROTOCOLS.some((protocol) => href.startsWith(protocol));
+  }
+
+  function trackFromElement(el: HTMLElement, onReady?: () => void) {
+    const eventName = readDataset(el, 'gtmEvent');
+    if (!eventName) {
+      onReady?.();
+      return;
+    }
+
+    const location = readDataset(el, 'gtmLocation');
+    const params: Record<string, string | number | (() => void) | undefined> = { location };
+
+    if (el instanceof HTMLAnchorElement) {
+      params.link_url = el.href;
+    }
+
+    if (el instanceof HTMLFormElement) {
+      params.form_id = el.id || undefined;
+      const serviceInput = el.querySelector('[name="service"]');
+      if (serviceInput instanceof HTMLInputElement || serviceInput instanceof HTMLTextAreaElement) {
+        params.service = serviceInput.value || undefined;
+      }
+    }
+
+    if (onReady) {
+      let settled = false;
+      const finish = () => {
+        if (settled) {
+          return;
+        }
+        settled = true;
+        onReady();
+      };
+
+      params.eventCallback = finish;
+      params.eventTimeout = NAVIGATION_DELAY_MS;
+      pushGtmEvent(eventName, params);
+      window.setTimeout(finish, NAVIGATION_DELAY_MS);
+      return;
+    }
+
+    pushGtmEvent(eventName, params);
+  }
+
+  function onClick(event: Event) {
+    const target = event.target;
+    if (!(target instanceof Element)) {
+      return;
+    }
+
+    const el = target.closest('[data-gtm-event]');
+    if (!(el instanceof HTMLElement) || el instanceof HTMLFormElement) {
+      return;
+    }
+
+    // Form submits are tracked on the submit event, not the button click.
+    if (el.closest('form[data-gtm-event]')) {
+      return;
+    }
+
+    if (el instanceof HTMLAnchorElement && isSameTabContactLink(el)) {
+      event.preventDefault();
+      const href = el.href;
+      trackFromElement(el, () => {
+        window.location.href = href;
+      });
+      return;
+    }
+
+    trackFromElement(el);
+  }
+
+  function onSubmit(event: Event) {
+    const form = event.target;
+    if (!(form instanceof HTMLFormElement)) {
+      return;
+    }
+
+    if (!form.dataset.gtmEvent) {
+      return;
+    }
+
+    trackFromElement(form);
+  }
+
+  if (!window.__nagmGtmBound) {
+    document.addEventListener('click', onClick, true);
+    document.addEventListener('submit', onSubmit, true);
+    window.__nagmGtmBound = true;
+  }
+</script>
