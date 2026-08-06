@@ -1,19 +1,25 @@
 ---
 import SocialLinks from './SocialLinks.astro';
 import type { Branch } from '../data/branches';
+import type { Locale } from '../i18n/types';
+import { t } from '../i18n/t';
 
 export interface Props {
   sectionLabel: string;
+  title?: string;
   branches: Branch[];
+  locale?: Locale;
 }
 
-const { sectionLabel, branches } = Astro.props;
+const { sectionLabel, branches, locale = 'ar', title } = Astro.props;
+const dir = locale === 'en' ? 'ltr' : 'rtl';
+const heading = title ?? t(locale, 'contactBranchesHeading');
 ---
 
-<article id="branches" class="py-8" dir="rtl">
+<article id="branches" class="py-8" dir={dir}>
   <span class="text-sm font-medium text-gold">{sectionLabel}</span>
-  <h2 class="text-gold-gradient mt-2 text-right text-4xl font-bold leading-tight tracking-[0.48px] sm:text-5xl">
-    زُرنا في أقرب فرع
+  <h2 class="text-gold-gradient mt-2 text-start text-4xl font-bold leading-tight tracking-[0.48px] sm:text-5xl">
+    {heading}
   </h2>
 
   <div class="mt-6 flex flex-col gap-4">
@@ -24,17 +30,17 @@ const { sectionLabel, branches } = Astro.props;
           <dl class="mt-3 flex flex-col gap-2 text-sm text-text-muted">
             <div class="flex items-start gap-2">
               <img src="/assets/icons/location.svg" alt="" width="16" height="16" class="mt-0.5 size-4 shrink-0" />
-              <dt class="sr-only">العنوان</dt>
+              <dt class="sr-only">{locale === 'en' ? 'Address' : 'العنوان'}</dt>
               <dd>{branch.address}</dd>
             </div>
             <div class="flex items-start gap-2">
               <img src="/assets/icons/hours.svg" alt="" width="16" height="16" class="mt-0.5 size-4 shrink-0" />
-              <dt class="sr-only">ساعات العمل</dt>
+              <dt class="sr-only">{t(locale, 'contactLabelHours')}</dt>
               <dd>{branch.hours}</dd>
             </div>
             <div class="flex items-start gap-2">
               <img src="/assets/icons/branch-phone.svg" alt="" width="16" height="16" class="mt-0.5 size-4 shrink-0" />
-              <dt class="sr-only">رقم الهاتف</dt>
+              <dt class="sr-only">{t(locale, 'contactLabelPhone')}</dt>
               <dd dir="ltr">{branch.phone}</dd>
             </div>
           </dl>
@@ -44,6 +50,6 @@ const { sectionLabel, branches } = Astro.props;
   </div>
 
   <div class="mt-8 flex justify-start">
-    <SocialLinks showLabel />
+    <SocialLinks showLabel locale={locale} />
   </div>
 </article>

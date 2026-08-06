@@ -1,0 +1,165 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import Header from '../components/Header.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import HeroSection from '../components/HeroSection.astro';
+import SplitMediaSection from '../components/SplitMediaSection.astro';
+import FeatureGrid from '../components/FeatureGrid.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import CTASection from '../components/CTASection.astro';
+import { getBookingAction, getCallAction } from '../data/site';
+import { localePath } from '../i18n/paths';
+import { t } from '../i18n/t';
+import type { Locale } from '../i18n/types';
+
+export interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const booking = getBookingAction(locale);
+const call = getCallAction(locale);
+const brand = t(locale, 'brandName');
+
+const breadcrumbs = [
+  { label: t(locale, 'breadcrumbHome'), href: localePath('/', locale) },
+  { label: t(locale, 'breadcrumbAbout'), href: localePath('/about/', locale) },
+];
+
+const values = [
+  {
+    icon: '/assets/about/icons/trusted-expertise.svg',
+    title: t(locale, 'aboutValue1Title'),
+    description: t(locale, 'aboutValue1Description'),
+  },
+  {
+    icon: '/assets/about/icons/exceptional-quality.svg',
+    title: t(locale, 'aboutValue2Title'),
+    description: t(locale, 'aboutValue2Description'),
+  },
+  {
+    icon: '/assets/about/icons/authentic-nature.svg',
+    title: t(locale, 'aboutValue3Title'),
+    description: t(locale, 'aboutValue3Description'),
+  },
+  {
+    icon: '/assets/about/icons/calm-atmosphere.svg',
+    title: t(locale, 'aboutValue4Title'),
+    description: t(locale, 'aboutValue4Description'),
+  },
+  {
+    icon: '/assets/about/icons/complete-privacy.svg',
+    title: t(locale, 'aboutValue5Title'),
+    description: t(locale, 'aboutValue5Description'),
+  },
+  {
+    icon: '/assets/about/icons/complete-service.svg',
+    title: t(locale, 'aboutValue6Title'),
+    description: t(locale, 'aboutValue6Description'),
+  },
+];
+
+const stats =
+  locale === 'en'
+    ? [
+        { value: '1', label: t(locale, 'aboutStatBranches') },
+        { value: '24', label: t(locale, 'aboutStatHours') },
+        { value: '+50', label: t(locale, 'aboutStatTherapists') },
+        { value: '+12', label: t(locale, 'aboutStatExperience') },
+      ]
+    : [
+        { value: '١', label: t(locale, 'aboutStatBranches') },
+        { value: '٢٤', label: t(locale, 'aboutStatHours') },
+        { value: '+٥٠', label: t(locale, 'aboutStatTherapists') },
+        { value: '+١٢', label: t(locale, 'aboutStatExperience') },
+      ];
+
+const heroDesc = t(locale, 'aboutHeroDescription');
+const mid = Math.ceil(heroDesc.length / 2);
+const breakAt = heroDesc.lastIndexOf(' ', mid);
+const heroLine1 = breakAt > 0 ? heroDesc.slice(0, breakAt) : heroDesc;
+const heroLine2 = breakAt > 0 ? heroDesc.slice(breakAt + 1) : '';
+---
+
+<SiteLayout
+  title={t(locale, 'aboutPageTitle')}
+  description={t(locale, 'aboutPageDescription')}
+  pathname={localePath('/about/', locale)}
+  pageType="AboutPage"
+  image="/assets/about/mission.jpg"
+  breadcrumbs={breadcrumbs}
+  locale={locale}
+>
+  <div data-hero-shell class="bg-bg-hero">
+    <Header currentPage="about" locale={locale} />
+    <div class="page-container pt-6">
+      <Breadcrumbs items={breadcrumbs} locale={locale} class="mb-0" />
+    </div>
+    <HeroSection badge={t(locale, 'aboutHeroBadge')} description={heroLine1} descriptionLine2={heroLine2}>
+      <Fragment slot="title">
+        <span class="text-gold-gradient">{brand}</span>
+        <span class="text-text-primary">
+          {locale === 'en' ? ' — where authenticity' : ' - حيث تلتقي الأصالة'}
+        </span>
+        <br />
+        <span class="text-text-primary">{locale === 'en' ? 'meets luxury' : 'بالرفاهية'}</span>
+      </Fragment>
+    </HeroSection>
+  </div>
+
+  <SplitMediaSection
+    locale={locale}
+    eyebrow={t(locale, 'aboutMissionEyebrow')}
+    title={t(locale, 'aboutMissionTitle')}
+    paragraphs={[t(locale, 'aboutMissionP1'), t(locale, 'aboutMissionP2')]}
+    image="/assets/about/mission.jpg"
+    imageAlt={locale === 'en' ? 'Nagm Spa atmosphere' : 'أجواء نجم سبا'}
+    imagePosition="right"
+    surface="secondary"
+  >
+    <div class="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
+      {
+        stats.map((stat) => (
+          <div class="rounded-[20px] border border-border-card bg-bg-card/60 p-4 text-center">
+            <p class="text-2xl font-bold tracking-[0.24px] text-gold">{stat.value}</p>
+            <p class="mt-1 text-xs leading-4 text-text-muted">{stat.label}</p>
+          </div>
+        ))
+      }
+    </div>
+  </SplitMediaSection>
+
+  <section class="section-block bg-bg-tertiary">
+    <div class="page-container">
+      <SectionHeading
+        eyebrow={t(locale, 'aboutValuesEyebrow')}
+        title={t(locale, 'aboutValuesTitle')}
+        description={t(locale, 'aboutValuesDescription')}
+        align="center"
+      />
+      <div class="mt-14">
+        <FeatureGrid features={values} columns={3} />
+      </div>
+    </div>
+  </section>
+
+  <SplitMediaSection
+    locale={locale}
+    eyebrow={t(locale, 'aboutVisionEyebrow')}
+    title={t(locale, 'aboutVisionTitle')}
+    paragraphs={[t(locale, 'aboutVisionP1')]}
+    image="/assets/contact-cta.jpg"
+    imageAlt={locale === 'en' ? 'Massage session at Nagm Spa' : 'جلسة مساج في نجم سبا'}
+    imagePosition="left"
+    surface="primary"
+    primaryAction={{ label: t(locale, 'aboutVisionContactAction'), href: localePath('/contact/', locale) }}
+    secondaryAction={{ label: t(locale, 'aboutVisionServicesAction'), href: localePath('/services/', locale) }}
+  />
+
+  <CTASection
+    title={t(locale, 'aboutCtaTitle')}
+    description={t(locale, 'aboutCtaDescription')}
+    primaryAction={{ label: t(locale, 'aboutCtaPrimary'), href: booking.href }}
+    secondaryAction={{ label: t(locale, 'aboutCtaSecondary'), href: call.href }}
+  />
+</SiteLayout>

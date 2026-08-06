@@ -1,5 +1,6 @@
 ---
 import type { SiteAction } from '../data/site';
+import { gtmAttrsForHref } from '../lib/gtm';
 
 export interface Props {
   title: string;
@@ -17,8 +18,8 @@ const {
   backgroundImage = '/assets/contact-cta.jpg',
 } = Astro.props;
 
-function isExternal(href: string) {
-  return href.startsWith('http') || href.startsWith('tel:') || href.startsWith('mailto:');
+function isHttp(href: string) {
+  return href.startsWith('http');
 }
 ---
 
@@ -42,12 +43,24 @@ function isExternal(href: string) {
         </p>
         <div class="flex flex-wrap items-center justify-center gap-4 pt-4">
           {primaryAction && (
-            <a href={primaryAction.href} target={isExternal(primaryAction.href) ? '_blank' : undefined} rel={isExternal(primaryAction.href) ? 'noopener noreferrer' : undefined} class="gold-button">
+            <a
+              href={primaryAction.href}
+              target={isHttp(primaryAction.href) ? '_blank' : undefined}
+              rel={isHttp(primaryAction.href) ? 'noopener noreferrer' : undefined}
+              class="gold-button"
+              {...gtmAttrsForHref(primaryAction.href, 'cta')}
+            >
               {primaryAction.label}
             </a>
           )}
           {secondaryAction && (
-            <a href={secondaryAction.href} target={isExternal(secondaryAction.href) ? '_blank' : undefined} rel={isExternal(secondaryAction.href) ? 'noopener noreferrer' : undefined} class="outline-button">
+            <a
+              href={secondaryAction.href}
+              target={isHttp(secondaryAction.href) ? '_blank' : undefined}
+              rel={isHttp(secondaryAction.href) ? 'noopener noreferrer' : undefined}
+              class="outline-button"
+              {...gtmAttrsForHref(secondaryAction.href, 'cta')}
+            >
               {secondaryAction.label}
             </a>
           )}

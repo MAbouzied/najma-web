@@ -1,29 +1,55 @@
 ---
 import '../styles/global.css';
 import { ClientRouter } from 'astro:transitions';
+import FloatingContact from '../components/FloatingContact.astro';
 import Footer from '../components/Footer.astro';
 import Gtm from '../components/Gtm.astro';
 import JsonLd from '../components/JsonLd.astro';
-import type { Faq, Package, Service } from '../data/home';
+import type { Locale } from '../i18n/types';
+import { isBlogPath, localePath, stripLocalePrefix } from '../i18n/paths';
+import { t } from '../i18n/t';
+import { GTM_CONTAINER_ID, isGtmContainerConfigured, isGtmContainerId } from '../lib/gtm';
 import {
   buildStructuredData,
   resolveSeoUrl,
   type BreadcrumbItem,
   type PageSchemaType,
+  type ResolvedFaq,
+  type ResolvedService,
+  type ResolvedPackage,
+  type ResolvedOffer,
 } from '../lib/structured-data';
+
+export interface ArticleMeta {
+  publishedTime: string;
+  modifiedTime?: string;
+  author?: string;
+  section?: string;
+  tags?: string[];
+}
 
 export interface Props {
   title: string;
   description: string;
   pathname?: string;
   pageType?: PageSchemaType;
-  image?: string;
+  image?: string | null;
   socialImage?: string;
-  faqItems?: Faq[];
-  services?: Service[];
-  packages?: Package[];
+  faqItems?: ResolvedFaq[];
+  services?: ResolvedService[];
+  packages?: ResolvedPackage[];
+  offers?: ResolvedOffer[];
   breadcrumbLabel?: string;
   breadcrumbs?: BreadcrumbItem[];
+  locale?: Locale;
+  robots?: string;
+  showFloatingContact?: boolean;
+  showFooter?: boolean;
+  ogType?: 'website' | 'article';
+  article?: ArticleMeta;
+  additionalSchemas?: Record<string, unknown>[];
+  imageAlt?: string;
+  mainEntityId?: string;
 }
 
 const {
@@ -31,34 +57,61 @@ const {
   description,
   pathname = Astro.url.pathname,
   pageType = 'WebPage',
-  image = '/assets/home/hero-interior.png',
+  image,
   socialImage = '/assets/og/nagm-spa-share.jpg',
   faqItems = [],
   services = [],
   packages = [],
+  offers = [],
   breadcrumbLabel,
   breadcrumbs,
+  locale = 'ar',
+  robots = 'index, follow, max-image-preview:large',
+  showFloatingContact = true,
+  showFooter = true,
+  ogType = 'website',
+  article,
+  additionalSchemas = [],
+  imageAlt,
+  mainEntityId,
 } = Astro.props;
+const htmlLang = locale === 'en' ? 'en' : 'ar';
+const htmlDir = locale === 'en' ? 'ltr' : 'rtl';
 const siteOrigin = Astro.site?.href;
 const canonicalUrl = resolveSeoUrl(pathname, siteOrigin);
 const socialImageUrl = resolveSeoUrl(socialImage, siteOrigin);
+const ogImageAlt = imageAlt ?? title;
+
+const neutralPath = stripLocalePrefix(pathname);
+const arabicOnlyAlternates = isBlogPath(pathname);
+const arHref = resolveSeoUrl(localePath(neutralPath, 'ar'), siteOrigin);
+const enHref = resolveSeoUrl(localePath(neutralPath, 'en'), siteOrigin);
+
+const primaryImage = image === null ? null : (image ?? '/assets/home/hero-interior.jpg');
 const structuredData = buildStructuredData({
   title,
   description,
   pathname,
   pageType,
-  image,
+  image: primaryImage,
   siteOrigin,
   faqItems,
   services,
   packages,
+  offers,
   breadcrumbLabel,
   breadcrumbs,
+  locale,
+  mainEntityId,
 });
+
+if (additionalSchemas.length > 0) {
+  structuredData['@graph'] = [...structuredData['@graph'], ...additionalSchemas];
+}
 ---
 
 <!doctype html>
-<html lang="ar" dir="rtl">
+<html lang={htmlLang} dir={htmlDir}>
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -66,7 +119,7 @@ const structuredData = buildStructuredData({
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
-    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="robots" content={robots} />
     <meta name="color-scheme" content="dark" />
     <meta name="generator" content={Astro.generator} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -76,10 +129,16 @@ const structuredData = buildStructuredData({
       href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap"
     />
     <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" hreflang="ar" href={arHref} />
+    {!arabicOnlyAlternates && <link rel="alternate" hreflang="en" href={enHref} />}
+    <link rel="alternate" hreflang="x-default" href={arHref} />
 
-    <meta property="og:locale" content="ar_SA" />
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="نجم سبا" />
+    <meta property="og:locale" content={locale === 'en' ? 'en_US' : 'ar_SA'} />
+    {!arabicOnlyAlternates && (
+      <meta property="og:locale:alternate" content={locale === 'en' ? 'ar_SA' : 'en_US'} />
+    )}
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content={t(locale, 'brandName')} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
@@ -88,22 +147,43 @@ const structuredData = buildStructuredData({
     <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content={title} />
+    <meta property="og:image:alt" content={ogImageAlt} />
+    {ogType === 'article' && article && (
+      <>
+        <meta property="article:published_time" content={article.publishedTime} />
+        <meta property="article:modified_time" content={article.modifiedTime ?? article.publishedTime} />
+        {article.author && <meta property="article:author" content={article.author} />}
+        {article.section && <meta property="article:section" content={article.section} />}
+        {article.tags?.map((tag) => <meta property="article:tag" content={tag} />)}
+      </>
+    )}
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImageUrl} />
-    <meta name="twitter:image:alt" content={title} />
+    <meta name="twitter:image:alt" content={ogImageAlt} />
     <title>{title}</title>
     <JsonLd data={structuredData} />
     <Gtm />
     <ClientRouter />
   </head>
   <body>
+    {isGtmContainerConfigured && isGtmContainerId && (
+      <noscript>
+        <iframe
+          src={`https://www.googletagmanager.com/ns.html?id=${GTM_CONTAINER_ID}`}
+          height="0"
+          width="0"
+          class="hidden"
+          title="Google Tag Manager"
+        ></iframe>
+      </noscript>
+    )}
     <main>
       <slot />
     </main>
-    <Footer />
+    {showFooter && <Footer locale={locale} />}
+    {showFloatingContact && <FloatingContact locale={locale} />}
   </body>
 </html>

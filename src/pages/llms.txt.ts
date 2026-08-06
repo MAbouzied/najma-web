@@ -1,7 +1,9 @@
 import type { APIRoute } from 'astro';
-import { services, packages } from '../data/home';
+import { offers, packages, services } from '../data/home';
 import {
+  buildCallHref,
   buildGeneralContactUrl,
+  MAPS_HREF,
   WHATSAPP_PHONE_DISPLAY,
 } from '../lib/whatsapp';
 
@@ -9,47 +11,96 @@ export const prerender = true;
 
 export const GET: APIRoute = ({ site }) => {
   const link = (path: string) => (site ? new URL(path, site).href : path);
-  const serviceLinks = services
-    .map((s) => `- [${s.title}](${link(`/services/${s.slug}/`)}): ${s.description} — ${s.price}`)
+  const serviceLinksAr = services
+    .map((s) => `- [${s.title.ar}](${link(`/services/${s.slug}/`)}): ${s.description.ar} — ${s.price.ar}`)
     .join('\n');
-  const packageLinks = packages
-    .map((p) => `- [${p.name}](${link(`/packages/${p.slug}/`)}): ${p.subtitle} — ${p.price}`)
+  const serviceLinksEn = services
+    .map((s) => `- [${s.title.en}](${link(`/en/services/${s.slug}/`)}): ${s.description.en} — ${s.price.en}`)
+    .join('\n');
+  const offerLinksAr = offers
+    .map(
+      (offer) =>
+        `- [${offer.name.ar}](${link(`/offers/${offer.slug}/`)}): ${offer.subtitle.ar} — ${offer.price.ar} (بدلاً من ${offer.originalPrice.ar})`,
+    )
+    .join('\n');
+  const offerLinksEn = offers
+    .map(
+      (offer) =>
+        `- [${offer.name.en}](${link(`/en/offers/${offer.slug}/`)}): ${offer.subtitle.en} — ${offer.price.en} (was ${offer.originalPrice.en})`,
+    )
+    .join('\n');
+  const packageLinksAr = packages
+    .map((p) => `- [${p.name.ar}](${link(`/packages/${p.slug}/`)}): ${p.subtitle.ar} — ${p.price.ar}`)
+    .join('\n');
+  const packageLinksEn = packages
+    .map((p) => `- [${p.name.en}](${link(`/en/packages/${p.slug}/`)}): ${p.subtitle.en} — ${p.price.en}`)
     .join('\n');
 
-  const body = `# نجم سبا
+  const body = `# نجم سبا / Nagm Spa
 
-> مركز مساج وحمام مغربي في حفر الباطن، المملكة العربية السعودية. يقدم خدمات المساج والحمام المغربي والعناية الشخصية بأيدي أخصائيين فلبينيين محترفين.
+> مركز مساج وحمام مغربي في حفر الباطن — حي المصيف، المملكة العربية السعودية. مفتوح على مدار الساعة.
+> Massage and Moroccan bath center in Hafar Al-Batin — Al-Musayyif district, Saudi Arabia. Open 24 hours.
 
-جميع المحتويات باللغة العربية. الموقع يعمل بفرع واحد فقط في حفر الباطن — المحمدية. لا توجد فروع في الرياض أو جدة أو الخبر. بيانات التواصل والحجز موحدة في كل صفحات الموقع.
+Arabic is the default locale (unprefixed). English is available under /en/. The business operates from a single branch in Hafar Al-Batin — Al-Musayyif. There are no branches in Riyadh, Jeddah, or Khobar.
 
-## الصفحات الرئيسية
+## الصفحات الرئيسية (Arabic)
 
-- [الرئيسية](${link('/')}): تعريف بالخدمات والباقات والأسئلة الشائعة مع تجربة تصفح كاملة.
-- [من نحن](${link('/about/')}): قصة المركز ورسالته وقائمة الخدمات المقدمة.
-- [تواصل معنا](${link('/contact/')}): بيانات التواصل الكاملة (هاتف، واتساب، بريد، عنوان) مع نموذج إرسال عبر واتساب.
+- [الرئيسية](${link('/')}): تعريف بالخدمات والباقات والعروض والأسئلة الشائعة.
+- [من نحن](${link('/about/')}): قصة المركز ورسالته وقيمه.
+- [الخدمات](${link('/services/')}): فهرس خدمات المساج والحمام والعناية.
+- [الباقات](${link('/packages/')}): فهرس باقات العناية المتكاملة.
+- [عروض الصيف](${link('/offers/')}): عروض صيفك على كيفك بخصم ٢٠٪.
+- [المدونة](${link('/blogs/')}): مقالات عربية عن المساج والاسترخاء والعناية (عربي فقط).
+- [تواصل معنا](${link('/contact/')}): بيانات التواصل الكاملة مع نموذج الحجز.
 
-## الخدمات
+## Main pages (English)
 
-${serviceLinks}
+- [Home](${link('/en/')}): Services, packages, offers, and FAQs.
+- [About](${link('/en/about/')}): Brand story, mission, and values.
+- [Services](${link('/en/services/')}): Massage, bath, and personal care index.
+- [Packages](${link('/en/packages/')}): Integrated care packages index.
+- [Summer Deals](${link('/en/offers/')}): Seasonal offers with 20% off.
+- [Contact](${link('/en/contact/')}): Full contact details and booking form.
 
-## الباقات
+## الخدمات / Services
 
-${packageLinks}
+### العربية
+${serviceLinksAr}
 
-## معلومات التواصل
+### English
+${serviceLinksEn}
 
-- [الهاتف / واتساب](${buildGeneralContactUrl()}): ${WHATSAPP_PHONE_DISPLAY}
-- [واتساب للحجز](${buildGeneralContactUrl()}): راسلنا مباشرة للحجز والاستفسار
-- [البريد الإلكتروني](mailto:info@nagmspa.com): info@nagmspa.com
-- [العنوان](https://maps.app.goo.gl/7fA6iB4VxucoVwoc7?g_st=ic): طريق الملك فيصل بن عبد العزيز، المحمدية، حفر الباطن 39911
-- [ساعات العمل](${link('/#')}): يوميًا ١٠ صباحًا – ١٢ منتصف الليل
+## عروض الصيف / Summer Offers
 
-## Optional
+### العربية
+${offerLinksAr}
+
+### English
+${offerLinksEn}
+
+## الباقات / Packages
+
+### العربية
+${packageLinksAr}
+
+### English
+${packageLinksEn}
+
+## معلومات التواصل / Contact
+
+- [الهاتف / Phone](${buildCallHref()}): ${WHATSAPP_PHONE_DISPLAY}
+- [واتساب للحجز / WhatsApp](${buildGeneralContactUrl()}): Direct booking and inquiries
+- [البريد الإلكتروني / Email](mailto:info@nagmspa.com): info@nagmspa.com
+- [العنوان / Address](${MAPS_HREF}): حي المصيف، حفر الباطن / Al-Musayyif, Hafar Al-Batin
+- [ساعات العمل / Hours](${link('/contact/')}): على مدار الساعة — ٢٤ ساعة يوميًا / Open 24 hours
+
+## Social
 
 - [إنستقرام](https://www.instagram.com/nagmspa/): @nagmspa
 - [تويتر](https://twitter.com/nagmspa): @nagmspa
 - [سناب شات](https://www.snapchat.com/add/nagmspa): @nagmspa
-- [الأسئلة الشائعة](${link('/#faq')}): إجابات عن الحجز والمواعيد والدفع والخصوصية.
+- [الأسئلة الشائعة / FAQ](${link('/#faq')})
+- [English FAQ](${link('/en/#faq')})
 `;
 
   return new Response(body, {

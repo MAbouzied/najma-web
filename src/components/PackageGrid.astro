@@ -1,14 +1,23 @@
 ---
 import PackageCard from './PackageCard.astro';
-import type { Package } from '../data/home';
+import type { Locale } from '../i18n/types';
 
 export interface Props {
-  packages: Package[];
+  packages: {
+    slug: string;
+    name: string;
+    subtitle: string;
+    description: string;
+    price: string;
+    features: string[];
+    featured?: boolean;
+  }[];
+  locale?: Locale;
 }
 
-const { packages } = Astro.props;
+const { packages, locale = 'ar' } = Astro.props;
 ---
 
 <div class="grid grid-cols-1 items-stretch gap-6 pt-4 lg:grid-cols-3 lg:pt-8">
-  {packages.map((packageItem) => <PackageCard packageItem={packageItem} />)}
+  {packages.map((packageItem) => <PackageCard packageItem={packageItem} locale={locale} />)}
 </div>

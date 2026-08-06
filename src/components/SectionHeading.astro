@@ -10,7 +10,7 @@ const { eyebrow, title, description, align = 'start' } = Astro.props;
 const centered = align === 'center';
 ---
 
-<header class:list={['flex flex-col gap-3', centered ? 'items-center text-center' : 'items-start text-right']}>
+<header class:list={['flex flex-col gap-3', centered ? 'items-center text-center' : 'items-start text-start']}>
   {eyebrow && <span class="text-sm font-medium text-gold">{eyebrow}</span>}
   <h2 class="text-gold-gradient text-4xl font-bold leading-[1.3] tracking-[0.48px] sm:text-5xl">
     {title}

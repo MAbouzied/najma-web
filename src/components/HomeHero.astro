@@ -1,35 +1,44 @@
 ---
 import type { SiteAction } from '../data/site';
+import type { Locale } from '../i18n/types';
+import { gtmAttrsForHref } from '../lib/gtm';
 
 export interface Props {
+  locale?: Locale;
   eyebrow: string;
   title: string;
   highlightedTitle: string;
   description: string;
   descriptionLine2?: string;
   image: string;
+  imageAlt: string;
+  proofAriaLabel: string;
   primaryAction: SiteAction;
   secondaryAction: SiteAction;
   proofPoints: string[];
 }
 
 const {
+  locale = 'ar',
   eyebrow,
   title,
   highlightedTitle,
   description,
   descriptionLine2,
   image,
+  imageAlt,
+  proofAriaLabel,
   primaryAction,
   secondaryAction,
   proofPoints,
 } = Astro.props;
 
+const dir = locale === 'en' ? 'ltr' : 'rtl';
 const isExternalLink = (href: string) => /^(https?:\/\/|tel:|mailto:)/.test(href);
 ---
 
 <section data-home-hero class="overflow-hidden bg-transparent">
-  <div class="mx-auto flex w-full max-w-[896px] flex-col items-center px-5 py-16 text-center sm:px-8 lg:py-24" dir="rtl">
+  <div class="mx-auto flex w-full max-w-[896px] flex-col items-center px-5 py-16 text-center sm:px-8 lg:py-24" dir={dir}>
     <div>
       <div class="inline-flex items-center gap-2 rounded-full border border-border-badge bg-bg-badge px-4 py-1.5">
         <img src="/assets/icons/star.svg" alt="" width="14" height="14" class="size-3.5" />
@@ -49,6 +58,7 @@ const isExternalLink = (href: string) => /^(https?:\/\/|tel:|mailto:)/.test(href
           href={secondaryAction.href}
           {...(isExternalLink(secondaryAction.href) ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
           class="outline-button"
+          {...gtmAttrsForHref(secondaryAction.href, 'home_hero')}
         >
           {secondaryAction.label}
         </a>
@@ -56,13 +66,14 @@ const isExternalLink = (href: string) => /^(https?:\/\/|tel:|mailto:)/.test(href
           href={primaryAction.href}
           {...(isExternalLink(primaryAction.href) ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
           class="gold-button"
+          {...gtmAttrsForHref(primaryAction.href, 'home_hero')}
         >
           <img src="/assets/icons/arrow.svg" alt="" width="16" height="16" class="size-4" />
           {primaryAction.label}
         </a>
       </div>
 
-      <ul class="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-3 text-sm text-text-muted" aria-label="مزايا نجم سبا">
+      <ul class="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-3 text-sm text-text-muted" aria-label={proofAriaLabel}>
         {proofPoints.map((point) => (
           <li class="flex items-center gap-2">
             <span class="size-1.5 rounded-full bg-gold" aria-hidden="true"></span>
@@ -77,10 +88,10 @@ const isExternalLink = (href: string) => /^(https?:\/\/|tel:|mailto:)/.test(href
     <figure class="relative overflow-hidden rounded-[32px] border-[3px] border-border-card sm:rounded-[48px] lg:rounded-[62px]">
       <img
         src={image}
-        alt="حمام سبا فاخر بإضاءة هادئة داخل نجم سبا"
-        width="1216"
-        height="588"
-        class="h-[300px] w-full object-cover sm:h-[440px] lg:h-[588px]"
+        alt={imageAlt}
+        width="2048"
+        height="1365"
+        class="h-[220px] w-full object-cover object-[center_55%] sm:h-[300px] lg:h-[360px]"
         fetchpriority="high"
       />
       <div class="absolute inset-0 bg-gradient-to-t from-bg-primary/80 via-bg-primary/15 to-transparent"></div>

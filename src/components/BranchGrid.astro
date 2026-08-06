@@ -1,12 +1,14 @@
 ---
 import BranchCard from './BranchCard.astro';
 import type { Branch } from '../data/branches';
+import type { Locale } from '../i18n/types';
 
 export interface Props {
   branches: Branch[];
+  locale?: Locale;
 }
 
-const { branches } = Astro.props;
+const { branches, locale = 'ar' } = Astro.props;
 
 const gridClass =
   branches.length === 1
@@ -15,5 +17,5 @@ const gridClass =
 ---
 
 <div data-branch-grid class={`grid gap-6 ${gridClass}`}>
-  {branches.map((branch) => <BranchCard branch={branch} />)}
+  {branches.map((branch) => <BranchCard branch={branch} locale={locale} />)}
 </div>

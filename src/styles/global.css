@@ -23,6 +23,7 @@
   --color-text-nav: #ddd7c5;
   --color-text-placeholder: rgba(244, 241, 234, 0.5);
   --color-text-btn: #031108;
+  --color-danger: #e85d5d;
 
   --color-border-input: rgba(65, 58, 40, 0.55);
   --color-border-badge: rgba(224, 175, 74, 0.4);
@@ -118,6 +119,7 @@
   min-height: 44px;
   align-items: center;
   justify-content: center;
+  gap: 8px;
   border: 1px solid rgba(225, 175, 74, 0.5);
   border-radius: 9999px;
   padding: 12px 32px;

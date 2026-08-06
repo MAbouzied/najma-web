@@ -1,83 +1,179 @@
 ---
+import { GTM_EVENTS, gtmContactAttrs } from '../lib/gtm';
 import { WHATSAPP_PHONE } from '../lib/whatsapp';
+import { offers, packages, services } from '../data/home';
+import { t } from '../i18n/t';
+import type { Locale } from '../i18n/types';
 
 export interface Props {
   sectionLabel?: string;
   title: string;
   description: string;
+  locale?: Locale;
 }
 
-const { sectionLabel, title, description } = Astro.props;
+const { sectionLabel, title, description, locale = 'ar' } = Astro.props;
+const dir = locale === 'en' ? 'ltr' : 'rtl';
+const labels = {
+  phone: t(locale, 'contactFormPhone'),
+  name: t(locale, 'contactFormName'),
+  email: t(locale, 'contactFormEmail'),
+  service: t(locale, 'contactFormService'),
+  message: t(locale, 'contactFormMessage'),
+  phonePh: t(locale, 'contactFormPhonePlaceholder'),
+  namePh: t(locale, 'contactFormNamePlaceholder'),
+  servicePh: t(locale, 'contactFormServicePlaceholder'),
+  messagePh: t(locale, 'contactFormMessagePlaceholder'),
+  submit: t(locale, 'contactFormSubmit'),
+};
+const waLabels =
+  locale === 'en'
+    ? { name: 'Name', phone: 'Phone', email: 'Email', service: 'Service', message: 'Message' }
+    : { name: 'اسمي', phone: 'رقمي', email: 'بريدي', service: 'الخدمة', message: 'الرسالة' };
 ---
 
-<article id="contact-form" class="rounded-3xl bg-bg-form p-6 sm:p-8">
+<article class="rounded-3xl bg-bg-form p-6 sm:p-8" dir={dir}>
   {sectionLabel && <span class="text-sm font-medium text-gold">{sectionLabel}</span>}
-  <h2 class="text-gold-gradient mt-2 text-right text-4xl font-bold leading-tight tracking-[0.48px] sm:text-5xl">
+  <h2 class="text-gold-gradient mt-2 text-start text-4xl font-bold leading-tight tracking-[0.48px] sm:text-5xl">
     {title}
   </h2>
-  <p class="mt-3 text-right text-sm leading-6 text-text-muted sm:text-base">{description}</p>
+  <p class="mt-3 text-start text-sm leading-6 text-text-muted sm:text-base">{description}</p>
 
-  <form id="contact-form" class="mt-5 flex w-full flex-col gap-4" dir="rtl">
+  <form
+    id="contact-form"
+    class="mt-5 flex w-full flex-col gap-4"
+    dir={dir}
+    data-locale={locale}
+    data-whatsapp-phone={WHATSAPP_PHONE}
+    data-label-name={waLabels.name}
+    data-label-phone={waLabels.phone}
+    data-label-email={waLabels.email}
+    data-label-service={waLabels.service}
+    data-label-message={waLabels.message}
+    {...gtmContactAttrs(GTM_EVENTS.formSubmit, 'contact_form')}
+  >
     <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
       <div class="flex flex-col gap-2">
-        <label for="phone" class="text-sm text-text-muted">رقم الجوال</label>
-        <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+٩٦٦" required />
+        <label for="phone" class="text-sm text-text-muted">{labels.phone}</label>
+        <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" pattern="(?:\+?966|0)?5[0-9]{8}" placeholder={labels.phonePh} required />
       </div>
       <div class="flex flex-col gap-2">
-        <label for="name" class="text-sm text-text-muted">الاسم الكامل</label>
-        <input id="name" name="name" type="text" autocomplete="name" placeholder="اكتب اسمك" required />
+        <label for="name" class="text-sm text-text-muted">{labels.name}</label>
+        <input id="name" name="name" type="text" autocomplete="name" placeholder={labels.namePh} required />
       </div>
     </div>
 
     <div class="flex flex-col gap-2">
-      <label for="email" class="text-sm text-text-muted">البريد الإلكتروني</label>
+      <label for="email" class="text-sm text-text-muted">{labels.email}</label>
       <input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" />
     </div>
 
     <div class="flex flex-col gap-2">
-      <label for="service" class="text-sm text-text-muted">الخدمة المطلوبة</label>
-      <input id="service" name="service" type="text" placeholder="مثال: مساج سويدي، حمام مغربي..." />
+      <label for="service" class="text-sm text-text-muted">{labels.service}</label>
+      <select id="service" name="service" required>
+        <option value="">{labels.servicePh}</option>
+        <optgroup label={locale === 'en' ? 'Services' : 'الخدمات'}>
+          {services.map((service) => (
+            <option value={`service:${service.slug}`}>{service.title[locale]}</option>
+          ))}
+        </optgroup>
+        <optgroup label={locale === 'en' ? 'Packages' : 'الباقات'}>
+          {packages.map((packageItem) => (
+            <option value={`package:${packageItem.slug}`}>{packageItem.name[locale]}</option>
+          ))}
+        </optgroup>
+        <optgroup label={locale === 'en' ? 'Offers' : 'العروض'}>
+          {offers.map((offer) => (
+            <option value={`offer:${offer.slug}`}>{offer.name[locale]}</option>
+          ))}
+        </optgroup>
+      </select>
     </div>
 
     <div class="flex flex-col gap-2 pb-1.5">
-      <label for="message" class="text-sm text-text-muted">رسالتك</label>
-      <textarea id="message" name="message" placeholder="اكتب تفاصيل طلبك هنا..." rows="5" required></textarea>
+      <label for="message" class="text-sm text-text-muted">{labels.message}</label>
+      <textarea id="message" name="message" placeholder={labels.messagePh} rows="5" required></textarea>
     </div>
 
     <button type="submit" class="gold-button self-start">
       <img src="/assets/icons/send.svg" alt="" width="16" height="16" class="size-4" />
-      إرسال عبر واتساب
+      {labels.submit}
     </button>
+    <p data-form-status class="text-sm text-text-muted" role="status" aria-live="polite"></p>
+    <label class="hidden" aria-hidden="true">
+      Company
+      <input name="company" type="text" tabindex="-1" autocomplete="off" />
+    </label>
   </form>
 </article>
 
-<script define:vars={{ whatsappPhone: WHATSAPP_PHONE }}>
-  document.getElementById('contact-form')?.addEventListener('submit', (e) => {
+<script>
+  import { submitCustomerLead } from '../lib/customer-leads';
+
+  document.getElementById('contact-form')?.addEventListener('submit', async (e) => {
     e.preventDefault();
     const form = e.target;
-    const name = form.querySelector('[name="name"]')?.value || '';
-    const phone = form.querySelector('[name="phone"]')?.value || '';
-    const email = form.querySelector('[name="email"]')?.value || '';
-    const service = form.querySelector('[name="service"]')?.value || '';
-    const message = form.querySelector('[name="message"]')?.value || '';
+    if (!(form instanceof HTMLFormElement)) {
+      return;
+    }
+
+    const data = new FormData(form);
+    const name = String(data.get('name') ?? '').trim();
+    const phone = String(data.get('phone') ?? '').trim();
+    const email = String(data.get('email') ?? '').trim();
+    const serviceValue = String(data.get('service') ?? '');
+    const message = String(data.get('message') ?? '').trim();
+    const company = String(data.get('company') ?? '');
+    const [department, service] = serviceValue.split(':');
+    const serviceSelect = form.elements.namedItem('service');
+    const serviceLabel = serviceSelect instanceof HTMLSelectElement
+      ? serviceSelect.selectedOptions[0]?.textContent?.trim() ?? ''
+      : '';
+    const labels = {
+      name: form.dataset.labelName ?? '',
+      phone: form.dataset.labelPhone ?? '',
+      email: form.dataset.labelEmail ?? '',
+      service: form.dataset.labelService ?? '',
+      message: form.dataset.labelMessage ?? '',
+    };
 
     const body = [
-      `*اسمي:* ${name}`,
-      `*رقمي:* ${phone}`,
-      `*بريدي:* ${email}`,
-      `*الخدمة:* ${service}`,
+      `*${labels.name}:* ${name}`,
+      `*${labels.phone}:* ${phone}`,
+      `*${labels.email}:* ${email}`,
+      `*${labels.service}:* ${serviceLabel}`,
       ``,
-      `*الرسالة:*`,
+      `*${labels.message}:*`,
       message,
     ].join('\n');
 
-    const url = `https://api.whatsapp.com/send/?phone=${whatsappPhone}&text=${encodeURIComponent(body)}&type=phone_number&app_absent=0`;
-    window.open(url, '_blank');
+    const whatsappWindow = window.open('about:blank', '_blank');
+    if (whatsappWindow) whatsappWindow.opener = null;
+    const button = form.querySelector('button[type="submit"]');
+    const status = form.querySelector('[data-form-status]');
+    if (button instanceof HTMLButtonElement) button.disabled = true;
+    if (status) status.textContent = form.dataset.locale === 'en' ? 'Saving your details...' : 'جاري حفظ بياناتك...';
+
+    await submitCustomerLead({
+      name,
+      phone,
+      department: department as 'service' | 'package' | 'offer',
+      service,
+      page: window.location.pathname,
+      language: form.dataset.locale === 'en' ? 'en' : 'ar',
+      company,
+    });
+
+    const url = `https://api.whatsapp.com/send/?phone=${form.dataset.whatsappPhone}&text=${encodeURIComponent(body)}&type=phone_number&app_absent=0`;
+    if (whatsappWindow) whatsappWindow.location.href = url;
+    else window.location.href = url;
+    if (button instanceof HTMLButtonElement) button.disabled = false;
   });
 </script>
 
 <style>
   input,
+  select,
   textarea {
     width: 100%;
     border: 1px solid var(--color-border-input);
@@ -85,10 +181,26 @@ const { sectionLabel, title, description } = Astro.props;
     background: var(--color-bg-input);
     color: var(--color-text-primary);
     font-size: 14px;
+  }
+
+  [dir='rtl'] input,
+  [dir='rtl'] select,
+  [dir='rtl'] textarea {
     text-align: right;
   }
 
+  [dir='ltr'] input,
+  [dir='ltr'] select,
+  [dir='ltr'] textarea {
+    text-align: left;
+  }
+
   input {
+    min-height: 42px;
+    padding: 10px 17px;
+  }
+
+  select {
     min-height: 42px;
     padding: 10px 17px;
   }
@@ -105,6 +217,7 @@ const { sectionLabel, title, description } = Astro.props;
   }
 
   input:focus,
+  select:focus,
   textarea:focus {
     border-color: var(--color-gold);
     outline: none;

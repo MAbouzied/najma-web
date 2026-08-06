@@ -1,0 +1,29 @@
+---
+import OfferDetailPage from '../../../views/OfferDetailPage.astro';
+import { offers } from '../../../data/home';
+import { L, localizeList } from '../../../i18n/localize';
+
+const locale = 'en';
+
+export function getStaticPaths() {
+  return offers.map((offer) => ({
+    params: { slug: offer.slug },
+    props: { offer },
+  }));
+}
+
+const { offer } = Astro.props;
+---
+
+<OfferDetailPage
+  locale={locale}
+  offer={{
+    slug: offer.slug,
+    name: L(offer.name, locale),
+    subtitle: L(offer.subtitle, locale),
+    description: L(offer.description, locale),
+    price: L(offer.price, locale),
+    originalPrice: L(offer.originalPrice, locale),
+    features: localizeList(offer.features, locale),
+  }}
+/>

@@ -1,21 +1,31 @@
 ---
 import BrandLogo from './BrandLogo.astro';
-import { bookingAction, navigationLinks, type PageId } from '../data/site';
+import { getNavigationLinks, getBookingAction, getCallAction, type Locale, type PageId } from '../data/site';
+import { switchLocalePath } from '../i18n/paths';
+import { t } from '../i18n/t';
+import { GTM_EVENTS, gtmContactAttrs } from '../lib/gtm';
 
 export interface Props {
   currentPage?: PageId;
+  locale?: Locale;
 }
 
-const { currentPage } = Astro.props;
+const { currentPage, locale = 'ar' } = Astro.props;
+const isEnglish = locale === 'en';
+const navLinks = getNavigationLinks(locale);
+const booking = getBookingAction(locale);
+const call = getCallAction(locale);
+const languageHref = `${switchLocalePath(Astro.url.pathname, isEnglish ? 'ar' : 'en')}${Astro.url.search}`;
+const languageLabel = isEnglish ? t(locale, 'langSwitchAr') : t(locale, 'langSwitchEn');
 ---
 
-<header data-site-header class="relative z-20 h-20 bg-transparent" dir="rtl">
-  <div class="page-container flex h-full items-center justify-between gap-6">
-    <BrandLogo current={currentPage === 'home'} />
+<header data-site-header class="relative z-20 h-20 bg-transparent" dir={isEnglish ? 'ltr' : 'rtl'}>
+  <div class="page-container flex h-full items-center justify-between gap-4 sm:gap-6">
+    <BrandLogo current={currentPage === 'home'} locale={locale} />
 
-    <nav class="hidden items-center gap-7 lg:flex" aria-label="التنقل الرئيسي">
+    <nav class="hidden items-center gap-7 lg:flex" aria-label={isEnglish ? 'Main navigation' : 'التنقل الرئيسي'}>
       {
-        navigationLinks.map((link) => (
+        navLinks.map((link) => (
           <a
             href={link.href}
             aria-current={link.page === currentPage ? 'page' : undefined}
@@ -30,10 +40,33 @@ const { currentPage } = Astro.props;
       }
     </nav>
 
-    <a href={bookingAction.href} target="_blank" rel="noopener noreferrer" class="gold-button shrink-0">
-      <img src="/assets/icons/arrow.svg" alt="" width="16" height="16" class="size-4" />
-      <span class="hidden sm:inline">{bookingAction.label}</span>
-      <span class="sm:hidden">احجز الآن</span>
-    </a>
+    <div class="flex shrink-0 items-center gap-2 sm:gap-3">
+      <a
+        href={languageHref}
+        class="outline-button min-h-0 px-3 py-2 text-xs font-semibold sm:px-4"
+        aria-label={isEnglish ? 'Switch to Arabic' : 'Switch to English'}
+        hreflang={isEnglish ? 'ar' : 'en'}
+      >
+        {languageLabel}
+      </a>
+      <a
+        href={call.href}
+        class="outline-button hidden min-h-0 px-3 py-2 text-xs font-semibold sm:inline-flex sm:px-4"
+        aria-label={t(locale, 'actionCallNow')}
+        {...gtmContactAttrs(GTM_EVENTS.call, 'header')}
+      >
+        <img src="/assets/icons/branch-phone.svg" alt="" width="16" height="16" class="size-4" />
+        <span class="hidden md:inline">{t(locale, 'actionCall')}</span>
+      </a>
+      <a
+        href={booking.href}
+        class="gold-button shrink-0"
+        {...gtmContactAttrs(GTM_EVENTS.whatsapp, 'header')}
+      >
+        <img src="/assets/icons/arrow.svg" alt="" width="16" height="16" class="size-4" />
+        <span class="hidden sm:inline">{booking.label}</span>
+        <span class="sm:hidden">{t(locale, 'actionBookShort')}</span>
+      </a>
+    </div>
   </div>
 </header>

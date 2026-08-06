@@ -1,5 +1,7 @@
-import { businessProfile } from '../data/business';
-import type { Faq, Package, Service } from '../data/home';
+import { getBusinessProfile } from '../data/business';
+import { localePath, stripLocalePrefix } from '../i18n/paths';
+import { t } from '../i18n/t';
+import type { Locale } from '../i18n/types';
 
 export type PageSchemaType = 'WebPage' | 'AboutPage' | 'ContactPage';
 
@@ -8,18 +10,56 @@ export interface BreadcrumbItem {
   href?: string;
 }
 
+export interface ResolvedService {
+  slug: string;
+  image: string;
+  title: string;
+  description: string;
+  duration?: string;
+  price: string;
+}
+
+export interface ResolvedPackage {
+  slug: string;
+  name: string;
+  subtitle: string;
+  description: string;
+  price: string;
+  features: string[];
+  featured?: boolean;
+}
+
+export interface ResolvedOffer {
+  slug: string;
+  name: string;
+  subtitle: string;
+  description: string;
+  price: string;
+  originalPrice: string;
+  features: string[];
+}
+
+export interface ResolvedFaq {
+  question: string;
+  answer: string;
+}
+
 export interface StructuredDataOptions {
   title: string;
   description: string;
   pathname: string;
   pageType: PageSchemaType;
-  image: string;
+  image?: string | null;
   siteOrigin?: string;
-  faqItems?: Faq[];
-  services?: Service[];
-  packages?: Package[];
+  locale?: Locale;
+  faqItems?: ResolvedFaq[];
+  services?: ResolvedService[];
+  packages?: ResolvedPackage[];
+  offers?: ResolvedOffer[];
   breadcrumbLabel?: string;
   breadcrumbs?: BreadcrumbItem[];
+  /** When set, attaches mainEntity to the page WebPage node (e.g. BlogPosting @id). */
+  mainEntityId?: string;
 }
 
 export interface StructuredDataDocument {
@@ -39,7 +79,25 @@ function toSchemaPrice(price: string): string {
   const arabicIndicDigits = '٠١٢٣٤٥٦٧٨٩';
   return price
     .replace(/[٠-٩]/gu, (digit) => String(arabicIndicDigits.indexOf(digit)))
-    .replace(/[^\d.]/gu, '');
+    .replace(/[^\d.]/gu, '')
+    .replace(/^\.+|\.+$/gu, '');
+}
+
+function isCollectionDetail(pathname: string, collection: 'services' | 'packages' | 'offers'): boolean {
+  const neutral = stripLocalePrefix(pathname);
+  return new RegExp(`^/${collection}/[^/]+/?$`).test(neutral);
+}
+
+function localeHome(locale: Locale): string {
+  return localePath('/', locale);
+}
+
+function detailPath(
+  collection: 'services' | 'packages' | 'offers',
+  slug: string,
+  locale: Locale,
+): string {
+  return localePath(`/${collection}/${slug}/`, locale);
 }
 
 export function buildStructuredData({
@@ -47,32 +105,39 @@ export function buildStructuredData({
   description,
   pathname,
   pageType,
-  image,
+  image = null,
   siteOrigin,
+  locale = 'ar',
   faqItems = [],
   services = [],
   packages = [],
+  offers = [],
   breadcrumbLabel,
   breadcrumbs,
+  mainEntityId,
 }: StructuredDataOptions): StructuredDataDocument {
+  const profile = getBusinessProfile(locale);
+  const homePath = localeHome(locale);
   const businessId = resolveSeoUrl('/#business', siteOrigin);
-  const websiteId = resolveSeoUrl('/#website', siteOrigin);
+  const websiteId = resolveSeoUrl(`${homePath}#website`, siteOrigin);
   const pageUrl = resolveSeoUrl(pathname, siteOrigin);
   const pageId = resolveSeoUrl(`${pathname === '/' ? '/' : pathname}#webpage`, siteOrigin);
-  const imageUrl = resolveSeoUrl(image, siteOrigin);
-  const imageId = `${pageId}-primaryimage`;
-  const faqId = resolveSeoUrl('/#faq', siteOrigin);
+  const faqId = resolveSeoUrl(`${homePath}#faq`, siteOrigin);
+  const inLanguage = locale === 'en' ? 'en-US' : 'ar-SA';
+  const serviceDetail = isCollectionDetail(pathname, 'services');
+  const packageDetail = isCollectionDetail(pathname, 'packages');
+  const offerDetail = isCollectionDetail(pathname, 'offers');
 
   const business: Record<string, unknown> = {
     '@type': 'DaySpa',
     '@id': businessId,
-    name: businessProfile.name,
-    url: resolveSeoUrl('/', siteOrigin),
-    description: businessProfile.description,
+    name: profile.name,
+    url: resolveSeoUrl(homePath, siteOrigin),
+    description: profile.description,
     currenciesAccepted: 'SAR',
     areaServed: {
       '@type': 'Country',
-      name: 'المملكة العربية السعودية',
+      name: t(locale, 'schemaCountryName'),
     },
     image: [
       resolveSeoUrl('/assets/home/hero-slider.jpg', siteOrigin),
@@ -83,55 +148,213 @@ export function buildStructuredData({
       '@id': resolveSeoUrl('/#logo', siteOrigin),
       url: resolveSeoUrl('/assets/nagm-logo.png', siteOrigin),
       contentUrl: resolveSeoUrl('/assets/nagm-logo.png', siteOrigin),
-      caption: 'نجم سبا',
+      caption: profile.name,
     },
   };
 
   const catalogs: Record<string, unknown>[] = [];
+  const detailEntities: Record<string, unknown>[] = [];
 
-  if (services.length > 0) {
+  if (services.length > 0 && serviceDetail && services.length === 1) {
+    const service = services[0];
+    const servicePath = detailPath('services', service.slug, locale);
+    const serviceUrl = resolveSeoUrl(servicePath, siteOrigin);
+    const serviceId = resolveSeoUrl(`${servicePath}#service`, siteOrigin);
+    const offerId = resolveSeoUrl(`${servicePath}#offer`, siteOrigin);
+    const serviceEntity: Record<string, unknown> = {
+      '@type': 'Service',
+      '@id': serviceId,
+      name: service.title,
+      description: service.description,
+      image: resolveSeoUrl(service.image, siteOrigin),
+      serviceType: service.title,
+      provider: { '@id': businessId },
+      url: serviceUrl,
+    };
+    if (service.duration) {
+      serviceEntity.additionalProperty = {
+        '@type': 'PropertyValue',
+        name: t(locale, 'serviceDetailDuration').replace(/:$/, ''),
+        value: service.duration,
+      };
+    }
+    detailEntities.push(serviceEntity);
+    const price = toSchemaPrice(service.price);
+    if (price) {
+      detailEntities.push({
+        '@type': 'Offer',
+        '@id': offerId,
+        url: serviceUrl,
+        price,
+        priceCurrency: 'SAR',
+        itemOffered: { '@id': serviceId },
+      });
+    }
+  } else if (services.length > 0) {
     catalogs.push({
       '@type': 'OfferCatalog',
-      name: 'خدمات نجم سبا',
-      itemListElement: services.map((service, index) => ({
-        '@type': 'Offer',
-        '@id': resolveSeoUrl(`/#offer-${index + 1}`, siteOrigin),
-        url: resolveSeoUrl('/#services', siteOrigin),
-        price: toSchemaPrice(service.price),
-        priceCurrency: 'SAR',
-        itemOffered: {
-          '@type': 'Service',
-          '@id': resolveSeoUrl(`/#service-${index + 1}`, siteOrigin),
-          name: service.title,
-          description: service.description,
-          serviceType: service.title,
-          provider: { '@id': businessId },
-          url: resolveSeoUrl('/#services', siteOrigin),
-        },
-      })),
+      name: t(locale, 'schemaServicesCatalog'),
+      itemListElement: services.map((service) => {
+        const servicePath = detailPath('services', service.slug, locale);
+        const serviceUrl = resolveSeoUrl(servicePath, siteOrigin);
+        const serviceId = resolveSeoUrl(`${servicePath}#service`, siteOrigin);
+        const offerId = resolveSeoUrl(`${servicePath}#offer`, siteOrigin);
+        return {
+          '@type': 'Offer',
+          '@id': offerId,
+          url: serviceUrl,
+          price: toSchemaPrice(service.price),
+          priceCurrency: 'SAR',
+          itemOffered: {
+            '@type': 'Service',
+            '@id': serviceId,
+            name: service.title,
+            description: service.description,
+            image: resolveSeoUrl(service.image, siteOrigin),
+            serviceType: service.title,
+            provider: { '@id': businessId },
+            url: serviceUrl,
+          },
+        };
+      }),
     });
   }
 
-  if (packages.length > 0) {
+  if (packages.length > 0 && packageDetail && packages.length === 1) {
+    const pkg = packages[0];
+    const packagePath = detailPath('packages', pkg.slug, locale);
+    const packageUrl = resolveSeoUrl(packagePath, siteOrigin);
+    const serviceId = resolveSeoUrl(`${packagePath}#service`, siteOrigin);
+    const offerId = resolveSeoUrl(`${packagePath}#offer`, siteOrigin);
+    detailEntities.push({
+      '@type': 'Service',
+      '@id': serviceId,
+      name: pkg.name,
+      description: pkg.description,
+      serviceType: t(locale, 'schemaSpaPackageType'),
+      provider: { '@id': businessId },
+      url: packageUrl,
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: t(locale, 'packageDetailComponents'),
+        itemListElement: pkg.features.map((feature, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          name: feature,
+        })),
+      },
+    });
+    const price = toSchemaPrice(pkg.price);
+    if (price) {
+      detailEntities.push({
+        '@type': 'Offer',
+        '@id': offerId,
+        url: packageUrl,
+        price,
+        priceCurrency: 'SAR',
+        itemOffered: { '@id': serviceId },
+      });
+    }
+  } else if (packages.length > 0) {
     catalogs.push({
       '@type': 'OfferCatalog',
-      name: 'باقات نجم سبا',
-      itemListElement: packages.map((pkg, index) => ({
+      name: t(locale, 'schemaPackagesCatalog'),
+      itemListElement: packages.map((pkg) => {
+        const packagePath = detailPath('packages', pkg.slug, locale);
+        const packageUrl = resolveSeoUrl(packagePath, siteOrigin);
+        const serviceId = resolveSeoUrl(`${packagePath}#service`, siteOrigin);
+        const offerId = resolveSeoUrl(`${packagePath}#offer`, siteOrigin);
+        return {
+          '@type': 'Offer',
+          '@id': offerId,
+          url: packageUrl,
+          price: toSchemaPrice(pkg.price),
+          priceCurrency: 'SAR',
+          itemOffered: {
+            '@type': 'Service',
+            '@id': serviceId,
+            name: pkg.name,
+            description: pkg.description,
+            serviceType: t(locale, 'schemaSpaPackageType'),
+            provider: { '@id': businessId },
+            url: packageUrl,
+          },
+        };
+      }),
+    });
+  }
+
+  if (offers.length > 0 && offerDetail && offers.length === 1) {
+    const offer = offers[0];
+    const offerPath = detailPath('offers', offer.slug, locale);
+    const offerUrl = resolveSeoUrl(offerPath, siteOrigin);
+    const serviceId = resolveSeoUrl(`${offerPath}#service`, siteOrigin);
+    const offerId = resolveSeoUrl(`${offerPath}#offer`, siteOrigin);
+    detailEntities.push({
+      '@type': 'Service',
+      '@id': serviceId,
+      name: offer.name,
+      description: offer.description,
+      serviceType: t(locale, 'schemaSpaPackageType'),
+      provider: { '@id': businessId },
+      url: offerUrl,
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: t(locale, 'offerDetailComponents'),
+        itemListElement: offer.features.map((feature, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          name: feature,
+        })),
+      },
+    });
+    const price = toSchemaPrice(offer.price);
+    const originalPrice = toSchemaPrice(offer.originalPrice);
+    if (price) {
+      const offerEntity: Record<string, unknown> = {
         '@type': 'Offer',
-        '@id': resolveSeoUrl(`/#package-offer-${index + 1}`, siteOrigin),
-        url: resolveSeoUrl(`/packages/${pkg.slug}/`, siteOrigin),
-        price: toSchemaPrice(pkg.price),
+        '@id': offerId,
+        url: offerUrl,
+        price,
         priceCurrency: 'SAR',
-        itemOffered: {
-          '@type': 'Service',
-          '@id': resolveSeoUrl(`/#package-${index + 1}`, siteOrigin),
-          name: pkg.name,
-          description: pkg.description,
-          serviceType: pkg.name,
-          provider: { '@id': businessId },
-          url: resolveSeoUrl(`/packages/${pkg.slug}/`, siteOrigin),
-        },
-      })),
+        itemOffered: { '@id': serviceId },
+      };
+      if (originalPrice && Number(originalPrice) > Number(price)) {
+        offerEntity.priceSpecification = {
+          '@type': 'UnitPriceSpecification',
+          priceType: 'https://schema.org/StrikethroughPrice',
+          price: originalPrice,
+          priceCurrency: 'SAR',
+        };
+      }
+      detailEntities.push(offerEntity);
+    }
+  } else if (offers.length > 0) {
+    catalogs.push({
+      '@type': 'OfferCatalog',
+      name: t(locale, 'schemaOffersCatalog'),
+      itemListElement: offers.map((offer) => {
+        const offerPath = detailPath('offers', offer.slug, locale);
+        const offerUrl = resolveSeoUrl(offerPath, siteOrigin);
+        const serviceId = resolveSeoUrl(`${offerPath}#service`, siteOrigin);
+        const offerId = resolveSeoUrl(`${offerPath}#offer`, siteOrigin);
+        return {
+          '@type': 'Offer',
+          '@id': offerId,
+          url: offerUrl,
+          price: toSchemaPrice(offer.price),
+          priceCurrency: 'SAR',
+          itemOffered: {
+            '@type': 'Service',
+            '@id': serviceId,
+            name: offer.name,
+            description: offer.description,
+            serviceType: t(locale, 'schemaSpaPackageType'),
+            provider: { '@id': businessId },
+            url: offerUrl,
+          },
+        };
+      }),
     });
   }
 
@@ -141,8 +364,8 @@ export function buildStructuredData({
     business.hasOfferCatalog = catalogs;
   }
 
-  if (businessProfile.localDetails.status === 'verified') {
-    const details = businessProfile.localDetails;
+  if (profile.localDetails.status === 'verified') {
+    const details = profile.localDetails;
     business.telephone = details.telephone;
     business.email = details.email;
     business.priceRange = details.priceRange;
@@ -172,19 +395,11 @@ export function buildStructuredData({
   const website = {
     '@type': 'WebSite',
     '@id': websiteId,
-    url: resolveSeoUrl('/', siteOrigin),
-    name: 'نجم سبا',
-    description: businessProfile.description,
-    inLanguage: 'ar-SA',
+    url: resolveSeoUrl(homePath, siteOrigin),
+    name: profile.name,
+    description: profile.description,
+    inLanguage,
     publisher: { '@id': businessId },
-  };
-
-  const primaryImage = {
-    '@type': 'ImageObject',
-    '@id': imageId,
-    url: imageUrl,
-    contentUrl: imageUrl,
-    caption: title,
   };
 
   const page: Record<string, unknown> = {
@@ -193,24 +408,35 @@ export function buildStructuredData({
     url: pageUrl,
     name: title,
     description,
-    inLanguage: 'ar-SA',
+    inLanguage,
     isPartOf: { '@id': websiteId },
     about: { '@id': businessId },
-    primaryImageOfPage: { '@id': imageId },
+    ...(mainEntityId ? { mainEntity: { '@id': mainEntityId } } : {}),
   };
 
-  if (pageType === 'AboutPage' || pageType === 'ContactPage') {
-    page.mainEntity = { '@id': businessId };
+  const graph: Record<string, unknown>[] = [business, website];
+
+  if (image) {
+    const imageUrl = resolveSeoUrl(image, siteOrigin);
+    const imageId = `${pageId}-primaryimage`;
+    graph.push({
+      '@type': 'ImageObject',
+      '@id': imageId,
+      url: imageUrl,
+      contentUrl: imageUrl,
+      caption: title,
+    });
+    page.primaryImageOfPage = { '@id': imageId };
   }
 
-  const graph: Record<string, unknown>[] = [business, website, primaryImage, page];
+  graph.push(page, ...detailEntities);
 
   const breadcrumbTrail: BreadcrumbItem[] =
     breadcrumbs && breadcrumbs.length > 0
       ? breadcrumbs
       : breadcrumbLabel
         ? [
-            { label: 'الرئيسية', href: '/' },
+            { label: t(locale, 'breadcrumbHome'), href: homePath },
             { label: breadcrumbLabel, href: pathname },
           ]
         : [];
@@ -235,9 +461,9 @@ export function buildStructuredData({
     graph.push({
       '@type': 'FAQPage',
       '@id': faqId,
-      url: resolveSeoUrl('/#faq', siteOrigin),
-      name: 'الأسئلة الشائعة عن نجم سبا',
-      inLanguage: 'ar-SA',
+      url: resolveSeoUrl(`${homePath}#faq`, siteOrigin),
+      name: t(locale, 'schemaFaqTitle'),
+      inLanguage,
       isPartOf: { '@id': pageId },
       about: { '@id': businessId },
       mainEntity: faqItems.map((item) => ({

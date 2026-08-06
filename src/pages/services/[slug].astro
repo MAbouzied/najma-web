@@ -1,10 +1,9 @@
 ---
-import SiteLayout from '../../layouts/SiteLayout.astro';
-import Header from '../../components/Header.astro';
-import Breadcrumbs from '../../components/Breadcrumbs.astro';
-import CTASection from '../../components/CTASection.astro';
+import ServiceDetailPage from '../../views/ServiceDetailPage.astro';
 import { services } from '../../data/home';
-import { buildServiceBookingUrl } from '../../lib/whatsapp';
+import { L } from '../../i18n/localize';
+
+const locale = 'ar';
 
 export function getStaticPaths() {
   return services.map((service) => ({
@@ -14,66 +13,17 @@ export function getStaticPaths() {
 }
 
 const { service } = Astro.props;
-const serviceBookingHref = buildServiceBookingUrl(service.title);
-const breadcrumbs = [
-  { label: 'الرئيسية', href: '/' },
-  { label: 'خدماتنا', href: '/services/' },
-  { label: service.title, href: `/services/${service.slug}/` },
-];
 ---
 
-<SiteLayout
-  title={`${service.title} - نجم سبا`}
-  description={service.description}
-  pathname={`/services/${service.slug}/`}
-  pageType="WebPage"
-  image={service.image}
-  breadcrumbs={breadcrumbs}
->
-  <div data-hero-shell class="bg-bg-hero">
-    <Header />
-  </div>
-
-  <section class="section-block bg-bg-primary">
-    <div class="page-container">
-      <div class="mx-auto max-w-3xl" dir="rtl">
-        <Breadcrumbs items={breadcrumbs} />
-
-        <div class="overflow-hidden rounded-3xl border border-border-card">
-          <img src={service.image} alt={service.title} width="1200" height="600" class="h-72 w-full object-cover sm:h-96" />
-        </div>
-
-        <h1 class="mt-8 text-4xl font-bold leading-tight text-text-primary">{service.title}</h1>
-        <p class="mt-4 text-lg leading-8 text-text-muted">{service.description}</p>
-
-        <div class="mt-8 flex flex-wrap items-center gap-6 border-t border-border-card pt-6">
-          {service.duration && (
-            <div class="flex items-center gap-2 text-sm text-text-muted">
-              <img src="/assets/icons/hours.svg" alt="" width="16" height="16" class="size-4" />
-              <span>المدة: {service.duration}</span>
-            </div>
-          )}
-          <div class="text-2xl font-bold text-gold">{service.price}</div>
-        </div>
-
-        <div class="mt-8">
-          <a
-            href={serviceBookingHref}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="gold-button inline-flex items-center gap-2"
-          >
-            <img src="/assets/icons/whatsapp.svg" alt="" width="16" height="16" class="size-4" />
-            تواصل عبر واتساب
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <CTASection
-    title="جاهز لتجربة الاسترخاء؟"
-    description="احجز موعدك الآن عبر واتساب — فريقنا في انتظارك"
-    primaryAction={{ label: 'تواصل عبر واتساب', href: serviceBookingHref }}
-  />
-</SiteLayout>
+<ServiceDetailPage
+  locale={locale}
+  service={{
+    slug: service.slug,
+    image: service.image,
+    heroImage: service.heroImage,
+    title: L(service.title, locale),
+    description: L(service.description, locale),
+    duration: service.duration ? L(service.duration, locale) : undefined,
+    price: L(service.price, locale),
+  }}
+/>

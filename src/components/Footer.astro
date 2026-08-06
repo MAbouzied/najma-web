@@ -2,24 +2,42 @@
 import BrandLogo from './BrandLogo.astro';
 import SocialLinks from './SocialLinks.astro';
 import {
-  brandDescription,
-  contactDetails,
-  quickLinks,
-  serviceLinks,
+  getBrandDescription,
+  getContactDetails,
+  getLicenseDetails,
+  getQuickLinks,
+  getServiceLinks,
 } from '../data/site';
+import { t } from '../i18n/t';
+import type { Locale } from '../i18n/types';
+import { GTM_EVENTS, gtmContactAttrs } from '../lib/gtm';
+
+export interface Props {
+  locale?: Locale;
+}
+
+const { locale = 'ar' } = Astro.props;
+const isEnglish = locale === 'en';
+const dir = isEnglish ? 'ltr' : 'rtl';
+const brandDesc = getBrandDescription(locale);
+const quickLinks = getQuickLinks(locale);
+const serviceLinks = getServiceLinks(locale);
+const contactDet = getContactDetails(locale);
+const license = getLicenseDetails(locale);
+const placeholder = t(locale, 'licenseRequiredPlaceholder');
 ---
 
-<footer data-site-footer class="w-full bg-bg-footer" dir="rtl">
+<footer data-site-footer class="w-full bg-bg-footer" dir={dir}>
   <div class="page-container py-24">
     <div class="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
       <div class="flex flex-col items-start gap-4">
-        <BrandLogo size="footer" />
-        <p class="max-w-[290px] text-right text-sm leading-[1.65] text-text-muted">{brandDescription}</p>
-        <SocialLinks />
+        <BrandLogo size="footer" locale={locale} />
+        <p class="max-w-[290px] text-start text-sm leading-[1.65] text-text-muted">{brandDesc}</p>
+        <SocialLinks locale={locale} />
       </div>
 
       <div>
-        <h2 class="text-sm font-bold tracking-[0.14px] text-gold">روابط سريعة</h2>
+        <h2 class="text-sm font-bold tracking-[0.14px] text-gold">{t(locale, 'footerQuickLinks')}</h2>
         <ul class="mt-4 flex flex-col gap-2">
           {quickLinks.map((link) => (
             <li>
@@ -32,7 +50,7 @@ import {
       </div>
 
       <div>
-        <h2 class="text-sm font-bold tracking-[0.14px] text-gold">خدماتنا</h2>
+        <h2 class="text-sm font-bold tracking-[0.14px] text-gold">{t(locale, 'footerOurServices')}</h2>
         <ul class="mt-4 flex flex-col gap-2">
           {
             serviceLinks.map((link) => (
@@ -47,22 +65,64 @@ import {
       </div>
 
       <div>
-        <h2 class="text-sm font-bold tracking-[0.14px] text-gold">تواصل معنا</h2>
+        <h2 class="text-sm font-bold tracking-[0.14px] text-gold">{t(locale, 'footerContactUs')}</h2>
         <ul class="mt-4 flex flex-col gap-2 text-xs text-text-muted">
           <li class="flex items-center gap-2">
             <img src="/assets/icons/branch-phone.svg" alt="" width="14" height="14" class="size-3.5" />
-            <a href={contactDetails.phoneHref} target="_blank" rel="noopener noreferrer" dir="ltr">{contactDetails.phoneDisplay}</a>
+            <a
+              href={contactDet.phoneHref}
+              dir="ltr"
+              {...gtmContactAttrs(GTM_EVENTS.call, 'footer')}
+            >
+              {contactDet.phoneDisplay}
+            </a>
           </li>
           <li class="flex items-center gap-2">
             <img src="/assets/icons/hours.svg" alt="" width="14" height="14" class="size-3.5" />
-            <span>{contactDetails.hours}</span>
+            <span>{contactDet.hours}</span>
           </li>
         </ul>
       </div>
     </div>
 
-    <div class="mt-12 flex flex-col-reverse items-start justify-between gap-4 border-t border-border-card pt-6 sm:flex-row sm:items-center">
-      <p class="text-xs text-text-muted">© 2026 نجم سبا. جميع الحقوق محفوظة.</p>
+    <div
+      data-license-details
+      class="mt-12 border-t border-border-card pt-8 text-start"
+    >
+      <div class="flex items-center gap-3">
+        <span aria-hidden="true" class="size-2 shrink-0 rounded-full bg-gold"></span>
+        <h2 class="text-sm font-bold text-text-primary">{license.title}</h2>
+        <span aria-hidden="true" class="h-px flex-1 bg-border-card"></span>
+      </div>
+      <dl data-license-grid class="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          license.fields.map((field, index) => (
+            <div
+              data-license-card
+              data-license-missing={!field.value ? true : undefined}
+              class:list={[
+                'rounded-xl border bg-bg-primary/45 p-4',
+                field.value ? 'border-border-card' : 'border-danger/40 bg-danger/5',
+                index === 3 && 'sm:col-span-2',
+              ]}
+            >
+              <dt class="text-xs font-semibold leading-5 text-gold">{field.label}</dt>
+              <dd
+                class:list={[
+                  'mt-2 text-sm leading-6',
+                  field.value ? 'text-text-primary' : 'font-semibold text-danger',
+                ]}
+              >
+                {field.value ?? placeholder}
+              </dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+
+    <div class="mt-6 flex flex-col-reverse items-start justify-between gap-4 border-t border-border-card pt-6 sm:flex-row sm:items-center">
+      <p class="text-xs text-text-muted">{t(locale, 'footerCopyright')}</p>
     </div>
   </div>
 </footer>

@@ -1,0 +1,197 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import Header from '../components/Header.astro';
+import HomeHero from '../components/HomeHero.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import FeatureGrid from '../components/FeatureGrid.astro';
+import ServiceGrid from '../components/ServiceGrid.astro';
+import PackageGrid from '../components/PackageGrid.astro';
+import OfferGrid from '../components/OfferGrid.astro';
+import BranchGrid from '../components/BranchGrid.astro';
+import TestimonialGrid from '../components/TestimonialGrid.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
+import CTASection from '../components/CTASection.astro';
+import {
+	getBenefits,
+	getFaqs,
+	getOffers,
+	getPackages,
+	getServices,
+	getSummerCampaign,
+	getTestimonials,
+} from '../data/home';
+import { getBranches } from '../data/branches';
+import { getBookingAction, getCallAction } from '../data/site';
+import { localePath } from '../i18n/paths';
+import { t } from '../i18n/t';
+import type { Locale } from '../i18n/types';
+import { GOOGLE_REVIEWS_HREF } from '../lib/whatsapp';
+
+export interface Props {
+	locale: Locale;
+}
+
+const { locale } = Astro.props;
+const servicesData = getServices(locale);
+const packagesData = getPackages(locale);
+const offersData = getOffers(locale);
+const benefitsData = getBenefits(locale);
+const testimonialsData = getTestimonials(locale);
+const faqsData = getFaqs(locale);
+const branchesData = getBranches(locale);
+const campaign = getSummerCampaign(locale);
+const booking = getBookingAction(locale);
+const call = getCallAction(locale);
+const offersDiscount = campaign.discountLabel.replace(/\s*Off$/i, '').replace(/^خصم\s*/, '');
+const offersDescription = t(locale, 'homeOffersDescription').replace('{discount}', offersDiscount);
+---
+
+<SiteLayout
+	title={t(locale, 'seoHomeTitle')}
+	description={t(locale, 'seoHomeDescription')}
+	pathname={localePath('/', locale)}
+	pageType="WebPage"
+	image="/assets/home/hero-interior.jpg"
+	faqItems={faqsData}
+	services={servicesData}
+	packages={packagesData}
+	offers={offersData}
+	locale={locale}
+>
+	<div data-home-intro-shell data-hero-shell class="bg-bg-primary">
+		<Header currentPage="home" locale={locale} />
+		<HomeHero
+			locale={locale}
+			eyebrow={t(locale, 'homeHeroEyebrow')}
+			title={t(locale, 'homeHeroTitle')}
+			highlightedTitle={t(locale, 'homeHeroHighlightedTitle')}
+			description={t(locale, 'homeHeroDescription')}
+			descriptionLine2={t(locale, 'homeHeroDescriptionLine2')}
+			image="/assets/home/hero-interior.jpg"
+			imageAlt={t(locale, 'homeHeroImageAlt')}
+			proofAriaLabel={t(locale, 'homeHeroProofAria')}
+			primaryAction={{ label: t(locale, 'homeHeroPrimary'), href: booking.href }}
+			secondaryAction={{ label: t(locale, 'homeHeroSecondary'), href: '#services' }}
+			proofPoints={[t(locale, 'homeHeroProof1'), t(locale, 'homeHeroProof2'), t(locale, 'homeHeroProof3')]}
+		/>
+	</div>
+
+	<section id="services" class="section-block scroll-mt-20 bg-bg-tertiary">
+		<div class="page-container">
+			<SectionHeading
+				eyebrow={t(locale, 'homeServicesEyebrow')}
+				title={t(locale, 'homeServicesTitle')}
+				description={t(locale, 'homeServicesDescription')}
+				align="center"
+			/>
+			<div class="mt-14">
+				<ServiceGrid services={servicesData} locale={locale} />
+			</div>
+		</div>
+	</section>
+
+	<section data-home-benefits class="section-block bg-bg-primary">
+		<div class="page-container">
+			<SectionHeading
+				eyebrow={t(locale, 'homeBenefitsEyebrow')}
+				title={t(locale, 'homeBenefitsTitle')}
+				description={t(locale, 'homeBenefitsDescription')}
+				align="center"
+			/>
+			<div class="mt-14">
+				<FeatureGrid features={benefitsData} />
+			</div>
+		</div>
+	</section>
+
+	<section id="offers" class="section-block scroll-mt-20 bg-bg-secondary">
+		<div class="page-container">
+			<SectionHeading
+				eyebrow={campaign.eyebrow}
+				title={`${locale === 'en' ? '' : 'عروض '}${campaign.name}${locale === 'en' ? ' Deals' : ''}`}
+				description={offersDescription}
+				align="center"
+			/>
+			<div class="mt-12">
+				<OfferGrid offers={offersData} locale={locale} />
+			</div>
+			<div class="mt-10 flex justify-center">
+				<a href={localePath('/offers/', locale)} class="outline-button">{t(locale, 'homeOffersAllLink')}</a>
+			</div>
+		</div>
+	</section>
+
+	<section id="packages" class="section-block scroll-mt-20 bg-bg-tertiary">
+		<div class="page-container">
+			<SectionHeading
+				eyebrow={t(locale, 'homePackagesEyebrow')}
+				title={t(locale, 'homePackagesTitle')}
+				description={t(locale, 'homePackagesDescription')}
+				align="center"
+			/>
+			<div class="mt-12">
+				<PackageGrid packages={packagesData} locale={locale} />
+			</div>
+		</div>
+	</section>
+
+	<section id="branches" class="section-block scroll-mt-20 bg-bg-secondary">
+		<div class="page-container">
+			<SectionHeading
+				eyebrow={t(locale, 'homeBranchesEyebrow')}
+				title={t(locale, 'homeBranchesTitle')}
+				description={t(locale, 'homeBranchesDescription')}
+				align="center"
+			/>
+			<div class="mt-14">
+				<BranchGrid branches={branchesData} locale={locale} />
+			</div>
+		</div>
+	</section>
+
+	<section id="reviews" class="section-block scroll-mt-20 bg-bg-primary">
+		<div class="page-container">
+			<SectionHeading
+				eyebrow={t(locale, 'homeTestimonialsEyebrow')}
+				title={t(locale, 'homeTestimonialsTitle')}
+				description={t(locale, 'homeTestimonialsDescription')}
+				align="center"
+			/>
+			<div class="mt-14">
+				<TestimonialGrid testimonials={testimonialsData} locale={locale} />
+			</div>
+			<div class="mt-10 flex justify-center">
+				<a
+					href={GOOGLE_REVIEWS_HREF}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="outline-button"
+				>
+					<img src="/assets/icons/star.svg" alt="" width="16" height="16" class="size-4" />
+					{t(locale, 'homeTestimonialsGoogleLink')}
+				</a>
+			</div>
+		</div>
+	</section>
+
+	<section id="faq" class="section-block scroll-mt-20 bg-bg-primary">
+		<div class="page-container">
+			<SectionHeading
+				eyebrow={t(locale, 'homeFaqEyebrow')}
+				title={t(locale, 'homeFaqTitle')}
+				description={t(locale, 'homeFaqDescription')}
+				align="center"
+			/>
+			<div class="mt-14">
+				<FaqAccordion items={faqsData} locale={locale} />
+			</div>
+		</div>
+	</section>
+
+	<CTASection
+		title={t(locale, 'homeCtaTitle')}
+		description={t(locale, 'homeCtaDescription')}
+		primaryAction={{ label: t(locale, 'homeCtaPrimary'), href: booking.href }}
+		secondaryAction={{ label: t(locale, 'homeCtaSecondary'), href: call.href }}
+	/>
+</SiteLayout>

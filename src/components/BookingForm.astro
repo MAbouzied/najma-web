@@ -1,0 +1,214 @@
+---
+import { offers, packages, services } from '../data/home';
+import type { Locale } from '../i18n/types';
+import WhatsAppIcon from './WhatsAppIcon.astro';
+
+export interface Props {
+  locale?: Locale;
+}
+
+const { locale = 'ar' } = Astro.props;
+const isEnglish = locale === 'en';
+const copy = isEnglish
+  ? {
+      name: 'Full name',
+      namePlaceholder: 'Enter your name',
+      phone: 'Mobile number',
+      phonePlaceholder: '05xxxxxxxx',
+      booking: 'Service or offer',
+      choose: 'Choose what you would like to book',
+      services: 'Services',
+      packages: 'Packages',
+      offers: 'Offers',
+      note: 'Notes (optional)',
+      notePlaceholder: 'Preferred time or any details for our team',
+      submit: 'Continue to WhatsApp',
+      saving: 'Saving your booking...',
+      redirecting: 'Opening WhatsApp...',
+      invalid: 'Please check your name, Saudi mobile number, and selection.',
+    }
+  : {
+      name: 'الاسم الكامل',
+      namePlaceholder: 'اكتب اسمك',
+      phone: 'رقم الجوال',
+      phonePlaceholder: '05xxxxxxxx',
+      booking: 'الخدمة أو العرض',
+      choose: 'اختر ما ترغب في حجزه',
+      services: 'الخدمات',
+      packages: 'الباقات',
+      offers: 'العروض',
+      note: 'ملاحظات (اختياري)',
+      notePlaceholder: 'الوقت المفضل أو أي تفاصيل لفريقنا',
+      submit: 'المتابعة عبر واتساب',
+      saving: 'جاري حفظ طلب الحجز...',
+      redirecting: 'جاري فتح واتساب...',
+      invalid: 'يرجى التأكد من الاسم ورقم الجوال السعودي واختيار الخدمة.',
+    };
+---
+
+<form
+  id="booking-form"
+  class="rounded-3xl border border-border-card bg-bg-form p-6 shadow-[0_28px_80px_-52px_var(--color-gold)] sm:p-9"
+  data-locale={locale}
+  data-saving={copy.saving}
+  data-redirecting={copy.redirecting}
+  data-invalid={copy.invalid}
+>
+  <div class="grid gap-5 sm:grid-cols-2">
+    <label class="field">
+      <span>{copy.name}</span>
+      <input name="name" type="text" autocomplete="name" minlength="2" maxlength="80" placeholder={copy.namePlaceholder} required />
+    </label>
+    <label class="field">
+      <span>{copy.phone}</span>
+      <input name="phone" type="tel" inputmode="tel" autocomplete="tel" pattern="(?:\+?966|0)?5[0-9]{8}" placeholder={copy.phonePlaceholder} required dir="ltr" />
+    </label>
+  </div>
+
+  <label class="field mt-5">
+    <span>{copy.booking}</span>
+    <select name="booking" required>
+      <option value="">{copy.choose}</option>
+      <optgroup label={copy.services}>
+        {services.map((service) => (
+          <option value={`service:${service.slug}`} data-ar={service.title.ar} data-en={service.title.en}>
+            {service.title[locale]}
+          </option>
+        ))}
+      </optgroup>
+      <optgroup label={copy.packages}>
+        {packages.map((packageItem) => (
+          <option value={`package:${packageItem.slug}`} data-ar={packageItem.name.ar} data-en={packageItem.name.en}>
+            {packageItem.name[locale]}
+          </option>
+        ))}
+      </optgroup>
+      <optgroup label={copy.offers}>
+        {offers.map((offer) => (
+          <option value={`offer:${offer.slug}`} data-ar={offer.name.ar} data-en={offer.name.en}>
+            {offer.name[locale]}
+          </option>
+        ))}
+      </optgroup>
+    </select>
+  </label>
+
+  <label class="field mt-5">
+    <span>{copy.note}</span>
+    <textarea name="note" rows="4" maxlength="500" placeholder={copy.notePlaceholder}></textarea>
+  </label>
+
+  <label class="hidden" aria-hidden="true">
+    Company
+    <input name="company" type="text" tabindex="-1" autocomplete="off" />
+  </label>
+
+  <div class="mt-6 flex flex-wrap items-center gap-4">
+    <button type="submit" class="gold-button">
+      <WhatsAppIcon class="size-[17px] text-text-btn" />
+      {copy.submit}
+    </button>
+    <p data-form-status class="text-sm text-text-muted" role="status" aria-live="polite"></p>
+  </div>
+</form>
+
+<script>
+  import { submitCustomerLead } from '../lib/customer-leads';
+  import { buildWhatsAppUrl } from '../lib/whatsapp';
+
+  const form = document.querySelector<HTMLFormElement>('#booking-form');
+  const bookingSelect = form?.elements.namedItem('booking');
+  if (form && bookingSelect instanceof HTMLSelectElement) {
+    const query = new URLSearchParams(window.location.search);
+    const department = query.get('department');
+    const item = query.get('item');
+    if (department && item) {
+      const option = Array.from(bookingSelect.options).find((candidate) =>
+        candidate.value.startsWith(`${department}:`)
+        && (candidate.dataset.ar === item || candidate.dataset.en === item || candidate.value.endsWith(`:${item}`)),
+      );
+      if (option) bookingSelect.value = option.value;
+    }
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+
+      const status = form.querySelector<HTMLElement>('[data-form-status]');
+      const submit = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+      const data = new FormData(form);
+      const name = String(data.get('name') ?? '').trim();
+      const phone = String(data.get('phone') ?? '').trim();
+      const note = String(data.get('note') ?? '').trim();
+      const company = String(data.get('company') ?? '');
+      const [selectedDepartment, service] = bookingSelect.value.split(':');
+      const serviceLabel = bookingSelect.selectedOptions[0]?.textContent?.trim() ?? '';
+      const language = form.dataset.locale === 'en' ? 'en' : 'ar';
+      const message = language === 'en'
+        ? [`*Name:* ${name}`, `*Phone:* ${phone}`, `*Booking:* ${serviceLabel}`, note && `*Notes:* ${note}`].filter(Boolean).join('\n')
+        : [`*الاسم:* ${name}`, `*الجوال:* ${phone}`, `*الحجز:* ${serviceLabel}`, note && `*ملاحظات:* ${note}`].filter(Boolean).join('\n');
+      const whatsappWindow = window.open('about:blank', '_blank');
+      if (whatsappWindow) whatsappWindow.opener = null;
+
+      if (submit) submit.disabled = true;
+      if (status) status.textContent = form.dataset.saving ?? '';
+      await submitCustomerLead({
+        name,
+        phone,
+        department: selectedDepartment as 'service' | 'package' | 'offer',
+        service,
+        page: window.location.pathname,
+        language,
+        company,
+      });
+
+      const whatsappUrl = buildWhatsAppUrl(message);
+      if (status) status.textContent = form.dataset.redirecting ?? '';
+      if (whatsappWindow) whatsappWindow.location.href = whatsappUrl;
+      else window.location.href = whatsappUrl;
+      if (submit) submit.disabled = false;
+    });
+  }
+</script>
+
+<style>
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    color: var(--color-text-muted);
+    font-size: 14px;
+  }
+
+  input,
+  select,
+  textarea {
+    width: 100%;
+    border: 1px solid var(--color-border-input);
+    border-radius: 16px;
+    background: var(--color-bg-input);
+    color: var(--color-text-primary);
+    padding: 12px 17px;
+  }
+
+  input,
+  select {
+    min-height: 48px;
+  }
+
+  textarea {
+    resize: vertical;
+  }
+
+  input:focus,
+  select:focus,
+  textarea:focus {
+    border-color: var(--color-gold);
+    outline: none;
+  }
+
+  button:disabled {
+    cursor: wait;
+    opacity: 0.65;
+  }
+</style>

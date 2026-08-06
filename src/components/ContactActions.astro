@@ -1,0 +1,61 @@
+---
+import { GTM_EVENTS, gtmContactAttrs } from '../lib/gtm';
+import { buildCallHref } from '../lib/whatsapp';
+import type { Locale } from '../i18n/types';
+import { t } from '../i18n/t';
+import WhatsAppIcon from './WhatsAppIcon.astro';
+
+export interface Props {
+  whatsappHref: string;
+  whatsappLabel?: string;
+  callHref?: string;
+  callLabel?: string;
+  class?: string;
+  size?: 'default' | 'compact';
+  gtmLocation?: string;
+  locale?: Locale;
+}
+
+const {
+  whatsappHref,
+  locale = 'ar',
+  whatsappLabel = t(locale, 'actionWhatsapp'),
+  callHref = buildCallHref(),
+  callLabel = t(locale, 'actionCallNow'),
+  class: className = '',
+  size = 'default',
+  gtmLocation = 'contact_actions',
+} = Astro.props;
+
+const dir = locale === 'en' ? 'ltr' : 'rtl';
+const buttonClass =
+  size === 'compact'
+    ? 'gold-button min-h-0 flex-1 px-4 py-2 text-xs font-semibold'
+    : 'gold-button flex-1';
+const outlineClass =
+  size === 'compact'
+    ? 'outline-button min-h-0 flex-1 px-4 py-2 text-xs font-normal'
+    : 'outline-button flex-1';
+---
+
+<div class:list={['flex flex-wrap gap-2', className]} dir={dir}>
+  <a
+    href={whatsappHref}
+    target={whatsappHref.startsWith('http') ? '_blank' : undefined}
+    rel={whatsappHref.startsWith('http') ? 'noopener noreferrer' : undefined}
+    class={buttonClass}
+    {...gtmContactAttrs(GTM_EVENTS.whatsapp, gtmLocation)}
+  >
+    <WhatsAppIcon class="size-4 text-text-btn" />
+    {whatsappLabel}
+  </a>
+  <a
+    href={callHref}
+    class={outlineClass}
+    aria-label={callLabel}
+    {...gtmContactAttrs(GTM_EVENTS.call, gtmLocation)}
+  >
+    <img src="/assets/icons/branch-phone.svg" alt="" width="16" height="16" class="size-4" />
+    {callLabel}
+  </a>
+</div>

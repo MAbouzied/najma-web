@@ -1,0 +1,93 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import Header from '../components/Header.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import ContactActions from '../components/ContactActions.astro';
+import CTASection from '../components/CTASection.astro';
+import { getCallAction } from '../data/site';
+import { localePath } from '../i18n/paths';
+import { t } from '../i18n/t';
+import type { Locale } from '../i18n/types';
+import { buildPackageBookingUrl } from '../lib/whatsapp';
+
+export interface Props {
+  locale: Locale;
+  packageItem: {
+    slug: string;
+    name: string;
+    subtitle: string;
+    description: string;
+    price: string;
+    features: string[];
+    featured?: boolean;
+  };
+}
+
+const { locale, packageItem } = Astro.props;
+const dir = locale === 'en' ? 'ltr' : 'rtl';
+const call = getCallAction(locale);
+const packageBookingHref = buildPackageBookingUrl(packageItem.name, locale);
+const featuredLabel = locale === 'en' ? 'Most Popular' : 'الأكثر طلبًا';
+const breadcrumbs = [
+  { label: t(locale, 'breadcrumbHome'), href: localePath('/', locale) },
+  { label: t(locale, 'breadcrumbPackages'), href: localePath('/packages/', locale) },
+  { label: packageItem.name, href: localePath(`/packages/${packageItem.slug}/`, locale) },
+];
+---
+
+<SiteLayout
+  title={`${packageItem.name} - ${t(locale, 'brandName')}`}
+  description={packageItem.description}
+  pathname={localePath(`/packages/${packageItem.slug}/`, locale)}
+  pageType="WebPage"
+  image={null}
+  breadcrumbs={breadcrumbs}
+  packages={[packageItem]}
+  locale={locale}
+>
+  <div data-hero-shell class="bg-bg-hero">
+    <Header locale={locale} />
+  </div>
+
+  <section class="section-block bg-bg-primary">
+    <div class="page-container">
+      <div class="mx-auto max-w-3xl" dir={dir}>
+        <Breadcrumbs items={breadcrumbs} locale={locale} />
+
+        {packageItem.featured && (
+          <span class="mb-4 inline-block rounded-full bg-gold-gradient px-4 py-1 text-xs font-bold text-text-btn">
+            {featuredLabel}
+          </span>
+        )}
+
+        <h1 class="text-4xl font-bold leading-tight text-text-primary">{packageItem.name}</h1>
+        <p class="mt-3 text-lg text-text-muted">{packageItem.subtitle}</p>
+        <p class="mt-4 leading-7 text-text-muted">{packageItem.description}</p>
+        <p class="mt-6 text-4xl font-bold text-gold">{packageItem.price}</p>
+
+        <div class="mt-8 rounded-2xl border border-border-card bg-bg-card p-6">
+          <h2 class="mb-4 text-lg font-bold text-text-primary">{t(locale, 'packageDetailComponents')}</h2>
+          <ul class="flex flex-col gap-3">
+            {packageItem.features.map((feature) => (
+              <li class="flex items-center gap-3 text-sm leading-6 text-text-muted">
+                <span class="flex size-6 shrink-0 items-center justify-center rounded-full bg-gold/20 text-xs text-gold">✓</span>
+                {feature}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="mt-8 max-w-md">
+          <ContactActions whatsappHref={packageBookingHref} gtmLocation="package_detail" locale={locale} />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CTASection
+    title={t(locale, 'packageDetailCtaTitle')}
+    description={t(locale, 'packageDetailCtaDescription')}
+    primaryAction={{ label: t(locale, 'actionWhatsapp'), href: packageBookingHref }}
+    secondaryAction={{ label: t(locale, 'actionCallNow'), href: call.href }}
+  />
+</SiteLayout>

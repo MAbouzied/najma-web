@@ -1,14 +1,26 @@
 ---
-import type { Service } from '../data/home';
 import { buildServiceBookingUrl } from '../lib/whatsapp';
+import { localePath } from '../i18n/paths';
+import { t } from '../i18n/t';
+import type { Locale } from '../i18n/types';
+import ContactActions from './ContactActions.astro';
 
 export interface Props {
-  service: Service;
+  service: {
+    slug: string;
+    image: string;
+    title: string;
+    description: string;
+    duration?: string;
+    price: string;
+  };
+  locale?: Locale;
 }
 
-const { service } = Astro.props;
-const detailHref = `/services/${service.slug}/`;
-const bookingHref = buildServiceBookingUrl(service.title);
+const { service, locale = 'ar' } = Astro.props;
+const dir = locale === 'en' ? 'ltr' : 'rtl';
+const detailHref = localePath(`/services/${service.slug}/`, locale);
+const bookingHref = buildServiceBookingUrl(service.title, locale);
 ---
 
 <article
@@ -27,7 +39,7 @@ const bookingHref = buildServiceBookingUrl(service.title);
       />
       <div class="absolute inset-0 bg-gradient-to-t from-bg-card via-transparent to-transparent"></div>
     </div>
-    <div class="p-6 pb-4 text-right" dir="rtl">
+    <div class="p-6 pb-4" dir={dir}>
       <h3 class="text-xl font-bold text-text-primary">{service.title}</h3>
       <p class="mt-2 min-h-12 text-sm leading-6 text-text-muted">{service.description}</p>
       <div class="mt-5 flex items-center justify-between border-t border-border-card pt-4">
@@ -41,16 +53,15 @@ const bookingHref = buildServiceBookingUrl(service.title);
       </div>
     </div>
   </a>
-  <div class="px-6 pb-6" dir="rtl">
-    <a
-      href={bookingHref}
-      target="_blank"
-      rel="noopener noreferrer"
-      class="gold-button w-full"
-      aria-label={`تواصل عبر واتساب لحجز ${service.title}`}
-    >
-      <img src="/assets/icons/whatsapp.svg" alt="" width="16" height="16" class="size-4" />
-      تواصل عبر واتساب
-    </a>
+  <div class="px-6 pb-6">
+    <ContactActions
+      whatsappHref={bookingHref}
+      whatsappLabel={t(locale, 'actionWhatsapp')}
+      gtmLocation="service_card"
+      callLabel={t(locale, 'actionCall')}
+      size="compact"
+      class="w-full"
+      locale={locale}
+    />
   </div>
 </article>

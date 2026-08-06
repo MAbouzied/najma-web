@@ -2,17 +2,36 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 
-const readDist = (path) => readFile(new URL(`../dist/${path}`, import.meta.url), 'utf8');
-const [homeHtml, aboutHtml, contactHtml, serviceDetailHtml, packageDetailHtml, robotsText, llmsText] =
-  await Promise.all([
-    readDist('index.html'),
-    readDist('about/index.html'),
-    readDist('contact/index.html'),
-    readDist('services/massage-relaxation/index.html'),
-    readDist('packages/luxury/index.html'),
-    readDist('robots.txt'),
-    readDist('llms.txt'),
-  ]);
+const readDist = (path) => readFile(new URL(`../dist/client/${path}`, import.meta.url), 'utf8');
+const [
+  homeHtml,
+  aboutHtml,
+  contactHtml,
+  serviceDetailHtml,
+  packageDetailHtml,
+  offerIndexHtml,
+  offerDetailHtml,
+  robotsText,
+  llmsText,
+  sitemapText,
+  enHomeHtml,
+  enAboutHtml,
+  enContactHtml,
+] = await Promise.all([
+  readDist('index.html'),
+  readDist('about/index.html'),
+  readDist('contact/index.html'),
+  readDist('services/massage-relaxation/index.html'),
+  readDist('packages/luxury/index.html'),
+  readDist('offers/index.html'),
+  readDist('offers/signature/index.html'),
+  readDist('robots.txt'),
+  readDist('llms.txt'),
+  readDist('sitemap-0.xml'),
+  readDist('en/index.html'),
+  readDist('en/about/index.html'),
+  readDist('en/contact/index.html'),
+]);
 
 const parseJsonLd = (html) => {
   const match = html.match(/<script type="application\/ld\+json" data-structured-data>([\s\S]*?)<\/script>/);
@@ -21,7 +40,7 @@ const parseJsonLd = (html) => {
 };
 
 test('renders complete canonical and social metadata on every page', () => {
-  for (const html of [homeHtml, aboutHtml, contactHtml]) {
+  for (const html of [homeHtml, aboutHtml, contactHtml, offerIndexHtml, offerDetailHtml]) {
     assert.match(html, /<link rel="canonical" href="[^"]+">/);
     assert.match(html, /<meta property="og:locale" content="ar_SA">/);
     assert.match(html, /<meta property="og:title" content="[^"]+">/);
@@ -59,13 +78,28 @@ test('marks up visible services and FAQs with verified local details', () => {
   const homeGraph = parseJsonLd(homeHtml)['@graph'];
   const daySpa = homeGraph.find((node) => node['@type'] === 'DaySpa');
   const faqPage = homeGraph.find((node) => node['@type'] === 'FAQPage');
+  const catalogs = [].concat(daySpa.hasOfferCatalog);
+  const serviceCatalog = catalogs.find((catalog) => catalog.name === 'خدمات نجم سبا');
+  const packagesCatalog = catalogs.find((catalog) => catalog.name === 'باقات نجم سبا');
+  const offersCatalog = catalogs.find((catalog) => catalog.name === 'عروض صيفك على كيفك');
 
-  assert.equal(daySpa.hasOfferCatalog.itemListElement.length, 9);
-  for (const offer of daySpa.hasOfferCatalog.itemListElement) {
+  assert.ok(serviceCatalog, 'expected services catalog');
+  assert.ok(packagesCatalog, 'expected packages catalog');
+  assert.ok(offersCatalog, 'expected summer offers catalog');
+  assert.equal(serviceCatalog.itemListElement.length, 10);
+  assert.equal(packagesCatalog.itemListElement.length, 3);
+  assert.equal(offersCatalog.itemListElement.length, 8);
+
+  for (const offer of [...serviceCatalog.itemListElement, ...offersCatalog.itemListElement]) {
     assert.equal(offer['@type'], 'Offer');
     assert.equal(offer.priceCurrency, 'SAR');
+    assert.match(String(offer.price), /^\d+$/);
     assert.equal(offer.itemOffered['@type'], 'Service');
     assert.match(offer.itemOffered.provider['@id'], /#business$/);
+  }
+
+  for (const offer of offersCatalog.itemListElement) {
+    assert.match(offer.url, /\/offers\/[a-z-]+\/$/);
   }
 
   assert.equal(faqPage.mainEntity.length, 8);
@@ -108,7 +142,7 @@ test('adds nested breadcrumb schema and UI for service and package detail pages'
   assert.equal(serviceBreadcrumb.itemListElement.length, 3);
   assert.equal(serviceBreadcrumb.itemListElement[0].name, 'الرئيسية');
   assert.equal(serviceBreadcrumb.itemListElement[1].name, 'خدماتنا');
-  assert.equal(serviceBreadcrumb.itemListElement[2].name, 'مساج استرخاء');
+  assert.equal(serviceBreadcrumb.itemListElement[2].name, 'مساج الاسترخاء');
   assert.match(serviceDetailHtml, /data-breadcrumbs/);
   assert.doesNotMatch(serviceDetailHtml, /العودة للخدمات/);
 
@@ -120,17 +154,109 @@ test('adds nested breadcrumb schema and UI for service and package detail pages'
   assert.equal(packageBreadcrumb.itemListElement[2].name, 'باقة الرفاهية');
   assert.match(packageDetailHtml, /data-breadcrumbs/);
   assert.doesNotMatch(packageDetailHtml, /العودة للباقات/);
+
+  const offerGraph = parseJsonLd(offerDetailHtml)['@graph'];
+  const offerBreadcrumb = offerGraph.find((node) => node['@type'] === 'BreadcrumbList');
+  assert.equal(offerBreadcrumb.itemListElement.length, 3);
+  assert.equal(offerBreadcrumb.itemListElement[0].name, 'الرئيسية');
+  assert.equal(offerBreadcrumb.itemListElement[1].name, 'عروض الصيف');
+  assert.equal(offerBreadcrumb.itemListElement[2].name, 'نجم سبا سجنتشر');
+  assert.match(offerDetailHtml, /data-breadcrumbs/);
+  assert.doesNotMatch(offerDetailHtml, /العودة للعروض/);
+});
+
+const ORIGIN = 'https://najma-web.mohamed-abouzied.workers.dev';
+
+test('emits hreflang trio (ar, en, x-default) on every Arabic page', () => {
+  for (const html of [homeHtml, aboutHtml, contactHtml, offerIndexHtml, offerDetailHtml]) {
+    assert.match(html, /<link rel="alternate" hreflang="ar" href="[^"]+">/);
+    assert.match(html, /<link rel="alternate" hreflang="en" href="[^"]+">/);
+    assert.match(html, /<link rel="alternate" hreflang="x-default" href="[^"]+">/);
+  }
+});
+
+test('emits hreflang trio on English pages with correct cross-references', () => {
+  for (const html of [enHomeHtml, enAboutHtml, enContactHtml]) {
+    assert.match(html, /<link rel="alternate" hreflang="ar" href="[^"]+">/);
+    assert.match(html, /<link rel="alternate" hreflang="en" href="[^"]+">/);
+    assert.match(html, /<link rel="alternate" hreflang="x-default" href="[^"]+">/);
+  }
+
+  assert.match(enAboutHtml, new RegExp(`hreflang="ar" href="${ORIGIN}/about/?"`));
+  assert.match(enAboutHtml, new RegExp(`hreflang="en" href="${ORIGIN}/en/about/?"`));
+  assert.match(enAboutHtml, new RegExp(`hreflang="x-default" href="${ORIGIN}/about/?"`));
+});
+
+test('English pages have lang="en" and og:locale en_US', () => {
+  for (const html of [enHomeHtml, enAboutHtml, enContactHtml]) {
+    assert.match(html, /<html lang="en" dir="ltr">/);
+    assert.match(html, /<meta property="og:locale" content="en_US">/);
+    assert.match(html, /<meta property="og:locale:alternate" content="ar_SA">/);
+  }
+});
+
+test('Arabic pages have og:locale ar_SA with en_US alternate', () => {
+  for (const html of [homeHtml, aboutHtml, contactHtml]) {
+    assert.match(html, /<meta property="og:locale" content="ar_SA">/);
+    assert.match(html, /<meta property="og:locale:alternate" content="en_US">/);
+  }
+});
+
+test('English pages have locale-correct og:site_name and title', () => {
+  assert.match(enHomeHtml, /<meta property="og:site_name" content="Nagm Spa">/);
+  assert.match(enAboutHtml, /<meta property="og:site_name" content="Nagm Spa">/);
+  assert.match(enContactHtml, /<meta property="og:site_name" content="Nagm Spa">/);
+
+  assert.match(enHomeHtml, /Nagm Spa/);
+  assert.match(enAboutHtml, /About Us - Nagm Spa/);
+  assert.match(enContactHtml, /Contact Us - Nagm Spa/);
+});
+
+test('canonical on English pages points to the English URL', () => {
+  assert.match(enHomeHtml, new RegExp(`<link rel="canonical" href="${ORIGIN}/en/"`));
+  assert.match(enAboutHtml, new RegExp(`<link rel="canonical" href="${ORIGIN}/en/about/"`));
+  assert.match(enContactHtml, new RegExp(`<link rel="canonical" href="${ORIGIN}/en/contact/"`));
+});
+
+test('sitemap includes English locale URLs', () => {
+  assert.match(sitemapText, /\/en\//);
 });
 
 test('serves crawl and LLM discovery files without placeholder origins', () => {
   assert.match(robotsText, /^User-agent: \*/);
   assert.match(robotsText, /Allow: \//);
+  assert.match(robotsText, /Disallow: \/api\//);
   assert.match(robotsText, /Sitemap: https:\/\/najma-web\.mohamed-abouzied\.workers\.dev\/sitemap-index\.xml/);
   assert.doesNotMatch(robotsText, /localhost|example\.com/);
 
   assert.match(llmsText, /^# نجم سبا/);
   assert.match(llmsText, /## الصفحات الرئيسية/);
   assert.match(llmsText, /\[من نحن\]\(https:\/\/najma-web\.mohamed-abouzied\.workers\.dev\/about\/\)/);
-  assert.match(llmsText, /\[الأسئلة الشائعة\]\(https:\/\/najma-web\.mohamed-abouzied\.workers\.dev\/#faq\)/);
+  assert.match(llmsText, /\[Services\]\(https:\/\/najma-web\.mohamed-abouzied\.workers\.dev\/en\/services\/\)/);
+  assert.match(llmsText, /\/#faq/);
+  assert.match(llmsText, /\/en\/#faq/);
+  assert.match(llmsText, /## عروض الصيف/);
+  assert.match(llmsText, /\/offers\/signature\//);
+  assert.match(llmsText, /\/en\/offers\/signature\//);
   assert.doesNotMatch(llmsText, /localhost|example\.com/);
+  assert.doesNotMatch(llmsText, /\/book\/|\/go\/|\/api\//);
+
+  assert.match(sitemapText, /\/offers\//);
+  assert.match(sitemapText, /\/offers\/signature\//);
+  assert.match(sitemapText, /\/offers\/recovery\//);
+  assert.match(sitemapText, /\/offers\/golden\//);
+  assert.doesNotMatch(sitemapText, /\/book\/|\/go\/|\/api\//);
+});
+
+test('marks booking and link-hub pages as noindex', async () => {
+  const [bookHtml, enBookHtml, goHtml, enGoHtml] = await Promise.all([
+    readDist('book/index.html'),
+    readDist('en/book/index.html'),
+    readDist('go/index.html'),
+    readDist('en/go/index.html'),
+  ]);
+
+  for (const html of [bookHtml, enBookHtml, goHtml, enGoHtml]) {
+    assert.match(html, /<meta name="robots" content="noindex, follow">/);
+  }
 });

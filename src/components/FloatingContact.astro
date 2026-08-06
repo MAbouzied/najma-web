@@ -1,0 +1,40 @@
+---
+import { getBookingAction, getCallAction, type Locale } from '../data/site';
+import { t } from '../i18n/t';
+import { GTM_EVENTS, gtmContactAttrs } from '../lib/gtm';
+import WhatsAppIcon from './WhatsAppIcon.astro';
+
+export interface Props {
+  locale?: Locale;
+}
+
+const { locale = 'ar' } = Astro.props;
+const isEnglish = locale === 'en';
+const booking = getBookingAction(locale);
+const call = getCallAction(locale);
+---
+
+<div
+  data-floating-contact
+  class="fixed bottom-4 end-4 z-40 sm:bottom-6 sm:end-6"
+  dir={isEnglish ? 'ltr' : 'rtl'}
+>
+  <div class="flex flex-col items-center gap-1.5 rounded-full border border-border-card bg-bg-card/95 p-1.5 shadow-xl backdrop-blur-md">
+    <a
+      href={booking.href}
+      class="bg-gold-gradient inline-flex size-12 min-h-11 min-w-11 shrink-0 items-center justify-center rounded-full text-text-btn shadow-md transition-transform duration-200 hover:-translate-y-0.5 active:translate-y-0"
+      aria-label={t(locale, 'actionWhatsapp')}
+      {...gtmContactAttrs(GTM_EVENTS.whatsapp, 'floating')}
+    >
+      <WhatsAppIcon class="size-[1.375rem] text-text-btn" />
+    </a>
+    <a
+      href={call.href}
+      class="inline-flex size-12 min-h-11 min-w-11 shrink-0 items-center justify-center rounded-full border border-border-badge bg-bg-primary/80 transition-colors duration-200 hover:bg-bg-tertiary"
+      aria-label={t(locale, 'actionCallNow')}
+      {...gtmContactAttrs(GTM_EVENTS.call, 'floating')}
+    >
+      <img src="/assets/icons/branch-phone.svg" alt="" width="20" height="20" class="size-5" />
+    </a>
+  </div>
+</div>

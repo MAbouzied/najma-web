@@ -1,17 +1,23 @@
 ---
+import type { Locale } from '../i18n/types';
+import { localePath } from '../i18n/paths';
+import { t } from '../i18n/t';
+
 export interface Props {
   size?: 'header' | 'footer';
   current?: boolean;
+  locale?: Locale;
 }
 
-const { size = 'header', current = false } = Astro.props;
+const { size = 'header', current = false, locale = 'ar' } = Astro.props;
 const imageSize = size === 'footer' ? 'size-[71px]' : 'size-[45px]';
+const homeHref = localePath('/', locale);
 ---
 
 <a
-  href="/"
+  href={homeHref}
   class="inline-flex items-center gap-2"
-  aria-label="نجم سبا - الرئيسية"
+  aria-label={t(locale, 'brandHomeAria')}
   aria-current={current ? 'page' : undefined}
 >
   <img
@@ -22,6 +28,6 @@ const imageSize = size === 'footer' ? 'size-[71px]' : 'size-[45px]';
     class:list={['block object-contain', imageSize]}
   />
   <span class:list={['text-gold-gradient font-bold tracking-[0.2px]', size === 'footer' ? 'text-xl' : 'text-xl']}>
-    نجم سبا
+    {t(locale, 'brandName')}
   </span>
 </a>

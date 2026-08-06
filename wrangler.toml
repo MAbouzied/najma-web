@@ -1,7 +1,13 @@
 name = "najma-web"
+main = "@astrojs/cloudflare/entrypoints/server"
 compatibility_date = "2026-07-21"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+GOOGLE_SHEET_ID = "1QK0DCOr52q6wbbNvuPJchCvOgL3HlLab2eaLiX87QDA"
 
 [assets]
 directory = "./dist"
+binding = "ASSETS"
 html_handling = "auto-trailing-slash"
 not_found_handling = "404-page"

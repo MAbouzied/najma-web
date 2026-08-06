@@ -1,0 +1,29 @@
+---
+import PackageDetailPage from '../../../views/PackageDetailPage.astro';
+import { packages } from '../../../data/home';
+import { L, localizeList } from '../../../i18n/localize';
+
+const locale = 'en';
+
+export function getStaticPaths() {
+  return packages.map((pkg) => ({
+    params: { slug: pkg.slug },
+    props: { packageItem: pkg },
+  }));
+}
+
+const { packageItem } = Astro.props;
+---
+
+<PackageDetailPage
+  locale={locale}
+  packageItem={{
+    slug: packageItem.slug,
+    name: L(packageItem.name, locale),
+    subtitle: L(packageItem.subtitle, locale),
+    description: L(packageItem.description, locale),
+    price: L(packageItem.price, locale),
+    features: localizeList(packageItem.features, locale),
+    featured: packageItem.featured,
+  }}
+/>

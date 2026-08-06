@@ -10,19 +10,26 @@
     "dev": "astro dev",
     "build": "astro build",
     "deploy": "npm run build && wrangler deploy",
-    "test": "astro build && node --test tests/*.test.mjs",
+    "test": "astro build && node --test tests/*.test.mjs && node --experimental-strip-types --test \"src/modules/**/*.test.ts\" \"src/lib/auth/**/*.test.ts\" \"src/lib/staff-access/**/*.test.ts\"",
     "preview": "astro preview",
     "preview:cf": "npm run build && wrangler dev",
     "astro": "astro"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.9",
+    "@astrojs/cloudflare": "^14.1.7",
     "@astrojs/sitemap": "^3.7.3",
+    "@sanity/client": "^7.26.0",
+    "@sanity/image-url": "^2.1.1",
     "@tailwindcss/vite": "^4.3.3",
     "astro": "^7.1.1",
+    "astro-portabletext": "^0.13.0",
+    "better-auth": "^1.6.26",
+    "prismjs": "^1.30.0",
     "typescript": "^6.0.3"
   },
   "devDependencies": {
+    "@types/node": "^22.20.1",
     "wrangler": "^4.112.0"
   }
 }

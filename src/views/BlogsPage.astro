@@ -1,0 +1,105 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import Header from '../components/Header.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import CTASection from '../components/CTASection.astro';
+import BlogListing from '../modules/blog/components/BlogListing.astro';
+import {
+  BLOG_PAGE_SIZE,
+  DEFAULT_BLOG_LISTING_LABELS,
+  buildBlogCollectionSchemas,
+  listingPathForPage,
+  paginatePosts,
+  selectListing,
+} from '../modules/blog';
+import {
+  BLOG_CACHE_MAX_AGE_SECONDS,
+  BLOG_CACHE_SWR_SECONDS,
+  blogListingCacheTags,
+} from '../modules/blog/cache';
+import { getBlogRepository } from '../modules/blog/repository/get-blog-repository';
+import { getBookingAction, getCallAction } from '../data/site';
+import { localePath } from '../i18n/paths';
+import { t } from '../i18n/t';
+
+export interface Props {
+  page?: number;
+}
+
+const { page = 1 } = Astro.props;
+const locale = 'ar' as const;
+const repository = getBlogRepository();
+const posts = await repository.getPublishedPosts();
+const listing = selectListing(posts);
+const recentPage = paginatePosts(listing.recent, page, BLOG_PAGE_SIZE);
+
+if (!recentPage || page < 1) {
+  return new Response(null, { status: 404, statusText: 'Not Found' });
+}
+
+if (Astro.cache.enabled) {
+  Astro.cache.set({
+    maxAge: BLOG_CACHE_MAX_AGE_SECONDS,
+    swr: BLOG_CACHE_SWR_SECONDS,
+    tags: blogListingCacheTags(),
+  });
+}
+
+const site = Astro.site!;
+const path = listingPathForPage(page);
+const title =
+  page <= 1
+    ? t(locale, 'seoBlogsTitle')
+    : t(locale, 'seoBlogsPageTitle').replace('{page}', String(page));
+const description = page <= 1 ? t(locale, 'seoBlogsDescription') : t(locale, 'seoBlogsPageDescription');
+const breadcrumbs = [
+  { label: t(locale, 'breadcrumbHome'), href: localePath('/', locale) },
+  { label: t(locale, 'breadcrumbBlogs'), href: '/blogs/' },
+  ...(page > 1 ? [{ label: t(locale, 'blogPageLabel').replace('{page}', String(page)) }] : []),
+];
+const booking = getBookingAction(locale);
+const call = getCallAction(locale);
+const labels = DEFAULT_BLOG_LISTING_LABELS;
+---
+
+<SiteLayout
+  title={title}
+  description={description}
+  pathname={path}
+  pageType="WebPage"
+  image="/assets/home/hero-interior.jpg"
+  locale={locale}
+  additionalSchemas={buildBlogCollectionSchemas({
+    site,
+    path,
+    name: title,
+    description,
+    posts: page <= 1 ? listing.allPublished : recentPage.items,
+  })}
+>
+  <div data-hero-shell class="bg-bg-hero">
+    <Header currentPage="blogs" locale={locale} />
+    <div class="page-container pt-6">
+      <Breadcrumbs items={breadcrumbs} locale={locale} class="mb-0" />
+    </div>
+  </div>
+
+  <section class="section-block bg-bg-primary">
+    <BlogListing
+      featured={page <= 1 ? listing.featured : null}
+      recent={recentPage.items}
+      totalPublished={listing.allPublished.length}
+      page={page}
+      totalPages={recentPage.totalPages}
+      labels={labels}
+    >
+      <CTASection
+        slot="cta"
+        title={t(locale, 'blogsCtaTitle')}
+        description={t(locale, 'blogsCtaDescription')}
+        primaryAction={{ label: t(locale, 'blogsCtaPrimary'), href: booking.href }}
+        secondaryAction={{ label: t(locale, 'actionCallNow'), href: call.href }}
+      />
+    </BlogListing>
+  </section>
+</SiteLayout>

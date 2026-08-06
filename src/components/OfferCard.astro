@@ -1,0 +1,68 @@
+---
+import { getSummerCampaign } from '../data/home';
+import { buildOfferBookingUrl } from '../lib/whatsapp';
+import { localePath } from '../i18n/paths';
+import { t } from '../i18n/t';
+import type { Locale } from '../i18n/types';
+import ContactActions from './ContactActions.astro';
+
+export interface Props {
+  offer: {
+    slug: string;
+    name: string;
+    subtitle: string;
+    description: string;
+    price: string;
+    originalPrice: string;
+    features: string[];
+  };
+  locale?: Locale;
+}
+
+const { offer, locale = 'ar' } = Astro.props;
+const dir = locale === 'en' ? 'ltr' : 'rtl';
+const campaign = getSummerCampaign(locale);
+const detailHref = localePath(`/offers/${offer.slug}/`, locale);
+const bookingHref = buildOfferBookingUrl(offer.name, locale);
+const detailLabel = locale === 'en' ? 'View Details' : 'عرض التفاصيل';
+const srLabel = locale === 'en' ? 'Price before discount ' : 'السعر قبل الخصم ';
+---
+
+<article
+  data-offer-card
+  class="relative flex h-full flex-col rounded-3xl border border-border-card bg-bg-card p-7 transition-transform hover:-translate-y-1 sm:p-8"
+  dir={dir}
+>
+  <span class="mb-4 inline-flex w-fit items-center rounded-full border border-border-badge bg-bg-badge px-3 py-1 text-xs font-bold text-gold">
+    {campaign.discountLabel}
+  </span>
+  <a href={detailHref} class="flex flex-1 flex-col">
+    <h3 class="text-2xl font-bold text-text-primary">{offer.name}</h3>
+    <p class="mt-2 text-sm text-text-muted">{offer.subtitle}</p>
+    <p class="mt-6 flex flex-wrap items-baseline gap-3">
+      <span class="text-3xl font-bold text-gold">{offer.price}</span>
+      <s class="text-lg text-text-muted">
+        <span class="sr-only">{srLabel}</span>
+        {offer.originalPrice}
+      </s>
+    </p>
+    <ul class="mt-6 flex flex-1 flex-col gap-3">
+      {offer.features.map((feature) => (
+        <li class="flex items-start gap-3 text-sm leading-6 text-text-muted">
+          <span class="mt-2 size-1.5 shrink-0 rounded-full bg-gold" aria-hidden="true"></span>
+          {feature}
+        </li>
+      ))}
+    </ul>
+    <span class="outline-button mt-8 w-full text-center">{detailLabel}</span>
+  </a>
+  <ContactActions
+    whatsappHref={bookingHref}
+    whatsappLabel={t(locale, 'actionWhatsapp')}
+    callLabel={t(locale, 'actionCall')}
+    size="compact"
+    class="mt-4 w-full"
+    gtmLocation="offer_card"
+    locale={locale}
+  />
+</article>

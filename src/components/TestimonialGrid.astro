@@ -1,14 +1,16 @@
 ---
 import TestimonialCard from './TestimonialCard.astro';
-import type { Testimonial } from '../data/home';
+import type { ResolvedTestimonial } from './TestimonialCard.astro';
+import type { Locale } from '../i18n/types';
 
 export interface Props {
-  testimonials: Testimonial[];
+  testimonials: ResolvedTestimonial[];
+  locale?: Locale;
 }
 
-const { testimonials } = Astro.props;
+const { testimonials, locale = 'ar' } = Astro.props;
 ---
 
 <div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
-  {testimonials.map((testimonial) => <TestimonialCard testimonial={testimonial} />)}
+  {testimonials.map((testimonial) => <TestimonialCard testimonial={testimonial} locale={locale} />)}
 </div>

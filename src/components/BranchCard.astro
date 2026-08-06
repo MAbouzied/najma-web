@@ -1,34 +1,53 @@
 ---
 import type { Branch } from '../data/branches';
+import { GTM_EVENTS, gtmContactAttrs } from '../lib/gtm';
 import { buildWhatsAppUrl } from '../lib/whatsapp';
+import { t } from '../i18n/t';
+import type { Locale } from '../i18n/types';
+import ContactActions from './ContactActions.astro';
 
 export interface Props {
   branch: Branch;
+  locale?: Locale;
 }
 
-const { branch } = Astro.props;
-const branchBookingHref = buildWhatsAppUrl(`أهلاً، أريد الحجز في ${branch.title}`);
+const { branch, locale = 'ar' } = Astro.props;
+const dir = locale === 'en' ? 'ltr' : 'rtl';
+const branchBookingHref = buildWhatsAppUrl(
+  locale === 'en'
+    ? `Hello, I would like to book at ${branch.title}`
+    : `أهلاً، أريد الحجز في ${branch.title}`,
+);
 ---
 
-<article data-branch-card class="rounded-[20px] border border-border-card bg-bg-card p-6 text-right sm:p-8" dir="rtl">
+<article
+  data-branch-card
+  class="rounded-[20px] border border-border-card bg-bg-card p-6 text-start sm:p-8"
+  dir={dir}
+>
   <h3 class="text-xl font-semibold leading-7 tracking-[0.2px] text-text-primary">{branch.title}</h3>
   <dl class="mt-4 flex flex-col gap-3 text-sm leading-5 text-text-muted">
     <div class="flex items-center gap-2">
       <img src="/assets/icons/location.svg" alt="" width="16" height="16" class="size-4 shrink-0" />
-      <dt class="sr-only">العنوان</dt>
+      <dt class="sr-only">{locale === 'en' ? 'Address' : 'العنوان'}</dt>
       <dd>{branch.address}</dd>
     </div>
     <div class="flex items-center gap-2">
       <img src="/assets/icons/hours.svg" alt="" width="16" height="16" class="size-4 shrink-0" />
-      <dt class="sr-only">ساعات العمل</dt>
+      <dt class="sr-only">{locale === 'en' ? 'Hours' : 'ساعات العمل'}</dt>
       <dd>{branch.hours}</dd>
     </div>
     <div class="flex items-center gap-2">
       <img src="/assets/icons/branch-phone.svg" alt="" width="16" height="16" class="size-4 shrink-0" />
-      <dt class="sr-only">الهاتف</dt>
+      <dt class="sr-only">{t(locale, 'contactLabelPhone')}</dt>
       <dd>
         {branch.phoneHref ? (
-          <a href={branch.phoneHref} class="transition-colors hover:text-gold" dir="ltr">
+          <a
+            href={branch.phoneHref}
+            class="transition-colors hover:text-gold"
+            dir="ltr"
+            {...gtmContactAttrs(GTM_EVENTS.call, 'branch_card')}
+          >
             {branch.phone}
           </a>
         ) : (
@@ -37,23 +56,23 @@ const branchBookingHref = buildWhatsAppUrl(`أهلاً، أريد الحجز ف�
       </dd>
     </div>
   </dl>
-  <div class="mt-6 flex gap-2">
-    <a
-      href={branchBookingHref}
-      target="_blank"
-      rel="noopener noreferrer"
-      class="gold-button min-h-0 flex-1 px-4 py-2 text-xs font-semibold"
-    >
-      احجز في هذا الفرع
-    </a>
+  <div class="mt-6 flex flex-col gap-2">
+    <ContactActions
+      whatsappHref={branchBookingHref}
+      whatsappLabel={t(locale, 'actionWhatsapp')}
+      callLabel={t(locale, 'actionCall')}
+      size="compact"
+      gtmLocation="branch_card"
+      locale={locale}
+    />
     {branch.mapsHref && (
       <a
         href={branch.mapsHref}
         target="_blank"
         rel="noopener noreferrer"
-        class="outline-button min-h-0 flex-1 px-4 py-2 text-xs font-normal text-text-muted"
+        class="outline-button min-h-0 w-full px-4 py-2 text-xs font-normal text-text-muted"
       >
-        الاتجاهات
+        {t(locale, 'actionDirections')}
       </a>
     )}
   </div>

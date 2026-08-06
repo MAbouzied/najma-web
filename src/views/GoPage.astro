@@ -1,0 +1,101 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import BrandLogo from '../components/BrandLogo.astro';
+import WhatsAppIcon from '../components/WhatsAppIcon.astro';
+import {
+  buildCallHref,
+  buildGeneralContactUrl,
+  MAPS_HREF,
+  WHATSAPP_PHONE_DISPLAY,
+} from '../lib/whatsapp';
+import { getContactDetails } from '../data/site';
+import { localePath } from '../i18n/paths';
+import { t } from '../i18n/t';
+import type { Locale } from '../i18n/types';
+import { GTM_EVENTS, gtmContactAttrs } from '../lib/gtm';
+
+export interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const dir = locale === 'en' ? 'ltr' : 'rtl';
+const whatsappHref = buildGeneralContactUrl(locale);
+const callHref = buildCallHref();
+const contact = getContactDetails(locale);
+---
+
+<SiteLayout
+  title={t(locale, 'goPageTitle')}
+  description={t(locale, 'goPageDescription')}
+  pathname={localePath('/go/', locale)}
+  pageType="WebPage"
+  image="/assets/contact-cta.jpg"
+  robots="noindex, follow"
+  showFloatingContact={false}
+  showFooter={false}
+  locale={locale}
+>
+  <section class="relative min-h-dvh overflow-hidden bg-bg-primary" dir={dir}>
+    <img
+      src="/assets/home/hero-interior.jpg"
+      alt=""
+      width="1600"
+      height="1067"
+      class="absolute inset-0 size-full object-cover opacity-35"
+    />
+    <div class="absolute inset-0 bg-gradient-to-b from-bg-hero/80 via-bg-primary/85 to-bg-primary"></div>
+
+    <div class="relative z-10 mx-auto flex min-h-dvh w-full max-w-lg flex-col items-center justify-center gap-8 px-6 py-16 text-center">
+      <BrandLogo size="footer" locale={locale} />
+
+      <div class="space-y-3">
+        <p class="text-sm font-semibold tracking-[0.2em] text-gold">{t(locale, 'brandName')}</p>
+        <h1 class="text-3xl font-bold leading-tight text-text-primary sm:text-4xl">
+          {t(locale, 'goTitle')}
+        </h1>
+        <p class="text-sm leading-7 text-text-muted">
+          {t(locale, 'goSubtitle')}
+          <br />
+          <span dir="ltr">{WHATSAPP_PHONE_DISPLAY}</span>
+        </p>
+      </div>
+
+      <div class="flex w-full flex-col gap-3">
+        <a
+          href={whatsappHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="gold-button w-full min-h-14 text-base"
+          {...gtmContactAttrs(GTM_EVENTS.whatsapp, 'go')}
+        >
+          <WhatsAppIcon class="size-5 text-text-btn" />
+          {t(locale, 'goWhatsappLabel')}
+        </a>
+        <a
+          href={callHref}
+          class="outline-button w-full min-h-14 text-base"
+          {...gtmContactAttrs(GTM_EVENTS.call, 'go')}
+        >
+          <img src="/assets/icons/branch-phone.svg" alt="" width="20" height="20" class="size-5" />
+          {t(locale, 'goCallLabel')}
+        </a>
+        <a
+          href={MAPS_HREF}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="outline-button w-full min-h-14 text-base"
+        >
+          <img src="/assets/icons/location.svg" alt="" width="20" height="20" class="size-5" />
+          {t(locale, 'goDirectionsLabel')}
+        </a>
+      </div>
+
+      <p class="text-xs text-text-muted">
+        {t(locale, 'goHoursLabel')}: {contact.hours}
+        ·
+        <a href={localePath('/', locale)} class="text-gold transition-colors hover:text-gold-light">{t(locale, 'goFullSite')}</a>
+      </p>
+    </div>
+  </section>
+</SiteLayout>

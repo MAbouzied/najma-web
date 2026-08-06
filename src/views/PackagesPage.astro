@@ -1,0 +1,63 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import Header from '../components/Header.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import HeroSection from '../components/HeroSection.astro';
+import PackageGrid from '../components/PackageGrid.astro';
+import CTASection from '../components/CTASection.astro';
+import { getPackages } from '../data/home';
+import { getBookingAction, getCallAction } from '../data/site';
+import { localePath } from '../i18n/paths';
+import { t } from '../i18n/t';
+import type { Locale } from '../i18n/types';
+
+export interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const packagesData = getPackages(locale);
+const booking = getBookingAction(locale);
+const call = getCallAction(locale);
+const breadcrumbs = [
+  { label: t(locale, 'breadcrumbHome'), href: localePath('/', locale) },
+  { label: t(locale, 'breadcrumbPackages'), href: localePath('/packages/', locale) },
+];
+---
+
+<SiteLayout
+  title={t(locale, 'seoPackagesTitle')}
+  description={t(locale, 'seoPackagesDescription')}
+  pathname={localePath('/packages/', locale)}
+  pageType="WebPage"
+  image="/assets/home/hero-interior.jpg"
+  breadcrumbs={breadcrumbs}
+  packages={packagesData}
+  locale={locale}
+>
+  <div data-hero-shell class="bg-bg-hero">
+    <Header currentPage="packages" locale={locale} />
+    <div class="page-container pt-6">
+      <Breadcrumbs items={breadcrumbs} locale={locale} class="mb-0" />
+    </div>
+    <HeroSection badge={t(locale, 'packagesHeroBadge')} description={t(locale, 'packagesHeroDescription')}>
+      <Fragment slot="title">
+        <span class="text-gold-gradient">{t(locale, 'packagesHeroTitle')}</span>
+        <span class="text-text-primary">{t(locale, 'packagesHeroTitleSuffix')}</span>
+      </Fragment>
+    </HeroSection>
+  </div>
+
+  <section class="section-block bg-bg-primary">
+    <div class="page-container">
+      <PackageGrid packages={packagesData} locale={locale} />
+    </div>
+  </section>
+
+  <CTASection
+    title={t(locale, 'packagesCtaTitle')}
+    description={t(locale, 'packagesCtaDescription')}
+    primaryAction={{ label: t(locale, 'packagesCtaPrimary'), href: booking.href }}
+    secondaryAction={{ label: t(locale, 'actionCallNow'), href: call.href }}
+  />
+</SiteLayout>

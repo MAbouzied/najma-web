@@ -1,0 +1,29 @@
+---
+import ServiceDetailPage from '../../../views/ServiceDetailPage.astro';
+import { services } from '../../../data/home';
+import { L } from '../../../i18n/localize';
+
+const locale = 'en';
+
+export function getStaticPaths() {
+  return services.map((service) => ({
+    params: { slug: service.slug },
+    props: { service },
+  }));
+}
+
+const { service } = Astro.props;
+---
+
+<ServiceDetailPage
+  locale={locale}
+  service={{
+    slug: service.slug,
+    image: service.image,
+    heroImage: service.heroImage,
+    title: L(service.title, locale),
+    description: L(service.description, locale),
+    duration: service.duration ? L(service.duration, locale) : undefined,
+    price: L(service.price, locale),
+  }}
+/>

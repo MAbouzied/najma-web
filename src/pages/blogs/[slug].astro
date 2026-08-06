@@ -1,0 +1,30 @@
+---
+export const prerender = false;
+
+import BlogDetailPage from '../../views/BlogDetailPage.astro';
+import { getBlogRepository } from '../../modules/blog/repository/get-blog-repository';
+import {
+  BLOG_CACHE_MAX_AGE_SECONDS,
+  BLOG_CACHE_SWR_SECONDS,
+  blogArticleCacheTags,
+} from '../../modules/blog/cache';
+
+const repository = getBlogRepository();
+const slug = Astro.params.slug ?? '';
+const allPosts = await repository.getPublishedPosts();
+const post = allPosts.find((item) => item.slug === slug) ?? null;
+
+if (!post) {
+  return new Response(null, { status: 404, statusText: 'Not Found' });
+}
+
+if (Astro.cache.enabled) {
+  Astro.cache.set({
+    maxAge: BLOG_CACHE_MAX_AGE_SECONDS,
+    swr: BLOG_CACHE_SWR_SECONDS,
+    tags: blogArticleCacheTags(post.id),
+  });
+}
+---
+
+<BlogDetailPage post={post} allPosts={allPosts} />

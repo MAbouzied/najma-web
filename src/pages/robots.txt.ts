@@ -6,6 +6,11 @@ export const GET: APIRoute = ({ site }) => {
   const lines = [
     'User-agent: *',
     'Allow: /',
+    'Disallow: /api/',
+    'Disallow: /admin',
+    'Disallow: /admin/',
+    'Disallow: /login',
+    'Disallow: /login/',
     ...(site ? ['', `Sitemap: ${new URL('/sitemap-index.xml', site).href}`] : []),
     '',
   ];

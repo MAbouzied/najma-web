@@ -1,14 +1,22 @@
 ---
 import ServiceCard from './ServiceCard.astro';
-import type { Service } from '../data/home';
+import type { Locale } from '../i18n/types';
 
 export interface Props {
-  services: Service[];
+  services: {
+    slug: string;
+    image: string;
+    title: string;
+    description: string;
+    duration?: string;
+    price: string;
+  }[];
+  locale?: Locale;
 }
 
-const { services } = Astro.props;
+const { services, locale = 'ar' } = Astro.props;
 ---
 
 <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-  {services.map((service) => <ServiceCard service={service} />)}
+  {services.map((service) => <ServiceCard service={service} locale={locale} />)}
 </div>

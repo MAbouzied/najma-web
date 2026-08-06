@@ -1,0 +1,63 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import Header from '../components/Header.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import HeroSection from '../components/HeroSection.astro';
+import ServiceGrid from '../components/ServiceGrid.astro';
+import CTASection from '../components/CTASection.astro';
+import { getServices } from '../data/home';
+import { getBookingAction, getCallAction } from '../data/site';
+import { localePath } from '../i18n/paths';
+import { t } from '../i18n/t';
+import type { Locale } from '../i18n/types';
+
+export interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const servicesData = getServices(locale);
+const booking = getBookingAction(locale);
+const call = getCallAction(locale);
+const breadcrumbs = [
+  { label: t(locale, 'breadcrumbHome'), href: localePath('/', locale) },
+  { label: t(locale, 'breadcrumbServices'), href: localePath('/services/', locale) },
+];
+---
+
+<SiteLayout
+  title={t(locale, 'seoServicesTitle')}
+  description={t(locale, 'seoServicesDescription')}
+  pathname={localePath('/services/', locale)}
+  pageType="WebPage"
+  image="/assets/home/hero-interior.jpg"
+  breadcrumbs={breadcrumbs}
+  services={servicesData}
+  locale={locale}
+>
+  <div data-hero-shell class="bg-bg-hero">
+    <Header currentPage="services" locale={locale} />
+    <div class="page-container pt-6">
+      <Breadcrumbs items={breadcrumbs} locale={locale} class="mb-0" />
+    </div>
+    <HeroSection badge={t(locale, 'servicesHeroBadge')} description={t(locale, 'servicesHeroDescription')}>
+      <Fragment slot="title">
+        <span class="text-gold-gradient">{t(locale, 'servicesHeroTitle')}</span>
+        <span class="text-text-primary">{t(locale, 'servicesHeroTitleSuffix')}</span>
+      </Fragment>
+    </HeroSection>
+  </div>
+
+  <section class="section-block bg-bg-primary">
+    <div class="page-container">
+      <ServiceGrid services={servicesData} locale={locale} />
+    </div>
+  </section>
+
+  <CTASection
+    title={t(locale, 'servicesCtaTitle')}
+    description={t(locale, 'servicesCtaDescription')}
+    primaryAction={{ label: t(locale, 'servicesCtaPrimary'), href: booking.href }}
+    secondaryAction={{ label: t(locale, 'actionCallNow'), href: call.href }}
+  />
+</SiteLayout>

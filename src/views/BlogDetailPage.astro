@@ -1,0 +1,90 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import Header from '../components/Header.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import CTASection from '../components/CTASection.astro';
+import BlogArticle from '../modules/blog/components/BlogArticle.astro';
+import {
+  articleSeoDescription,
+  articleSeoTitle,
+  buildBlogDetailBreadcrumbSchema,
+  buildBlogPostingSchema,
+  readingTimeForPost,
+  selectRelatedPosts,
+  type BlogPost,
+} from '../modules/blog';
+import { getBookingAction, getCallAction } from '../data/site';
+import { localePath } from '../i18n/paths';
+import { t } from '../i18n/t';
+
+export interface Props {
+  post: BlogPost;
+  allPosts: BlogPost[];
+}
+
+const { post, allPosts } = Astro.props;
+const locale = 'ar' as const;
+const relatedPosts = selectRelatedPosts(allPosts, post, 3);
+const site = Astro.site!;
+const path = `/blogs/${post.slug}/`;
+const title = articleSeoTitle(post);
+const description = articleSeoDescription(post);
+const readingTimeMinutes = readingTimeForPost(post);
+const mainEntityId = `${new URL(path, site).href}#blogposting`;
+const breadcrumbs = [
+  { label: t(locale, 'breadcrumbHome'), href: localePath('/', locale) },
+  { label: t(locale, 'breadcrumbBlogs'), href: '/blogs/' },
+  { label: post.title },
+];
+const booking = getBookingAction(locale);
+const call = getCallAction(locale);
+---
+
+<SiteLayout
+  title={title}
+  description={description}
+  pathname={path}
+  pageType="WebPage"
+  image={post.cover.src}
+  socialImage={post.cover.src}
+  imageAlt={post.cover.alt}
+  locale={locale}
+  ogType="article"
+  mainEntityId={mainEntityId}
+  article={{
+    publishedTime: post.publishedAt,
+    modifiedTime: post.updatedAt ?? post.publishedAt,
+    author: post.author.name,
+    section: post.category.label,
+    tags: [post.category.label],
+  }}
+  additionalSchemas={[
+    buildBlogDetailBreadcrumbSchema(site, post.title, path),
+    buildBlogPostingSchema({
+      site,
+      post,
+      path,
+      readingTimeMinutes,
+    }),
+  ]}
+>
+  <div data-hero-shell class="bg-bg-hero">
+    <Header currentPage="blogs" locale={locale} />
+    <div class="page-container pt-6">
+      <Breadcrumbs items={breadcrumbs} locale={locale} class="mb-0" />
+    </div>
+  </div>
+
+  <section class="section-block bg-bg-primary">
+    <div class="page-container">
+      <BlogArticle post={post} relatedPosts={relatedPosts} />
+    </div>
+  </section>
+
+  <CTASection
+    title={t(locale, 'blogsCtaTitle')}
+    description={t(locale, 'blogsCtaDescription')}
+    primaryAction={{ label: t(locale, 'blogsCtaPrimary'), href: booking.href }}
+    secondaryAction={{ label: t(locale, 'actionCallNow'), href: call.href }}
+  />
+</SiteLayout>

@@ -1,0 +1,12 @@
+---
+export const prerender = false;
+
+import BlogsPage from '../../../views/BlogsPage.astro';
+
+const pageNumber = Number.parseInt(Astro.params.page ?? '', 10);
+if (!Number.isInteger(pageNumber) || pageNumber < 2) {
+  return new Response(null, { status: 404, statusText: 'Not Found' });
+}
+---
+
+<BlogsPage page={pageNumber} />

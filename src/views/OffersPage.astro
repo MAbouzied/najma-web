@@ -1,0 +1,63 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import Header from '../components/Header.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import HeroSection from '../components/HeroSection.astro';
+import OfferGrid from '../components/OfferGrid.astro';
+import CTASection from '../components/CTASection.astro';
+import { getOffers, getSummerCampaign } from '../data/home';
+import { getBookingAction, getCallAction } from '../data/site';
+import { localePath } from '../i18n/paths';
+import { t } from '../i18n/t';
+import type { Locale } from '../i18n/types';
+
+export interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const offersData = getOffers(locale);
+const campaign = getSummerCampaign(locale);
+const booking = getBookingAction(locale);
+const call = getCallAction(locale);
+const breadcrumbs = [
+  { label: t(locale, 'breadcrumbHome'), href: localePath('/', locale) },
+  { label: t(locale, 'breadcrumbOffers'), href: localePath('/offers/', locale) },
+];
+---
+
+<SiteLayout
+  title={t(locale, 'seoOffersTitle')}
+  description={t(locale, 'seoOffersDescription')}
+  pathname={localePath('/offers/', locale)}
+  pageType="WebPage"
+  image="/assets/home/hero-interior.jpg"
+  breadcrumbs={breadcrumbs}
+  offers={offersData}
+  locale={locale}
+>
+  <div data-hero-shell class="bg-bg-hero">
+    <Header currentPage="offers" locale={locale} />
+    <div class="page-container pt-6">
+      <Breadcrumbs items={breadcrumbs} locale={locale} class="mb-0" />
+    </div>
+    <HeroSection badge={campaign.discountLabel} description={t(locale, 'offersHeroDescription')}>
+      <Fragment slot="title">
+        <span class="text-gold-gradient">{campaign.name}</span>
+      </Fragment>
+    </HeroSection>
+  </div>
+
+  <section class="section-block bg-bg-primary">
+    <div class="page-container">
+      <OfferGrid offers={offersData} locale={locale} />
+    </div>
+  </section>
+
+  <CTASection
+    title={t(locale, 'offersCtaTitle')}
+    description={t(locale, 'offersCtaDescription')}
+    primaryAction={{ label: t(locale, 'offersCtaPrimary'), href: booking.href }}
+    secondaryAction={{ label: t(locale, 'actionCallNow'), href: call.href }}
+  />
+</SiteLayout>

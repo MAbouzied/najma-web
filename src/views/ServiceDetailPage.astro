@@ -1,0 +1,87 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import Header from '../components/Header.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import ContactActions from '../components/ContactActions.astro';
+import CTASection from '../components/CTASection.astro';
+import { getCallAction } from '../data/site';
+import { localePath } from '../i18n/paths';
+import { t } from '../i18n/t';
+import type { Locale } from '../i18n/types';
+import { buildServiceBookingUrl } from '../lib/whatsapp';
+
+export interface Props {
+  locale: Locale;
+  service: {
+    slug: string;
+    image: string;
+    heroImage?: string;
+    title: string;
+    description: string;
+    duration?: string;
+    price: string;
+  };
+}
+
+const { locale, service } = Astro.props;
+const dir = locale === 'en' ? 'ltr' : 'rtl';
+const call = getCallAction(locale);
+const serviceBookingHref = buildServiceBookingUrl(service.title, locale);
+const detailImage = service.heroImage ?? service.image;
+const breadcrumbs = [
+  { label: t(locale, 'breadcrumbHome'), href: localePath('/', locale) },
+  { label: t(locale, 'breadcrumbServices'), href: localePath('/services/', locale) },
+  { label: service.title, href: localePath(`/services/${service.slug}/`, locale) },
+];
+---
+
+<SiteLayout
+  title={`${service.title} - ${t(locale, 'brandName')}`}
+  description={service.description}
+  pathname={localePath(`/services/${service.slug}/`, locale)}
+  pageType="WebPage"
+  image={detailImage}
+  breadcrumbs={breadcrumbs}
+  services={[service]}
+  locale={locale}
+>
+  <div data-hero-shell class="bg-bg-hero">
+    <Header locale={locale} />
+  </div>
+
+  <section class="section-block bg-bg-primary">
+    <div class="page-container">
+      <div class="mx-auto max-w-3xl" dir={dir}>
+        <Breadcrumbs items={breadcrumbs} locale={locale} />
+
+        <div class="overflow-hidden rounded-3xl border border-border-card">
+          <img src={detailImage} alt={service.title} width="1200" height="600" class="h-72 w-full object-cover sm:h-96" />
+        </div>
+
+        <h1 class="mt-8 text-4xl font-bold leading-tight text-text-primary">{service.title}</h1>
+        <p class="mt-4 text-lg leading-8 text-text-muted">{service.description}</p>
+
+        <div class="mt-8 flex flex-wrap items-center gap-6 border-t border-border-card pt-6">
+          {service.duration && (
+            <div class="flex items-center gap-2 text-sm text-text-muted">
+              <img src="/assets/icons/hours.svg" alt="" width="16" height="16" class="size-4" />
+              <span>{t(locale, 'serviceDetailDuration')} {service.duration}</span>
+            </div>
+          )}
+          <div class="text-2xl font-bold text-gold">{service.price}</div>
+        </div>
+
+        <div class="mt-8 max-w-md">
+          <ContactActions whatsappHref={serviceBookingHref} gtmLocation="service_detail" locale={locale} />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CTASection
+    title={t(locale, 'serviceDetailCtaTitle')}
+    description={t(locale, 'serviceDetailCtaDescription')}
+    primaryAction={{ label: t(locale, 'actionWhatsapp'), href: serviceBookingHref }}
+    secondaryAction={{ label: t(locale, 'actionCallNow'), href: call.href }}
+  />
+</SiteLayout>

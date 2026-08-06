@@ -1,5 +1,11 @@
 export const WHATSAPP_PHONE = '966542030018';
 export const WHATSAPP_PHONE_DISPLAY = '+966542030018';
+export const PHONE_TEL_HREF = `tel:+${WHATSAPP_PHONE}`;
+
+export const MAPS_HREF =
+  'https://www.google.com/maps/search/?api=1&query=%D8%AD%D9%8A+%D8%A7%D9%84%D9%85%D8%B5%D9%8A%D9%81+%D8%AD%D9%81%D8%B1+%D8%A7%D9%84%D8%A8%D8%A7%D8%B7%D9%86+%D9%86%D8%AC%D9%85+%D8%B3%D8%A8%D8%A7';
+
+export const GOOGLE_REVIEWS_HREF = MAPS_HREF;
 
 export function buildWhatsAppUrl(message = ''): string {
   const params = new URLSearchParams({
@@ -12,14 +18,36 @@ export function buildWhatsAppUrl(message = ''): string {
   return `https://api.whatsapp.com/send/?${params.toString()}`;
 }
 
-export function buildServiceBookingUrl(serviceName: string): string {
-  return buildWhatsAppUrl(`أهلاً، أريد حجز ${serviceName}`);
+export function buildBookingUrl(
+  locale: 'ar' | 'en' = 'ar',
+  department: 'service' | 'package' | 'offer' | 'general' = 'general',
+  item = '',
+): string {
+  const path = locale === 'en' ? '/en/book/' : '/book/';
+  if (department === 'general') return path;
+  const params = new URLSearchParams({ department, item });
+  return `${path}?${params.toString()}`;
 }
 
-export function buildPackageBookingUrl(packageName: string): string {
-  return buildWhatsAppUrl(`أهلاً، أريد حجز ${packageName}`);
+export function buildServiceBookingUrl(serviceName: string, locale: 'ar' | 'en' = 'ar'): string {
+  return buildBookingUrl(locale, 'service', serviceName);
 }
 
-export function buildGeneralContactUrl(): string {
-  return buildWhatsAppUrl('أهلاً، أريد التواصل مع نجم سبا');
+export function buildPackageBookingUrl(packageName: string, locale: 'ar' | 'en' = 'ar'): string {
+  return buildBookingUrl(locale, 'package', packageName);
+}
+
+export function buildOfferBookingUrl(offerName: string, locale: 'ar' | 'en' = 'ar'): string {
+  return buildBookingUrl(locale, 'offer', offerName);
+}
+
+export function buildGeneralContactUrl(locale: 'ar' | 'en' = 'ar'): string {
+  const msg = locale === 'en'
+    ? 'Hello, I would like to contact Nagm Spa'
+    : 'أهلاً، أريد التواصل مع نجم سبا';
+  return buildWhatsAppUrl(msg);
+}
+
+export function buildCallHref(): string {
+  return PHONE_TEL_HREF;
 }

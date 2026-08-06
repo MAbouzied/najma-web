@@ -1,5 +1,6 @@
 ---
-import { socialLinks as defaultSocialLinks } from '../data/site';
+import { getSocialLinks } from '../data/site';
+import type { Locale } from '../i18n/types';
 
 export interface SocialLink {
   label: string;
@@ -10,16 +11,19 @@ export interface SocialLink {
 export interface Props {
   links?: SocialLink[];
   showLabel?: boolean;
+  locale?: Locale;
 }
 
 const {
   showLabel = false,
-  links = defaultSocialLinks,
+  locale = 'ar',
+  links = getSocialLinks(locale),
 } = Astro.props;
+const followLabel = locale === 'en' ? 'Follow us:' : 'تابعنا:';
 ---
 
 <div class="flex items-center gap-3">
-  {showLabel && <span class="text-sm text-text-muted">تابعنا:</span>}
+  {showLabel && <span class="text-sm text-text-muted">{followLabel}</span>}
   {
     links.map((link) => (
       <a

@@ -1,0 +1,19 @@
+---
+export const prerender = false;
+
+import AdminShell from '../../components/admin/AdminShell.astro';
+import BlogCardGrid from '../../components/admin/BlogCardGrid.astro';
+import { listAdminPosts } from '../../lib/admin/blog-admin.ts';
+
+const posts = await listAdminPosts();
+---
+
+<AdminShell
+  title="إدارة المدونة | نجم سبا"
+  description="إنشاء مقالات المدونة وتحريرها وحفظها كمسودات أو نشرها."
+  heading="المقالات"
+  subtitle="أنشئ المحتوى، راجعه في المعاينة، ثم احفظه كمسودة أو انشره مباشرة."
+  active="overview"
+>
+  <BlogCardGrid posts={posts} />
+</AdminShell>
