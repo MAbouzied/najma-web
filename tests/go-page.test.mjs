@@ -8,8 +8,8 @@ test('renders a dedicated contact landing with WhatsApp, call, and directions', 
   assert.match(goHtml, /واتساب/);
   assert.match(goHtml, /اتصال/);
   assert.match(goHtml, /الاتجاهات/);
-  assert.match(goHtml, /api\.whatsapp\.com\/send\/\?phone=966542030018/);
-  assert.match(goHtml, /tel:\+966542030018/);
+  assert.match(goHtml, /api\.whatsapp\.com\/send\/\?phone=966579777407/);
+  assert.match(goHtml, /tel:\+966579777407/);
   assert.match(goHtml, /google\.com\/maps/);
   assert.match(goHtml, /حي المصيف/);
   assert.match(goHtml, /٢٤ ساعة|24/);

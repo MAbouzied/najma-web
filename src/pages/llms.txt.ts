@@ -18,16 +18,16 @@ export const GET: APIRoute = ({ site }) => {
     .map((s) => `- [${s.title.en}](${link(`/en/services/${s.slug}/`)}): ${s.description.en} — ${s.price.en}`)
     .join('\n');
   const offerLinksAr = offers
-    .map(
-      (offer) =>
-        `- [${offer.name.ar}](${link(`/offers/${offer.slug}/`)}): ${offer.subtitle.ar} — ${offer.price.ar} (بدلاً من ${offer.originalPrice.ar})`,
-    )
+    .map((offer) => {
+      const was = offer.originalPrice ? ` (بدلاً من ${offer.originalPrice.ar})` : '';
+      return `- [${offer.name.ar}](${link(`/offers/${offer.slug}/`)}): ${offer.subtitle.ar} — ${offer.price.ar}${was}`;
+    })
     .join('\n');
   const offerLinksEn = offers
-    .map(
-      (offer) =>
-        `- [${offer.name.en}](${link(`/en/offers/${offer.slug}/`)}): ${offer.subtitle.en} — ${offer.price.en} (was ${offer.originalPrice.en})`,
-    )
+    .map((offer) => {
+      const was = offer.originalPrice ? ` (was ${offer.originalPrice.en})` : '';
+      return `- [${offer.name.en}](${link(`/en/offers/${offer.slug}/`)}): ${offer.subtitle.en} — ${offer.price.en}${was}`;
+    })
     .join('\n');
   const packageLinksAr = packages
     .map((p) => `- [${p.name.ar}](${link(`/packages/${p.slug}/`)}): ${p.subtitle.ar} — ${p.price.ar}`)
@@ -49,7 +49,7 @@ Arabic is the default locale (unprefixed). English is available under /en/. The 
 - [من نحن](${link('/about/')}): قصة المركز ورسالته وقيمه.
 - [الخدمات](${link('/services/')}): فهرس خدمات المساج والحمام والعناية.
 - [الباقات](${link('/packages/')}): فهرس باقات العناية المتكاملة.
-- [عروض الصيف](${link('/offers/')}): عروض صيفك على كيفك بخصم ٢٠٪.
+- [العروض](${link('/offers/')}): عروض خاصة على غسيل وتلميع السيارات.
 - [المدونة](${link('/blogs/')}): مقالات عربية عن المساج والاسترخاء والعناية (عربي فقط).
 - [تواصل معنا](${link('/contact/')}): بيانات التواصل الكاملة مع نموذج الحجز.
 
@@ -59,7 +59,7 @@ Arabic is the default locale (unprefixed). English is available under /en/. The 
 - [About](${link('/en/about/')}): Brand story, mission, and values.
 - [Services](${link('/en/services/')}): Massage, bath, and personal care index.
 - [Packages](${link('/en/packages/')}): Integrated care packages index.
-- [Summer Deals](${link('/en/offers/')}): Seasonal offers with 20% off.
+- [Offers](${link('/en/offers/')}): Special car wash and polishing offers.
 - [Contact](${link('/en/contact/')}): Full contact details and booking form.
 
 ## الخدمات / Services
@@ -70,7 +70,7 @@ ${serviceLinksAr}
 ### English
 ${serviceLinksEn}
 
-## عروض الصيف / Summer Offers
+## العروض / Offers
 
 ### العربية
 ${offerLinksAr}

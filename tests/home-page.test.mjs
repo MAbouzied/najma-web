@@ -9,7 +9,7 @@ test('renders every homepage section in design order', () => {
     'استرخِ، استعد طاقتك،',
     'تجربة سبا متكاملة',
     'تجربة لا تُنسى',
-    'عروض صيفك على كيفك',
+    'عروض العناية بالسيارات',
     'باقات مختارة بعناية',
     'فرع حفر الباطن',
     'آراء من واقع التجربة',
@@ -27,7 +27,7 @@ test('renders every homepage section in design order', () => {
 
 test('renders all data-driven homepage collections', () => {
   assert.equal((homeHtml.match(/data-service-card/g) ?? []).length, 10);
-  assert.equal((homeHtml.match(/data-offer-card/g) ?? []).length, 8);
+  assert.equal((homeHtml.match(/data-offer-card/g) ?? []).length, 4);
   assert.equal((homeHtml.match(/data-package-card/g) ?? []).length, 3);
   assert.equal((homeHtml.match(/data-branch-card/g) ?? []).length, 1);
   assert.equal((homeHtml.match(/data-testimonial-card/g) ?? []).length, 6);
@@ -55,13 +55,13 @@ test('matches the intro order on one continuous background', () => {
 
 test('links service and package cards to detail pages with WhatsApp and call buttons', () => {
   assert.match(homeHtml, /data-service-card[\s\S]*?href="\/services\/massage-relaxation\/"/);
-  assert.match(homeHtml, /data-service-card[\s\S]*?api\.whatsapp\.com\/send\/\?phone=966542030018/);
-  assert.match(homeHtml, /data-service-card[\s\S]*?tel:\+966542030018/);
-  assert.match(homeHtml, /data-offer-card[\s\S]*?href="\/offers\/signature\/"/);
-  assert.match(homeHtml, /data-offer-card[\s\S]*?api\.whatsapp\.com\/send\/\?phone=966542030018/);
+  assert.match(homeHtml, /data-service-card[\s\S]*?api\.whatsapp\.com\/send\/\?phone=966579777407/);
+  assert.match(homeHtml, /data-service-card[\s\S]*?tel:\+966579777407/);
+  assert.match(homeHtml, /data-offer-card[\s\S]*?href="\/offers\/body-polishing\/"/);
+  assert.match(homeHtml, /data-offer-card[\s\S]*?api\.whatsapp\.com\/send\/\?phone=966579777407/);
   assert.match(homeHtml, /href="\/offers\/"[^>]*>[\s\S]*?كل العروض/);
   assert.match(homeHtml, /data-package-card[\s\S]*?href="\/packages\/luxury\/"/);
-  assert.match(homeHtml, /data-package-card[\s\S]*?api\.whatsapp\.com\/send\/\?phone=966542030018/);
+  assert.match(homeHtml, /data-package-card[\s\S]*?api\.whatsapp\.com\/send\/\?phone=966579777407/);
   assert.match(homeHtml, /English/);
   assert.match(homeHtml, /آراؤنا على خرائط جوجل/);
 });

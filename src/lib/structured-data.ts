@@ -31,11 +31,12 @@ export interface ResolvedPackage {
 
 export interface ResolvedOffer {
   slug: string;
+  image?: string;
   name: string;
   subtitle: string;
   description: string;
   price: string;
-  originalPrice: string;
+  originalPrice?: string;
   features: string[];
 }
 
@@ -290,15 +291,20 @@ export function buildStructuredData({
     const offerUrl = resolveSeoUrl(offerPath, siteOrigin);
     const serviceId = resolveSeoUrl(`${offerPath}#service`, siteOrigin);
     const offerId = resolveSeoUrl(`${offerPath}#offer`, siteOrigin);
-    detailEntities.push({
+    const serviceEntity: Record<string, unknown> = {
       '@type': 'Service',
       '@id': serviceId,
       name: offer.name,
       description: offer.description,
-      serviceType: t(locale, 'schemaSpaPackageType'),
+      serviceType: t(locale, 'schemaCarCareOfferType'),
       provider: { '@id': businessId },
       url: offerUrl,
-      hasOfferCatalog: {
+    };
+    if (offer.image) {
+      serviceEntity.image = resolveSeoUrl(offer.image, siteOrigin);
+    }
+    if (offer.features.length > 0) {
+      serviceEntity.hasOfferCatalog = {
         '@type': 'OfferCatalog',
         name: t(locale, 'offerDetailComponents'),
         itemListElement: offer.features.map((feature, index) => ({
@@ -306,10 +312,11 @@ export function buildStructuredData({
           position: index + 1,
           name: feature,
         })),
-      },
-    });
+      };
+    }
+    detailEntities.push(serviceEntity);
     const price = toSchemaPrice(offer.price);
-    const originalPrice = toSchemaPrice(offer.originalPrice);
+    const originalPrice = offer.originalPrice ? toSchemaPrice(offer.originalPrice) : '';
     if (price) {
       const offerEntity: Record<string, unknown> = {
         '@type': 'Offer',
@@ -349,9 +356,10 @@ export function buildStructuredData({
             '@id': serviceId,
             name: offer.name,
             description: offer.description,
-            serviceType: t(locale, 'schemaSpaPackageType'),
+            serviceType: t(locale, 'schemaCarCareOfferType'),
             provider: { '@id': businessId },
             url: offerUrl,
+            ...(offer.image ? { image: resolveSeoUrl(offer.image, siteOrigin) } : {}),
           },
         };
       }),

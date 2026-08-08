@@ -26,13 +26,13 @@ test('exposes contact and form event names', () => {
 });
 
 test('resolves contact event names from hrefs', () => {
-  assert.equal(resolveContactEvent('tel:+966542030018'), 'contact_call');
+  assert.equal(resolveContactEvent('tel:+966579777407'), 'contact_call');
   assert.equal(resolveContactEvent('mailto:info@nagmspa.com'), 'contact_email');
   assert.equal(
-    resolveContactEvent('https://api.whatsapp.com/send/?phone=966542030018'),
+    resolveContactEvent('https://api.whatsapp.com/send/?phone=966579777407'),
     'contact_whatsapp',
   );
-  assert.equal(resolveContactEvent('https://wa.me/966542030018'), 'contact_whatsapp');
+  assert.equal(resolveContactEvent('https://wa.me/966579777407'), 'contact_whatsapp');
   assert.equal(resolveContactEvent('/services/'), null);
   assert.equal(resolveContactEvent('#branches'), null);
 });

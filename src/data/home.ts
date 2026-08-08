@@ -31,12 +31,14 @@ export interface Package {
 
 export interface Offer {
   slug: string;
+  /** Optional promotional banner shown on cards and the detail page */
+  image?: string;
   name: LocalizedString;
   subtitle: LocalizedString;
   description: LocalizedString;
   price: LocalizedString;
-  originalPrice: LocalizedString;
-  features: LocalizedString[];
+  originalPrice?: LocalizedString;
+  features?: LocalizedString[];
 }
 
 export interface Testimonial {
@@ -51,9 +53,9 @@ export interface Faq {
 }
 
 export const summerCampaign = {
-  name: { ar: 'صيفك على كيفك', en: 'Your Summer, Your Way' } as LocalizedString,
-  discountLabel: { ar: 'خصم ٢٠٪', en: '20% Off' } as LocalizedString,
-  eyebrow: { ar: 'عروض الصيف', en: 'Summer Offers' } as LocalizedString,
+  name: { ar: 'العناية بالسيارات', en: 'Car Care' } as LocalizedString,
+  discountLabel: { ar: 'عرض خاص', en: 'Special Offer' } as LocalizedString,
+  eyebrow: { ar: 'عروضنا', en: 'Our Offers' } as LocalizedString,
 } as const;
 
 export const benefits: Benefit[] = [
@@ -240,139 +242,44 @@ export const packages: Package[] = [
 
 export const offers: Offer[] = [
   {
-    slug: 'recovery',
-    name: { ar: 'عرض التعافي', en: 'Recovery Offer' },
-    subtitle: { ar: 'استعادة النشاط بعد الجهد', en: 'Restore your energy after exertion' },
+    slug: 'exterior-wash',
+    name: { ar: 'غسيل خارجي فقط', en: 'Exterior Wash Only' },
+    subtitle: { ar: 'سعر خاص لفترة محدودة', en: 'Special price for a limited time' },
     description: {
-      ar: 'عرض التعافي من نجم سبا يجمع المساج السويدي والتايلندي ومساج الكاسات الصينية لتخفيف الشد واستعادة نشاطك. احجز عرضك عبر واتساب الآن.',
-      en: 'Recovery offer from Nagm Spa combines Swedish massage, Thai massage, and cupping massage to relieve tension and restore your energy. Book your offer via WhatsApp now.',
+      ar: 'غسيل خارجي فقط لسيارتك من نجم سبا بسعر خاص — ١٥ ر.س لفترة محدودة. احجز عرضك الآن عبر واتساب أو اتصل بنا.',
+      en: 'Exterior-only wash for your car at Nagm Spa at a special price — 15 SAR for a limited time. Book your offer now via WhatsApp or call us.',
     },
-    price: { ar: '١٩٩ ر.س', en: '199 SAR' },
-    originalPrice: { ar: '٢٤٩ ر.س', en: '249 SAR' },
-    features: [
-      { ar: 'مساج سويدي', en: 'Swedish massage' },
-      { ar: 'مساج تايلندي', en: 'Thai massage' },
-      { ar: 'مساج كاسات صينية', en: 'Cupping massage' },
-    ],
+    price: { ar: '١٥ ر.س', en: '15 SAR' },
   },
   {
-    slug: 'relaxation',
-    name: { ar: 'عرض الاسترخاء', en: 'Relaxation Offer' },
-    subtitle: { ar: 'هدوء عميق للجسم والعقل', en: 'Deep calm for body and mind' },
+    slug: 'interior-wash',
+    name: { ar: 'غسيل داخلي فقط', en: 'Interior Wash Only' },
+    subtitle: { ar: 'عرض خاص لفترة محدودة', en: 'Special offer for a limited time' },
     description: {
-      ar: 'عرض الاسترخاء من نجم سبا: مساج سويدي وتايلندي مع مساج الأحجار الساخنة لجلسة هدوء عميقة ومريحة. احجز عرضك عبر واتساب الآن بسهولة.',
-      en: 'Relaxation offer from Nagm Spa: Swedish and Thai massage with hot stone massage for a deeply calming and comfortable session. Book your offer via WhatsApp now.',
+      ar: 'غسيل داخلي فقط لسيارتك من نجم سبا بسعر خاص — ٢٠ ر.س لفترة محدودة. احجز عرضك الآن عبر واتساب أو اتصل بنا.',
+      en: 'Interior-only wash for your car at Nagm Spa at a special price — 20 SAR for a limited time. Book your offer now via WhatsApp or call us.',
     },
-    price: { ar: '١٩٩ ر.س', en: '199 SAR' },
-    originalPrice: { ar: '٢٤٩ ر.س', en: '249 SAR' },
-    features: [
-      { ar: 'مساج سويدي', en: 'Swedish massage' },
-      { ar: 'مساج تايلندي', en: 'Thai massage' },
-      { ar: 'مساج أحجار ساخنة', en: 'Hot stone massage' },
-    ],
+    price: { ar: '٢٠ ر.س', en: '20 SAR' },
   },
   {
-    slug: 'signature',
-    name: { ar: 'نجم سبا سجنتشر', en: 'Nagm Spa Signature' },
-    subtitle: { ar: 'التجربة الأشمل من نجم سبا', en: 'The most comprehensive experience from Nagm Spa' },
+    slug: 'engine-cleaning',
+    name: { ar: 'تنظيف المحرك', en: 'Engine Cleaning' },
+    subtitle: { ar: 'عرض خاص لفترة محدودة', en: 'Special offer for a limited time' },
     description: {
-      ar: 'نجم سبا سجنتشر — تجربة متكاملة تجمع المساج والحمام الملكي والبدكير وصنفرة البشرة وجلسة البخار. احجز عرضك عبر واتساب الآن.',
-      en: 'Nagm Spa Signature — a complete experience combining massage, royal bath, pedicure, body scrub, and steam session. Book your offer via WhatsApp now.',
+      ar: 'تنظيف المحرك من نجم سبا بسعر خاص — ٥٠ ر.س لفترة محدودة. احجز عرضك الآن عبر واتساب أو اتصل بنا.',
+      en: 'Engine cleaning at Nagm Spa at a special price — 50 SAR for a limited time. Book your offer now via WhatsApp or call us.',
     },
-    price: { ar: '٣٥٩ ر.س', en: '359 SAR' },
-    originalPrice: { ar: '٤٤٩ ر.س', en: '449 SAR' },
-    features: [
-      { ar: 'مساج استرخاء', en: 'Relaxation massage' },
-      { ar: 'مساج تايلندي', en: 'Thai massage' },
-      { ar: 'مساج الزيت الحار', en: 'Hot oil massage' },
-      { ar: 'حمام ملكي فاخر', en: 'Luxurious royal bath' },
-      { ar: 'بدكير يدين وقدمين', en: 'Hand & foot pedicure' },
-      { ar: 'صنفرة بشرة', en: 'Body scrub' },
-      { ar: 'جلسة بخار', en: 'Steam session' },
-    ],
+    price: { ar: '٥٠ ر.س', en: '50 SAR' },
   },
   {
-    slug: 'care',
-    name: { ar: 'باقة العناية', en: 'Care Package' },
-    subtitle: { ar: 'عناية متوازنة للجسم والأطراف', en: 'Balanced care for body and extremities' },
+    slug: 'body-polishing',
+    name: { ar: 'تلميع الهيكل', en: 'Body Polishing' },
+    subtitle: { ar: 'عرض خاص لفترة محدودة', en: 'Special offer for a limited time' },
     description: {
-      ar: 'باقة العناية من نجم سبا تجمع مساج الاسترخاء والشياتسو والتايلندي مع بدكير اليدين والقدمين. احجز باقتك عبر واتساب الآن بسهولة.',
-      en: 'Care package from Nagm Spa combines relaxation, Shiatsu, and Thai massage with manicure & pedicure. Book your package via WhatsApp now.',
+      ar: 'تلميع الهيكل من نجم سبا بسعر خاص — ١٠٠ ر.س لفترة محدودة. احجز عرضك الآن عبر واتساب أو اتصل بنا.',
+      en: 'Body polishing at Nagm Spa at a special price — 100 SAR for a limited time. Book your offer now via WhatsApp or call us.',
     },
-    price: { ar: '٢٥٩ ر.س', en: '259 SAR' },
-    originalPrice: { ar: '٣٢٤ ر.س', en: '324 SAR' },
-    features: [
-      { ar: 'مساج استرخاء + مساج شياتسو', en: 'Relaxation massage + Shiatsu massage' },
-      { ar: 'مساج تايلندي', en: 'Thai massage' },
-      { ar: 'بدكير يدين وقدمين', en: 'Manicure & pedicure' },
-    ],
-  },
-  {
-    slug: 'elegance',
-    name: { ar: 'عرض الفخامة', en: 'Elegance Offer' },
-    subtitle: { ar: 'مساج وحمام ملكي بأجواء فاخرة', en: 'Massage and royal bath in a luxurious setting' },
-    description: {
-      ar: 'عرض الفخامة من نجم سبا: مساج سويدي وتايلندي مع حمام ملكي فاخر وجلسة بخار ليوم استرخاء راقٍ. احجز عرضك عبر واتساب الآن.',
-      en: 'Elegance offer from Nagm Spa: Swedish and Thai massage with a luxurious royal bath and steam session for a refined day of relaxation. Book your offer via WhatsApp now.',
-    },
-    price: { ar: '٢٤٩ ر.س', en: '249 SAR' },
-    originalPrice: { ar: '٣١٢ ر.س', en: '312 SAR' },
-    features: [
-      { ar: 'مساج سويدي', en: 'Swedish massage' },
-      { ar: 'مساج تايلندي', en: 'Thai massage' },
-      { ar: 'حمام ملكي فاخر', en: 'Luxurious royal bath' },
-      { ar: 'جلسة بخار', en: 'Steam session' },
-    ],
-  },
-  {
-    slug: 'prosperity',
-    name: { ar: 'العرض الرخاء', en: 'Prosperity Offer' },
-    subtitle: { ar: 'راحة هادئة بأسعار الصيف', en: 'Quiet comfort at summer prices' },
-    description: {
-      ar: 'العرض الرخاء من نجم سبا يجمع المساج السويدي والحمام المغربي الكلاسيكي وجلسة البخار لراحة هادئة ومتوازنة. احجز عبر واتساب الآن.',
-      en: 'Prosperity offer from Nagm Spa combines Swedish massage, classic Moroccan bath, and steam session for quiet, balanced comfort. Book via WhatsApp now.',
-    },
-    price: { ar: '٢١٩ ر.س', en: '219 SAR' },
-    originalPrice: { ar: '٢٧٤ ر.س', en: '274 SAR' },
-    features: [
-      { ar: 'مساج سويدي', en: 'Swedish massage' },
-      { ar: 'حمام مغربي كلاسيكي', en: 'Classic Moroccan bath' },
-      { ar: 'جلسة بخار', en: 'Steam session' },
-    ],
-  },
-  {
-    slug: 'royal',
-    name: { ar: 'العرض الملكي', en: 'Royal Offer' },
-    subtitle: { ar: 'تجربة ملكية شاملة بخصم الصيف', en: 'A comprehensive royal experience at summer discount' },
-    description: {
-      ar: 'العرض الملكي من نجم سبا — مساج نجم سبا والزيت الحار والكاسات والأحجار مع حمام ملكي وبدكير وصنفرة وبخار. احجز عبر واتساب الآن.',
-      en: 'Royal offer from Nagm Spa — Nagm Spa massage, hot oil, cupping, and hot stones with royal bath, pedicure, body scrub, and steam. Book via WhatsApp now.',
-    },
-    price: { ar: '٤٤٩ ر.س', en: '449 SAR' },
-    originalPrice: { ar: '٥٦٢ ر.س', en: '562 SAR' },
-    features: [
-      { ar: 'مساج نجم سبا + مساج زيت حار', en: 'Nagm Spa massage + hot oil massage' },
-      { ar: 'مساج كاسات صينية + مساج أحجار ساخنة', en: 'Cupping massage + hot stone massage' },
-      { ar: 'حمام ملكي فاخر + بدكير يدين وقدمين', en: 'Luxurious royal bath + manicure & pedicure' },
-      { ar: 'صنفرة بشرة + جلسة بخار', en: 'Body scrub + steam session' },
-    ],
-  },
-  {
-    slug: 'golden',
-    name: { ar: 'العرض الذهبي', en: 'Golden Offer' },
-    subtitle: { ar: 'مزيج ذهبي من المساج والحمام', en: 'A golden blend of massage and bath' },
-    description: {
-      ar: 'العرض الذهبي من نجم سبا يجمع مساج الاسترخاء والتايلندي والكاسات والأحجار الساخنة مع حمام ملكي فاخر. احجز عرضك عبر واتساب الآن.',
-      en: 'Golden offer from Nagm Spa combines relaxation massage, Thai massage, cupping, and hot stones with a luxurious royal bath. Book your offer via WhatsApp now.',
-    },
-    price: { ar: '٣٤٩ ر.س', en: '349 SAR' },
-    originalPrice: { ar: '٤٣٨ ر.س', en: '438 SAR' },
-    features: [
-      { ar: 'مساج استرخاء + مساج تايلندي', en: 'Relaxation massage + Thai massage' },
-      { ar: 'مساج كاسات صينية', en: 'Cupping massage' },
-      { ar: 'مساج أحجار ساخنة', en: 'Hot stone massage' },
-      { ar: 'حمام ملكي فاخر', en: 'Luxurious royal bath' },
-    ],
+    price: { ar: '١٠٠ ر.س', en: '100 SAR' },
   },
 ];
 
@@ -473,12 +380,13 @@ export function getPackages(locale: Locale) {
 export function getOffers(locale: Locale) {
   return offers.map((o) => ({
     slug: o.slug,
+    ...(o.image ? { image: o.image } : {}),
     name: L(o.name, locale),
     subtitle: L(o.subtitle, locale),
     description: L(o.description, locale),
     price: L(o.price, locale),
-    originalPrice: L(o.originalPrice, locale),
-    features: localizeList(o.features, locale),
+    originalPrice: o.originalPrice ? L(o.originalPrice, locale) : undefined,
+    features: o.features ? localizeList(o.features, locale) : [],
   }));
 }
 

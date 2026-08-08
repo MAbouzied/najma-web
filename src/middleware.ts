@@ -3,6 +3,25 @@ import { ADMIN_AUTH_DISABLED } from 'astro:env/server';
 import { assertStaffAccess, sanitizeReturnUrl } from './lib/auth/authorization.ts';
 import { adminApiError } from './lib/staff-access/http.ts';
 
+const RETIRED_OFFER_SLUGS = new Set([
+  'recovery',
+  'relaxation',
+  'signature',
+  'care',
+  'elegance',
+  'prosperity',
+  'royal',
+  'golden',
+]);
+
+function retiredOfferRedirect(pathname: string): string | null {
+  const match = pathname.match(/^(\/en)?\/offers\/([^/]+)\/?$/);
+  if (!match) return null;
+  const slug = match[2];
+  if (!RETIRED_OFFER_SLUGS.has(slug)) return null;
+  return match[1] ? '/en/offers/' : '/offers/';
+}
+
 function isAdminPage(pathname: string): boolean {
   return pathname === '/admin' || pathname.startsWith('/admin/');
 }
@@ -54,6 +73,10 @@ function forbiddenResponse(isApi: boolean): Response {
 
 export const onRequest = defineMiddleware(async (context, next) => {
   const pathname = context.url.pathname.replace(/\/$/, '') || '/';
+  const offerRedirect = retiredOfferRedirect(pathname);
+  if (offerRedirect) {
+    return context.redirect(offerRedirect, 301);
+  }
   const adminPage = isAdminPage(pathname);
   const adminApi = isAdminApi(pathname);
   const protectedSurface = adminPage || adminApi;

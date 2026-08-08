@@ -31,5 +31,7 @@ test('English about and services pages are fully translated', () => {
 
 test('language switch from English home points back to Arabic home', () => {
   assert.match(enHome, /hreflang="ar"/);
-  assert.match(enHome, /العربية/);
+  assert.match(enHome, /href="\/"/);
+  assert.match(enHome, />AR</);
+  assert.match(enHome, /aria-label="Switch to Arabic"/);
 });

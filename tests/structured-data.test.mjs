@@ -57,8 +57,8 @@ test('service, package, and offer details expose Service and Offer entities', ()
     pages.find((p) => p.route === '/en/services/massage-relaxation/'),
     pages.find((p) => p.route === '/packages/luxury/'),
     pages.find((p) => p.route === '/en/packages/luxury/'),
-    pages.find((p) => p.route === '/offers/signature/'),
-    pages.find((p) => p.route === '/en/offers/signature/'),
+    pages.find((p) => p.route === '/offers/body-polishing/'),
+    pages.find((p) => p.route === '/en/offers/body-polishing/'),
   ];
 
   for (const page of samples) {
@@ -92,7 +92,7 @@ test('English catalogs use English names and English URLs', () => {
   const catalogs = [].concat(daySpa.hasOfferCatalog);
   assert.ok(catalogs.some((c) => c.name === 'Nagm Spa Services'));
   assert.ok(catalogs.some((c) => c.name === 'Nagm Spa Packages'));
-  assert.ok(catalogs.some((c) => c.name === 'Your Summer, Your Way Offers'));
+  assert.ok(catalogs.some((c) => c.name === 'Car Care Offers'));
   for (const catalog of catalogs) {
     for (const item of catalog.itemListElement) {
       assert.match(item.url, /\/en\//);

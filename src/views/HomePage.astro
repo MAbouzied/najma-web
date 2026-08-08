@@ -42,8 +42,7 @@ const branchesData = getBranches(locale);
 const campaign = getSummerCampaign(locale);
 const booking = getBookingAction(locale);
 const call = getCallAction(locale);
-const offersDiscount = campaign.discountLabel.replace(/\s*Off$/i, '').replace(/^خصم\s*/, '');
-const offersDescription = t(locale, 'homeOffersDescription').replace('{discount}', offersDiscount);
+const offersDescription = t(locale, 'homeOffersDescription');
 ---
 
 <SiteLayout

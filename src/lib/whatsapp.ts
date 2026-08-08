@@ -1,5 +1,5 @@
-export const WHATSAPP_PHONE = '966542030018';
-export const WHATSAPP_PHONE_DISPLAY = '+966542030018';
+export const WHATSAPP_PHONE = '966579777407';
+export const WHATSAPP_PHONE_DISPLAY = '+966579777407';
 export const PHONE_TEL_HREF = `tel:+${WHATSAPP_PHONE}`;
 
 export const MAPS_HREF =

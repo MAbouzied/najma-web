@@ -24,7 +24,7 @@ const [
   readDist('services/massage-relaxation/index.html'),
   readDist('packages/luxury/index.html'),
   readDist('offers/index.html'),
-  readDist('offers/signature/index.html'),
+  readDist('offers/body-polishing/index.html'),
   readDist('robots.txt'),
   readDist('llms.txt'),
   readDist('sitemap-0.xml'),
@@ -81,14 +81,14 @@ test('marks up visible services and FAQs with verified local details', () => {
   const catalogs = [].concat(daySpa.hasOfferCatalog);
   const serviceCatalog = catalogs.find((catalog) => catalog.name === 'خدمات نجم سبا');
   const packagesCatalog = catalogs.find((catalog) => catalog.name === 'باقات نجم سبا');
-  const offersCatalog = catalogs.find((catalog) => catalog.name === 'عروض صيفك على كيفك');
+  const offersCatalog = catalogs.find((catalog) => catalog.name === 'عروض العناية بالسيارات');
 
   assert.ok(serviceCatalog, 'expected services catalog');
   assert.ok(packagesCatalog, 'expected packages catalog');
-  assert.ok(offersCatalog, 'expected summer offers catalog');
+  assert.ok(offersCatalog, 'expected car care offers catalog');
   assert.equal(serviceCatalog.itemListElement.length, 10);
   assert.equal(packagesCatalog.itemListElement.length, 3);
-  assert.equal(offersCatalog.itemListElement.length, 8);
+  assert.equal(offersCatalog.itemListElement.length, 4);
 
   for (const offer of [...serviceCatalog.itemListElement, ...offersCatalog.itemListElement]) {
     assert.equal(offer['@type'], 'Offer');
@@ -115,7 +115,7 @@ test('marks up visible services and FAQs with verified local details', () => {
 test('includes verified local business details in structured data', () => {
   for (const html of [homeHtml, aboutHtml, contactHtml]) {
     const structuredData = JSON.stringify(parseJsonLd(html));
-    assert.match(structuredData, /"telephone":"\+966542030018"/);
+    assert.match(structuredData, /"telephone":"\+966579777407"/);
     assert.match(structuredData, /"email":"info@nagmspa\.com"/);
     assert.match(structuredData, /"addressLocality":"حفر الباطن"/);
     assert.match(structuredData, /"geo"/);
@@ -159,8 +159,8 @@ test('adds nested breadcrumb schema and UI for service and package detail pages'
   const offerBreadcrumb = offerGraph.find((node) => node['@type'] === 'BreadcrumbList');
   assert.equal(offerBreadcrumb.itemListElement.length, 3);
   assert.equal(offerBreadcrumb.itemListElement[0].name, 'الرئيسية');
-  assert.equal(offerBreadcrumb.itemListElement[1].name, 'عروض الصيف');
-  assert.equal(offerBreadcrumb.itemListElement[2].name, 'نجم سبا سجنتشر');
+  assert.equal(offerBreadcrumb.itemListElement[1].name, 'العروض');
+  assert.equal(offerBreadcrumb.itemListElement[2].name, 'تلميع الهيكل');
   assert.match(offerDetailHtml, /data-breadcrumbs/);
   assert.doesNotMatch(offerDetailHtml, /العودة للعروض/);
 });
@@ -235,16 +235,16 @@ test('serves crawl and LLM discovery files without placeholder origins', () => {
   assert.match(llmsText, /\[Services\]\(https:\/\/najma-web\.mohamed-abouzied\.workers\.dev\/en\/services\/\)/);
   assert.match(llmsText, /\/#faq/);
   assert.match(llmsText, /\/en\/#faq/);
-  assert.match(llmsText, /## عروض الصيف/);
-  assert.match(llmsText, /\/offers\/signature\//);
-  assert.match(llmsText, /\/en\/offers\/signature\//);
+  assert.match(llmsText, /## العروض/);
+  assert.match(llmsText, /\/offers\/body-polishing\//);
+  assert.match(llmsText, /\/en\/offers\/body-polishing\//);
   assert.doesNotMatch(llmsText, /localhost|example\.com/);
   assert.doesNotMatch(llmsText, /\/book\/|\/go\/|\/api\//);
 
   assert.match(sitemapText, /\/offers\//);
-  assert.match(sitemapText, /\/offers\/signature\//);
-  assert.match(sitemapText, /\/offers\/recovery\//);
-  assert.match(sitemapText, /\/offers\/golden\//);
+  assert.match(sitemapText, /\/offers\/exterior-wash\//);
+  assert.match(sitemapText, /\/offers\/engine-cleaning\//);
+  assert.match(sitemapText, /\/offers\/body-polishing\//);
   assert.doesNotMatch(sitemapText, /\/book\/|\/go\/|\/api\//);
 });
 

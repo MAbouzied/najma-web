@@ -19,8 +19,8 @@ test('does not render legacy phone numbers', () => {
 });
 
 test('renders real phone, call link, and email', () => {
-  assert.match(contactHtml, /\+966542030018/);
-  assert.match(contactHtml, /tel:\+966542030018/);
+  assert.match(contactHtml, /\+966579777407/);
+  assert.match(contactHtml, /tel:\+966579777407/);
   assert.match(contactHtml, /info@nagmspa\.com/);
 });
 

@@ -19,14 +19,10 @@ export const SERVICE_SLUGS = [
 ];
 export const PACKAGE_SLUGS = ['wedding', 'luxury', 'gift'];
 export const OFFER_SLUGS = [
-  'recovery',
-  'relaxation',
-  'signature',
-  'care',
-  'elegance',
-  'prosperity',
-  'royal',
-  'golden',
+  'exterior-wash',
+  'interior-wash',
+  'engine-cleaning',
+  'body-polishing',
 ];
 
 /** Published mock blog slugs (Arabic-only surface). Keep in sync with mock-posts.ts. */

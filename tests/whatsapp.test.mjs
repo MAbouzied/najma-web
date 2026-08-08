@@ -13,10 +13,10 @@ import {
 } from '../src/lib/whatsapp.ts';
 
 test('uses the unified WhatsApp phone number', () => {
-  assert.equal(WHATSAPP_PHONE, '966542030018');
-  assert.equal(WHATSAPP_PHONE_DISPLAY, '+966542030018');
-  assert.equal(PHONE_TEL_HREF, 'tel:+966542030018');
-  assert.equal(buildCallHref(), 'tel:+966542030018');
+  assert.equal(WHATSAPP_PHONE, '966579777407');
+  assert.equal(WHATSAPP_PHONE_DISPLAY, '+966579777407');
+  assert.equal(PHONE_TEL_HREF, 'tel:+966579777407');
+  assert.equal(buildCallHref(), 'tel:+966579777407');
 });
 
 test('routes booking links through the customer form with item names', () => {
@@ -35,5 +35,5 @@ test('routes booking links through the customer form with item names', () => {
   assert.equal(buildBookingUrl('ar'), '/book/');
   assert.equal(buildBookingUrl('en'), '/en/book/');
 
-  assert.match(buildWhatsAppUrl(), /phone=966542030018/);
+  assert.match(buildWhatsAppUrl(), /phone=966579777407/);
 });

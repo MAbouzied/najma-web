@@ -16,7 +16,8 @@ const navLinks = getNavigationLinks(locale);
 const booking = getBookingAction(locale);
 const call = getCallAction(locale);
 const languageHref = `${switchLocalePath(Astro.url.pathname, isEnglish ? 'ar' : 'en')}${Astro.url.search}`;
-const languageLabel = isEnglish ? t(locale, 'langSwitchAr') : t(locale, 'langSwitchEn');
+const languageLabel = isEnglish ? 'AR' : 'EN';
+const languageAriaLabel = isEnglish ? t(locale, 'langSwitchAr') : t(locale, 'langSwitchEn');
 ---
 
 <header data-site-header class="relative z-20 h-20 bg-transparent" dir={isEnglish ? 'ltr' : 'rtl'}>
@@ -43,11 +44,12 @@ const languageLabel = isEnglish ? t(locale, 'langSwitchAr') : t(locale, 'langSwi
     <div class="flex shrink-0 items-center gap-2 sm:gap-3">
       <a
         href={languageHref}
-        class="outline-button min-h-0 px-3 py-2 text-xs font-semibold sm:px-4"
-        aria-label={isEnglish ? 'Switch to Arabic' : 'Switch to English'}
+        class="outline-button min-h-0 gap-1.5 px-3 py-2 text-xs font-semibold uppercase tracking-wide sm:px-4"
+        aria-label={languageAriaLabel}
         hreflang={isEnglish ? 'ar' : 'en'}
       >
-        {languageLabel}
+        <img src="/assets/icons/lang.svg" alt="" width="16" height="16" class="size-4" />
+        <span>{languageLabel}</span>
       </a>
       <a
         href={call.href}
