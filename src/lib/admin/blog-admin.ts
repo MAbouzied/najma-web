@@ -1,14 +1,26 @@
-import { createClient, type SanityClient } from '@sanity/client';
+import { createClient, type IdentifiedSanityDocumentStub, type SanityClient } from '@sanity/client';
 import { BLOG_PROVIDER, SANITY_API_VERSION, SANITY_DATASET, SANITY_PROJECT_ID, SANITY_WRITE_TOKEN } from 'astro:env/server';
 import { services } from '../../data/home.ts';
 import { calculateReadingTimeMinutes } from '../../modules/blog/lib/reading-time.ts';
 import type { BlogPost } from '../../modules/blog/model/blog-types.ts';
-import { sanitizeBlogHtml, htmlToPlainText } from './blog-content.ts';
+import { sanitizeBlogHtml, htmlToPlainText, lexicalJsonToHtml, lexicalJsonToPlainText, normalizeLexicalJson } from './blog-content.ts';
+import {
+  adminAuthorDocumentId,
+  adminCategoryDocumentId,
+  assertAdminPublishCopy,
+  resolveAdminPublishedAt,
+} from './blog-admin-helpers.ts';
+import { createBlogSlug, isValidBlogSlug } from '../../modules/blog/lib/slug.ts';
 
 const DEFAULT_AUTHOR = 'فريق نجم سبا';
-const DEFAULT_COVER = '/assets/home/hero-interior.jpg';
 
 export type AdminPostStatus = 'draft' | 'published';
+export type AdminPostListStatus = AdminPostStatus | 'all';
+
+export interface AdminPostListOptions {
+  search?: string;
+  status?: AdminPostListStatus;
+}
 
 export interface AdminPost {
   id: string;
@@ -16,6 +28,7 @@ export interface AdminPost {
   slug: string;
   excerpt: string;
   contentHtml: string;
+  contentJson: string;
   status: AdminPostStatus;
   publishedAt: string | null;
   updatedAt: string;
@@ -35,6 +48,7 @@ export interface AdminPostInput {
   slug: string;
   excerpt: string;
   contentHtml: string;
+  contentJson?: string;
   category?: string;
   author?: string;
   coverUrl?: string;
@@ -50,13 +64,7 @@ function nowIso(): string {
   return new Date().toISOString();
 }
 
-function slugify(value: string): string {
-  return value
-    .trim()
-    .toLowerCase()
-    .replace(/[^\p{L}\p{N}]+/gu, '-')
-    .replace(/^-+|-+$/g, '') || `blog-${Date.now()}`;
-}
+function slugify(value: string): string { return createBlogSlug(value); }
 
 // Local mode starts empty by design. It is only an in-memory workspace for testing
 // the admin editor when a database provider is not configured; no fixture posts are seeded.
@@ -69,6 +77,7 @@ function emptyAdminDraft(id: string): AdminPost {
     slug: '',
     excerpt: '',
     contentHtml: '',
+    contentJson: '',
     status: 'draft',
     publishedAt: null,
     updatedAt: nowIso(),
@@ -105,29 +114,40 @@ export async function reserveAdminDraft(reservationId: string): Promise<AdminPos
   }
   const client = getSanityClient();
   const now = nowIso();
-  const categoryId = 'blog-category-general';
-  const authorId = 'blog-author-default';
-  await client.createOrReplace({ _id: categoryId, _type: 'blogCategory', categoryId: { _type: 'slug', current: 'general' }, label: 'عام' });
-  await client.createOrReplace({ _id: authorId, _type: 'blogAuthor', name: DEFAULT_AUTHOR });
-  await client.createOrReplace({
-    _id: `drafts.${id}`,
-    _type: 'blogPost',
-    locale: 'ar',
-    title: '',
-    slug: { _type: 'slug', current: '' },
-    excerpt: '',
-    bodyFormat: 'html',
-    bodyHtml: '',
-    updatedAt: now,
-    featured: false,
-    category: { _type: 'reference', _ref: categoryId },
-    author: { _type: 'reference', _ref: authorId },
-  });
+  const categoryLabel = 'عام';
+  const authorName = DEFAULT_AUTHOR;
+  const categoryId = adminCategoryDocumentId(categoryLabel);
+  const authorId = adminAuthorDocumentId(authorName);
+  await client
+    .transaction()
+    .createIfNotExists({
+      _id: categoryId,
+      _type: 'blogCategory',
+      categoryId: { _type: 'slug', current: createBlogSlug(categoryLabel) || 'general' },
+      label: categoryLabel,
+    })
+    .createIfNotExists({ _id: authorId, _type: 'blogAuthor', name: authorName })
+    .createOrReplace({
+      _id: `drafts.${id}`,
+      _type: 'blogPost',
+      locale: 'ar',
+      title: '',
+      slug: { _type: 'slug', current: '' },
+      excerpt: '',
+      bodyFormat: 'lexical',
+      bodyJson: JSON.stringify({ root: { type: 'root', children: [] } }),
+      bodyHtml: '',
+      updatedAt: now,
+      featured: false,
+      category: { _type: 'reference', _ref: categoryId },
+      author: { _type: 'reference', _ref: authorId },
+    })
+    .commit();
   return (await getAdminPost(id)) ?? emptyAdminDraft(id);
 }
 
 function toPublicPost(post: AdminPost): BlogPost | null {
-  if (post.status !== 'published' || !post.title.trim() || !post.excerpt.trim() || !post.contentHtml.trim()) return null;
+  if (post.status !== 'published' || !post.title.trim() || !post.excerpt.trim() || (!post.contentHtml.trim() && !post.contentJson.trim())) return null;
   const publishedAt = post.publishedAt ?? post.updatedAt;
   return {
     id: post.id,
@@ -138,7 +158,7 @@ function toPublicPost(post: AdminPost): BlogPost | null {
     category: { id: 'general', label: post.category || 'عام' },
     author: { name: post.author || DEFAULT_AUTHOR },
     cover: {
-      src: post.coverUrl || DEFAULT_COVER,
+      src: post.coverUrl || '/assets/landing-blog-dental.jpg',
       alt: post.coverAlt || post.title,
       width: post.coverWidth ?? 1600,
       height: post.coverHeight ?? 1067,
@@ -148,9 +168,11 @@ function toPublicPost(post: AdminPost): BlogPost | null {
     featured: post.featured,
     draft: false,
     seo: {},
-    body: { format: 'html', html: sanitizeBlogHtml(post.contentHtml) },
+    body: post.contentJson
+      ? { format: 'lexical', version: 1, json: post.contentJson }
+      : { format: 'html', html: sanitizeBlogHtml(post.contentHtml) },
     relatedServiceId: post.relatedServiceId || undefined,
-    readingTimeMinutes: calculateReadingTimeMinutes(htmlToPlainText(post.contentHtml)),
+    readingTimeMinutes: calculateReadingTimeMinutes(post.contentJson ? lexicalJsonToPlainText(post.contentJson) : htmlToPlainText(post.contentHtml)),
   };
 }
 
@@ -161,26 +183,52 @@ export function getMockAdminPublishedPostsSync(): BlogPost[] {
     .sort((a, b) => Date.parse(b.publishedAt) - Date.parse(a.publishedAt));
 }
 
-function listMock(): AdminPost[] {
-  return Array.from(mockStore.values()).sort((a, b) => Date.parse(b.updatedAt) - Date.parse(a.updatedAt));
+function listMock(options: AdminPostListOptions = {}): AdminPost[] {
+  const search = options.search?.trim().toLocaleLowerCase('ar') ?? '';
+  const status = options.status ?? 'all';
+  return Array.from(mockStore.values())
+    .filter((post) => {
+      const searchable = `${post.title} ${post.slug} ${post.excerpt} ${post.contentHtml}`.toLocaleLowerCase('ar');
+      return (!search || searchable.includes(search)) && (status === 'all' || post.status === status);
+    })
+    .sort((a, b) => Date.parse(b.updatedAt) - Date.parse(a.updatedAt));
+}
+
+function assertPublishFields(input: { title: string; excerpt: string; contentHtml: string; contentJson?: string; slug: string }): void {
+  assertAdminPublishCopy(input);
+  const contentText = input.contentJson ? lexicalJsonToPlainText(input.contentJson) : htmlToPlainText(input.contentHtml);
+  if (!contentText.trim()) {
+    throw new Error('المقال يحتاج عنواناً ومقدمة ومحتوى قبل النشر.');
+  }
+  if (!isValidBlogSlug(input.slug)) throw new Error(`الرابط المختصر غير صالح: ${input.slug || 'أدخل رابطاً مختصراً صالحاً.'}`);
+}
+
+function assertMockUniqueSlug(slug: string, id?: string): void {
+  if (!slug) return;
+  const duplicate = Array.from(mockStore.values()).find((post) => post.id !== id && post.slug === slug);
+  if (duplicate) throw new Error('هذا الرابط المختصر مستخدم بالفعل. اختر رابطاً آخر.');
 }
 
 function saveMock(id: string | undefined, input: AdminPostInput, publish: boolean): AdminPost {
   const timestamp = nowIso();
   const existing = id ? mockStore.get(id) : undefined;
+  const slug = input.slug.trim() ? slugify(input.slug) : (input.title.trim() ? slugify(input.title) : '');
+  if (publish) assertPublishFields({ ...input, slug });
+  assertMockUniqueSlug(slug, id);
   const post: AdminPost = {
     id: id ?? `post-${crypto.randomUUID()}`,
     title: input.title.trim(),
-    slug: slugify(input.slug || input.title),
+    slug,
     excerpt: input.excerpt.trim(),
-    contentHtml: sanitizeBlogHtml(input.contentHtml),
+    contentJson: input.contentJson ? normalizeLexicalJson(input.contentJson) : '',
+    contentHtml: input.contentJson ? lexicalJsonToHtml(input.contentJson) : sanitizeBlogHtml(input.contentHtml),
     status: publish ? 'published' : 'draft',
-    publishedAt: publish ? (existing?.publishedAt ?? timestamp) : (existing?.publishedAt ?? null),
+    publishedAt: resolveAdminPublishedAt(publish, existing?.publishedAt, timestamp) ?? null,
     updatedAt: timestamp,
     featured: input.featured === true,
     category: input.category?.trim() || existing?.category || 'عام',
     author: input.author?.trim() || existing?.author || DEFAULT_AUTHOR,
-    coverUrl: input.coverUrl?.trim() || existing?.coverUrl || DEFAULT_COVER,
+    coverUrl: input.coverUrl?.trim() || existing?.coverUrl || '/assets/landing-blog-dental.jpg',
     coverAlt: input.coverAlt?.trim() || existing?.coverAlt || input.title.trim(),
     coverAssetId: input.coverAssetId?.trim() || existing?.coverAssetId || '',
     coverWidth: input.coverWidth ?? existing?.coverWidth ?? null,
@@ -199,38 +247,45 @@ function getSanityClient(): SanityClient {
 }
 
 function sanityProjection(): string {
-  return `{ _id, title, "slug": slug.current, excerpt, "contentHtml": bodyHtml, publishedAt, updatedAt, featured, "status": select(_id match "drafts.*" => "draft", defined(publishedAt) => "published", "draft"), "category": category->label, "author": author->name, "coverUrl": coalesce(cover.asset->url, coverUrl), "coverAssetId": cover.asset._ref, "coverWidth": cover.asset->metadata.dimensions.width, "coverHeight": cover.asset->metadata.dimensions.height, "coverAlt": cover.alt, relatedServiceId }`;
+  return `{ _id, title, "slug": slug.current, excerpt, "contentHtml": bodyHtml, bodyJson, publishedAt, updatedAt, featured, "status": select(_id match "drafts.*" => "draft", defined(publishedAt) => "published", "draft"), "category": category->label, "author": author->name, "coverUrl": coalesce(cover.asset->url, coverUrl), "coverAssetId": cover.asset._ref, "coverWidth": cover.asset->metadata.dimensions.width, "coverHeight": cover.asset->metadata.dimensions.height, "coverAlt": coalesce(cover.alt, coverUrlAlt), relatedServiceId }`;
 }
 
 function mapSanityAdmin(raw: Record<string, unknown>): AdminPost {
+  const contentJson = typeof raw.contentJson === 'string' ? raw.contentJson : (typeof raw.bodyJson === 'string' ? raw.bodyJson : '');
+  const contentHtml = typeof raw.contentHtml === 'string' && raw.contentHtml.trim()
+    ? sanitizeBlogHtml(raw.contentHtml)
+    : contentJson
+      ? lexicalJsonToHtml(contentJson)
+      : '';
   return {
     id: String(raw._id ?? '').replace(/^drafts\./, ''),
     title: String(raw.title ?? ''), slug: String(raw.slug ?? ''), excerpt: String(raw.excerpt ?? ''),
-    contentHtml: sanitizeBlogHtml(String(raw.contentHtml ?? '')), status: raw.status === 'published' ? 'published' : 'draft',
+    contentJson, contentHtml, status: raw.status === 'published' ? 'published' : 'draft',
     publishedAt: typeof raw.publishedAt === 'string' ? raw.publishedAt : null,
     updatedAt: typeof raw.updatedAt === 'string' ? raw.updatedAt : nowIso(), featured: raw.featured === true,
-    category: String(raw.category ?? 'عام'),
-    author: String(raw.author ?? DEFAULT_AUTHOR),
-    coverUrl: String(raw.coverUrl ?? ''),
-    coverAlt: String(raw.coverAlt ?? ''),
-    coverAssetId: String(raw.coverAssetId ?? ''),
-    coverWidth: typeof raw.coverWidth === 'number' ? raw.coverWidth : null,
-    coverHeight: typeof raw.coverHeight === 'number' ? raw.coverHeight : null,
-    relatedServiceId: String(raw.relatedServiceId ?? ''),
+    category: String(raw.category ?? 'عام'), author: String(raw.author ?? DEFAULT_AUTHOR), coverUrl: String(raw.coverUrl ?? ''), coverAlt: String(raw.coverAlt ?? ''), coverAssetId: String(raw.coverAssetId ?? ''), coverWidth: typeof raw.coverWidth === 'number' ? raw.coverWidth : null, coverHeight: typeof raw.coverHeight === 'number' ? raw.coverHeight : null, relatedServiceId: String(raw.relatedServiceId ?? ''),
   };
 }
 
-export async function listAdminPosts(): Promise<AdminPost[]> {
-  if (BLOG_PROVIDER !== 'sanity') return listMock();
+export async function listAdminPosts(options: AdminPostListOptions = {}): Promise<AdminPost[]> {
+  if (BLOG_PROVIDER !== 'sanity') return listMock(options);
   const client = getSanityClient();
-  const rows = await client.fetch<Record<string, unknown>[]>(`*[_type == "blogPost" && locale == "ar"] | order(updatedAt desc) ${sanityProjection()}`);
+  const search = options.search?.trim().replace(/\*/g, '').slice(0, 120) ?? '';
+  const searchPattern = search ? `*${search}*` : '';
+  const status = options.status ?? 'all';
+  const searchClause = search
+    ? '&& (title match $search || excerpt match $search || slug.current match $search || bodyHtml match $search)'
+    : '';
+  const query = `*[_type == "blogPost" && locale == "ar" ${searchClause}] | order(updatedAt desc) ${sanityProjection()}`;
+  const rows = await client.fetch<Record<string, unknown>[]>(query, search ? { search: searchPattern } : {});
   const grouped = new Map<string, AdminPost>();
   for (const row of rows ?? []) {
-    const mapped = mapSanityAdmin(row);
+    let mapped: AdminPost;
+    try { mapped = mapSanityAdmin(row); } catch (error) { console.error(`[admin-blog] Skipping malformed Sanity document ${String(row._id ?? '')}.`, error); continue; }
     if (String(row._id).startsWith('drafts.')) grouped.set(mapped.id, mapped);
     else if (!grouped.has(mapped.id)) grouped.set(mapped.id, mapped);
   }
-  return Array.from(grouped.values());
+  return Array.from(grouped.values()).filter((post) => status === 'all' || post.status === status);
 }
 
 export async function getAdminPost(id: string): Promise<AdminPost | null> {
@@ -240,56 +295,89 @@ export async function getAdminPost(id: string): Promise<AdminPost | null> {
   return row ? mapSanityAdmin(row) : null;
 }
 
-export async function saveAdminPost(id: string | undefined, input: AdminPostInput, publish: boolean): Promise<AdminPost> {
+export async function saveAdminPost(
+  id: string | undefined,
+  input: AdminPostInput,
+  publish: boolean,
+  options: { deletePublished?: boolean } = {},
+): Promise<AdminPost> {
   if (BLOG_PROVIDER !== 'sanity') return saveMock(id, input, publish);
   const client = getSanityClient();
   const documentId = id ?? crypto.randomUUID();
   const existing = id ? await getAdminPost(documentId) : null;
+  const slug = input.slug.trim() ? slugify(input.slug) : (input.title.trim() ? slugify(input.title) : '');
+  if (publish) assertPublishFields({ ...input, slug });
+  if (slug) {
+    const duplicate = await client.fetch<string | null>(`*[_type == "blogPost" && locale == "ar" && slug.current == $slug && !(_id in [$id, $draftId])][0]._id`, { slug, id: documentId, draftId: `drafts.${documentId}` });
+    if (duplicate) throw new Error('هذا الرابط المختصر مستخدم بالفعل. اختر رابطاً آخر.');
+  }
   const coverAssetId = input.coverAssetId !== undefined ? input.coverAssetId.trim() : (existing?.coverAssetId ?? '');
-  const categoryId = 'blog-category-general';
-  const authorId = 'blog-author-default';
-  await client.createOrReplace({ _id: categoryId, _type: 'blogCategory', categoryId: { _type: 'slug', current: 'general' }, label: input.category?.trim() || 'عام' });
-  await client.createOrReplace({ _id: authorId, _type: 'blogAuthor', name: input.author?.trim() || DEFAULT_AUTHOR });
-  const doc = {
+  const categoryLabel = input.category?.trim() || existing?.category || 'عام';
+  const authorName = input.author?.trim() || existing?.author || DEFAULT_AUTHOR;
+  const categoryId = adminCategoryDocumentId(categoryLabel);
+  const authorId = adminAuthorDocumentId(authorName);
+  const coverAlt = input.coverAlt?.trim() || existing?.coverAlt || input.title.trim();
+  const coverUrl = coverAssetId ? undefined : (input.coverUrl?.trim() || existing?.coverUrl || undefined);
+  const timestamp = nowIso();
+  const publishedAt = resolveAdminPublishedAt(publish, existing?.publishedAt, timestamp);
+  const doc: IdentifiedSanityDocumentStub<Record<string, unknown>> = {
     _id: publish ? documentId : `drafts.${documentId}`,
-    _type: 'blogPost', locale: 'ar', title: input.title.trim(), slug: { _type: 'slug', current: slugify(input.slug || input.title) }, excerpt: input.excerpt.trim(),
-    bodyFormat: 'html', bodyHtml: sanitizeBlogHtml(input.contentHtml), publishedAt: publish ? nowIso() : undefined, updatedAt: nowIso(), featured: input.featured === true,
+    _type: 'blogPost', locale: 'ar', title: input.title.trim(), slug: { _type: 'slug', current: slug }, excerpt: input.excerpt.trim(),
+    bodyFormat: input.contentJson ? 'lexical' : 'html',
+    ...(input.contentJson ? { bodyJson: normalizeLexicalJson(input.contentJson), bodyHtml: lexicalJsonToHtml(input.contentJson) } : { bodyHtml: sanitizeBlogHtml(input.contentHtml) }),
+    ...(publishedAt ? { publishedAt } : {}),
+    updatedAt: timestamp,
+    featured: input.featured === true,
     category: { _type: 'reference', _ref: categoryId }, author: { _type: 'reference', _ref: authorId }, relatedServiceId: input.relatedServiceId?.trim() || undefined,
-    coverUrl: coverAssetId ? undefined : (input.coverUrl?.trim() || existing?.coverUrl || undefined),
     ...(coverAssetId ? {
       cover: {
         _type: 'blogImage',
         asset: { _type: 'reference', _ref: coverAssetId },
-        alt: input.coverAlt?.trim() || existing?.coverAlt || input.title.trim(),
+        alt: coverAlt,
       },
-    } : {}),
+    } : {
+      coverUrl,
+      coverUrlAlt: coverAlt || undefined,
+    }),
   };
-  await client.createOrReplace(doc);
-  if (publish) await client.delete(`drafts.${documentId}`).catch(() => undefined);
+  const tx = client
+    .transaction()
+    .createIfNotExists({
+      _id: categoryId,
+      _type: 'blogCategory',
+      categoryId: { _type: 'slug', current: createBlogSlug(categoryLabel) || 'general' },
+      label: categoryLabel,
+    })
+    .createIfNotExists({ _id: authorId, _type: 'blogAuthor', name: authorName })
+    .createOrReplace(doc);
+  if (publish) tx.delete(`drafts.${documentId}`);
+  if (options.deletePublished) tx.delete(documentId);
+  await tx.commit();
   return (await getAdminPost(documentId)) ?? mapSanityAdmin(doc as unknown as Record<string, unknown>);
 }
 
 export async function setAdminPostStatus(id: string, publish: boolean): Promise<AdminPost | null> {
   const existing = await getAdminPost(id);
   if (!existing) return null;
-  if (publish && (!existing.title.trim() || !existing.excerpt.trim() || !htmlToPlainText(existing.contentHtml))) {
-    throw new Error('المقال يحتاج عنواناً ومقدمة ومحتوى قبل النشر.');
-  }
+  if (publish) assertPublishFields(existing);
   if (publish && BLOG_PROVIDER === 'sanity' && !existing.coverAssetId && !existing.coverUrl.trim()) {
     throw new Error('أضف صورة رئيسية من خلال رفع ملف أو إدخال رابط صورة قبل نشر المقال.');
   }
-  const updated = await saveAdminPost(id, { ...existing, contentHtml: existing.contentHtml }, publish);
-  if (!publish && BLOG_PROVIDER === 'sanity') {
-    await getSanityClient().delete(id).catch(() => undefined);
-  }
-  return updated;
+  return saveAdminPost(
+    id,
+    { ...existing, contentHtml: existing.contentHtml, contentJson: existing.contentJson || undefined },
+    publish,
+    { deletePublished: !publish && BLOG_PROVIDER === 'sanity' && existing.status === 'published' },
+  );
 }
 
 export async function deleteAdminPost(id: string): Promise<void> {
   if (BLOG_PROVIDER !== 'sanity') { mockStore.delete(id); return; }
-  const client = getSanityClient();
-  await client.delete(id).catch(() => undefined);
-  await client.delete(`drafts.${id}`).catch(() => undefined);
+  await getSanityClient()
+    .transaction()
+    .delete(id)
+    .delete(`drafts.${id}`)
+    .commit();
 }
 
 export function listAdminServices(): Array<{ id: string; title: string }> {
@@ -311,4 +399,40 @@ export async function uploadAdminImage(file: File): Promise<{ assetId: string; u
     width: 'metadata' in asset && asset.metadata?.dimensions ? asset.metadata.dimensions.width : null,
     height: 'metadata' in asset && asset.metadata?.dimensions ? asset.metadata.dimensions.height : null,
   };
+}
+
+function assertSafeRemoteImageUrl(raw: string): URL {
+  let url: URL;
+  try { url = new URL(raw); } catch { throw new Error('رابط الصورة غير صالح.'); }
+  if (url.protocol !== 'https:') throw new Error('يجب أن يبدأ رابط الصورة بـ https.');
+  if (url.username || url.password) throw new Error('لا يمكن استخدام رابط يحتوي بيانات دخول.');
+  const host = url.hostname.toLowerCase();
+  if (host === 'localhost' || host.endsWith('.localhost') || host.endsWith('.local') || host === '0.0.0.0' || host === '::1' || /^(10|127|169\.254|192\.168)\./.test(host) || /^172\.(1[6-9]|2\d|3[0-1])\./.test(host)) {
+    throw new Error('لا يمكن استيراد صورة من هذا المضيف.');
+  }
+  return url;
+}
+
+export async function importAdminImageFromUrl(rawUrl: string): Promise<{ assetId: string; url: string; width: number | null; height: number | null }> {
+  let url = assertSafeRemoteImageUrl(rawUrl);
+  let response: Response | null = null;
+  for (let attempt = 0; attempt < 4; attempt += 1) {
+    response = await fetch(url, { redirect: 'manual', signal: AbortSignal.timeout(12_000), headers: { Accept: 'image/*' } });
+    if (response.status >= 300 && response.status < 400) {
+      const location = response.headers.get('location');
+      if (!location) throw new Error('رابط الصورة أعاد إعادة توجيه غير صالح.');
+      url = assertSafeRemoteImageUrl(new URL(location, url).toString());
+      continue;
+    }
+    break;
+  }
+  if (!response || !response.ok) throw new Error('تعذر تحميل الصورة من الرابط.');
+  const contentType = response.headers.get('content-type')?.split(';')[0].trim().toLowerCase() || '';
+  if (!['image/jpeg', 'image/png', 'image/webp', 'image/gif'].includes(contentType)) throw new Error('الرابط لا يشير إلى صورة مدعومة.');
+  const contentLength = Number(response.headers.get('content-length') || 0);
+  if (contentLength > 10 * 1024 * 1024) throw new Error('حجم الصورة يجب ألا يتجاوز 10 ميجابايت.');
+  const bytes = await response.arrayBuffer();
+  if (bytes.byteLength > 10 * 1024 * 1024) throw new Error('حجم الصورة يجب ألا يتجاوز 10 ميجابايت.');
+  const file = new File([bytes], `blog-import.${contentType.split('/')[1] || 'image'}`, { type: contentType });
+  return uploadAdminImage(file);
 }

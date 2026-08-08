@@ -3,9 +3,12 @@ export const prerender = false;
 
 import AdminShell from '../../components/admin/AdminShell.astro';
 import BlogCardGrid from '../../components/admin/BlogCardGrid.astro';
-import { listAdminPosts } from '../../lib/admin/blog-admin.ts';
+import { listAdminPosts, type AdminPostListStatus } from '../../lib/admin/blog-admin.ts';
 
-const posts = await listAdminPosts();
+const search = Astro.url.searchParams.get('q')?.trim().slice(0, 120) ?? '';
+const rawStatus = Astro.url.searchParams.get('status');
+const status: AdminPostListStatus = rawStatus === 'published' || rawStatus === 'draft' ? rawStatus : 'all';
+const posts = await listAdminPosts({ search, status });
 ---
 
 <AdminShell
@@ -15,5 +18,5 @@ const posts = await listAdminPosts();
   subtitle="أنشئ المحتوى، راجعه في المعاينة، ثم احفظه كمسودة أو انشره مباشرة."
   active="overview"
 >
-  <BlogCardGrid posts={posts} />
+  <BlogCardGrid posts={posts} search={search} status={status} />
 </AdminShell>

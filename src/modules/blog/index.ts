@@ -53,7 +53,17 @@ export {
   parseBlogDate,
   toDateTimeAttribute,
 } from './lib/date-format.ts';
-export { assertValidBlogSlug, headingIdFromText, isValidBlogSlug } from './lib/slug.ts';
+export {
+  assertValidBlogSlug,
+  blogPath,
+  BLOG_SLUG_MAX_LENGTH,
+  BLOG_SLUG_MIN_LENGTH,
+  createBlogSlug,
+  headingIdFromText,
+  isValidBlogSlug,
+  normalizeBlogSlug,
+  normalizeBlogSlugParam,
+} from './lib/slug.ts';
 export {
   articleDescription,
   articleSeoDescription,

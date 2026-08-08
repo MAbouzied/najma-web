@@ -547,11 +547,22 @@
 }
 
 .blog-root .blog-body__embed {
-  padding: 1rem;
-  border: 1px dashed var(--blog-border);
-  border-radius: 1rem;
-  color: var(--blog-muted);
-  background: var(--blog-surface-soft);
+  margin-block: 0.75rem;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  color: inherit;
+  background: transparent;
+  box-shadow: none;
+}
+
+.blog-root .blog-body__embed iframe {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  min-height: 0;
+  border: 0;
+  border-radius: 0.75rem;
 }
 
 .blog-related {

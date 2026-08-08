@@ -9,8 +9,8 @@ import {
   saveAdminPost,
   setAdminPostStatus,
   uploadAdminImage,
-  type AdminPostInput,
 } from '../../../../lib/admin/blog-admin.ts';
+import { readAdminPostPayload } from '../../../../lib/admin/blog-admin-helpers.ts';
 import { requireAdminApiAccess } from '../../../../lib/staff-access/admin-auth.ts';
 import { adminApiError, hasSameOrigin } from '../../../../lib/staff-access/http.ts';
 
@@ -20,20 +20,9 @@ function json(data: unknown, status = 200): Response {
   return new Response(JSON.stringify(data), { status, headers: { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' } });
 }
 
-async function readPayload(request: Request): Promise<AdminPostInput> {
-  const payload = await request.json() as Partial<AdminPostInput>;
-  return {
-    title: String(payload.title ?? ''), slug: String(payload.slug ?? ''), excerpt: String(payload.excerpt ?? ''), contentHtml: String(payload.contentHtml ?? ''),
-    category: typeof payload.category === 'string' ? payload.category : undefined,
-    author: typeof payload.author === 'string' ? payload.author : undefined,
-    coverUrl: typeof payload.coverUrl === 'string' ? payload.coverUrl : undefined,
-    coverAlt: typeof payload.coverAlt === 'string' ? payload.coverAlt : undefined,
-    coverAssetId: typeof payload.coverAssetId === 'string' ? payload.coverAssetId : undefined,
-    coverWidth: typeof payload.coverWidth === 'number' ? payload.coverWidth : undefined,
-    coverHeight: typeof payload.coverHeight === 'number' ? payload.coverHeight : undefined,
-    relatedServiceId: typeof payload.relatedServiceId === 'string' ? payload.relatedServiceId : undefined,
-    featured: payload.featured === true,
-  };
+async function readPayload(request: Request) {
+  const payload = await request.json() as Partial<Record<string, unknown>>;
+  return readAdminPostPayload(payload);
 }
 
 async function invalidateBlogCache(context: Parameters<APIRoute>[0], postId: string): Promise<void> {

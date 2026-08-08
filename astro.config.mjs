@@ -1,5 +1,6 @@
 // @ts-check
 import cloudflare from '@astrojs/cloudflare';
+import react from '@astrojs/react';
 import { cacheCloudflare } from '@astrojs/cloudflare/cache';
 import { defineConfig, envField } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
@@ -68,6 +69,7 @@ export default defineConfig({
     routing: { prefixDefaultLocale: false, redirectToDefaultLocale: false },
   },
   integrations: [
+    react(),
     sitemap({
       customPages: getBlogSitemapPages(site),
       i18n: {
