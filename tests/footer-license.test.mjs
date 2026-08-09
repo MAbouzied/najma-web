@@ -18,21 +18,20 @@ test('renders official licensing data in the footer', () => {
   );
 });
 
-test('renders VAT registration number with certificate viewer control', () => {
+test('renders VAT registration number with certificate link to public image', () => {
   assert.match(homeHtml, /الرقم الضريبي[\s\S]*?310360176500003/);
-  assert.match(homeHtml, /data-vat-certificate-open[^>]*aria-haspopup="dialog"/);
   assert.match(homeHtml, /\/assets\/icons\/zatca-vat\.svg/);
-  assert.match(homeHtml, /data-vat-certificate-dialog[^>]*aria-labelledby="vat-certificate-title"/);
-  assert.match(homeHtml, /id="vat-certificate-title"/);
-  assert.match(homeHtml, /data-vat-certificate-close[^>]*aria-label=/);
   assert.match(
     homeHtml,
-    /data-vat-certificate-image[^>]*src="\/assets\/legal\/vat-registration-certificate\.png"/,
+    /data-vat-certificate-link[^>]*href="\/assets\/legal\/vat-registration-certificate\.png"[^>]*target="_blank"/,
   );
+  assert.doesNotMatch(homeHtml, /data-vat-certificate-dialog/);
   assert.doesNotMatch(homeHtml, /data-license-missing/);
   assert.match(enHomeHtml, /VAT Number[\s\S]*?310360176500003/);
-  assert.match(enHomeHtml, /data-vat-certificate-open[^>]*aria-haspopup="dialog"/);
-  assert.match(enHomeHtml, /data-vat-certificate-dialog[^>]*aria-labelledby="vat-certificate-title"/);
+  assert.match(
+    enHomeHtml,
+    /data-vat-certificate-link[^>]*href="\/assets\/legal\/vat-registration-certificate\.png"[^>]*target="_blank"/,
+  );
 });
 
 test('presents licensing details as an accessible responsive card grid', () => {

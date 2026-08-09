@@ -505,6 +505,34 @@
   font-weight: 400;
 }
 
+.blog-root .blog-body strong,
+.blog-root .blog-body b,
+.blog-root .blog-body .editor-text-bold {
+  font-weight: 700;
+}
+
+.blog-root .blog-body em,
+.blog-root .blog-body i,
+.blog-root .blog-body .editor-text-italic {
+  font-style: italic;
+}
+
+.blog-root .blog-body u,
+.blog-root .blog-body .editor-text-underline {
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.blog-root .blog-body s,
+.blog-root .blog-body .editor-text-strikethrough {
+  text-decoration: line-through;
+}
+
+.blog-root .blog-body .editor-text-underline.editor-text-strikethrough {
+  text-decoration: underline line-through;
+  text-underline-offset: 0.15em;
+}
+
 .blog-root .blog-body a {
   color: var(--blog-accent);
   text-decoration-thickness: 1px;
@@ -513,10 +541,22 @@
 
 .blog-root .blog-body ul,
 .blog-root .blog-body ol {
-  margin: 0;
+  display: block;
+  margin: 0 0 0.85rem;
   padding-inline-start: 1.35rem;
-  display: grid;
-  gap: 0.4rem;
+}
+
+.blog-root .blog-body ul {
+  list-style-type: disc;
+}
+
+.blog-root .blog-body ol {
+  list-style-type: decimal;
+}
+
+.blog-root .blog-body li {
+  display: list-item;
+  margin: 0 0 0.4rem;
 }
 
 .blog-root .blog-body blockquote {

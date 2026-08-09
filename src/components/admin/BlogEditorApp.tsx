@@ -240,7 +240,24 @@ function Toolbar({ onImage, onVideo, disabled }: { onImage: () => void; onVideo:
 }
 
 function EditorField({ post, onChange, onImage, onVideo, onReady, disabled }: { post: AdminPost; onChange: (state: EditorState, html: string) => void; onImage: () => void; onVideo: () => void; onReady: (editor: LexicalEditor) => void; disabled: boolean }) {
-  const initialConfig = useMemo(() => ({ namespace: 'NagmSpaBlog', theme: {}, nodes: [HeadingNode, QuoteNode, ListNode, ListItemNode, LinkNode, BlogImageNode, BlogVideoNode], onError(error: Error) { throw error; } }), []);
+  const initialConfig = useMemo(() => ({
+    namespace: 'NagmSpaBlog',
+    theme: {
+      paragraph: 'editor-paragraph',
+      quote: 'editor-quote',
+      heading: { h2: 'editor-heading-h2', h3: 'editor-heading-h3' },
+      list: { ol: 'editor-list-ol', ul: 'editor-list-ul', listitem: 'editor-listitem' },
+      link: 'editor-link',
+      text: {
+        bold: 'editor-text-bold',
+        italic: 'editor-text-italic',
+        underline: 'editor-text-underline',
+        strikethrough: 'editor-text-strikethrough',
+      },
+    },
+    nodes: [HeadingNode, QuoteNode, ListNode, ListItemNode, LinkNode, BlogImageNode, BlogVideoNode],
+    onError(error: Error) { throw error; },
+  }), []);
   return <LexicalComposer initialConfig={initialConfig}>
     <div className="content-field blog-root" dir="rtl" lang="ar">
       <div className="field-heading"><label>محتوى المقال</label><span>استخدم الأدوات لتنسيق النص</span></div>

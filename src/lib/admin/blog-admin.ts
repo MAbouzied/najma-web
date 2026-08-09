@@ -392,7 +392,9 @@ export async function uploadAdminImage(file: File): Promise<{ assetId: string; u
     throw new Error('رفع الصور يحتاج BLOG_PROVIDER=sanity مع إعدادات Sanity كاملة.');
   }
   const client = getSanityClient();
-  const asset = await client.assets.upload('image', file, {
+  // Sanity's Node client rejects browser File objects ("must be a string, buffer or stream").
+  const body = Buffer.from(await file.arrayBuffer());
+  const asset = await client.assets.upload('image', body, {
     filename: file.name || 'blog-cover',
     contentType: file.type || undefined,
   });
