@@ -89,8 +89,8 @@ export function getBusinessProfile(locale: Locale): BusinessProfile {
         },
       ],
       geo: {
-        latitude: 28.4346,
-        longitude: 45.9635,
+        latitude: 28.3803376,
+        longitude: 45.9878199,
       },
       sameAs: [
         'https://www.instagram.com/nagmspa/',

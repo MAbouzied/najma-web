@@ -105,6 +105,24 @@ export function resolveAdminPublishedAt(
   return publish ? timestamp : undefined;
 }
 
+/** True for Sanity draft document ids (`drafts.<publishedId>`). */
+export function isSanityDraftId(rawId: string): boolean {
+  return rawId.startsWith('drafts.');
+}
+
+/**
+ * Admin list status must treat Sanity draft ids as drafts even when publishedAt
+ * is preserved for SEO republish. Draft ids intentionally override GROQ status
+ * so a stale `published` projection cannot mislabel an unpublished draft.
+ */
+export function resolveSanityAdminStatus(
+  rawId: string,
+  groqStatus: unknown,
+): 'draft' | 'published' {
+  if (isSanityDraftId(rawId)) return 'draft';
+  return groqStatus === 'published' ? 'published' : 'draft';
+}
+
 export function assertAdminPublishCopy(input: { title: string; excerpt: string }): void {
   const title = input.title.trim();
   const excerpt = input.excerpt.trim();

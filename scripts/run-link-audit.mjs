@@ -43,7 +43,13 @@ function classify(href) {
   ) {
     return 'social';
   }
-  if (href.includes('google.com/maps') || href.includes('maps.google')) return 'maps';
+  if (
+    href.includes('google.com/maps') ||
+    href.includes('maps.google') ||
+    href.includes('maps.app.goo.gl')
+  ) {
+    return 'maps';
+  }
   if (href.startsWith(BASE) || href.startsWith('/')) return 'internal';
   if (href.startsWith('http')) return 'external';
   return 'other';
@@ -230,7 +236,8 @@ async function main() {
       const knownBrand =
         href === 'https://www.instagram.com/nagmspa/' ||
         href === 'https://www.snapchat.com/add/nagmspa' ||
-        href.includes('google.com/maps');
+        href.includes('google.com/maps') ||
+        href.includes('maps.app.goo.gl');
       const pass = check.ok || knownBrand;
       linkResults.push({
         type,

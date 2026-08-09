@@ -11,6 +11,7 @@ import {
   readAdminImportUrlBody,
   readAdminPostPayload,
   resolveAdminPublishedAt,
+  resolveSanityAdminStatus,
   shouldKeepExistingBlogSlug,
 } from './blog-admin-helpers.ts';
 
@@ -45,6 +46,20 @@ describe('resolveAdminPublishedAt', () => {
       '2025-06-01T00:00:00.000Z',
     );
     assert.equal(resolveAdminPublishedAt(false, null, '2026-01-01T00:00:00.000Z'), undefined);
+  });
+});
+
+describe('resolveSanityAdminStatus', () => {
+  it('treats draft document ids as draft even when GROQ reports published', () => {
+    assert.equal(resolveSanityAdminStatus('drafts.post-1', 'published'), 'draft');
+    assert.equal(resolveSanityAdminStatus('drafts.post-1', 'draft'), 'draft');
+  });
+
+  it('keeps published only for non-draft ids with published status', () => {
+    assert.equal(resolveSanityAdminStatus('post-1', 'published'), 'published');
+    assert.equal(resolveSanityAdminStatus('post-1', 'draft'), 'draft');
+    assert.equal(resolveSanityAdminStatus('post-1', undefined), 'draft');
+    assert.equal(resolveSanityAdminStatus('post-1', null), 'draft');
   });
 });
 

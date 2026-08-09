@@ -44,7 +44,7 @@ export interface Offer {
 export interface Testimonial {
   quote: LocalizedString;
   name: LocalizedString;
-  service: LocalizedString;
+  service?: LocalizedString;
 }
 
 export interface Faq {
@@ -409,36 +409,49 @@ export const offers: Offer[] = [
   },
 ];
 
+/** Five-star Google Maps reviews for مساج وحمام مغربي نجم سبا. */
 export const testimonials: Testimonial[] = [
   {
-    quote: { ar: 'تجربة استثنائية من اللحظة الأولى. الأجواء هادئة والمعالجة محترفة جدًا.', en: 'An exceptional experience from the very first moment. The atmosphere is calm and the therapist is very professional.' },
-    name: { ar: 'ريم العتيبي', en: 'Reem Al-Otaibi' },
-    service: { ar: 'حمام مغربي كلاسيك', en: 'Classic Moroccan Bath' },
+    quote: {
+      ar: 'ما شاء الله المحل جميل وراقي وتعامل الموظفين مره ممتاز ومحترم وخصوص موظف الاستقبال محمود والله يوفقهم ويرزقهم ويسر الامور حاب اشكرهم واقول يعطيك العافيه وبيض الله وجهكم',
+      en: 'MashaAllah, the place is beautiful and elegant, and the staff are excellent and respectful — especially receptionist Mahmoud. May God grant them success. Thank you, well done.',
+    },
+    name: { ar: 'سعد المطيري', en: 'Saad Al-Mutairi' },
   },
   {
-    quote: { ar: 'أفضل مكان جربته للاسترخاء. المكان راقٍ والخدمة على أعلى مستوى.', en: 'The best place I have tried for relaxation. The venue is upscale and the service is top-notch.' },
-    name: { ar: 'نوره القحطاني', en: 'Noura Al-Qahtani' },
-    service: { ar: 'مساج الزيت الحار', en: 'Hot Oil Massage' },
+    quote: {
+      ar: 'ماشاء الله تجربة ممتعة وإدارة على قدر كبير من الرقى وتعامل الإخوة المصرين الاستاذ محمودفى الاستقبال واخصائين المساج كفاءة عالية ننصحكم بالتجربة',
+      en: 'MashaAllah, an enjoyable experience with refined management. Receptionist Mahmoud and the massage therapists were highly skilled. We recommend trying it.',
+    },
+    name: { ar: 'ع. المطيري', en: 'A. Al-Mutairi' },
   },
   {
-    quote: { ar: 'شعرت بتجدد كامل بعد الجلسة. تفاصيل صغيرة تصنع فرقًا كبيرًا.', en: 'I felt completely renewed after the session. Small details make a big difference.' },
-    name: { ar: 'سارة الدوسري', en: 'Sara Al-Dosari' },
-    service: { ar: 'مساج الاسترخاء', en: 'Relaxation Massage' },
+    quote: {
+      ar: 'أشكركم على الاستقبال المحترم الأستاذ محمود ابو سلمى والمحل نظيف والعمال كويس جدا',
+      en: 'Thank you for the respectful welcome from Mr. Mahmoud Abu Salma. The place is clean and the staff are very good.',
+    },
+    name: { ar: 'مبارك اليامي', en: 'Mobark Alyami' },
   },
   {
-    quote: { ar: 'خدمة سريعة ومكان نظيف. مساج الأحجار الساخنة خفف ألم الظهر بوضوح.', en: 'Quick service and a clean place. The hot stone massage clearly relieved my back pain.' },
-    name: { ar: 'فهد الشمري', en: 'Fahd Al-Shammari' },
-    service: { ar: 'مساج أحجار ساخنة', en: 'Hot Stone Massage' },
+    quote: {
+      ar: 'ما شاء الله تبارك الله، المكان مرتب جدًا وواضح فيه التعب والاهتمام بالتفاصيل. شغل العمالة ممتاز واحترافي. أشكر بشكل خاص الأخ محمود في الاستقبال، إنسان محترم وتعاملُه راقٍ، واستقبالُه كان جدًا طيب. تجربة رائعة وأنصح بالمكان.',
+      en: 'MashaAllah, the place is very tidy with clear attention to detail. The team’s work is excellent and professional. Special thanks to Mahmoud at reception — respectful, refined, and warm. A wonderful experience; I recommend it.',
+    },
+    name: { ar: 'مساعد', en: 'Musaid' },
   },
   {
-    quote: { ar: 'أجواء هادئة وخصوصية تامة. أعود إليهم باستمرار بعد يوم طويل.', en: 'Calm atmosphere and complete privacy. I keep coming back after a long day.' },
-    name: { ar: 'مشاعل العتيبي', en: 'Mashael Al-Otaibi' },
-    service: { ar: 'مساج نجم سبا', en: 'Nagm Spa Massage' },
+    quote: {
+      ar: 'موظف الاستقبال محمود ممتاز وقمة في الاخلاق',
+      en: 'Receptionist Mahmoud is excellent and the height of good manners.',
+    },
+    name: { ar: 'حمد العنزي', en: 'Hamad Alanzi' },
   },
   {
-    quote: { ar: 'تجربة ممتازة من الاستقبال حتى نهاية الجلسة. أنصح بهم بشدة.', en: 'An excellent experience from reception to the end of the session. I highly recommend them.' },
-    name: { ar: 'عبدالله الدوسري', en: 'Abdullah Al-Dosari' },
-    service: { ar: 'مساج تايلندي', en: 'Thai Massage' },
+    quote: {
+      ar: 'المركز ممتاز والقامين على العمل فنانين يعطيه العافيه ما قصر والاخ محمود ما قصر اشكر',
+      en: 'The center is excellent and the team are true professionals. Well done — and special thanks to Mahmoud.',
+    },
+    name: { ar: 'جراح الشمري', en: 'Jarrah Al-Shammari' },
   },
 ];
 
@@ -528,7 +541,7 @@ export function getTestimonials(locale: Locale) {
   return testimonials.map((t) => ({
     quote: L(t.quote, locale),
     name: L(t.name, locale),
-    service: L(t.service, locale),
+    ...(t.service ? { service: L(t.service, locale) } : {}),
   }));
 }
 
