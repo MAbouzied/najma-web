@@ -19,7 +19,7 @@ export interface Props {
     title: string;
     description: string;
     duration?: string;
-    price: string;
+    price?: string;
   };
 }
 
@@ -28,6 +28,7 @@ const dir = locale === 'en' ? 'ltr' : 'rtl';
 const call = getCallAction(locale);
 const serviceBookingHref = buildServiceBookingUrl(service.title, locale);
 const detailImage = service.heroImage ?? service.image;
+const priceLabel = service.price ?? (locale === 'en' ? 'Via offers' : 'ضمن العروض');
 const breadcrumbs = [
   { label: t(locale, 'breadcrumbHome'), href: localePath('/', locale) },
   { label: t(locale, 'breadcrumbServices'), href: localePath('/services/', locale) },
@@ -68,7 +69,7 @@ const breadcrumbs = [
               <span>{t(locale, 'serviceDetailDuration')} {service.duration}</span>
             </div>
           )}
-          <div class="text-2xl font-bold text-gold">{service.price}</div>
+          <div class="text-2xl font-bold text-gold">{priceLabel}</div>
         </div>
 
         <div class="mt-8 max-w-md">

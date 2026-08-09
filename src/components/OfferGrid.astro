@@ -5,12 +5,11 @@ import type { Locale } from '../i18n/types';
 export interface Props {
   offers: {
     slug: string;
-    image?: string;
     name: string;
     subtitle: string;
     description: string;
     price: string;
-    originalPrice?: string;
+    originalPrice: string;
     features: string[];
   }[];
   locale?: Locale;

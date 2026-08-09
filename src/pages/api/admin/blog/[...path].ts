@@ -3,6 +3,7 @@ import { blogMutationCacheTags } from '../../../../modules/blog/cache.ts';
 import {
   deleteAdminPost,
   getAdminPost,
+  importAdminImageFromUrl,
   listAdminPosts,
   listAdminServices,
   reserveAdminDraft,
@@ -10,7 +11,7 @@ import {
   setAdminPostStatus,
   uploadAdminImage,
 } from '../../../../lib/admin/blog-admin.ts';
-import { readAdminPostPayload } from '../../../../lib/admin/blog-admin-helpers.ts';
+import { readAdminImportUrlBody, readAdminPostPayload } from '../../../../lib/admin/blog-admin-helpers.ts';
 import { requireAdminApiAccess } from '../../../../lib/staff-access/admin-auth.ts';
 import { adminApiError, hasSameOrigin } from '../../../../lib/staff-access/http.ts';
 
@@ -54,6 +55,11 @@ export const POST: APIRoute = async (context) => {
   const path = (params.path ?? '').split('/').filter(Boolean);
   try {
     if (path[0] === 'assets') {
+      if (path[1] === 'import') {
+        const payload = await request.json().catch(() => ({})) as Partial<Record<string, unknown>>;
+        const { url } = readAdminImportUrlBody(payload);
+        return json(await importAdminImageFromUrl(url), 201);
+      }
       const formData = await request.formData();
       const file = formData.get('file');
       if (!(file instanceof File)) return json({ error: 'اختر ملف صورة أولاً.' }, 400);

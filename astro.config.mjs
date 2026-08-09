@@ -7,7 +7,7 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import { getBlogSitemapPages } from './src/lib/blog-sitemap-pages.ts';
 
-const site = 'https://najma-web.mohamed-abouzied.workers.dev';
+const site = 'https://nagmspa.com';
 
 export default defineConfig({
   site,

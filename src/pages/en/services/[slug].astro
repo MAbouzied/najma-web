@@ -24,6 +24,6 @@ const { service } = Astro.props;
     title: L(service.title, locale),
     description: L(service.description, locale),
     duration: service.duration ? L(service.duration, locale) : undefined,
-    price: L(service.price, locale),
+    price: service.price ? L(service.price, locale) : undefined,
   }}
 />

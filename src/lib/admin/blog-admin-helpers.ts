@@ -51,6 +51,17 @@ export function readAdminPostPayload(payload: Partial<Record<string, unknown>>):
   };
 }
 
+export interface AdminImportUrlBody {
+  url: string;
+}
+
+/** Validate JSON body for POST /api/admin/blog/assets/import. */
+export function readAdminImportUrlBody(payload: Partial<Record<string, unknown>>): AdminImportUrlBody {
+  const url = typeof payload.url === 'string' ? payload.url.trim() : '';
+  if (!url) throw new Error('أدخل رابط الصورة.');
+  return { url };
+}
+
 /** Existing posts keep their established URL unless the editor changes it explicitly. */
 export function shouldKeepExistingBlogSlug(slug: string): boolean {
   return slug.trim().length > 0;

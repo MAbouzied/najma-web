@@ -1,0 +1,2813 @@
+{
+  "base": "http://127.0.0.1:4323",
+  "generatedAt": "2026-08-09T07:52:41.972Z",
+  "summary": {
+    "pages": {
+      "total": 62,
+      "passed": 62,
+      "failed": 0
+    },
+    "links": {
+      "total": 111,
+      "passed": 111,
+      "failed": 0
+    },
+    "whatsappFlows": {
+      "total": 92,
+      "passed": 92,
+      "failed": 0
+    }
+  },
+  "pageResults": [
+    {
+      "type": "internal-page",
+      "link": "/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/about/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/services/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/offers/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/packages/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/blogs/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/contact/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/go/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/book/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/login/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/en/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/en/about/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/en/services/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/en/offers/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/en/packages/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/en/contact/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/en/go/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/en/book/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/llms.txt",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/robots.txt",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/services/massage-relaxation/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/en/services/massage-relaxation/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/services/hot-oil-massage/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/en/services/hot-oil-massage/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/services/foot-massage/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/en/services/foot-massage/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/services/shiatsu/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/en/services/shiatsu/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/services/thai-massage/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/en/services/thai-massage/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/services/sports-massage/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/en/services/sports-massage/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/services/star-spa-massage/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/en/services/star-spa-massage/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/services/moroccan-bath/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/en/services/moroccan-bath/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/services/moroccan-bath-clay/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/en/services/moroccan-bath-clay/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/services/manicure-pedicure/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/en/services/manicure-pedicure/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/packages/wedding/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/en/packages/wedding/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/packages/luxury/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/en/packages/luxury/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/packages/gift/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/en/packages/gift/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/offers/recovery/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/en/offers/recovery/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/offers/relaxation/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/en/offers/relaxation/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/offers/signature/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/en/offers/signature/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/offers/care/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/en/offers/care/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/offers/elegance/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/en/offers/elegance/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/offers/prosperity/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/en/offers/prosperity/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/offers/royal/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/en/offers/royal/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/offers/golden/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-page",
+      "link": "/en/offers/golden/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    }
+  ],
+  "linkResults": [
+    {
+      "type": "internal-link",
+      "link": "/",
+      "label": "العودة للصفحة الرئيسية — نجم سبا",
+      "source": "/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/about/",
+      "label": "من نحن",
+      "source": "/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/services/",
+      "label": "خدماتنا",
+      "source": "/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/offers/",
+      "label": "عروض الصيف",
+      "source": "/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/packages/",
+      "label": "باقاتنا",
+      "source": "/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/blogs/",
+      "label": "المدونة",
+      "source": "/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/contact/",
+      "label": "اتصل بنا",
+      "source": "/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/en/",
+      "label": "English",
+      "source": "/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "tel",
+      "link": "tel:+966579777407",
+      "label": "اتصل الآن",
+      "source": "/",
+      "status": "valid",
+      "pass": true,
+      "note": "correct phone"
+    },
+    {
+      "type": "internal-link",
+      "link": "/book/",
+      "label": "احجز الآناحجز",
+      "source": "/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/services/massage-relaxation/",
+      "label": "مساج الاسترخاءاحجز مساج الاسترخاء في نجم سبا — جلسة هادئة تُخفف التوتر وتستعيد توازن الجسم والعقل بأ",
+      "source": "/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/book/?department=service&item=%D9%85%D8%B3%D8%A7%D8%AC+%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D8%B1%D8%AE%D8%A7%D8%A1",
+      "label": "واتساب",
+      "source": "/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/services/hot-oil-massage/",
+      "label": "مساج الزيت الحارمساج الزيت الحار في نجم سبا — زيوت دافئة تُرخّي العضلات وتحسّن الدورة الدموية وتمنحك",
+      "source": "/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/book/?department=service&item=%D9%85%D8%B3%D8%A7%D8%AC+%D8%A7%D9%84%D8%B2%D9%8A%D8%AA+%D8%A7%D9%84%D8%AD%D8%A7%D8%B1",
+      "label": "واتساب",
+      "source": "/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/services/foot-massage/",
+      "label": "مساج القدمين واليدينمساج القدمين واليدين في نجم سبا — عناية متخصصة تُريح الجسم بالكامل وتخفف الإرهاق",
+      "source": "/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/book/?department=service&item=%D9%85%D8%B3%D8%A7%D8%AC+%D8%A7%D9%84%D9%82%D8%AF%D9%85%D9%8A%D9%86+%D9%88%D8%A7%D9%84%D9%8A%D8%AF%D9%8A%D9%86",
+      "label": "واتساب",
+      "source": "/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/services/shiatsu/",
+      "label": "مساج الشياتسومساج الشياتسو في نجم سبا — ضغط إيقاعي على مسارات الطاقة لتحفيز الدورة الدموية وإطلاق ال",
+      "source": "/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/book/?department=service&item=%D9%85%D8%B3%D8%A7%D8%AC+%D8%A7%D9%84%D8%B4%D9%8A%D8%A7%D8%AA%D8%B3%D9%88",
+      "label": "واتساب",
+      "source": "/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/services/thai-massage/",
+      "label": "مساج تايلنديالمساج التايلندي في نجم سبا يجمع التمدد والضغط العميق لزيادة المرونة وتجديد طاقة الجسم. ",
+      "source": "/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/book/?department=service&item=%D9%85%D8%B3%D8%A7%D8%AC+%D8%AA%D8%A7%D9%8A%D9%84%D9%86%D8%AF%D9%8A",
+      "label": "واتساب",
+      "source": "/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/services/sports-massage/",
+      "label": "المساج الرياضيالمساج الرياضي في نجم سبا مخصص لتخفيف شد العضلات وتحسين التعافي بعد الجهد بأيدي أخصائي",
+      "source": "/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/book/?department=service&item=%D8%A7%D9%84%D9%85%D8%B3%D8%A7%D8%AC+%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A",
+      "label": "واتساب",
+      "source": "/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/services/star-spa-massage/",
+      "label": "مساج نجم سبامساج نجم سبا التوقيع — جلسة طويلة متكاملة تجمع الاسترخاء والعناية العميقة لاستعادة طاقتك",
+      "source": "/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/book/?department=service&item=%D9%85%D8%B3%D8%A7%D8%AC+%D9%86%D8%AC%D9%85+%D8%B3%D8%A8%D8%A7",
+      "label": "واتساب",
+      "source": "/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/services/moroccan-bath/",
+      "label": "حمام مغربي كلاسيكحمام مغربي كلاسيك في نجم سبا يجمع البخار والصابون البلدي وتقشير البشرة لنضارة وانتع",
+      "source": "/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/book/?department=service&item=%D8%AD%D9%85%D8%A7%D9%85+%D9%85%D8%BA%D8%B1%D8%A8%D9%8A+%D9%83%D9%84%D8%A7%D8%B3%D9%8A%D9%83",
+      "label": "واتساب",
+      "source": "/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/services/moroccan-bath-clay/",
+      "label": "حمام مغربي بالطين المغربيحمام مغربي بالطين المغربي في نجم سبا — تنظيف عميق ونضارة للبشرة مع تجربة حم",
+      "source": "/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/book/?department=service&item=%D8%AD%D9%85%D8%A7%D9%85+%D9%85%D8%BA%D8%B1%D8%A8%D9%8A+%D8%A8%D8%A7%D9%84%D8%B7%D9%8A%D9%86+%D8%A7%D9%84%D9%85%D8%BA%D8%B1%D8%A8%D9%8A",
+      "label": "واتساب",
+      "source": "/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/services/manicure-pedicure/",
+      "label": "بدكير اليدين والقدمينبدكير اليدين والقدمين في نجم سبا — عناية متكاملة لأظافرك وبشرتك بمظهر أنيق ومرت",
+      "source": "/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/book/?department=service&item=%D8%A8%D8%AF%D9%83%D9%8A%D8%B1+%D8%A7%D9%84%D9%8A%D8%AF%D9%8A%D9%86+%D9%88%D8%A7%D9%84%D9%82%D8%AF%D9%85%D9%8A%D9%86",
+      "label": "واتساب",
+      "source": "/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/offers/recovery/",
+      "label": "عرض التعافياستعادة النشاط بعد الجهد١٩٩ ر.سالسعر قبل الخصم ٢٤٩ ر.سمساج سويديمساج تايلنديمساج كاسات صي",
+      "source": "/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/book/?department=offer&item=%D8%B9%D8%B1%D8%B6+%D8%A7%D9%84%D8%AA%D8%B9%D8%A7%D9%81%D9%8A",
+      "label": "واتساب",
+      "source": "/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/offers/relaxation/",
+      "label": "عرض الاسترخاءهدوء عميق للجسم والعقل١٩٩ ر.سالسعر قبل الخصم ٢٤٩ ر.سمساج سويديمساج تايلنديمساج أحجار سا",
+      "source": "/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/book/?department=offer&item=%D8%B9%D8%B1%D8%B6+%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D8%B1%D8%AE%D8%A7%D8%A1",
+      "label": "واتساب",
+      "source": "/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/offers/signature/",
+      "label": "نجم سبا سجنتشرالتجربة الأشمل من نجم سبا٣٥٩ ر.سالسعر قبل الخصم ٤٤٩ ر.سمساج استرخاءمساج تايلنديمساج ال",
+      "source": "/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/book/?department=offer&item=%D9%86%D8%AC%D9%85+%D8%B3%D8%A8%D8%A7+%D8%B3%D8%AC%D9%86%D8%AA%D8%B4%D8%B1",
+      "label": "واتساب",
+      "source": "/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/offers/care/",
+      "label": "باقة العنايةعناية متوازنة للجسم والأطراف٢٥٩ ر.سالسعر قبل الخصم ٣٢٤ ر.سمساج استرخاء + مساج شياتسومساج",
+      "source": "/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/book/?department=offer&item=%D8%A8%D8%A7%D9%82%D8%A9+%D8%A7%D9%84%D8%B9%D9%86%D8%A7%D9%8A%D8%A9",
+      "label": "واتساب",
+      "source": "/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/offers/elegance/",
+      "label": "عرض الفخامةمساج وحمام ملكي بأجواء فاخرة٢٤٩ ر.سالسعر قبل الخصم ٣١٢ ر.سمساج سويديمساج تايلنديحمام ملكي",
+      "source": "/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/book/?department=offer&item=%D8%B9%D8%B1%D8%B6+%D8%A7%D9%84%D9%81%D8%AE%D8%A7%D9%85%D8%A9",
+      "label": "واتساب",
+      "source": "/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/offers/prosperity/",
+      "label": "العرض الرخاءراحة هادئة بأسعار الصيف٢١٩ ر.سالسعر قبل الخصم ٢٧٤ ر.سمساج سويديحمام مغربي كلاسيكيجلسة بخ",
+      "source": "/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/book/?department=offer&item=%D8%A7%D9%84%D8%B9%D8%B1%D8%B6+%D8%A7%D9%84%D8%B1%D8%AE%D8%A7%D8%A1",
+      "label": "واتساب",
+      "source": "/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/offers/royal/",
+      "label": "العرض الملكيتجربة ملكية شاملة بخصم الصيف٤٤٩ ر.سالسعر قبل الخصم ٥٦٢ ر.سمساج نجم سبا + مساج زيت حارمسا",
+      "source": "/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/book/?department=offer&item=%D8%A7%D9%84%D8%B9%D8%B1%D8%B6+%D8%A7%D9%84%D9%85%D9%84%D9%83%D9%8A",
+      "label": "واتساب",
+      "source": "/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/offers/golden/",
+      "label": "العرض الذهبيمزيج ذهبي من المساج والحمام٣٤٩ ر.سالسعر قبل الخصم ٤٣٨ ر.سمساج استرخاء + مساج تايلنديمساج",
+      "source": "/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/book/?department=offer&item=%D8%A7%D9%84%D8%B9%D8%B1%D8%B6+%D8%A7%D9%84%D8%B0%D9%87%D8%A8%D9%8A",
+      "label": "واتساب",
+      "source": "/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/packages/wedding/",
+      "label": "باقة العرسانتحضير متكامل لإطلالة يوم الزفاف٦٩٠ ر.سحمام مغربي كلاسيكمساج الاسترخاءبدكير اليدين والقدم",
+      "source": "/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/book/?department=package&item=%D8%A8%D8%A7%D9%82%D8%A9+%D8%A7%D9%84%D8%B9%D8%B1%D8%B3%D8%A7%D9%86",
+      "label": "واتساب",
+      "source": "/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/packages/luxury/",
+      "label": "باقة الرفاهيةتجربة سبا فاخرة من البداية حتى النهاية٨٩٠ ر.سحمام مغربي بالطين المغربيمساج نجم سبا ٨٠ د",
+      "source": "/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/book/?department=package&item=%D8%A8%D8%A7%D9%82%D8%A9+%D8%A7%D9%84%D8%B1%D9%81%D8%A7%D9%87%D9%8A%D8%A9",
+      "label": "واتساب",
+      "source": "/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/packages/gift/",
+      "label": "باقة الإهداءهدية أنيقة قابلة للاختيار٥٩٠ ر.ساختيار أي خدمة من القائمةبطاقة إهداء شخصيةشهادة هديةعرض ",
+      "source": "/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/book/?department=package&item=%D8%A8%D8%A7%D9%82%D8%A9+%D8%A7%D9%84%D8%A5%D9%87%D8%AF%D8%A7%D8%A1",
+      "label": "واتساب",
+      "source": "/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "whatsapp-direct",
+      "link": "https://api.whatsapp.com/send/?phone=966579777407&type=phone_number&app_absent=0&text=%D8%A3%D9%87%D9%84%D8%A7%D9%8B%D8%8C+%D8%A3%D8%B1%D9%8A%D8%AF+%D8%A7%D9%84%D8%AD%D8%AC%D8%B2+%D9%81%D9%8A+%D9%81%D8%B1%D8%B9+%D8%AD%D9%81%D8%B1+%D8%A7%D9%84%D8%A8%D8%A7%D8%B7%D9%86+%E2%80%94+%D8%AD%D9%8A+%D8%A7%D9%84%D9%85%D8%B5%D9%8A%D9%81",
+      "label": "واتساب",
+      "source": "/",
+      "status": "valid-url",
+      "pass": true,
+      "note": "phone OK; message=\"أهلاً، أريد الحجز في فرع حفر الباطن — حي المصيف\"",
+      "message": "أهلاً، أريد الحجز في فرع حفر الباطن — حي المصيف"
+    },
+    {
+      "type": "maps",
+      "link": "https://www.google.com/maps/search/?api=1&query=%D8%AD%D9%8A+%D8%A7%D9%84%D9%85%D8%B5%D9%8A%D9%81+%D8%AD%D9%81%D8%B1+%D8%A7%D9%84%D8%A8%D8%A7%D8%B7%D9%86+%D9%86%D8%AC%D9%85+%D8%B3%D8%A8%D8%A7",
+      "label": "اتجاهات",
+      "source": "/",
+      "status": 200,
+      "pass": true,
+      "note": "reachable"
+    },
+    {
+      "type": "social",
+      "link": "https://www.instagram.com/nagmspa/",
+      "label": "إنستقرام",
+      "source": "/",
+      "status": 200,
+      "pass": true,
+      "note": "reachable"
+    },
+    {
+      "type": "social",
+      "link": "https://www.snapchat.com/add/nagmspa",
+      "label": "سناب شات",
+      "source": "/",
+      "status": 200,
+      "pass": true,
+      "note": "reachable"
+    },
+    {
+      "type": "internal-link",
+      "link": "/go/",
+      "label": "تواصل سريع",
+      "source": "/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/en/about/",
+      "label": "About",
+      "source": "/en/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/en/services/",
+      "label": "Services",
+      "source": "/en/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/en/offers/",
+      "label": "Summer Deals",
+      "source": "/en/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/en/packages/",
+      "label": "Packages",
+      "source": "/en/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/en/contact/",
+      "label": "Contact",
+      "source": "/en/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/en/book/",
+      "label": "Book NowBook",
+      "source": "/en/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/en/services/massage-relaxation/",
+      "label": "Relaxation MassageBook a relaxation massage at Nagm Spa — a calming session that relieves stress and",
+      "source": "/en/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/en/book/?department=service&item=Relaxation+Massage",
+      "label": "WhatsApp",
+      "source": "/en/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/en/services/hot-oil-massage/",
+      "label": "Hot Oil MassageHot oil massage at Nagm Spa — warm oils that relax muscles, improve blood circulation",
+      "source": "/en/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/en/book/?department=service&item=Hot+Oil+Massage",
+      "label": "WhatsApp",
+      "source": "/en/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/en/services/foot-massage/",
+      "label": "Hand & Foot MassageHand and foot massage at Nagm Spa — specialized care that relaxes the entire body",
+      "source": "/en/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/en/book/?department=service&item=Hand+%26+Foot+Massage",
+      "label": "WhatsApp",
+      "source": "/en/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/en/services/shiatsu/",
+      "label": "Shiatsu MassageShiatsu massage at Nagm Spa — rhythmic pressure on energy meridians to stimulate bloo",
+      "source": "/en/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/en/book/?department=service&item=Shiatsu+Massage",
+      "label": "WhatsApp",
+      "source": "/en/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/en/services/thai-massage/",
+      "label": "Thai MassageThai massage at Nagm Spa combines stretching and deep pressure to increase flexibility a",
+      "source": "/en/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/en/book/?department=service&item=Thai+Massage",
+      "label": "WhatsApp",
+      "source": "/en/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/en/services/sports-massage/",
+      "label": "Sports MassageSports massage at Nagm Spa is designed to relieve muscle tension and improve post-exer",
+      "source": "/en/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/en/book/?department=service&item=Sports+Massage",
+      "label": "WhatsApp",
+      "source": "/en/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/en/services/star-spa-massage/",
+      "label": "Nagm Spa Signature MassageNagm Spa signature massage — a comprehensive long session combining relaxa",
+      "source": "/en/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/en/book/?department=service&item=Nagm+Spa+Signature+Massage",
+      "label": "WhatsApp",
+      "source": "/en/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/en/services/moroccan-bath/",
+      "label": "Classic Moroccan BathClassic Moroccan bath at Nagm Spa combines steam, traditional black soap, and s",
+      "source": "/en/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/en/book/?department=service&item=Classic+Moroccan+Bath",
+      "label": "WhatsApp",
+      "source": "/en/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/en/services/moroccan-bath-clay/",
+      "label": "Moroccan Bath with Moroccan ClayMoroccan bath with Moroccan clay at Nagm Spa — deep cleansing and sk",
+      "source": "/en/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/en/book/?department=service&item=Moroccan+Bath+with+Moroccan+Clay",
+      "label": "WhatsApp",
+      "source": "/en/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/en/services/manicure-pedicure/",
+      "label": "Manicure & PedicureManicure and pedicure at Nagm Spa — complete care for your nails and skin for a p",
+      "source": "/en/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/en/book/?department=service&item=Manicure+%26+Pedicure",
+      "label": "WhatsApp",
+      "source": "/en/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/en/offers/recovery/",
+      "label": "Recovery OfferRestore your energy after exertion199 SARPrice before discount 249 SARSwedish massageT",
+      "source": "/en/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/en/book/?department=offer&item=Recovery+Offer",
+      "label": "WhatsApp",
+      "source": "/en/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/en/offers/relaxation/",
+      "label": "Relaxation OfferDeep calm for body and mind199 SARPrice before discount 249 SARSwedish massageThai m",
+      "source": "/en/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/en/book/?department=offer&item=Relaxation+Offer",
+      "label": "WhatsApp",
+      "source": "/en/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/en/offers/signature/",
+      "label": "Nagm Spa SignatureThe most comprehensive experience from Nagm Spa359 SARPrice before discount 449 SA",
+      "source": "/en/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/en/book/?department=offer&item=Nagm+Spa+Signature",
+      "label": "WhatsApp",
+      "source": "/en/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/en/offers/care/",
+      "label": "Care PackageBalanced care for body and extremities259 SARPrice before discount 324 SARRelaxation mas",
+      "source": "/en/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/en/book/?department=offer&item=Care+Package",
+      "label": "WhatsApp",
+      "source": "/en/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/en/offers/elegance/",
+      "label": "Elegance OfferMassage and royal bath in a luxurious setting249 SARPrice before discount 312 SARSwedi",
+      "source": "/en/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/en/book/?department=offer&item=Elegance+Offer",
+      "label": "WhatsApp",
+      "source": "/en/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/en/offers/prosperity/",
+      "label": "Prosperity OfferQuiet comfort at summer prices219 SARPrice before discount 274 SARSwedish massageCla",
+      "source": "/en/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/en/book/?department=offer&item=Prosperity+Offer",
+      "label": "WhatsApp",
+      "source": "/en/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/en/offers/royal/",
+      "label": "Royal OfferA comprehensive royal experience at summer discount449 SARPrice before discount 562 SARNa",
+      "source": "/en/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/en/book/?department=offer&item=Royal+Offer",
+      "label": "WhatsApp",
+      "source": "/en/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/en/offers/golden/",
+      "label": "Golden OfferA golden blend of massage and bath349 SARPrice before discount 438 SARRelaxation massage",
+      "source": "/en/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/en/book/?department=offer&item=Golden+Offer",
+      "label": "WhatsApp",
+      "source": "/en/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/en/packages/wedding/",
+      "label": "Wedding PackageComplete preparation for your wedding day look690 SARClassic Moroccan bathRelaxation ",
+      "source": "/en/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/en/book/?department=package&item=Wedding+Package",
+      "label": "WhatsApp",
+      "source": "/en/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/en/packages/luxury/",
+      "label": "Luxury PackageA luxurious spa experience from start to finish890 SARMoroccan bath with Moroccan clay",
+      "source": "/en/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/en/book/?department=package&item=Luxury+Package",
+      "label": "WhatsApp",
+      "source": "/en/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/en/packages/gift/",
+      "label": "Gift PackageAn elegant customizable gift590 SARChoose any service from the menuPersonalized gift car",
+      "source": "/en/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/en/book/?department=package&item=Gift+Package",
+      "label": "WhatsApp",
+      "source": "/en/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "whatsapp-direct",
+      "link": "https://api.whatsapp.com/send/?phone=966579777407&type=phone_number&app_absent=0&text=Hello%2C+I+would+like+to+book+at+Hafar+Al-Batin+Branch+%E2%80%94+Al-Musayyif",
+      "label": "WhatsApp",
+      "source": "/en/",
+      "status": "valid-url",
+      "pass": true,
+      "note": "phone OK; message=\"Hello, I would like to book at Hafar Al-Batin Branch — Al-Musayyif\"",
+      "message": "Hello, I would like to book at Hafar Al-Batin Branch — Al-Musayyif"
+    },
+    {
+      "type": "internal-link",
+      "link": "/en/go/",
+      "label": "Quick Contact",
+      "source": "/en/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "whatsapp-direct",
+      "link": "https://api.whatsapp.com/send/?phone=966579777407&type=phone_number&app_absent=0&text=%D8%A3%D9%87%D9%84%D8%A7%D9%8B%D8%8C+%D8%A3%D8%B1%D9%8A%D8%AF+%D8%A7%D9%84%D8%AA%D9%88%D8%A7%D8%B5%D9%84+%D9%85%D8%B9+%D9%86%D8%AC%D9%85+%D8%B3%D8%A8%D8%A7",
+      "label": "واتساب",
+      "source": "/go/",
+      "status": "valid-url",
+      "pass": true,
+      "note": "phone OK; message=\"أهلاً، أريد التواصل مع نجم سبا\"",
+      "message": "أهلاً، أريد التواصل مع نجم سبا"
+    },
+    {
+      "type": "whatsapp-direct",
+      "link": "https://api.whatsapp.com/send/?phone=966579777407&type=phone_number&app_absent=0&text=Hello%2C+I+would+like+to+contact+Nagm+Spa",
+      "label": "WhatsApp",
+      "source": "/en/go/",
+      "status": "valid-url",
+      "pass": true,
+      "note": "phone OK; message=\"Hello, I would like to contact Nagm Spa\"",
+      "message": "Hello, I would like to contact Nagm Spa"
+    },
+    {
+      "type": "internal-link",
+      "link": "/blogs/%D9%83%D9%8A%D9%81-%D8%AA%D8%AD%D8%A7%D9%81%D8%B8-%D8%B9%D9%84%D9%89-%D8%A7%D8%A8%D8%AA%D8%B3%D8%A7%D9%85%D8%A9-%D8%B5%D8%AD%D9%8A%D8%A9-%D8%A8%D9%8A%D9%86-%D8%A7%D9%84%D8%B2%D9%8A%D8%A7%D8%B1%D8%A7%D8%AA/",
+      "label": "كيف تحافظ على ابتسامة صحية بين الزيارات؟",
+      "source": "/blogs/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    },
+    {
+      "type": "internal-link",
+      "link": "/blogs/simple-daily-smile-routine/",
+      "label": "روتين يومي بسيط لابتسامة أكثر صحة",
+      "source": "/blogs/",
+      "status": 200,
+      "pass": true,
+      "note": "OK"
+    }
+  ],
+  "whatsappFlowResults": [
+    {
+      "type": "card-booking-cta",
+      "link": "/book/?department=service&item=%D9%85%D8%B3%D8%A7%D8%AC+%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D8%B1%D8%AE%D8%A7%D8%A1",
+      "source": "/services/",
+      "label": "واتساب",
+      "status": "collected",
+      "pass": true,
+      "note": "deep-link includes department+item",
+      "item": "مساج الاسترخاء",
+      "department": "service"
+    },
+    {
+      "type": "card-booking-cta",
+      "link": "/book/?department=service&item=%D9%85%D8%B3%D8%A7%D8%AC+%D8%A7%D9%84%D8%B2%D9%8A%D8%AA+%D8%A7%D9%84%D8%AD%D8%A7%D8%B1",
+      "source": "/services/",
+      "label": "واتساب",
+      "status": "collected",
+      "pass": true,
+      "note": "deep-link includes department+item",
+      "item": "مساج الزيت الحار",
+      "department": "service"
+    },
+    {
+      "type": "card-booking-cta",
+      "link": "/book/?department=service&item=%D9%85%D8%B3%D8%A7%D8%AC+%D8%A7%D9%84%D9%82%D8%AF%D9%85%D9%8A%D9%86+%D9%88%D8%A7%D9%84%D9%8A%D8%AF%D9%8A%D9%86",
+      "source": "/services/",
+      "label": "واتساب",
+      "status": "collected",
+      "pass": true,
+      "note": "deep-link includes department+item",
+      "item": "مساج القدمين واليدين",
+      "department": "service"
+    },
+    {
+      "type": "card-booking-cta",
+      "link": "/book/?department=service&item=%D9%85%D8%B3%D8%A7%D8%AC+%D8%A7%D9%84%D8%B4%D9%8A%D8%A7%D8%AA%D8%B3%D9%88",
+      "source": "/services/",
+      "label": "واتساب",
+      "status": "collected",
+      "pass": true,
+      "note": "deep-link includes department+item",
+      "item": "مساج الشياتسو",
+      "department": "service"
+    },
+    {
+      "type": "card-booking-cta",
+      "link": "/book/?department=service&item=%D9%85%D8%B3%D8%A7%D8%AC+%D8%AA%D8%A7%D9%8A%D9%84%D9%86%D8%AF%D9%8A",
+      "source": "/services/",
+      "label": "واتساب",
+      "status": "collected",
+      "pass": true,
+      "note": "deep-link includes department+item",
+      "item": "مساج تايلندي",
+      "department": "service"
+    },
+    {
+      "type": "card-booking-cta",
+      "link": "/book/?department=service&item=%D8%A7%D9%84%D9%85%D8%B3%D8%A7%D8%AC+%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A",
+      "source": "/services/",
+      "label": "واتساب",
+      "status": "collected",
+      "pass": true,
+      "note": "deep-link includes department+item",
+      "item": "المساج الرياضي",
+      "department": "service"
+    },
+    {
+      "type": "card-booking-cta",
+      "link": "/book/?department=service&item=%D9%85%D8%B3%D8%A7%D8%AC+%D9%86%D8%AC%D9%85+%D8%B3%D8%A8%D8%A7",
+      "source": "/services/",
+      "label": "واتساب",
+      "status": "collected",
+      "pass": true,
+      "note": "deep-link includes department+item",
+      "item": "مساج نجم سبا",
+      "department": "service"
+    },
+    {
+      "type": "card-booking-cta",
+      "link": "/book/?department=service&item=%D8%AD%D9%85%D8%A7%D9%85+%D9%85%D8%BA%D8%B1%D8%A8%D9%8A+%D9%83%D9%84%D8%A7%D8%B3%D9%8A%D9%83",
+      "source": "/services/",
+      "label": "واتساب",
+      "status": "collected",
+      "pass": true,
+      "note": "deep-link includes department+item",
+      "item": "حمام مغربي كلاسيك",
+      "department": "service"
+    },
+    {
+      "type": "card-booking-cta",
+      "link": "/book/?department=service&item=%D8%AD%D9%85%D8%A7%D9%85+%D9%85%D8%BA%D8%B1%D8%A8%D9%8A+%D8%A8%D8%A7%D9%84%D8%B7%D9%8A%D9%86+%D8%A7%D9%84%D9%85%D8%BA%D8%B1%D8%A8%D9%8A",
+      "source": "/services/",
+      "label": "واتساب",
+      "status": "collected",
+      "pass": true,
+      "note": "deep-link includes department+item",
+      "item": "حمام مغربي بالطين المغربي",
+      "department": "service"
+    },
+    {
+      "type": "card-booking-cta",
+      "link": "/book/?department=service&item=%D8%A8%D8%AF%D9%83%D9%8A%D8%B1+%D8%A7%D9%84%D9%8A%D8%AF%D9%8A%D9%86+%D9%88%D8%A7%D9%84%D9%82%D8%AF%D9%85%D9%8A%D9%86",
+      "source": "/services/",
+      "label": "واتساب",
+      "status": "collected",
+      "pass": true,
+      "note": "deep-link includes department+item",
+      "item": "بدكير اليدين والقدمين",
+      "department": "service"
+    },
+    {
+      "type": "card-booking-cta",
+      "link": "/book/?department=package&item=%D8%A8%D8%A7%D9%82%D8%A9+%D8%A7%D9%84%D8%B9%D8%B1%D8%B3%D8%A7%D9%86",
+      "source": "/packages/",
+      "label": "واتساب",
+      "status": "collected",
+      "pass": true,
+      "note": "deep-link includes department+item",
+      "item": "باقة العرسان",
+      "department": "package"
+    },
+    {
+      "type": "card-booking-cta",
+      "link": "/book/?department=package&item=%D8%A8%D8%A7%D9%82%D8%A9+%D8%A7%D9%84%D8%B1%D9%81%D8%A7%D9%87%D9%8A%D8%A9",
+      "source": "/packages/",
+      "label": "واتساب",
+      "status": "collected",
+      "pass": true,
+      "note": "deep-link includes department+item",
+      "item": "باقة الرفاهية",
+      "department": "package"
+    },
+    {
+      "type": "card-booking-cta",
+      "link": "/book/?department=package&item=%D8%A8%D8%A7%D9%82%D8%A9+%D8%A7%D9%84%D8%A5%D9%87%D8%AF%D8%A7%D8%A1",
+      "source": "/packages/",
+      "label": "واتساب",
+      "status": "collected",
+      "pass": true,
+      "note": "deep-link includes department+item",
+      "item": "باقة الإهداء",
+      "department": "package"
+    },
+    {
+      "type": "card-booking-cta",
+      "link": "/book/?department=offer&item=%D8%B9%D8%B1%D8%B6+%D8%A7%D9%84%D8%AA%D8%B9%D8%A7%D9%81%D9%8A",
+      "source": "/offers/",
+      "label": "واتساب",
+      "status": "collected",
+      "pass": true,
+      "note": "deep-link includes department+item",
+      "item": "عرض التعافي",
+      "department": "offer"
+    },
+    {
+      "type": "card-booking-cta",
+      "link": "/book/?department=offer&item=%D8%B9%D8%B1%D8%B6+%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D8%B1%D8%AE%D8%A7%D8%A1",
+      "source": "/offers/",
+      "label": "واتساب",
+      "status": "collected",
+      "pass": true,
+      "note": "deep-link includes department+item",
+      "item": "عرض الاسترخاء",
+      "department": "offer"
+    },
+    {
+      "type": "card-booking-cta",
+      "link": "/book/?department=offer&item=%D9%86%D8%AC%D9%85+%D8%B3%D8%A8%D8%A7+%D8%B3%D8%AC%D9%86%D8%AA%D8%B4%D8%B1",
+      "source": "/offers/",
+      "label": "واتساب",
+      "status": "collected",
+      "pass": true,
+      "note": "deep-link includes department+item",
+      "item": "نجم سبا سجنتشر",
+      "department": "offer"
+    },
+    {
+      "type": "card-booking-cta",
+      "link": "/book/?department=offer&item=%D8%A8%D8%A7%D9%82%D8%A9+%D8%A7%D9%84%D8%B9%D9%86%D8%A7%D9%8A%D8%A9",
+      "source": "/offers/",
+      "label": "واتساب",
+      "status": "collected",
+      "pass": true,
+      "note": "deep-link includes department+item",
+      "item": "باقة العناية",
+      "department": "offer"
+    },
+    {
+      "type": "card-booking-cta",
+      "link": "/book/?department=offer&item=%D8%B9%D8%B1%D8%B6+%D8%A7%D9%84%D9%81%D8%AE%D8%A7%D9%85%D8%A9",
+      "source": "/offers/",
+      "label": "واتساب",
+      "status": "collected",
+      "pass": true,
+      "note": "deep-link includes department+item",
+      "item": "عرض الفخامة",
+      "department": "offer"
+    },
+    {
+      "type": "card-booking-cta",
+      "link": "/book/?department=offer&item=%D8%A7%D9%84%D8%B9%D8%B1%D8%B6+%D8%A7%D9%84%D8%B1%D8%AE%D8%A7%D8%A1",
+      "source": "/offers/",
+      "label": "واتساب",
+      "status": "collected",
+      "pass": true,
+      "note": "deep-link includes department+item",
+      "item": "العرض الرخاء",
+      "department": "offer"
+    },
+    {
+      "type": "card-booking-cta",
+      "link": "/book/?department=offer&item=%D8%A7%D9%84%D8%B9%D8%B1%D8%B6+%D8%A7%D9%84%D9%85%D9%84%D9%83%D9%8A",
+      "source": "/offers/",
+      "label": "واتساب",
+      "status": "collected",
+      "pass": true,
+      "note": "deep-link includes department+item",
+      "item": "العرض الملكي",
+      "department": "offer"
+    },
+    {
+      "type": "card-booking-cta",
+      "link": "/book/?department=offer&item=%D8%A7%D9%84%D8%B9%D8%B1%D8%B6+%D8%A7%D9%84%D8%B0%D9%87%D8%A8%D9%8A",
+      "source": "/offers/",
+      "label": "واتساب",
+      "status": "collected",
+      "pass": true,
+      "note": "deep-link includes department+item",
+      "item": "العرض الذهبي",
+      "department": "offer"
+    },
+    {
+      "type": "card-booking-cta",
+      "link": "/en/book/?department=service&item=Relaxation+Massage",
+      "source": "/en/services/",
+      "label": "WhatsApp",
+      "status": "collected",
+      "pass": true,
+      "note": "deep-link includes department+item",
+      "item": "Relaxation Massage",
+      "department": "service"
+    },
+    {
+      "type": "card-booking-cta",
+      "link": "/en/book/?department=service&item=Hot+Oil+Massage",
+      "source": "/en/services/",
+      "label": "WhatsApp",
+      "status": "collected",
+      "pass": true,
+      "note": "deep-link includes department+item",
+      "item": "Hot Oil Massage",
+      "department": "service"
+    },
+    {
+      "type": "card-booking-cta",
+      "link": "/en/book/?department=service&item=Hand+%26+Foot+Massage",
+      "source": "/en/services/",
+      "label": "WhatsApp",
+      "status": "collected",
+      "pass": true,
+      "note": "deep-link includes department+item",
+      "item": "Hand & Foot Massage",
+      "department": "service"
+    },
+    {
+      "type": "card-booking-cta",
+      "link": "/en/book/?department=service&item=Shiatsu+Massage",
+      "source": "/en/services/",
+      "label": "WhatsApp",
+      "status": "collected",
+      "pass": true,
+      "note": "deep-link includes department+item",
+      "item": "Shiatsu Massage",
+      "department": "service"
+    },
+    {
+      "type": "card-booking-cta",
+      "link": "/en/book/?department=service&item=Thai+Massage",
+      "source": "/en/services/",
+      "label": "WhatsApp",
+      "status": "collected",
+      "pass": true,
+      "note": "deep-link includes department+item",
+      "item": "Thai Massage",
+      "department": "service"
+    },
+    {
+      "type": "card-booking-cta",
+      "link": "/en/book/?department=service&item=Sports+Massage",
+      "source": "/en/services/",
+      "label": "WhatsApp",
+      "status": "collected",
+      "pass": true,
+      "note": "deep-link includes department+item",
+      "item": "Sports Massage",
+      "department": "service"
+    },
+    {
+      "type": "card-booking-cta",
+      "link": "/en/book/?department=service&item=Nagm+Spa+Signature+Massage",
+      "source": "/en/services/",
+      "label": "WhatsApp",
+      "status": "collected",
+      "pass": true,
+      "note": "deep-link includes department+item",
+      "item": "Nagm Spa Signature Massage",
+      "department": "service"
+    },
+    {
+      "type": "card-booking-cta",
+      "link": "/en/book/?department=service&item=Classic+Moroccan+Bath",
+      "source": "/en/services/",
+      "label": "WhatsApp",
+      "status": "collected",
+      "pass": true,
+      "note": "deep-link includes department+item",
+      "item": "Classic Moroccan Bath",
+      "department": "service"
+    },
+    {
+      "type": "card-booking-cta",
+      "link": "/en/book/?department=service&item=Moroccan+Bath+with+Moroccan+Clay",
+      "source": "/en/services/",
+      "label": "WhatsApp",
+      "status": "collected",
+      "pass": true,
+      "note": "deep-link includes department+item",
+      "item": "Moroccan Bath with Moroccan Clay",
+      "department": "service"
+    },
+    {
+      "type": "card-booking-cta",
+      "link": "/en/book/?department=service&item=Manicure+%26+Pedicure",
+      "source": "/en/services/",
+      "label": "WhatsApp",
+      "status": "collected",
+      "pass": true,
+      "note": "deep-link includes department+item",
+      "item": "Manicure & Pedicure",
+      "department": "service"
+    },
+    {
+      "type": "card-booking-cta",
+      "link": "/en/book/?department=package&item=Wedding+Package",
+      "source": "/en/packages/",
+      "label": "WhatsApp",
+      "status": "collected",
+      "pass": true,
+      "note": "deep-link includes department+item",
+      "item": "Wedding Package",
+      "department": "package"
+    },
+    {
+      "type": "card-booking-cta",
+      "link": "/en/book/?department=package&item=Luxury+Package",
+      "source": "/en/packages/",
+      "label": "WhatsApp",
+      "status": "collected",
+      "pass": true,
+      "note": "deep-link includes department+item",
+      "item": "Luxury Package",
+      "department": "package"
+    },
+    {
+      "type": "card-booking-cta",
+      "link": "/en/book/?department=package&item=Gift+Package",
+      "source": "/en/packages/",
+      "label": "WhatsApp",
+      "status": "collected",
+      "pass": true,
+      "note": "deep-link includes department+item",
+      "item": "Gift Package",
+      "department": "package"
+    },
+    {
+      "type": "card-booking-cta",
+      "link": "/en/book/?department=offer&item=Recovery+Offer",
+      "source": "/en/offers/",
+      "label": "WhatsApp",
+      "status": "collected",
+      "pass": true,
+      "note": "deep-link includes department+item",
+      "item": "Recovery Offer",
+      "department": "offer"
+    },
+    {
+      "type": "card-booking-cta",
+      "link": "/en/book/?department=offer&item=Relaxation+Offer",
+      "source": "/en/offers/",
+      "label": "WhatsApp",
+      "status": "collected",
+      "pass": true,
+      "note": "deep-link includes department+item",
+      "item": "Relaxation Offer",
+      "department": "offer"
+    },
+    {
+      "type": "card-booking-cta",
+      "link": "/en/book/?department=offer&item=Nagm+Spa+Signature",
+      "source": "/en/offers/",
+      "label": "WhatsApp",
+      "status": "collected",
+      "pass": true,
+      "note": "deep-link includes department+item",
+      "item": "Nagm Spa Signature",
+      "department": "offer"
+    },
+    {
+      "type": "card-booking-cta",
+      "link": "/en/book/?department=offer&item=Care+Package",
+      "source": "/en/offers/",
+      "label": "WhatsApp",
+      "status": "collected",
+      "pass": true,
+      "note": "deep-link includes department+item",
+      "item": "Care Package",
+      "department": "offer"
+    },
+    {
+      "type": "card-booking-cta",
+      "link": "/en/book/?department=offer&item=Elegance+Offer",
+      "source": "/en/offers/",
+      "label": "WhatsApp",
+      "status": "collected",
+      "pass": true,
+      "note": "deep-link includes department+item",
+      "item": "Elegance Offer",
+      "department": "offer"
+    },
+    {
+      "type": "card-booking-cta",
+      "link": "/en/book/?department=offer&item=Prosperity+Offer",
+      "source": "/en/offers/",
+      "label": "WhatsApp",
+      "status": "collected",
+      "pass": true,
+      "note": "deep-link includes department+item",
+      "item": "Prosperity Offer",
+      "department": "offer"
+    },
+    {
+      "type": "card-booking-cta",
+      "link": "/en/book/?department=offer&item=Royal+Offer",
+      "source": "/en/offers/",
+      "label": "WhatsApp",
+      "status": "collected",
+      "pass": true,
+      "note": "deep-link includes department+item",
+      "item": "Royal Offer",
+      "department": "offer"
+    },
+    {
+      "type": "card-booking-cta",
+      "link": "/en/book/?department=offer&item=Golden+Offer",
+      "source": "/en/offers/",
+      "label": "WhatsApp",
+      "status": "collected",
+      "pass": true,
+      "note": "deep-link includes department+item",
+      "item": "Golden Offer",
+      "department": "offer"
+    },
+    {
+      "type": "booking-form-whatsapp",
+      "link": "/book/?department=service&item=%D9%85%D8%B3%D8%A7%D8%AC%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D8%B1%D8%AE%D8%A7%D8%A1",
+      "locale": "ar",
+      "department": "service",
+      "expectedItem": "مساج الاسترخاء",
+      "selected": {
+        "value": "service:massage-relaxation",
+        "label": "مساج الاسترخاء",
+        "ar": "مساج الاسترخاء",
+        "en": "Relaxation Massage"
+      },
+      "whatsappUrl": "https://api.whatsapp.com/send/?phone=966579777407&type=phone_number&app_absent=0&text=*%D8%A7%D9%84%D8%A7%D8%B3%D9%85%3A*+Link+Audit+Test%0A*%D8%A7%D9%84%D8%AC%D9%88%D8%A7%D9%84%3A*+0551234567%0A*%D8%A7%D9%84%D8%AD%D8%AC%D8%B2%3A*+%D9%85%D8%B3%D8%A7%D8%AC+%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D8%B1%D8%AE%D8%A7%D8%A1",
+      "message": "*الاسم:* Link Audit Test\n*الجوال:* 0551234567\n*الحجز:* مساج الاسترخاء",
+      "status": "opened",
+      "pass": true,
+      "note": "preselect OK; WA phone OK; item in message; name in message; customer phone in message"
+    },
+    {
+      "type": "booking-form-whatsapp",
+      "link": "/book/?department=package&item=%D8%A8%D8%A7%D9%82%D8%A9%20%D8%A7%D9%84%D8%B9%D8%B1%D8%B3%D8%A7%D9%86",
+      "locale": "ar",
+      "department": "package",
+      "expectedItem": "باقة العرسان",
+      "selected": {
+        "value": "package:wedding",
+        "label": "باقة العرسان",
+        "ar": "باقة العرسان",
+        "en": "Wedding Package"
+      },
+      "whatsappUrl": "https://api.whatsapp.com/send/?phone=966579777407&type=phone_number&app_absent=0&text=*%D8%A7%D9%84%D8%A7%D8%B3%D9%85%3A*+Link+Audit+Test%0A*%D8%A7%D9%84%D8%AC%D9%88%D8%A7%D9%84%3A*+0551234567%0A*%D8%A7%D9%84%D8%AD%D8%AC%D8%B2%3A*+%D8%A8%D8%A7%D9%82%D8%A9+%D8%A7%D9%84%D8%B9%D8%B1%D8%B3%D8%A7%D9%86",
+      "message": "*الاسم:* Link Audit Test\n*الجوال:* 0551234567\n*الحجز:* باقة العرسان",
+      "status": "opened",
+      "pass": true,
+      "note": "preselect OK; WA phone OK; item in message; name in message; customer phone in message"
+    },
+    {
+      "type": "booking-form-whatsapp",
+      "link": "/book/?department=offer&item=%D8%B9%D8%B1%D8%B6%20%D8%A7%D9%84%D8%AA%D8%B9%D8%A7%D9%81%D9%8A",
+      "locale": "ar",
+      "department": "offer",
+      "expectedItem": "عرض التعافي",
+      "selected": {
+        "value": "offer:recovery",
+        "label": "عرض التعافي",
+        "ar": "عرض التعافي",
+        "en": "Recovery Offer"
+      },
+      "whatsappUrl": "https://api.whatsapp.com/send/?phone=966579777407&type=phone_number&app_absent=0&text=*%D8%A7%D9%84%D8%A7%D8%B3%D9%85%3A*+Link+Audit+Test%0A*%D8%A7%D9%84%D8%AC%D9%88%D8%A7%D9%84%3A*+0551234567%0A*%D8%A7%D9%84%D8%AD%D8%AC%D8%B2%3A*+%D8%B9%D8%B1%D8%B6+%D8%A7%D9%84%D8%AA%D8%B9%D8%A7%D9%81%D9%8A",
+      "message": "*الاسم:* Link Audit Test\n*الجوال:* 0551234567\n*الحجز:* عرض التعافي",
+      "status": "opened",
+      "pass": true,
+      "note": "preselect OK; WA phone OK; item in message; name in message; customer phone in message"
+    },
+    {
+      "type": "booking-form-whatsapp",
+      "link": "/en/book/?department=service&item=Relaxation%20Massage",
+      "locale": "en",
+      "department": "service",
+      "expectedItem": "Relaxation Massage",
+      "selected": {
+        "value": "service:massage-relaxation",
+        "label": "Relaxation Massage",
+        "ar": "مساج الاسترخاء",
+        "en": "Relaxation Massage"
+      },
+      "whatsappUrl": "https://api.whatsapp.com/send/?phone=966579777407&type=phone_number&app_absent=0&text=*Name%3A*+Link+Audit+Test%0A*Phone%3A*+0551234567%0A*Booking%3A*+Relaxation+Massage",
+      "message": "*Name:* Link Audit Test\n*Phone:* 0551234567\n*Booking:* Relaxation Massage",
+      "status": "opened",
+      "pass": true,
+      "note": "preselect OK; WA phone OK; item in message; name in message; customer phone in message"
+    },
+    {
+      "type": "booking-form-whatsapp",
+      "link": "/en/book/?department=package&item=Wedding%20Package",
+      "locale": "en",
+      "department": "package",
+      "expectedItem": "Wedding Package",
+      "selected": {
+        "value": "package:wedding",
+        "label": "Wedding Package",
+        "ar": "باقة العرسان",
+        "en": "Wedding Package"
+      },
+      "whatsappUrl": "https://api.whatsapp.com/send/?phone=966579777407&type=phone_number&app_absent=0&text=*Name%3A*+Link+Audit+Test%0A*Phone%3A*+0551234567%0A*Booking%3A*+Wedding+Package",
+      "message": "*Name:* Link Audit Test\n*Phone:* 0551234567\n*Booking:* Wedding Package",
+      "status": "opened",
+      "pass": true,
+      "note": "preselect OK; WA phone OK; item in message; name in message; customer phone in message"
+    },
+    {
+      "type": "booking-form-whatsapp",
+      "link": "/en/book/?department=offer&item=Recovery%20Offer",
+      "locale": "en",
+      "department": "offer",
+      "expectedItem": "Recovery Offer",
+      "selected": {
+        "value": "offer:recovery",
+        "label": "Recovery Offer",
+        "ar": "عرض التعافي",
+        "en": "Recovery Offer"
+      },
+      "whatsappUrl": "https://api.whatsapp.com/send/?phone=966579777407&type=phone_number&app_absent=0&text=*Name%3A*+Link+Audit+Test%0A*Phone%3A*+0551234567%0A*Booking%3A*+Recovery+Offer",
+      "message": "*Name:* Link Audit Test\n*Phone:* 0551234567\n*Booking:* Recovery Offer",
+      "status": "opened",
+      "pass": true,
+      "note": "preselect OK; WA phone OK; item in message; name in message; customer phone in message"
+    },
+    {
+      "type": "card-to-whatsapp",
+      "link": "/book/?department=service&item=%D9%85%D8%B3%D8%A7%D8%AC+%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D8%B1%D8%AE%D8%A7%D8%A1",
+      "source": "/services/",
+      "expectedItem": "مساج الاسترخاء",
+      "department": "service",
+      "selected": {
+        "value": "service:massage-relaxation",
+        "label": "مساج الاسترخاء",
+        "ar": "مساج الاسترخاء",
+        "en": "Relaxation Massage"
+      },
+      "whatsappUrl": "https://api.whatsapp.com/send/?phone=966579777407&type=phone_number&app_absent=0&text=*%D8%A7%D9%84%D8%A7%D8%B3%D9%85%3A*+Link+Audit+Test%0A*%D8%A7%D9%84%D8%AC%D9%88%D8%A7%D9%84%3A*+0551234567%0A*%D8%A7%D9%84%D8%AD%D8%AC%D8%B2%3A*+%D9%85%D8%B3%D8%A7%D8%AC+%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D8%B1%D8%AE%D8%A7%D8%A1",
+      "message": "*الاسم:* Link Audit Test\n*الجوال:* 0551234567\n*الحجز:* مساج الاسترخاء",
+      "status": "opened",
+      "pass": true,
+      "note": "preselect OK; WA phone OK; item in message; name OK"
+    },
+    {
+      "type": "card-to-whatsapp",
+      "link": "/book/?department=service&item=%D9%85%D8%B3%D8%A7%D8%AC+%D8%A7%D9%84%D8%B2%D9%8A%D8%AA+%D8%A7%D9%84%D8%AD%D8%A7%D8%B1",
+      "source": "/services/",
+      "expectedItem": "مساج الزيت الحار",
+      "department": "service",
+      "selected": {
+        "value": "service:hot-oil-massage",
+        "label": "مساج الزيت الحار",
+        "ar": "مساج الزيت الحار",
+        "en": "Hot Oil Massage"
+      },
+      "whatsappUrl": "https://api.whatsapp.com/send/?phone=966579777407&type=phone_number&app_absent=0&text=*%D8%A7%D9%84%D8%A7%D8%B3%D9%85%3A*+Link+Audit+Test%0A*%D8%A7%D9%84%D8%AC%D9%88%D8%A7%D9%84%3A*+0551234567%0A*%D8%A7%D9%84%D8%AD%D8%AC%D8%B2%3A*+%D9%85%D8%B3%D8%A7%D8%AC+%D8%A7%D9%84%D8%B2%D9%8A%D8%AA+%D8%A7%D9%84%D8%AD%D8%A7%D8%B1",
+      "message": "*الاسم:* Link Audit Test\n*الجوال:* 0551234567\n*الحجز:* مساج الزيت الحار",
+      "status": "opened",
+      "pass": true,
+      "note": "preselect OK; WA phone OK; item in message; name OK"
+    },
+    {
+      "type": "card-to-whatsapp",
+      "link": "/book/?department=service&item=%D9%85%D8%B3%D8%A7%D8%AC+%D8%A7%D9%84%D9%82%D8%AF%D9%85%D9%8A%D9%86+%D9%88%D8%A7%D9%84%D9%8A%D8%AF%D9%8A%D9%86",
+      "source": "/services/",
+      "expectedItem": "مساج القدمين واليدين",
+      "department": "service",
+      "selected": {
+        "value": "service:foot-massage",
+        "label": "مساج القدمين واليدين",
+        "ar": "مساج القدمين واليدين",
+        "en": "Hand & Foot Massage"
+      },
+      "whatsappUrl": "https://api.whatsapp.com/send/?phone=966579777407&type=phone_number&app_absent=0&text=*%D8%A7%D9%84%D8%A7%D8%B3%D9%85%3A*+Link+Audit+Test%0A*%D8%A7%D9%84%D8%AC%D9%88%D8%A7%D9%84%3A*+0551234567%0A*%D8%A7%D9%84%D8%AD%D8%AC%D8%B2%3A*+%D9%85%D8%B3%D8%A7%D8%AC+%D8%A7%D9%84%D9%82%D8%AF%D9%85%D9%8A%D9%86+%D9%88%D8%A7%D9%84%D9%8A%D8%AF%D9%8A%D9%86",
+      "message": "*الاسم:* Link Audit Test\n*الجوال:* 0551234567\n*الحجز:* مساج القدمين واليدين",
+      "status": "opened",
+      "pass": true,
+      "note": "preselect OK; WA phone OK; item in message; name OK"
+    },
+    {
+      "type": "card-to-whatsapp",
+      "link": "/book/?department=service&item=%D9%85%D8%B3%D8%A7%D8%AC+%D8%A7%D9%84%D8%B4%D9%8A%D8%A7%D8%AA%D8%B3%D9%88",
+      "source": "/services/",
+      "expectedItem": "مساج الشياتسو",
+      "department": "service",
+      "selected": {
+        "value": "service:shiatsu",
+        "label": "مساج الشياتسو",
+        "ar": "مساج الشياتسو",
+        "en": "Shiatsu Massage"
+      },
+      "whatsappUrl": "https://api.whatsapp.com/send/?phone=966579777407&type=phone_number&app_absent=0&text=*%D8%A7%D9%84%D8%A7%D8%B3%D9%85%3A*+Link+Audit+Test%0A*%D8%A7%D9%84%D8%AC%D9%88%D8%A7%D9%84%3A*+0551234567%0A*%D8%A7%D9%84%D8%AD%D8%AC%D8%B2%3A*+%D9%85%D8%B3%D8%A7%D8%AC+%D8%A7%D9%84%D8%B4%D9%8A%D8%A7%D8%AA%D8%B3%D9%88",
+      "message": "*الاسم:* Link Audit Test\n*الجوال:* 0551234567\n*الحجز:* مساج الشياتسو",
+      "status": "opened",
+      "pass": true,
+      "note": "preselect OK; WA phone OK; item in message; name OK"
+    },
+    {
+      "type": "card-to-whatsapp",
+      "link": "/book/?department=service&item=%D9%85%D8%B3%D8%A7%D8%AC+%D8%AA%D8%A7%D9%8A%D9%84%D9%86%D8%AF%D9%8A",
+      "source": "/services/",
+      "expectedItem": "مساج تايلندي",
+      "department": "service",
+      "selected": {
+        "value": "service:thai-massage",
+        "label": "مساج تايلندي",
+        "ar": "مساج تايلندي",
+        "en": "Thai Massage"
+      },
+      "whatsappUrl": "https://api.whatsapp.com/send/?phone=966579777407&type=phone_number&app_absent=0&text=*%D8%A7%D9%84%D8%A7%D8%B3%D9%85%3A*+Link+Audit+Test%0A*%D8%A7%D9%84%D8%AC%D9%88%D8%A7%D9%84%3A*+0551234567%0A*%D8%A7%D9%84%D8%AD%D8%AC%D8%B2%3A*+%D9%85%D8%B3%D8%A7%D8%AC+%D8%AA%D8%A7%D9%8A%D9%84%D9%86%D8%AF%D9%8A",
+      "message": "*الاسم:* Link Audit Test\n*الجوال:* 0551234567\n*الحجز:* مساج تايلندي",
+      "status": "opened",
+      "pass": true,
+      "note": "preselect OK; WA phone OK; item in message; name OK"
+    },
+    {
+      "type": "card-to-whatsapp",
+      "link": "/book/?department=service&item=%D8%A7%D9%84%D9%85%D8%B3%D8%A7%D8%AC+%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A",
+      "source": "/services/",
+      "expectedItem": "المساج الرياضي",
+      "department": "service",
+      "selected": {
+        "value": "service:sports-massage",
+        "label": "المساج الرياضي",
+        "ar": "المساج الرياضي",
+        "en": "Sports Massage"
+      },
+      "whatsappUrl": "https://api.whatsapp.com/send/?phone=966579777407&type=phone_number&app_absent=0&text=*%D8%A7%D9%84%D8%A7%D8%B3%D9%85%3A*+Link+Audit+Test%0A*%D8%A7%D9%84%D8%AC%D9%88%D8%A7%D9%84%3A*+0551234567%0A*%D8%A7%D9%84%D8%AD%D8%AC%D8%B2%3A*+%D8%A7%D9%84%D9%85%D8%B3%D8%A7%D8%AC+%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A",
+      "message": "*الاسم:* Link Audit Test\n*الجوال:* 0551234567\n*الحجز:* المساج الرياضي",
+      "status": "opened",
+      "pass": true,
+      "note": "preselect OK; WA phone OK; item in message; name OK"
+    },
+    {
+      "type": "card-to-whatsapp",
+      "link": "/book/?department=service&item=%D9%85%D8%B3%D8%A7%D8%AC+%D9%86%D8%AC%D9%85+%D8%B3%D8%A8%D8%A7",
+      "source": "/services/",
+      "expectedItem": "مساج نجم سبا",
+      "department": "service",
+      "selected": {
+        "value": "service:star-spa-massage",
+        "label": "مساج نجم سبا",
+        "ar": "مساج نجم سبا",
+        "en": "Nagm Spa Signature Massage"
+      },
+      "whatsappUrl": "https://api.whatsapp.com/send/?phone=966579777407&type=phone_number&app_absent=0&text=*%D8%A7%D9%84%D8%A7%D8%B3%D9%85%3A*+Link+Audit+Test%0A*%D8%A7%D9%84%D8%AC%D9%88%D8%A7%D9%84%3A*+0551234567%0A*%D8%A7%D9%84%D8%AD%D8%AC%D8%B2%3A*+%D9%85%D8%B3%D8%A7%D8%AC+%D9%86%D8%AC%D9%85+%D8%B3%D8%A8%D8%A7",
+      "message": "*الاسم:* Link Audit Test\n*الجوال:* 0551234567\n*الحجز:* مساج نجم سبا",
+      "status": "opened",
+      "pass": true,
+      "note": "preselect OK; WA phone OK; item in message; name OK"
+    },
+    {
+      "type": "card-to-whatsapp",
+      "link": "/book/?department=service&item=%D8%AD%D9%85%D8%A7%D9%85+%D9%85%D8%BA%D8%B1%D8%A8%D9%8A+%D9%83%D9%84%D8%A7%D8%B3%D9%8A%D9%83",
+      "source": "/services/",
+      "expectedItem": "حمام مغربي كلاسيك",
+      "department": "service",
+      "selected": {
+        "value": "service:moroccan-bath",
+        "label": "حمام مغربي كلاسيك",
+        "ar": "حمام مغربي كلاسيك",
+        "en": "Classic Moroccan Bath"
+      },
+      "whatsappUrl": "https://api.whatsapp.com/send/?phone=966579777407&type=phone_number&app_absent=0&text=*%D8%A7%D9%84%D8%A7%D8%B3%D9%85%3A*+Link+Audit+Test%0A*%D8%A7%D9%84%D8%AC%D9%88%D8%A7%D9%84%3A*+0551234567%0A*%D8%A7%D9%84%D8%AD%D8%AC%D8%B2%3A*+%D8%AD%D9%85%D8%A7%D9%85+%D9%85%D8%BA%D8%B1%D8%A8%D9%8A+%D9%83%D9%84%D8%A7%D8%B3%D9%8A%D9%83",
+      "message": "*الاسم:* Link Audit Test\n*الجوال:* 0551234567\n*الحجز:* حمام مغربي كلاسيك",
+      "status": "opened",
+      "pass": true,
+      "note": "preselect OK; WA phone OK; item in message; name OK"
+    },
+    {
+      "type": "card-to-whatsapp",
+      "link": "/book/?department=service&item=%D8%AD%D9%85%D8%A7%D9%85+%D9%85%D8%BA%D8%B1%D8%A8%D9%8A+%D8%A8%D8%A7%D9%84%D8%B7%D9%8A%D9%86+%D8%A7%D9%84%D9%85%D8%BA%D8%B1%D8%A8%D9%8A",
+      "source": "/services/",
+      "expectedItem": "حمام مغربي بالطين المغربي",
+      "department": "service",
+      "selected": {
+        "value": "service:moroccan-bath-clay",
+        "label": "حمام مغربي بالطين المغربي",
+        "ar": "حمام مغربي بالطين المغربي",
+        "en": "Moroccan Bath with Moroccan Clay"
+      },
+      "whatsappUrl": "https://api.whatsapp.com/send/?phone=966579777407&type=phone_number&app_absent=0&text=*%D8%A7%D9%84%D8%A7%D8%B3%D9%85%3A*+Link+Audit+Test%0A*%D8%A7%D9%84%D8%AC%D9%88%D8%A7%D9%84%3A*+0551234567%0A*%D8%A7%D9%84%D8%AD%D8%AC%D8%B2%3A*+%D8%AD%D9%85%D8%A7%D9%85+%D9%85%D8%BA%D8%B1%D8%A8%D9%8A+%D8%A8%D8%A7%D9%84%D8%B7%D9%8A%D9%86+%D8%A7%D9%84%D9%85%D8%BA%D8%B1%D8%A8%D9%8A",
+      "message": "*الاسم:* Link Audit Test\n*الجوال:* 0551234567\n*الحجز:* حمام مغربي بالطين المغربي",
+      "status": "opened",
+      "pass": true,
+      "note": "preselect OK; WA phone OK; item in message; name OK"
+    },
+    {
+      "type": "card-to-whatsapp",
+      "link": "/book/?department=service&item=%D8%A8%D8%AF%D9%83%D9%8A%D8%B1+%D8%A7%D9%84%D9%8A%D8%AF%D9%8A%D9%86+%D9%88%D8%A7%D9%84%D9%82%D8%AF%D9%85%D9%8A%D9%86",
+      "source": "/services/",
+      "expectedItem": "بدكير اليدين والقدمين",
+      "department": "service",
+      "selected": {
+        "value": "service:manicure-pedicure",
+        "label": "بدكير اليدين والقدمين",
+        "ar": "بدكير اليدين والقدمين",
+        "en": "Manicure & Pedicure"
+      },
+      "whatsappUrl": "https://api.whatsapp.com/send/?phone=966579777407&type=phone_number&app_absent=0&text=*%D8%A7%D9%84%D8%A7%D8%B3%D9%85%3A*+Link+Audit+Test%0A*%D8%A7%D9%84%D8%AC%D9%88%D8%A7%D9%84%3A*+0551234567%0A*%D8%A7%D9%84%D8%AD%D8%AC%D8%B2%3A*+%D8%A8%D8%AF%D9%83%D9%8A%D8%B1+%D8%A7%D9%84%D9%8A%D8%AF%D9%8A%D9%86+%D9%88%D8%A7%D9%84%D9%82%D8%AF%D9%85%D9%8A%D9%86",
+      "message": "*الاسم:* Link Audit Test\n*الجوال:* 0551234567\n*الحجز:* بدكير اليدين والقدمين",
+      "status": "opened",
+      "pass": true,
+      "note": "preselect OK; WA phone OK; item in message; name OK"
+    },
+    {
+      "type": "card-to-whatsapp",
+      "link": "/book/?department=package&item=%D8%A8%D8%A7%D9%82%D8%A9+%D8%A7%D9%84%D8%B9%D8%B1%D8%B3%D8%A7%D9%86",
+      "source": "/packages/",
+      "expectedItem": "باقة العرسان",
+      "department": "package",
+      "selected": {
+        "value": "package:wedding",
+        "label": "باقة العرسان",
+        "ar": "باقة العرسان",
+        "en": "Wedding Package"
+      },
+      "whatsappUrl": "https://api.whatsapp.com/send/?phone=966579777407&type=phone_number&app_absent=0&text=*%D8%A7%D9%84%D8%A7%D8%B3%D9%85%3A*+Link+Audit+Test%0A*%D8%A7%D9%84%D8%AC%D9%88%D8%A7%D9%84%3A*+0551234567%0A*%D8%A7%D9%84%D8%AD%D8%AC%D8%B2%3A*+%D8%A8%D8%A7%D9%82%D8%A9+%D8%A7%D9%84%D8%B9%D8%B1%D8%B3%D8%A7%D9%86",
+      "message": "*الاسم:* Link Audit Test\n*الجوال:* 0551234567\n*الحجز:* باقة العرسان",
+      "status": "opened",
+      "pass": true,
+      "note": "preselect OK; WA phone OK; item in message; name OK"
+    },
+    {
+      "type": "card-to-whatsapp",
+      "link": "/book/?department=package&item=%D8%A8%D8%A7%D9%82%D8%A9+%D8%A7%D9%84%D8%B1%D9%81%D8%A7%D9%87%D9%8A%D8%A9",
+      "source": "/packages/",
+      "expectedItem": "باقة الرفاهية",
+      "department": "package",
+      "selected": {
+        "value": "package:luxury",
+        "label": "باقة الرفاهية",
+        "ar": "باقة الرفاهية",
+        "en": "Luxury Package"
+      },
+      "whatsappUrl": "https://api.whatsapp.com/send/?phone=966579777407&type=phone_number&app_absent=0&text=*%D8%A7%D9%84%D8%A7%D8%B3%D9%85%3A*+Link+Audit+Test%0A*%D8%A7%D9%84%D8%AC%D9%88%D8%A7%D9%84%3A*+0551234567%0A*%D8%A7%D9%84%D8%AD%D8%AC%D8%B2%3A*+%D8%A8%D8%A7%D9%82%D8%A9+%D8%A7%D9%84%D8%B1%D9%81%D8%A7%D9%87%D9%8A%D8%A9",
+      "message": "*الاسم:* Link Audit Test\n*الجوال:* 0551234567\n*الحجز:* باقة الرفاهية",
+      "status": "opened",
+      "pass": true,
+      "note": "preselect OK; WA phone OK; item in message; name OK"
+    },
+    {
+      "type": "card-to-whatsapp",
+      "link": "/book/?department=package&item=%D8%A8%D8%A7%D9%82%D8%A9+%D8%A7%D9%84%D8%A5%D9%87%D8%AF%D8%A7%D8%A1",
+      "source": "/packages/",
+      "expectedItem": "باقة الإهداء",
+      "department": "package",
+      "selected": {
+        "value": "package:gift",
+        "label": "باقة الإهداء",
+        "ar": "باقة الإهداء",
+        "en": "Gift Package"
+      },
+      "whatsappUrl": "https://api.whatsapp.com/send/?phone=966579777407&type=phone_number&app_absent=0&text=*%D8%A7%D9%84%D8%A7%D8%B3%D9%85%3A*+Link+Audit+Test%0A*%D8%A7%D9%84%D8%AC%D9%88%D8%A7%D9%84%3A*+0551234567%0A*%D8%A7%D9%84%D8%AD%D8%AC%D8%B2%3A*+%D8%A8%D8%A7%D9%82%D8%A9+%D8%A7%D9%84%D8%A5%D9%87%D8%AF%D8%A7%D8%A1",
+      "message": "*الاسم:* Link Audit Test\n*الجوال:* 0551234567\n*الحجز:* باقة الإهداء",
+      "status": "opened",
+      "pass": true,
+      "note": "preselect OK; WA phone OK; item in message; name OK"
+    },
+    {
+      "type": "card-to-whatsapp",
+      "link": "/book/?department=offer&item=%D8%B9%D8%B1%D8%B6+%D8%A7%D9%84%D8%AA%D8%B9%D8%A7%D9%81%D9%8A",
+      "source": "/offers/",
+      "expectedItem": "عرض التعافي",
+      "department": "offer",
+      "selected": {
+        "value": "offer:recovery",
+        "label": "عرض التعافي",
+        "ar": "عرض التعافي",
+        "en": "Recovery Offer"
+      },
+      "whatsappUrl": "https://api.whatsapp.com/send/?phone=966579777407&type=phone_number&app_absent=0&text=*%D8%A7%D9%84%D8%A7%D8%B3%D9%85%3A*+Link+Audit+Test%0A*%D8%A7%D9%84%D8%AC%D9%88%D8%A7%D9%84%3A*+0551234567%0A*%D8%A7%D9%84%D8%AD%D8%AC%D8%B2%3A*+%D8%B9%D8%B1%D8%B6+%D8%A7%D9%84%D8%AA%D8%B9%D8%A7%D9%81%D9%8A",
+      "message": "*الاسم:* Link Audit Test\n*الجوال:* 0551234567\n*الحجز:* عرض التعافي",
+      "status": "opened",
+      "pass": true,
+      "note": "preselect OK; WA phone OK; item in message; name OK"
+    },
+    {
+      "type": "card-to-whatsapp",
+      "link": "/book/?department=offer&item=%D8%B9%D8%B1%D8%B6+%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D8%B1%D8%AE%D8%A7%D8%A1",
+      "source": "/offers/",
+      "expectedItem": "عرض الاسترخاء",
+      "department": "offer",
+      "selected": {
+        "value": "offer:relaxation",
+        "label": "عرض الاسترخاء",
+        "ar": "عرض الاسترخاء",
+        "en": "Relaxation Offer"
+      },
+      "whatsappUrl": "https://api.whatsapp.com/send/?phone=966579777407&type=phone_number&app_absent=0&text=*%D8%A7%D9%84%D8%A7%D8%B3%D9%85%3A*+Link+Audit+Test%0A*%D8%A7%D9%84%D8%AC%D9%88%D8%A7%D9%84%3A*+0551234567%0A*%D8%A7%D9%84%D8%AD%D8%AC%D8%B2%3A*+%D8%B9%D8%B1%D8%B6+%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D8%B1%D8%AE%D8%A7%D8%A1",
+      "message": "*الاسم:* Link Audit Test\n*الجوال:* 0551234567\n*الحجز:* عرض الاسترخاء",
+      "status": "opened",
+      "pass": true,
+      "note": "preselect OK; WA phone OK; item in message; name OK"
+    },
+    {
+      "type": "card-to-whatsapp",
+      "link": "/book/?department=offer&item=%D9%86%D8%AC%D9%85+%D8%B3%D8%A8%D8%A7+%D8%B3%D8%AC%D9%86%D8%AA%D8%B4%D8%B1",
+      "source": "/offers/",
+      "expectedItem": "نجم سبا سجنتشر",
+      "department": "offer",
+      "selected": {
+        "value": "offer:signature",
+        "label": "نجم سبا سجنتشر",
+        "ar": "نجم سبا سجنتشر",
+        "en": "Nagm Spa Signature"
+      },
+      "whatsappUrl": "https://api.whatsapp.com/send/?phone=966579777407&type=phone_number&app_absent=0&text=*%D8%A7%D9%84%D8%A7%D8%B3%D9%85%3A*+Link+Audit+Test%0A*%D8%A7%D9%84%D8%AC%D9%88%D8%A7%D9%84%3A*+0551234567%0A*%D8%A7%D9%84%D8%AD%D8%AC%D8%B2%3A*+%D9%86%D8%AC%D9%85+%D8%B3%D8%A8%D8%A7+%D8%B3%D8%AC%D9%86%D8%AA%D8%B4%D8%B1",
+      "message": "*الاسم:* Link Audit Test\n*الجوال:* 0551234567\n*الحجز:* نجم سبا سجنتشر",
+      "status": "opened",
+      "pass": true,
+      "note": "preselect OK; WA phone OK; item in message; name OK"
+    },
+    {
+      "type": "card-to-whatsapp",
+      "link": "/book/?department=offer&item=%D8%A8%D8%A7%D9%82%D8%A9+%D8%A7%D9%84%D8%B9%D9%86%D8%A7%D9%8A%D8%A9",
+      "source": "/offers/",
+      "expectedItem": "باقة العناية",
+      "department": "offer",
+      "selected": {
+        "value": "offer:care",
+        "label": "باقة العناية",
+        "ar": "باقة العناية",
+        "en": "Care Package"
+      },
+      "whatsappUrl": "https://api.whatsapp.com/send/?phone=966579777407&type=phone_number&app_absent=0&text=*%D8%A7%D9%84%D8%A7%D8%B3%D9%85%3A*+Link+Audit+Test%0A*%D8%A7%D9%84%D8%AC%D9%88%D8%A7%D9%84%3A*+0551234567%0A*%D8%A7%D9%84%D8%AD%D8%AC%D8%B2%3A*+%D8%A8%D8%A7%D9%82%D8%A9+%D8%A7%D9%84%D8%B9%D9%86%D8%A7%D9%8A%D8%A9",
+      "message": "*الاسم:* Link Audit Test\n*الجوال:* 0551234567\n*الحجز:* باقة العناية",
+      "status": "opened",
+      "pass": true,
+      "note": "preselect OK; WA phone OK; item in message; name OK"
+    },
+    {
+      "type": "card-to-whatsapp",
+      "link": "/book/?department=offer&item=%D8%B9%D8%B1%D8%B6+%D8%A7%D9%84%D9%81%D8%AE%D8%A7%D9%85%D8%A9",
+      "source": "/offers/",
+      "expectedItem": "عرض الفخامة",
+      "department": "offer",
+      "selected": {
+        "value": "offer:elegance",
+        "label": "عرض الفخامة",
+        "ar": "عرض الفخامة",
+        "en": "Elegance Offer"
+      },
+      "whatsappUrl": "https://api.whatsapp.com/send/?phone=966579777407&type=phone_number&app_absent=0&text=*%D8%A7%D9%84%D8%A7%D8%B3%D9%85%3A*+Link+Audit+Test%0A*%D8%A7%D9%84%D8%AC%D9%88%D8%A7%D9%84%3A*+0551234567%0A*%D8%A7%D9%84%D8%AD%D8%AC%D8%B2%3A*+%D8%B9%D8%B1%D8%B6+%D8%A7%D9%84%D9%81%D8%AE%D8%A7%D9%85%D8%A9",
+      "message": "*الاسم:* Link Audit Test\n*الجوال:* 0551234567\n*الحجز:* عرض الفخامة",
+      "status": "opened",
+      "pass": true,
+      "note": "preselect OK; WA phone OK; item in message; name OK"
+    },
+    {
+      "type": "card-to-whatsapp",
+      "link": "/book/?department=offer&item=%D8%A7%D9%84%D8%B9%D8%B1%D8%B6+%D8%A7%D9%84%D8%B1%D8%AE%D8%A7%D8%A1",
+      "source": "/offers/",
+      "expectedItem": "العرض الرخاء",
+      "department": "offer",
+      "selected": {
+        "value": "offer:prosperity",
+        "label": "العرض الرخاء",
+        "ar": "العرض الرخاء",
+        "en": "Prosperity Offer"
+      },
+      "whatsappUrl": "https://api.whatsapp.com/send/?phone=966579777407&type=phone_number&app_absent=0&text=*%D8%A7%D9%84%D8%A7%D8%B3%D9%85%3A*+Link+Audit+Test%0A*%D8%A7%D9%84%D8%AC%D9%88%D8%A7%D9%84%3A*+0551234567%0A*%D8%A7%D9%84%D8%AD%D8%AC%D8%B2%3A*+%D8%A7%D9%84%D8%B9%D8%B1%D8%B6+%D8%A7%D9%84%D8%B1%D8%AE%D8%A7%D8%A1",
+      "message": "*الاسم:* Link Audit Test\n*الجوال:* 0551234567\n*الحجز:* العرض الرخاء",
+      "status": "opened",
+      "pass": true,
+      "note": "preselect OK; WA phone OK; item in message; name OK"
+    },
+    {
+      "type": "card-to-whatsapp",
+      "link": "/book/?department=offer&item=%D8%A7%D9%84%D8%B9%D8%B1%D8%B6+%D8%A7%D9%84%D9%85%D9%84%D9%83%D9%8A",
+      "source": "/offers/",
+      "expectedItem": "العرض الملكي",
+      "department": "offer",
+      "selected": {
+        "value": "offer:royal",
+        "label": "العرض الملكي",
+        "ar": "العرض الملكي",
+        "en": "Royal Offer"
+      },
+      "whatsappUrl": "https://api.whatsapp.com/send/?phone=966579777407&type=phone_number&app_absent=0&text=*%D8%A7%D9%84%D8%A7%D8%B3%D9%85%3A*+Link+Audit+Test%0A*%D8%A7%D9%84%D8%AC%D9%88%D8%A7%D9%84%3A*+0551234567%0A*%D8%A7%D9%84%D8%AD%D8%AC%D8%B2%3A*+%D8%A7%D9%84%D8%B9%D8%B1%D8%B6+%D8%A7%D9%84%D9%85%D9%84%D9%83%D9%8A",
+      "message": "*الاسم:* Link Audit Test\n*الجوال:* 0551234567\n*الحجز:* العرض الملكي",
+      "status": "opened",
+      "pass": true,
+      "note": "preselect OK; WA phone OK; item in message; name OK"
+    },
+    {
+      "type": "card-to-whatsapp",
+      "link": "/book/?department=offer&item=%D8%A7%D9%84%D8%B9%D8%B1%D8%B6+%D8%A7%D9%84%D8%B0%D9%87%D8%A8%D9%8A",
+      "source": "/offers/",
+      "expectedItem": "العرض الذهبي",
+      "department": "offer",
+      "selected": {
+        "value": "offer:golden",
+        "label": "العرض الذهبي",
+        "ar": "العرض الذهبي",
+        "en": "Golden Offer"
+      },
+      "whatsappUrl": "https://api.whatsapp.com/send/?phone=966579777407&type=phone_number&app_absent=0&text=*%D8%A7%D9%84%D8%A7%D8%B3%D9%85%3A*+Link+Audit+Test%0A*%D8%A7%D9%84%D8%AC%D9%88%D8%A7%D9%84%3A*+0551234567%0A*%D8%A7%D9%84%D8%AD%D8%AC%D8%B2%3A*+%D8%A7%D9%84%D8%B9%D8%B1%D8%B6+%D8%A7%D9%84%D8%B0%D9%87%D8%A8%D9%8A",
+      "message": "*الاسم:* Link Audit Test\n*الجوال:* 0551234567\n*الحجز:* العرض الذهبي",
+      "status": "opened",
+      "pass": true,
+      "note": "preselect OK; WA phone OK; item in message; name OK"
+    },
+    {
+      "type": "card-to-whatsapp",
+      "link": "/en/book/?department=service&item=Relaxation+Massage",
+      "source": "/en/services/",
+      "expectedItem": "Relaxation Massage",
+      "department": "service",
+      "selected": {
+        "value": "service:massage-relaxation",
+        "label": "Relaxation Massage",
+        "ar": "مساج الاسترخاء",
+        "en": "Relaxation Massage"
+      },
+      "whatsappUrl": "https://api.whatsapp.com/send/?phone=966579777407&type=phone_number&app_absent=0&text=*Name%3A*+Link+Audit+Test%0A*Phone%3A*+0551234567%0A*Booking%3A*+Relaxation+Massage",
+      "message": "*Name:* Link Audit Test\n*Phone:* 0551234567\n*Booking:* Relaxation Massage",
+      "status": "opened",
+      "pass": true,
+      "note": "preselect OK; WA phone OK; item in message; name OK"
+    },
+    {
+      "type": "card-to-whatsapp",
+      "link": "/en/book/?department=service&item=Hot+Oil+Massage",
+      "source": "/en/services/",
+      "expectedItem": "Hot Oil Massage",
+      "department": "service",
+      "selected": {
+        "value": "service:hot-oil-massage",
+        "label": "Hot Oil Massage",
+        "ar": "مساج الزيت الحار",
+        "en": "Hot Oil Massage"
+      },
+      "whatsappUrl": "https://api.whatsapp.com/send/?phone=966579777407&type=phone_number&app_absent=0&text=*Name%3A*+Link+Audit+Test%0A*Phone%3A*+0551234567%0A*Booking%3A*+Hot+Oil+Massage",
+      "message": "*Name:* Link Audit Test\n*Phone:* 0551234567\n*Booking:* Hot Oil Massage",
+      "status": "opened",
+      "pass": true,
+      "note": "preselect OK; WA phone OK; item in message; name OK"
+    },
+    {
+      "type": "card-to-whatsapp",
+      "link": "/en/book/?department=service&item=Hand+%26+Foot+Massage",
+      "source": "/en/services/",
+      "expectedItem": "Hand & Foot Massage",
+      "department": "service",
+      "selected": {
+        "value": "service:foot-massage",
+        "label": "Hand & Foot Massage",
+        "ar": "مساج القدمين واليدين",
+        "en": "Hand & Foot Massage"
+      },
+      "whatsappUrl": "https://api.whatsapp.com/send/?phone=966579777407&type=phone_number&app_absent=0&text=*Name%3A*+Link+Audit+Test%0A*Phone%3A*+0551234567%0A*Booking%3A*+Hand+%26+Foot+Massage",
+      "message": "*Name:* Link Audit Test\n*Phone:* 0551234567\n*Booking:* Hand & Foot Massage",
+      "status": "opened",
+      "pass": true,
+      "note": "preselect OK; WA phone OK; item in message; name OK"
+    },
+    {
+      "type": "card-to-whatsapp",
+      "link": "/en/book/?department=service&item=Shiatsu+Massage",
+      "source": "/en/services/",
+      "expectedItem": "Shiatsu Massage",
+      "department": "service",
+      "selected": {
+        "value": "service:shiatsu",
+        "label": "Shiatsu Massage",
+        "ar": "مساج الشياتسو",
+        "en": "Shiatsu Massage"
+      },
+      "whatsappUrl": "https://api.whatsapp.com/send/?phone=966579777407&type=phone_number&app_absent=0&text=*Name%3A*+Link+Audit+Test%0A*Phone%3A*+0551234567%0A*Booking%3A*+Shiatsu+Massage",
+      "message": "*Name:* Link Audit Test\n*Phone:* 0551234567\n*Booking:* Shiatsu Massage",
+      "status": "opened",
+      "pass": true,
+      "note": "preselect OK; WA phone OK; item in message; name OK"
+    },
+    {
+      "type": "card-to-whatsapp",
+      "link": "/en/book/?department=service&item=Thai+Massage",
+      "source": "/en/services/",
+      "expectedItem": "Thai Massage",
+      "department": "service",
+      "selected": {
+        "value": "service:thai-massage",
+        "label": "Thai Massage",
+        "ar": "مساج تايلندي",
+        "en": "Thai Massage"
+      },
+      "whatsappUrl": "https://api.whatsapp.com/send/?phone=966579777407&type=phone_number&app_absent=0&text=*Name%3A*+Link+Audit+Test%0A*Phone%3A*+0551234567%0A*Booking%3A*+Thai+Massage",
+      "message": "*Name:* Link Audit Test\n*Phone:* 0551234567\n*Booking:* Thai Massage",
+      "status": "opened",
+      "pass": true,
+      "note": "preselect OK; WA phone OK; item in message; name OK"
+    },
+    {
+      "type": "card-to-whatsapp",
+      "link": "/en/book/?department=service&item=Sports+Massage",
+      "source": "/en/services/",
+      "expectedItem": "Sports Massage",
+      "department": "service",
+      "selected": {
+        "value": "service:sports-massage",
+        "label": "Sports Massage",
+        "ar": "المساج الرياضي",
+        "en": "Sports Massage"
+      },
+      "whatsappUrl": "https://api.whatsapp.com/send/?phone=966579777407&type=phone_number&app_absent=0&text=*Name%3A*+Link+Audit+Test%0A*Phone%3A*+0551234567%0A*Booking%3A*+Sports+Massage",
+      "message": "*Name:* Link Audit Test\n*Phone:* 0551234567\n*Booking:* Sports Massage",
+      "status": "opened",
+      "pass": true,
+      "note": "preselect OK; WA phone OK; item in message; name OK"
+    },
+    {
+      "type": "card-to-whatsapp",
+      "link": "/en/book/?department=service&item=Nagm+Spa+Signature+Massage",
+      "source": "/en/services/",
+      "expectedItem": "Nagm Spa Signature Massage",
+      "department": "service",
+      "selected": {
+        "value": "service:star-spa-massage",
+        "label": "Nagm Spa Signature Massage",
+        "ar": "مساج نجم سبا",
+        "en": "Nagm Spa Signature Massage"
+      },
+      "whatsappUrl": "https://api.whatsapp.com/send/?phone=966579777407&type=phone_number&app_absent=0&text=*Name%3A*+Link+Audit+Test%0A*Phone%3A*+0551234567%0A*Booking%3A*+Nagm+Spa+Signature+Massage",
+      "message": "*Name:* Link Audit Test\n*Phone:* 0551234567\n*Booking:* Nagm Spa Signature Massage",
+      "status": "opened",
+      "pass": true,
+      "note": "preselect OK; WA phone OK; item in message; name OK"
+    },
+    {
+      "type": "card-to-whatsapp",
+      "link": "/en/book/?department=service&item=Classic+Moroccan+Bath",
+      "source": "/en/services/",
+      "expectedItem": "Classic Moroccan Bath",
+      "department": "service",
+      "selected": {
+        "value": "service:moroccan-bath",
+        "label": "Classic Moroccan Bath",
+        "ar": "حمام مغربي كلاسيك",
+        "en": "Classic Moroccan Bath"
+      },
+      "whatsappUrl": "https://api.whatsapp.com/send/?phone=966579777407&type=phone_number&app_absent=0&text=*Name%3A*+Link+Audit+Test%0A*Phone%3A*+0551234567%0A*Booking%3A*+Classic+Moroccan+Bath",
+      "message": "*Name:* Link Audit Test\n*Phone:* 0551234567\n*Booking:* Classic Moroccan Bath",
+      "status": "opened",
+      "pass": true,
+      "note": "preselect OK; WA phone OK; item in message; name OK"
+    },
+    {
+      "type": "card-to-whatsapp",
+      "link": "/en/book/?department=service&item=Moroccan+Bath+with+Moroccan+Clay",
+      "source": "/en/services/",
+      "expectedItem": "Moroccan Bath with Moroccan Clay",
+      "department": "service",
+      "selected": {
+        "value": "service:moroccan-bath-clay",
+        "label": "Moroccan Bath with Moroccan Clay",
+        "ar": "حمام مغربي بالطين المغربي",
+        "en": "Moroccan Bath with Moroccan Clay"
+      },
+      "whatsappUrl": "https://api.whatsapp.com/send/?phone=966579777407&type=phone_number&app_absent=0&text=*Name%3A*+Link+Audit+Test%0A*Phone%3A*+0551234567%0A*Booking%3A*+Moroccan+Bath+with+Moroccan+Clay",
+      "message": "*Name:* Link Audit Test\n*Phone:* 0551234567\n*Booking:* Moroccan Bath with Moroccan Clay",
+      "status": "opened",
+      "pass": true,
+      "note": "preselect OK; WA phone OK; item in message; name OK"
+    },
+    {
+      "type": "card-to-whatsapp",
+      "link": "/en/book/?department=service&item=Manicure+%26+Pedicure",
+      "source": "/en/services/",
+      "expectedItem": "Manicure & Pedicure",
+      "department": "service",
+      "selected": {
+        "value": "service:manicure-pedicure",
+        "label": "Manicure & Pedicure",
+        "ar": "بدكير اليدين والقدمين",
+        "en": "Manicure & Pedicure"
+      },
+      "whatsappUrl": "https://api.whatsapp.com/send/?phone=966579777407&type=phone_number&app_absent=0&text=*Name%3A*+Link+Audit+Test%0A*Phone%3A*+0551234567%0A*Booking%3A*+Manicure+%26+Pedicure",
+      "message": "*Name:* Link Audit Test\n*Phone:* 0551234567\n*Booking:* Manicure & Pedicure",
+      "status": "opened",
+      "pass": true,
+      "note": "preselect OK; WA phone OK; item in message; name OK"
+    },
+    {
+      "type": "card-to-whatsapp",
+      "link": "/en/book/?department=package&item=Wedding+Package",
+      "source": "/en/packages/",
+      "expectedItem": "Wedding Package",
+      "department": "package",
+      "selected": {
+        "value": "package:wedding",
+        "label": "Wedding Package",
+        "ar": "باقة العرسان",
+        "en": "Wedding Package"
+      },
+      "whatsappUrl": "https://api.whatsapp.com/send/?phone=966579777407&type=phone_number&app_absent=0&text=*Name%3A*+Link+Audit+Test%0A*Phone%3A*+0551234567%0A*Booking%3A*+Wedding+Package",
+      "message": "*Name:* Link Audit Test\n*Phone:* 0551234567\n*Booking:* Wedding Package",
+      "status": "opened",
+      "pass": true,
+      "note": "preselect OK; WA phone OK; item in message; name OK"
+    },
+    {
+      "type": "card-to-whatsapp",
+      "link": "/en/book/?department=package&item=Luxury+Package",
+      "source": "/en/packages/",
+      "expectedItem": "Luxury Package",
+      "department": "package",
+      "selected": {
+        "value": "package:luxury",
+        "label": "Luxury Package",
+        "ar": "باقة الرفاهية",
+        "en": "Luxury Package"
+      },
+      "whatsappUrl": "https://api.whatsapp.com/send/?phone=966579777407&type=phone_number&app_absent=0&text=*Name%3A*+Link+Audit+Test%0A*Phone%3A*+0551234567%0A*Booking%3A*+Luxury+Package",
+      "message": "*Name:* Link Audit Test\n*Phone:* 0551234567\n*Booking:* Luxury Package",
+      "status": "opened",
+      "pass": true,
+      "note": "preselect OK; WA phone OK; item in message; name OK"
+    },
+    {
+      "type": "card-to-whatsapp",
+      "link": "/en/book/?department=package&item=Gift+Package",
+      "source": "/en/packages/",
+      "expectedItem": "Gift Package",
+      "department": "package",
+      "selected": {
+        "value": "package:gift",
+        "label": "Gift Package",
+        "ar": "باقة الإهداء",
+        "en": "Gift Package"
+      },
+      "whatsappUrl": "https://api.whatsapp.com/send/?phone=966579777407&type=phone_number&app_absent=0&text=*Name%3A*+Link+Audit+Test%0A*Phone%3A*+0551234567%0A*Booking%3A*+Gift+Package",
+      "message": "*Name:* Link Audit Test\n*Phone:* 0551234567\n*Booking:* Gift Package",
+      "status": "opened",
+      "pass": true,
+      "note": "preselect OK; WA phone OK; item in message; name OK"
+    },
+    {
+      "type": "card-to-whatsapp",
+      "link": "/en/book/?department=offer&item=Recovery+Offer",
+      "source": "/en/offers/",
+      "expectedItem": "Recovery Offer",
+      "department": "offer",
+      "selected": {
+        "value": "offer:recovery",
+        "label": "Recovery Offer",
+        "ar": "عرض التعافي",
+        "en": "Recovery Offer"
+      },
+      "whatsappUrl": "https://api.whatsapp.com/send/?phone=966579777407&type=phone_number&app_absent=0&text=*Name%3A*+Link+Audit+Test%0A*Phone%3A*+0551234567%0A*Booking%3A*+Recovery+Offer",
+      "message": "*Name:* Link Audit Test\n*Phone:* 0551234567\n*Booking:* Recovery Offer",
+      "status": "opened",
+      "pass": true,
+      "note": "preselect OK; WA phone OK; item in message; name OK"
+    },
+    {
+      "type": "card-to-whatsapp",
+      "link": "/en/book/?department=offer&item=Relaxation+Offer",
+      "source": "/en/offers/",
+      "expectedItem": "Relaxation Offer",
+      "department": "offer",
+      "selected": {
+        "value": "offer:relaxation",
+        "label": "Relaxation Offer",
+        "ar": "عرض الاسترخاء",
+        "en": "Relaxation Offer"
+      },
+      "whatsappUrl": "https://api.whatsapp.com/send/?phone=966579777407&type=phone_number&app_absent=0&text=*Name%3A*+Link+Audit+Test%0A*Phone%3A*+0551234567%0A*Booking%3A*+Relaxation+Offer",
+      "message": "*Name:* Link Audit Test\n*Phone:* 0551234567\n*Booking:* Relaxation Offer",
+      "status": "opened",
+      "pass": true,
+      "note": "preselect OK; WA phone OK; item in message; name OK"
+    },
+    {
+      "type": "card-to-whatsapp",
+      "link": "/en/book/?department=offer&item=Nagm+Spa+Signature",
+      "source": "/en/offers/",
+      "expectedItem": "Nagm Spa Signature",
+      "department": "offer",
+      "selected": {
+        "value": "offer:signature",
+        "label": "Nagm Spa Signature",
+        "ar": "نجم سبا سجنتشر",
+        "en": "Nagm Spa Signature"
+      },
+      "whatsappUrl": "https://api.whatsapp.com/send/?phone=966579777407&type=phone_number&app_absent=0&text=*Name%3A*+Link+Audit+Test%0A*Phone%3A*+0551234567%0A*Booking%3A*+Nagm+Spa+Signature",
+      "message": "*Name:* Link Audit Test\n*Phone:* 0551234567\n*Booking:* Nagm Spa Signature",
+      "status": "opened",
+      "pass": true,
+      "note": "preselect OK; WA phone OK; item in message; name OK"
+    },
+    {
+      "type": "card-to-whatsapp",
+      "link": "/en/book/?department=offer&item=Care+Package",
+      "source": "/en/offers/",
+      "expectedItem": "Care Package",
+      "department": "offer",
+      "selected": {
+        "value": "offer:care",
+        "label": "Care Package",
+        "ar": "باقة العناية",
+        "en": "Care Package"
+      },
+      "whatsappUrl": "https://api.whatsapp.com/send/?phone=966579777407&type=phone_number&app_absent=0&text=*Name%3A*+Link+Audit+Test%0A*Phone%3A*+0551234567%0A*Booking%3A*+Care+Package",
+      "message": "*Name:* Link Audit Test\n*Phone:* 0551234567\n*Booking:* Care Package",
+      "status": "opened",
+      "pass": true,
+      "note": "preselect OK; WA phone OK; item in message; name OK"
+    },
+    {
+      "type": "card-to-whatsapp",
+      "link": "/en/book/?department=offer&item=Elegance+Offer",
+      "source": "/en/offers/",
+      "expectedItem": "Elegance Offer",
+      "department": "offer",
+      "selected": {
+        "value": "offer:elegance",
+        "label": "Elegance Offer",
+        "ar": "عرض الفخامة",
+        "en": "Elegance Offer"
+      },
+      "whatsappUrl": "https://api.whatsapp.com/send/?phone=966579777407&type=phone_number&app_absent=0&text=*Name%3A*+Link+Audit+Test%0A*Phone%3A*+0551234567%0A*Booking%3A*+Elegance+Offer",
+      "message": "*Name:* Link Audit Test\n*Phone:* 0551234567\n*Booking:* Elegance Offer",
+      "status": "opened",
+      "pass": true,
+      "note": "preselect OK; WA phone OK; item in message; name OK"
+    },
+    {
+      "type": "card-to-whatsapp",
+      "link": "/en/book/?department=offer&item=Prosperity+Offer",
+      "source": "/en/offers/",
+      "expectedItem": "Prosperity Offer",
+      "department": "offer",
+      "selected": {
+        "value": "offer:prosperity",
+        "label": "Prosperity Offer",
+        "ar": "العرض الرخاء",
+        "en": "Prosperity Offer"
+      },
+      "whatsappUrl": "https://api.whatsapp.com/send/?phone=966579777407&type=phone_number&app_absent=0&text=*Name%3A*+Link+Audit+Test%0A*Phone%3A*+0551234567%0A*Booking%3A*+Prosperity+Offer",
+      "message": "*Name:* Link Audit Test\n*Phone:* 0551234567\n*Booking:* Prosperity Offer",
+      "status": "opened",
+      "pass": true,
+      "note": "preselect OK; WA phone OK; item in message; name OK"
+    },
+    {
+      "type": "card-to-whatsapp",
+      "link": "/en/book/?department=offer&item=Royal+Offer",
+      "source": "/en/offers/",
+      "expectedItem": "Royal Offer",
+      "department": "offer",
+      "selected": {
+        "value": "offer:royal",
+        "label": "Royal Offer",
+        "ar": "العرض الملكي",
+        "en": "Royal Offer"
+      },
+      "whatsappUrl": "https://api.whatsapp.com/send/?phone=966579777407&type=phone_number&app_absent=0&text=*Name%3A*+Link+Audit+Test%0A*Phone%3A*+0551234567%0A*Booking%3A*+Royal+Offer",
+      "message": "*Name:* Link Audit Test\n*Phone:* 0551234567\n*Booking:* Royal Offer",
+      "status": "opened",
+      "pass": true,
+      "note": "preselect OK; WA phone OK; item in message; name OK"
+    },
+    {
+      "type": "card-to-whatsapp",
+      "link": "/en/book/?department=offer&item=Golden+Offer",
+      "source": "/en/offers/",
+      "expectedItem": "Golden Offer",
+      "department": "offer",
+      "selected": {
+        "value": "offer:golden",
+        "label": "Golden Offer",
+        "ar": "العرض الذهبي",
+        "en": "Golden Offer"
+      },
+      "whatsappUrl": "https://api.whatsapp.com/send/?phone=966579777407&type=phone_number&app_absent=0&text=*Name%3A*+Link+Audit+Test%0A*Phone%3A*+0551234567%0A*Booking%3A*+Golden+Offer",
+      "message": "*Name:* Link Audit Test\n*Phone:* 0551234567\n*Booking:* Golden Offer",
+      "status": "opened",
+      "pass": true,
+      "note": "preselect OK; WA phone OK; item in message; name OK"
+    },
+    {
+      "type": "page-whatsapp-direct",
+      "link": "https://api.whatsapp.com/send/?phone=966579777407&type=phone_number&app_absent=0&text=%D8%A3%D9%87%D9%84%D8%A7%D9%8B%D8%8C+%D8%A3%D8%B1%D9%8A%D8%AF+%D8%A7%D9%84%D8%AA%D9%88%D8%A7%D8%B5%D9%84+%D9%85%D8%B9+%D9%86%D8%AC%D9%85+%D8%B3%D8%A8%D8%A7",
+      "source": "/go/",
+      "message": "أهلاً، أريد التواصل مع نجم سبا",
+      "status": "valid",
+      "pass": true,
+      "note": "message=\"أهلاً، أريد التواصل مع نجم سبا\""
+    },
+    {
+      "type": "page-whatsapp-direct",
+      "link": "https://api.whatsapp.com/send/?phone=966579777407&type=phone_number&app_absent=0&text=Hello%2C+I+would+like+to+contact+Nagm+Spa",
+      "source": "/en/go/",
+      "message": "Hello, I would like to contact Nagm Spa",
+      "status": "valid",
+      "pass": true,
+      "note": "message=\"Hello, I would like to contact Nagm Spa\""
+    }
+  ],
+  "failures": {
+    "pages": [],
+    "links": [],
+    "whatsapp": []
+  }
+}

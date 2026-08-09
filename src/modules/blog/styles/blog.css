@@ -2,9 +2,9 @@
    Host apps map --blog-* variables; fallbacks keep the module extractable. */
 
 .blog-root {
-  --blog-surface: var(--color-bg-card, #0c2322);
-  --blog-surface-soft: var(--color-bg-tertiary, #0d2221);
-  --blog-surface-accent: var(--color-bg-secondary, #091918);
+  --blog-surface: var(--color-bg-card, #132c2b);
+  --blog-surface-soft: var(--color-bg-tertiary, #142b2a);
+  --blog-surface-accent: var(--color-bg-secondary, #102524);
   --blog-text: var(--color-text-primary, #f4f2ea);
   --blog-muted: var(--color-text-muted, #b3aea0);
   --blog-accent: var(--color-gold, #e1af4a);

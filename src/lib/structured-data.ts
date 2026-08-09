@@ -31,12 +31,11 @@ export interface ResolvedPackage {
 
 export interface ResolvedOffer {
   slug: string;
-  image?: string;
   name: string;
   subtitle: string;
   description: string;
   price: string;
-  originalPrice?: string;
+  originalPrice: string;
   features: string[];
 }
 
@@ -200,12 +199,11 @@ export function buildStructuredData({
         const serviceUrl = resolveSeoUrl(servicePath, siteOrigin);
         const serviceId = resolveSeoUrl(`${servicePath}#service`, siteOrigin);
         const offerId = resolveSeoUrl(`${servicePath}#offer`, siteOrigin);
-        return {
+        const price = service.price ? toSchemaPrice(service.price) : '';
+        const offer: Record<string, unknown> = {
           '@type': 'Offer',
           '@id': offerId,
           url: serviceUrl,
-          price: toSchemaPrice(service.price),
-          priceCurrency: 'SAR',
           itemOffered: {
             '@type': 'Service',
             '@id': serviceId,
@@ -217,6 +215,12 @@ export function buildStructuredData({
             url: serviceUrl,
           },
         };
+        // PDF menu prices treatments inside offers/packages — only emit Offer price when numeric.
+        if (price) {
+          offer.price = price;
+          offer.priceCurrency = 'SAR';
+        }
+        return offer;
       }),
     });
   }
@@ -291,20 +295,15 @@ export function buildStructuredData({
     const offerUrl = resolveSeoUrl(offerPath, siteOrigin);
     const serviceId = resolveSeoUrl(`${offerPath}#service`, siteOrigin);
     const offerId = resolveSeoUrl(`${offerPath}#offer`, siteOrigin);
-    const serviceEntity: Record<string, unknown> = {
+    detailEntities.push({
       '@type': 'Service',
       '@id': serviceId,
       name: offer.name,
       description: offer.description,
-      serviceType: t(locale, 'schemaCarCareOfferType'),
+      serviceType: t(locale, 'schemaSpaPackageType'),
       provider: { '@id': businessId },
       url: offerUrl,
-    };
-    if (offer.image) {
-      serviceEntity.image = resolveSeoUrl(offer.image, siteOrigin);
-    }
-    if (offer.features.length > 0) {
-      serviceEntity.hasOfferCatalog = {
+      hasOfferCatalog: {
         '@type': 'OfferCatalog',
         name: t(locale, 'offerDetailComponents'),
         itemListElement: offer.features.map((feature, index) => ({
@@ -312,11 +311,10 @@ export function buildStructuredData({
           position: index + 1,
           name: feature,
         })),
-      };
-    }
-    detailEntities.push(serviceEntity);
+      },
+    });
     const price = toSchemaPrice(offer.price);
-    const originalPrice = offer.originalPrice ? toSchemaPrice(offer.originalPrice) : '';
+    const originalPrice = toSchemaPrice(offer.originalPrice);
     if (price) {
       const offerEntity: Record<string, unknown> = {
         '@type': 'Offer',
@@ -356,10 +354,9 @@ export function buildStructuredData({
             '@id': serviceId,
             name: offer.name,
             description: offer.description,
-            serviceType: t(locale, 'schemaCarCareOfferType'),
+            serviceType: t(locale, 'schemaSpaPackageType'),
             provider: { '@id': businessId },
             url: offerUrl,
-            ...(offer.image ? { image: resolveSeoUrl(offer.image, siteOrigin) } : {}),
           },
         };
       }),

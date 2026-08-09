@@ -25,7 +25,7 @@ import { getBookingAction, getCallAction } from '../data/site';
 import { localePath } from '../i18n/paths';
 import { t } from '../i18n/t';
 import type { Locale } from '../i18n/types';
-import { GOOGLE_REVIEWS_HREF } from '../lib/whatsapp';
+import { GOOGLE_REVIEWS_HREF, MENU_PDF_HREF } from '../lib/whatsapp';
 
 export interface Props {
 	locale: Locale;
@@ -42,7 +42,8 @@ const branchesData = getBranches(locale);
 const campaign = getSummerCampaign(locale);
 const booking = getBookingAction(locale);
 const call = getCallAction(locale);
-const offersDescription = t(locale, 'homeOffersDescription');
+const offersDiscount = campaign.discountLabel.replace(/\s*Off$/i, '').replace(/^خصم\s*/, '');
+const offersDescription = t(locale, 'homeOffersDescription').replace('{discount}', offersDiscount);
 ---
 
 <SiteLayout
@@ -107,15 +108,23 @@ const offersDescription = t(locale, 'homeOffersDescription');
 		<div class="page-container">
 			<SectionHeading
 				eyebrow={campaign.eyebrow}
-				title={`${locale === 'en' ? '' : 'عروض '}${campaign.name}${locale === 'en' ? ' Deals' : ''}`}
+				title={campaign.name}
 				description={offersDescription}
 				align="center"
 			/>
 			<div class="mt-12">
 				<OfferGrid offers={offersData} locale={locale} />
 			</div>
-			<div class="mt-10 flex justify-center">
+			<div class="mt-10 flex flex-wrap items-center justify-center gap-3">
 				<a href={localePath('/offers/', locale)} class="outline-button">{t(locale, 'homeOffersAllLink')}</a>
+				<a
+					href={MENU_PDF_HREF}
+					download
+					class="outline-button"
+					aria-label={t(locale, 'menuPdfAria')}
+				>
+					{t(locale, 'menuPdfLabel')}
+				</a>
 			</div>
 		</div>
 	</section>

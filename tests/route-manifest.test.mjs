@@ -18,9 +18,9 @@ const generated = pages.map((p) => p.route);
 const expectedStatic = expectedPrerenderedRoutes();
 
 test('generates the complete Arabic and English prerendered route set', () => {
-  // 50 bilingual routes — blog listing/articles are SSR and not written to dist/client
-  assert.equal(expectedStatic.length, 50);
-  assert.equal(expectedRoutes().length, 57);
+  // 64 bilingual routes — blog listing/articles are SSR and not written to dist/client
+  assert.equal(expectedStatic.length, 64);
+  assert.equal(expectedRoutes().length, 71);
   assert.deepEqual(generated, expectedStatic);
 });
 

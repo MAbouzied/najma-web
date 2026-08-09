@@ -1,26 +1,11 @@
-import type { Locale, LocalizedString } from '../i18n/types';
-import { L, localizeList } from '../i18n/localize';
+import { readFileSync, writeFileSync } from 'node:fs';
 
-export interface Benefit {
-  icon: string;
-  title: LocalizedString;
-  description: LocalizedString;
-}
+const path = new URL('../src/data/home.ts', import.meta.url);
+let s = readFileSync(path, 'utf8').replace(/\r\n/g, '\n');
 
-export interface Service {
-  slug: string;
-  /** Card / listing thumbnail */
-  image: string;
-  /** Optional larger image for the service detail page */
-  heroImage?: string;
-  title: LocalizedString;
-  description: LocalizedString;
-  duration?: LocalizedString;
-  /** Omit when the PDF only prices this treatment inside offers/packages. */
-  price?: LocalizedString;
-}
-
-export interface Package {
+s = s.replace(
+  /export interface Package \{[\s\S]*?featured\?: boolean;\n\}/,
+  `export interface Package {
   slug: string;
   name: LocalizedString;
   subtitle: LocalizedString;
@@ -29,59 +14,29 @@ export interface Package {
   originalPrice?: LocalizedString;
   features: LocalizedString[];
   featured?: boolean;
-}
+}`,
+);
 
-export interface Offer {
-  slug: string;
-  name: LocalizedString;
-  subtitle: LocalizedString;
-  description: LocalizedString;
-  price: LocalizedString;
-  originalPrice: LocalizedString;
-  features: LocalizedString[];
-}
+s = s.replace(
+  /  duration\?: LocalizedString;\n  price: LocalizedString;\n\}/,
+  `  duration?: LocalizedString;
+  /** Omit when the PDF only prices this treatment inside offers/packages. */
+  price?: LocalizedString;
+}`,
+);
 
-export interface Testimonial {
-  quote: LocalizedString;
-  name: LocalizedString;
-  service: LocalizedString;
-}
-
-export interface Faq {
-  question: LocalizedString;
-  answer: LocalizedString;
-}
-
-export const summerCampaign = {
+s = s.replace(
+  /export const summerCampaign = \{[\s\S]*?\} as const;/,
+  `export const summerCampaign = {
   name: { ar: 'عروض نجم سبا', en: 'Nagm Spa Special Offers' } as LocalizedString,
   discountLabel: { ar: 'خصم ٢٠٪', en: '20% Off' } as LocalizedString,
   eyebrow: { ar: 'على جميع الباقات', en: 'On all packages' } as LocalizedString,
-} as const;
+} as const;`,
+);
 
-export const benefits: Benefit[] = [
-  {
-    icon: '/assets/home/benefits/expert-therapists.png',
-    title: { ar: 'فريق متخصص', en: 'Expert Team' },
-    description: { ar: 'خدمة احترافية بأيدي متخصصين داخل أجواء مصممة للراحة والخصوصية', en: 'Professional care by specialists in an atmosphere designed for comfort and privacy' },
-  },
-  {
-    icon: '/assets/home/benefits/luxury-products.png',
-    title: { ar: 'أجواء فاخرة', en: 'Luxurious Atmosphere' },
-    description: { ar: 'تجربة سبا متكاملة تجمع الهدوء والخصوصية وتجديد النشاط', en: 'A complete spa experience that combines tranquility, privacy, and renewed energy' },
-  },
-  {
-    icon: '/assets/home/benefits/calm-atmosphere.png',
-    title: { ar: 'أسعار تنافسية', en: 'Competitive Prices' },
-    description: { ar: 'خدمات متميزة بأسعار مناسبة وعروض حصرية طوال العام', en: 'Premium services at affordable prices with exclusive offers year-round' },
-  },
-  {
-    icon: '/assets/home/benefits/quick-booking.png',
-    title: { ar: 'موقع مميز', en: 'Prime Location' },
-    description: { ar: 'في قلب حفر الباطن — حي المصيف، نخدمك على مدار الساعة', en: 'In the heart of Hafar Al-Batin — Al-Masif district, serving you around the clock' },
-  },
-];
+const viaOffers = `{ ar: 'ضمن العروض', en: 'Via offers' }`;
 
-export const services: Service[] = [
+const servicesBlock = `export const services: Service[] = [
   {
     slug: 'swedish-massage',
     image: '/assets/home/services/swedish-massage.jpg',
@@ -90,7 +45,7 @@ export const services: Service[] = [
       ar: 'مساج سويدي ضمن عروض نجم سبا — لمسات انسيابية تُرخي العضلات وتُهدئ التوتر. احجز عبر واتساب ضمن الباقة المناسبة لك.',
       en: 'Swedish massage in Nagm Spa offers — flowing strokes that relax muscles and ease tension. Book via WhatsApp within the offer that suits you.',
     },
-    price: { ar: 'ضمن العروض', en: 'Via offers' },
+    price: ${viaOffers},
   },
   {
     slug: 'thai-massage',
@@ -100,7 +55,7 @@ export const services: Service[] = [
       ar: 'مساج تايلندي ضمن عروض نجم سبا — تمدد وضغط عميق لزيادة المرونة وتجديد الطاقة. احجز ضمن العرض المناسب لك.',
       en: 'Thai massage in Nagm Spa offers — stretching and deep pressure for flexibility and renewed energy. Book within the right offer.',
     },
-    price: { ar: 'ضمن العروض', en: 'Via offers' },
+    price: ${viaOffers},
   },
   {
     slug: 'hot-stone-massage',
@@ -111,7 +66,7 @@ export const services: Service[] = [
       ar: 'مساج الأحجار الساخنة ضمن عروض نجم سبا — حرارة مهدئة تُذيب الشد وتعمّق الاسترخاء.',
       en: 'Hot stone massage in Nagm Spa offers — soothing heat that melts tension and deepens relaxation.',
     },
-    price: { ar: 'ضمن العروض', en: 'Via offers' },
+    price: ${viaOffers},
   },
   {
     slug: 'cupping',
@@ -121,7 +76,7 @@ export const services: Service[] = [
       ar: 'مساج الكاسات الصينية ضمن عروض نجم سبا — تحفيز للدورة الدموية وتخفيف الشد العميق.',
       en: 'Chinese cupping massage in Nagm Spa offers — supports circulation and eases deep tension.',
     },
-    price: { ar: 'ضمن العروض', en: 'Via offers' },
+    price: ${viaOffers},
   },
   {
     slug: 'massage-relaxation',
@@ -131,7 +86,7 @@ export const services: Service[] = [
       ar: 'مساج الاسترخاء ضمن عروض نجم سبا — جلسة هادئة لاستعادة التوازن وتهدئة الجسد والعقل.',
       en: 'Relaxation massage in Nagm Spa offers — a calm session to restore balance for body and mind.',
     },
-    price: { ar: 'ضمن العروض', en: 'Via offers' },
+    price: ${viaOffers},
   },
   {
     slug: 'shiatsu',
@@ -141,7 +96,7 @@ export const services: Service[] = [
       ar: 'مساج الشياتسو ضمن عروض نجم سبا — ضغط إيقاعي على مسارات الطاقة لإطلاق التشنجات.',
       en: 'Shiatsu massage in Nagm Spa offers — rhythmic pressure on energy pathways to release tight spots.',
     },
-    price: { ar: 'ضمن العروض', en: 'Via offers' },
+    price: ${viaOffers},
   },
   {
     slug: 'hot-oil-massage',
@@ -151,7 +106,7 @@ export const services: Service[] = [
       ar: 'مساج الزيت الحار ضمن عروض نجم سبا — زيوت دافئة لاسترخاء عضلي عميق وراحة مريحة.',
       en: 'Hot oil massage in Nagm Spa offers — warm oils for deep muscle ease and comfortable relief.',
     },
-    price: { ar: 'ضمن العروض', en: 'Via offers' },
+    price: ${viaOffers},
   },
   {
     slug: 'star-spa-massage',
@@ -161,7 +116,7 @@ export const services: Service[] = [
       ar: 'مساج نجم سبا التوقيع ضمن العروض — جلسة متكاملة تجمع الاسترخاء والعناية العميقة.',
       en: 'Nagm Spa signature massage within offers — a complete session combining relaxation and deep care.',
     },
-    price: { ar: 'ضمن العروض', en: 'Via offers' },
+    price: ${viaOffers},
   },
   {
     slug: 'moroccan-bath',
@@ -171,7 +126,7 @@ export const services: Service[] = [
       ar: 'حمام مغربي كلاسيكي ضمن عروض نجم سبا — انتعاش ونضارة بتجربة حمام أصيلة.',
       en: 'Classic Moroccan bath in Nagm Spa offers — freshness and radiance with an authentic hammam experience.',
     },
-    price: { ar: 'ضمن العروض', en: 'Via offers' },
+    price: ${viaOffers},
   },
   {
     slug: 'royal-bath',
@@ -181,7 +136,7 @@ export const services: Service[] = [
       ar: 'حمام ملكي فاخر ضمن عروض نجم سبا — تجربة فاخرة للعناية العميقة والاسترخاء.',
       en: 'Luxury royal bath in Nagm Spa offers — a premium ritual for deep care and relaxation.',
     },
-    price: { ar: 'ضمن العروض', en: 'Via offers' },
+    price: ${viaOffers},
   },
   {
     slug: 'steam-session',
@@ -191,7 +146,7 @@ export const services: Service[] = [
       ar: 'جلسة بخار ضمن عروض نجم سبا — تهيئة مهدئة للجسم قبل أو مع باقة العناية.',
       en: 'Steam session in Nagm Spa offers — a calming prep for body care within your package.',
     },
-    price: { ar: 'ضمن العروض', en: 'Via offers' },
+    price: ${viaOffers},
   },
   {
     slug: 'manicure-pedicure',
@@ -202,7 +157,7 @@ export const services: Service[] = [
       ar: 'بدكير اليدين والقدمين ضمن عروض نجم سبا — عناية أنيقة لمظهر مرتب ومريح.',
       en: 'Hand and foot pedicure in Nagm Spa offers — polished care for a neat, comfortable finish.',
     },
-    price: { ar: 'ضمن العروض', en: 'Via offers' },
+    price: ${viaOffers},
   },
   {
     slug: 'body-scrub',
@@ -212,11 +167,11 @@ export const services: Service[] = [
       ar: 'صنفرة البشرة ضمن عروض نجم سبا — تنعيم ونضارة كجزء من تجربة العناية المتكاملة.',
       en: 'Body scrub in Nagm Spa offers — smoother, fresher skin as part of a complete care experience.',
     },
-    price: { ar: 'ضمن العروض', en: 'Via offers' },
+    price: ${viaOffers},
   },
-];
+];`;
 
-export const packages: Package[] = [
+const packagesBlock = `export const packages: Package[] = [
   {
     slug: 'groom',
     name: { ar: 'باقة المعرس', en: 'Groom Package' },
@@ -272,9 +227,9 @@ export const packages: Package[] = [
       { ar: 'يشمل العرض حلا + بوكيه ورد', en: 'Includes dessert + flower bouquet' },
     ],
   },
-];
+];`;
 
-export const offers: Offer[] = [
+const offersBlock = `export const offers: Offer[] = [
   {
     slug: 'relaxation',
     name: { ar: 'عرض الاسترخاء', en: 'Relaxation Offer' },
@@ -407,79 +362,15 @@ export const offers: Offer[] = [
       { ar: 'بدكير يدين وقدمين + صنفرة بشرة', en: 'Hand & foot pedicure + body scrub' },
     ],
   },
-];
+];`;
 
-export const testimonials: Testimonial[] = [
-  {
-    quote: { ar: 'تجربة استثنائية من اللحظة الأولى. الأجواء هادئة والمعالجة محترفة جدًا.', en: 'An exceptional experience from the very first moment. The atmosphere is calm and the therapist is very professional.' },
-    name: { ar: 'ريم العتيبي', en: 'Reem Al-Otaibi' },
-    service: { ar: 'حمام مغربي كلاسيك', en: 'Classic Moroccan Bath' },
-  },
-  {
-    quote: { ar: 'أفضل مكان جربته للاسترخاء. المكان راقٍ والخدمة على أعلى مستوى.', en: 'The best place I have tried for relaxation. The venue is upscale and the service is top-notch.' },
-    name: { ar: 'نوره القحطاني', en: 'Noura Al-Qahtani' },
-    service: { ar: 'مساج الزيت الحار', en: 'Hot Oil Massage' },
-  },
-  {
-    quote: { ar: 'شعرت بتجدد كامل بعد الجلسة. تفاصيل صغيرة تصنع فرقًا كبيرًا.', en: 'I felt completely renewed after the session. Small details make a big difference.' },
-    name: { ar: 'سارة الدوسري', en: 'Sara Al-Dosari' },
-    service: { ar: 'مساج الاسترخاء', en: 'Relaxation Massage' },
-  },
-  {
-    quote: { ar: 'خدمة سريعة ومكان نظيف. مساج الأحجار الساخنة خفف ألم الظهر بوضوح.', en: 'Quick service and a clean place. The hot stone massage clearly relieved my back pain.' },
-    name: { ar: 'فهد الشمري', en: 'Fahd Al-Shammari' },
-    service: { ar: 'مساج أحجار ساخنة', en: 'Hot Stone Massage' },
-  },
-  {
-    quote: { ar: 'أجواء هادئة وخصوصية تامة. أعود إليهم باستمرار بعد يوم طويل.', en: 'Calm atmosphere and complete privacy. I keep coming back after a long day.' },
-    name: { ar: 'مشاعل العتيبي', en: 'Mashael Al-Otaibi' },
-    service: { ar: 'مساج نجم سبا', en: 'Nagm Spa Massage' },
-  },
-  {
-    quote: { ar: 'تجربة ممتازة من الاستقبال حتى نهاية الجلسة. أنصح بهم بشدة.', en: 'An excellent experience from reception to the end of the session. I highly recommend them.' },
-    name: { ar: 'عبدالله الدوسري', en: 'Abdullah Al-Dosari' },
-    service: { ar: 'مساج تايلندي', en: 'Thai Massage' },
-  },
-];
+s = s.replace(/export const services: Service\[\] = \[[\s\S]*?\];\n\nexport const packages/, `${servicesBlock}\n\nexport const packages`);
+s = s.replace(/export const packages: Package\[\] = \[[\s\S]*?\];\n\nexport const offers/, `${packagesBlock}\n\nexport const offers`);
+s = s.replace(/export const offers: Offer\[\] = \[[\s\S]*?\];\n\nexport const testimonials/, `${offersBlock}\n\nexport const testimonials`);
 
-export const faqs: Faq[] = [
-  {
-    question: { ar: 'هل يجب الحجز مسبقًا؟', en: 'Do I need to book in advance?' },
-    answer: { ar: 'نعم، نوصي بالحجز المسبق لضمان توفر الوقت المناسب لك، ويمكنك الحجز بسهولة عبر واتساب أو الاتصال. نحن مفتوحون على مدار الساعة.', en: 'Yes, we recommend booking in advance to ensure your preferred time slot is available. You can easily book via WhatsApp or by calling. We are open around the clock.' },
-  },
-  {
-    question: { ar: 'متى يُفضّل الوصول قبل الموعد؟', en: 'How early should I arrive before my appointment?' },
-    answer: { ar: 'يُفضّل الوصول قبل الموعد بـ ١٥ دقيقة لإتمام إجراءات الاستقبال والاستعداد للجلسة بهدوء.', en: 'We recommend arriving 15 minutes before your appointment to complete check-in and prepare for your session calmly.' },
-  },
-  {
-    question: { ar: 'هل يمكن تعديل أو إلغاء الحجز؟', en: 'Can I modify or cancel my booking?' },
-    answer: { ar: 'نعم، يمكنك تعديل أو إلغاء الحجز قبل الموعد بـ ٢٤ ساعة دون رسوم.', en: 'Yes, you can modify or cancel your booking up to 24 hours before the appointment at no charge.' },
-  },
-  {
-    question: { ar: 'هل الجلسات مناسبة للحامل؟', en: 'Are the sessions suitable for pregnant women?' },
-    answer: { ar: 'نوفر جلسات مخصصة للحامل بعد استشارة الطبيب، ويرجى إبلاغ فريق الحجز مسبقًا.', en: 'We offer specialized sessions for pregnant women after doctor consultation. Please inform the booking team in advance.' },
-  },
-  {
-    question: { ar: 'هل توفرون غرفًا خاصة؟', en: 'Do you offer private rooms?' },
-    answer: { ar: 'نعم، جميع جلساتنا تُقدّم في غرف خاصة مصممة لتوفير الراحة والخصوصية التامة.', en: 'Yes, all our sessions are provided in private rooms designed for comfort and complete privacy.' },
-  },
-  {
-    question: { ar: 'هل الأسعار تشمل الضريبة؟', en: 'Are prices inclusive of tax?' },
-    answer: { ar: 'نعم، جميع الأسعار المعروفة تشمل ضريبة القيمة المضافة.', en: 'Yes, all listed prices include VAT.' },
-  },
-  {
-    question: { ar: 'ما طرق الدفع المتاحة؟', en: 'What payment methods are accepted?' },
-    answer: { ar: 'نقبل الدفع النقدي والبطاقات البنكية ومدى.', en: 'We accept cash, bank cards, and Mada.' },
-  },
-  {
-    question: { ar: 'هل يمكن شراء بطاقة هدية؟', en: 'Can I purchase a gift card?' },
-    answer: { ar: 'نعم، تتوفر بطاقات هدايا بقيم وتجارب مختلفة ويمكن تخصيصها لمناسبتك.', en: 'Yes, gift cards are available in various values and experiences and can be customized for your occasion.' },
-  },
-];
-
-// --- Localized getter helpers ---
-
-export function getServices(locale: Locale) {
+s = s.replace(
+  /export function getServices\(locale: Locale\) \{[\s\S]*?\n\}\n\nexport function getPackages/,
+  `export function getServices(locale: Locale) {
   return services.map((s) => ({
     slug: s.slug,
     image: s.image,
@@ -491,7 +382,12 @@ export function getServices(locale: Locale) {
   }));
 }
 
-export function getPackages(locale: Locale) {
+export function getPackages`,
+);
+
+s = s.replace(
+  /export function getPackages\(locale: Locale\) \{[\s\S]*?\n\}\n\nexport function getOffers/,
+  `export function getPackages(locale: Locale) {
   return packages.map((p) => ({
     slug: p.slug,
     name: L(p.name, locale),
@@ -504,45 +400,21 @@ export function getPackages(locale: Locale) {
   }));
 }
 
-export function getOffers(locale: Locale) {
-  return offers.map((o) => ({
-    slug: o.slug,
-    name: L(o.name, locale),
-    subtitle: L(o.subtitle, locale),
-    description: L(o.description, locale),
-    price: L(o.price, locale),
-    originalPrice: L(o.originalPrice, locale),
-    features: localizeList(o.features, locale),
-  }));
-}
+export function getOffers`,
+);
 
-export function getBenefits(locale: Locale) {
-  return benefits.map((b) => ({
-    icon: b.icon,
-    title: L(b.title, locale),
-    description: L(b.description, locale),
-  }));
-}
+// Why Nagm Spa benefit descriptions from PDF closing page
+s = s.replace(
+  /title: \{ ar: 'فريق متخصص', en: 'Expert Team' \},\n    description: \{ ar: '[^']+', en: '[^']+' \}/,
+  `title: { ar: 'فريق متخصص', en: 'Expert Team' },
+    description: { ar: 'خدمة احترافية بأيدي متخصصين داخل أجواء مصممة للراحة والخصوصية', en: 'Professional care by specialists in an atmosphere designed for comfort and privacy' }`,
+);
 
-export function getTestimonials(locale: Locale) {
-  return testimonials.map((t) => ({
-    quote: L(t.quote, locale),
-    name: L(t.name, locale),
-    service: L(t.service, locale),
-  }));
-}
+s = s.replace(
+  /title: \{ ar: 'أجواء فاخرة', en: 'Luxurious Atmosphere' \},\n    description: \{ ar: '[^']+', en: '[^']+' \}/,
+  `title: { ar: 'أجواء فاخرة', en: 'Luxurious Atmosphere' },
+    description: { ar: 'تجربة سبا متكاملة تجمع الهدوء والخصوصية وتجديد النشاط', en: 'A complete spa experience that combines tranquility, privacy, and renewed energy' }`,
+);
 
-export function getFaqs(locale: Locale) {
-  return faqs.map((f) => ({
-    question: L(f.question, locale),
-    answer: L(f.answer, locale),
-  }));
-}
-
-export function getSummerCampaign(locale: Locale) {
-  return {
-    name: L(summerCampaign.name, locale),
-    discountLabel: L(summerCampaign.discountLabel, locale),
-    eyebrow: L(summerCampaign.eyebrow, locale),
-  };
-}
+writeFileSync(path, s);
+console.log('home.ts menu data applied');

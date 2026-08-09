@@ -23,6 +23,7 @@ const { packageItem } = Astro.props;
     subtitle: L(packageItem.subtitle, locale),
     description: L(packageItem.description, locale),
     price: L(packageItem.price, locale),
+    originalPrice: packageItem.originalPrice ? L(packageItem.originalPrice, locale) : undefined,
     features: localizeList(packageItem.features, locale),
     featured: packageItem.featured,
   }}

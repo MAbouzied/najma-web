@@ -2,27 +2,34 @@ import { readdir, readFile } from 'node:fs/promises';
 import { join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-export const ORIGIN = 'https://najma-web.mohamed-abouzied.workers.dev';
+export const ORIGIN = 'https://nagmspa.com';
 export const DIST = fileURLToPath(new URL('../../dist/client/', import.meta.url));
 
 export const SERVICE_SLUGS = [
-  'massage-relaxation',
-  'hot-oil-massage',
-  'foot-massage',
-  'shiatsu',
+  'swedish-massage',
   'thai-massage',
-  'sports-massage',
+  'hot-stone-massage',
+  'cupping',
+  'massage-relaxation',
+  'shiatsu',
+  'hot-oil-massage',
   'star-spa-massage',
   'moroccan-bath',
-  'moroccan-bath-clay',
+  'royal-bath',
+  'steam-session',
   'manicure-pedicure',
+  'body-scrub',
 ];
-export const PACKAGE_SLUGS = ['wedding', 'luxury', 'gift'];
+export const PACKAGE_SLUGS = ['groom', 'luxury', 'gift'];
 export const OFFER_SLUGS = [
-  'exterior-wash',
-  'interior-wash',
-  'engine-cleaning',
-  'body-polishing',
+  'recovery',
+  'relaxation',
+  'signature',
+  'care',
+  'elegance',
+  'prosperity',
+  'royal',
+  'golden',
 ];
 
 /** Published mock blog slugs (Arabic-only surface). Keep in sync with mock-posts.ts. */

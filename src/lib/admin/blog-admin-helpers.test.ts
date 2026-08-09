@@ -8,6 +8,7 @@ import {
   adminAuthorDocumentId,
   adminCategoryDocumentId,
   assertAdminPublishCopy,
+  readAdminImportUrlBody,
   readAdminPostPayload,
   resolveAdminPublishedAt,
   shouldKeepExistingBlogSlug,
@@ -76,6 +77,31 @@ describe('readAdminPostPayload', () => {
       contentJson: '   ',
     });
     assert.equal(payload.contentJson, undefined);
+  });
+});
+
+describe('readAdminImportUrlBody', () => {
+  it('returns the trimmed url for a valid string', () => {
+    const result = readAdminImportUrlBody({ url: '  https://example.com/photo.jpg  ' });
+    assert.equal(result.url, 'https://example.com/photo.jpg');
+  });
+
+  it('throws for a missing url key', () => {
+    assert.throws(() => readAdminImportUrlBody({}), /أدخل رابط الصورة/);
+  });
+
+  it('throws for an empty string', () => {
+    assert.throws(() => readAdminImportUrlBody({ url: '' }), /أدخل رابط الصورة/);
+  });
+
+  it('throws for a whitespace-only string', () => {
+    assert.throws(() => readAdminImportUrlBody({ url: '   ' }), /أدخل رابط الصورة/);
+  });
+
+  it('throws for non-string values (number, null, object)', () => {
+    assert.throws(() => readAdminImportUrlBody({ url: 42 }),   /أدخل رابط الصورة/);
+    assert.throws(() => readAdminImportUrlBody({ url: null }), /أدخل رابط الصورة/);
+    assert.throws(() => readAdminImportUrlBody({ url: {} }),   /أدخل رابط الصورة/);
   });
 });
 

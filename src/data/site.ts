@@ -63,54 +63,34 @@ export function getQuickLinks(locale: Locale): SiteLink[] {
 }
 
 export function getServiceLinks(locale: Locale): SiteLink[] {
-  const labels: Record<'ar' | 'en', string[]> = {
-    ar: [
-      'مساج الاسترخاء',
-      'مساج الزيت الحار',
-      'مساج القدمين واليدين',
-      'مساج الشياتسو',
-      'مساج تايلندي',
-      'المساج الرياضي',
-      'مساج نجم سبا',
-      'حمام مغربي كلاسيك',
-      'حمام مغربي بالطين المغربي',
-      'بدكير اليدين والقدمين',
-    ],
-    en: [
-      'Relaxation Massage',
-      'Hot Oil Massage',
-      'Hands & Feet Massage',
-      'Shiatsu Massage',
-      'Thai Massage',
-      'Sports Massage',
-      'Nagm Spa Massage',
-      'Classic Moroccan Bath',
-      'Moroccan Clay Bath',
-      'Manicure & Pedicure',
-    ],
-  };
-  const slugs = [
-    'massage-relaxation',
-    'hot-oil-massage',
-    'foot-massage',
-    'shiatsu',
-    'thai-massage',
-    'sports-massage',
-    'star-spa-massage',
-    'moroccan-bath',
-    'moroccan-bath-clay',
-    'manicure-pedicure',
-  ];
-  return slugs.map((slug, i) => ({
-    label: labels[locale][i],
-    href: localePath(`/services/${slug}/`, locale),
+  // Keep footer links short: highlight core treatments from the PDF menu.
+  const items =
+    locale === 'en'
+      ? [
+          { slug: 'swedish-massage', label: 'Swedish Massage' },
+          { slug: 'thai-massage', label: 'Thai Massage' },
+          { slug: 'hot-stone-massage', label: 'Hot Stone Massage' },
+          { slug: 'cupping', label: 'Chinese Cupping' },
+          { slug: 'royal-bath', label: 'Luxury Royal Bath' },
+          { slug: 'manicure-pedicure', label: 'Hand & Foot Pedicure' },
+        ]
+      : [
+          { slug: 'swedish-massage', label: 'مساج سويدي' },
+          { slug: 'thai-massage', label: 'مساج تايلندي' },
+          { slug: 'hot-stone-massage', label: 'مساج أحجار ساخنة' },
+          { slug: 'cupping', label: 'مساج كاسات صينية' },
+          { slug: 'royal-bath', label: 'حمام ملكي فاخر' },
+          { slug: 'manicure-pedicure', label: 'بدكير يدين وقدمين' },
+        ];
+  return items.map((item) => ({
+    label: item.label,
+    href: localePath(`/services/${item.slug}/`, locale),
   }));
 }
 
 export function getSocialLinks(locale: Locale) {
   return [
     { label: t(locale, 'socialInstagram'), href: 'https://www.instagram.com/nagmspa/', icon: '/assets/icons/instagram.svg' },
-    { label: t(locale, 'socialTwitter'), href: 'https://twitter.com/nagmspa', icon: '/assets/icons/x.svg' },
     { label: t(locale, 'socialSnapchat'), href: 'https://www.snapchat.com/add/nagmspa', icon: '/assets/icons/snapchat.svg' },
   ];
 }
@@ -128,10 +108,23 @@ export function getBrandDescription(locale: Locale): string {
   return t(locale, 'brandDescription');
 }
 
+export interface LicenseCertificate {
+  href: string;
+  badgeSrc: string;
+  openLabel: string;
+  dialogTitle: string;
+  imageAlt: string;
+}
+
 export interface LicenseField {
   label: string;
   value: string | null;
+  certificate?: LicenseCertificate;
 }
+
+export const VAT_REGISTRATION_NUMBER = '310360176500003';
+export const VAT_CERTIFICATE_HREF = '/assets/legal/vat-registration-certificate.png';
+export const ZATCA_VAT_BADGE_SRC = '/assets/icons/zatca-vat.svg';
 
 export function getLicenseDetails(locale: Locale): { title: string; fields: LicenseField[] } {
   return {
@@ -141,7 +134,17 @@ export function getLicenseDetails(locale: Locale): { title: string; fields: Lice
       { label: t(locale, 'licenseMunicipalLicense'), value: '440511049271' },
       { label: t(locale, 'licenseLicensingAuthority'), value: t(locale, 'licenseLicensingAuthorityValue') },
       { label: t(locale, 'licenseLicensedActivity'), value: t(locale, 'licenseLicensedActivityValue') },
-      { label: t(locale, 'licenseVatNumber'), value: null },
+      {
+        label: t(locale, 'licenseVatNumber'),
+        value: VAT_REGISTRATION_NUMBER,
+        certificate: {
+          href: VAT_CERTIFICATE_HREF,
+          badgeSrc: ZATCA_VAT_BADGE_SRC,
+          openLabel: t(locale, 'licenseVatCertificateOpen'),
+          dialogTitle: t(locale, 'licenseVatCertificateTitle'),
+          imageAlt: t(locale, 'licenseVatCertificateAlt'),
+        },
+      },
     ],
   };
 }

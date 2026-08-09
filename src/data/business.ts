@@ -94,7 +94,6 @@ export function getBusinessProfile(locale: Locale): BusinessProfile {
       },
       sameAs: [
         'https://www.instagram.com/nagmspa/',
-        'https://twitter.com/nagmspa',
         'https://www.snapchat.com/add/nagmspa',
       ],
       hasMap: MAPS_HREF,

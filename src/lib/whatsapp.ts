@@ -2,6 +2,9 @@ export const WHATSAPP_PHONE = '966579777407';
 export const WHATSAPP_PHONE_DISPLAY = '+966579777407';
 export const PHONE_TEL_HREF = `tel:+${WHATSAPP_PHONE}`;
 
+/** Compressed PDF price menu (download link only — not embedded). */
+export const MENU_PDF_HREF = '/assets/nagm-spa-menu.pdf';
+
 export const MAPS_HREF =
   'https://www.google.com/maps/search/?api=1&query=%D8%AD%D9%8A+%D8%A7%D9%84%D9%85%D8%B5%D9%8A%D9%81+%D8%AD%D9%81%D8%B1+%D8%A7%D9%84%D8%A8%D8%A7%D8%B7%D9%86+%D9%86%D8%AC%D9%85+%D8%B3%D8%A8%D8%A7';
 

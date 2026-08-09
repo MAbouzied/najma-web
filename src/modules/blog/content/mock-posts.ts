@@ -291,7 +291,7 @@ export const mockBlogPosts: BlogPost[] = [
           type: 'link-paragraph',
           parts: [
             { text: 'تعرّف على ' },
-            { text: 'المساج الرياضي', href: '/services/sports-massage/' },
+            { text: 'مساج نجم سبا', href: '/services/star-spa-massage/' },
             { text: ' مباشرة.' },
           ],
         },

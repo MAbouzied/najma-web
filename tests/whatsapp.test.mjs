@@ -24,7 +24,7 @@ test('routes booking links through the customer form with item names', () => {
   assert.match(serviceUrl, /^\/book\/\?department=service/);
   assert.match(serviceUrl, /%D9%85%D8%B3%D8%A7%D8%AC/);
 
-  const packageUrl = buildPackageBookingUrl('باقة العرسان');
+  const packageUrl = buildPackageBookingUrl('باقة المعرس');
   assert.match(packageUrl, /^\/book\/\?department=package/);
   assert.match(packageUrl, /%D8%A8%D8%A7%D9%82%D8%A9/);
 

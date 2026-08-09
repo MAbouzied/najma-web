@@ -14,7 +14,7 @@ const indexable = pages.filter((p) => isIndexableRoute(p.route));
 
 test('covers all localized prerendered HTML pages', () => {
   // Blog listing/articles are SSR and absent from dist/client HTML snapshots.
-  assert.equal(pages.length, 50);
+  assert.equal(pages.length, 64);
 });
 
 test('every page has exactly one title, description, canonical, and robots policy', () => {

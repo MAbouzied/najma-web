@@ -24,7 +24,7 @@ const [
   readDist('services/massage-relaxation/index.html'),
   readDist('packages/luxury/index.html'),
   readDist('offers/index.html'),
-  readDist('offers/body-polishing/index.html'),
+  readDist('offers/signature/index.html'),
   readDist('robots.txt'),
   readDist('llms.txt'),
   readDist('sitemap-0.xml'),
@@ -45,11 +45,11 @@ test('renders complete canonical and social metadata on every page', () => {
     assert.match(html, /<meta property="og:locale" content="ar_SA">/);
     assert.match(html, /<meta property="og:title" content="[^"]+">/);
     assert.match(html, /<meta property="og:description" content="[^"]+">/);
-    assert.match(html, /<meta property="og:image" content="https:\/\/najma-web\.mohamed-abouzied\.workers\.dev\/assets\/og\/nagm-spa-share\.jpg">/);
+    assert.match(html, /<meta property="og:image" content="https:\/\/nagmspa\.com\/assets\/og\/nagm-spa-share\.jpg">/);
     assert.match(html, /<meta property="og:image:width" content="1200">/);
     assert.match(html, /<meta property="og:image:height" content="630">/);
     assert.match(html, /<meta name="twitter:card" content="summary_large_image">/);
-    assert.match(html, /<meta name="twitter:image" content="https:\/\/najma-web\.mohamed-abouzied\.workers\.dev\/assets\/og\/nagm-spa-share\.jpg">/);
+    assert.match(html, /<meta name="twitter:image" content="https:\/\/nagmspa\.com\/assets\/og\/nagm-spa-share\.jpg">/);
     assert.match(html, /<meta name="robots" content="index, follow, max-image-preview:large">/);
     assert.match(html, /<link rel="icon" href="\/favicon\.ico" sizes="any">/);
     assert.match(html, /<link rel="apple-touch-icon" sizes="180x180" href="\/apple-touch-icon\.png">/);
@@ -81,16 +81,27 @@ test('marks up visible services and FAQs with verified local details', () => {
   const catalogs = [].concat(daySpa.hasOfferCatalog);
   const serviceCatalog = catalogs.find((catalog) => catalog.name === 'خدمات نجم سبا');
   const packagesCatalog = catalogs.find((catalog) => catalog.name === 'باقات نجم سبا');
-  const offersCatalog = catalogs.find((catalog) => catalog.name === 'عروض العناية بالسيارات');
+  const offersCatalog = catalogs.find((catalog) => catalog.name === 'عروض نجم سبا');
 
   assert.ok(serviceCatalog, 'expected services catalog');
   assert.ok(packagesCatalog, 'expected packages catalog');
-  assert.ok(offersCatalog, 'expected car care offers catalog');
-  assert.equal(serviceCatalog.itemListElement.length, 10);
+  assert.ok(offersCatalog, 'expected offers catalog');
+  assert.equal(serviceCatalog.itemListElement.length, 13);
   assert.equal(packagesCatalog.itemListElement.length, 3);
-  assert.equal(offersCatalog.itemListElement.length, 4);
+  assert.equal(offersCatalog.itemListElement.length, 8);
 
-  for (const offer of [...serviceCatalog.itemListElement, ...offersCatalog.itemListElement]) {
+  for (const offer of serviceCatalog.itemListElement) {
+    assert.equal(offer['@type'], 'Offer');
+    assert.equal(offer.itemOffered['@type'], 'Service');
+    assert.match(offer.itemOffered.provider['@id'], /#business$/);
+    // Individual services are offered via packages; numeric price may be omitted.
+    if (offer.price != null) {
+      assert.equal(offer.priceCurrency, 'SAR');
+      assert.match(String(offer.price), /^\d+$/);
+    }
+  }
+
+  for (const offer of offersCatalog.itemListElement) {
     assert.equal(offer['@type'], 'Offer');
     assert.equal(offer.priceCurrency, 'SAR');
     assert.match(String(offer.price), /^\d+$/);
@@ -142,7 +153,7 @@ test('adds nested breadcrumb schema and UI for service and package detail pages'
   assert.equal(serviceBreadcrumb.itemListElement.length, 3);
   assert.equal(serviceBreadcrumb.itemListElement[0].name, 'الرئيسية');
   assert.equal(serviceBreadcrumb.itemListElement[1].name, 'خدماتنا');
-  assert.equal(serviceBreadcrumb.itemListElement[2].name, 'مساج الاسترخاء');
+  assert.equal(serviceBreadcrumb.itemListElement[2].name, 'مساج استرخاء');
   assert.match(serviceDetailHtml, /data-breadcrumbs/);
   assert.doesNotMatch(serviceDetailHtml, /العودة للخدمات/);
 
@@ -151,7 +162,7 @@ test('adds nested breadcrumb schema and UI for service and package detail pages'
   assert.equal(packageBreadcrumb.itemListElement.length, 3);
   assert.equal(packageBreadcrumb.itemListElement[0].name, 'الرئيسية');
   assert.equal(packageBreadcrumb.itemListElement[1].name, 'باقاتنا');
-  assert.equal(packageBreadcrumb.itemListElement[2].name, 'باقة الرفاهية');
+  assert.equal(packageBreadcrumb.itemListElement[2].name, 'العرض الرفاهية');
   assert.match(packageDetailHtml, /data-breadcrumbs/);
   assert.doesNotMatch(packageDetailHtml, /العودة للباقات/);
 
@@ -160,12 +171,12 @@ test('adds nested breadcrumb schema and UI for service and package detail pages'
   assert.equal(offerBreadcrumb.itemListElement.length, 3);
   assert.equal(offerBreadcrumb.itemListElement[0].name, 'الرئيسية');
   assert.equal(offerBreadcrumb.itemListElement[1].name, 'العروض');
-  assert.equal(offerBreadcrumb.itemListElement[2].name, 'تلميع الهيكل');
+  assert.equal(offerBreadcrumb.itemListElement[2].name, 'نجم سبا سجنتشر');
   assert.match(offerDetailHtml, /data-breadcrumbs/);
   assert.doesNotMatch(offerDetailHtml, /العودة للعروض/);
 });
 
-const ORIGIN = 'https://najma-web.mohamed-abouzied.workers.dev';
+const ORIGIN = 'https://nagmspa.com';
 
 test('emits hreflang trio (ar, en, x-default) on every Arabic page', () => {
   for (const html of [homeHtml, aboutHtml, contactHtml, offerIndexHtml, offerDetailHtml]) {
@@ -226,25 +237,25 @@ test('serves crawl and LLM discovery files without placeholder origins', () => {
   assert.match(robotsText, /^User-agent: \*/);
   assert.match(robotsText, /Allow: \//);
   assert.match(robotsText, /Disallow: \/api\//);
-  assert.match(robotsText, /Sitemap: https:\/\/najma-web\.mohamed-abouzied\.workers\.dev\/sitemap-index\.xml/);
+  assert.match(robotsText, /Sitemap: https:\/\/nagmspa\.com\/sitemap-index\.xml/);
   assert.doesNotMatch(robotsText, /localhost|example\.com/);
 
   assert.match(llmsText, /^# نجم سبا/);
   assert.match(llmsText, /## الصفحات الرئيسية/);
-  assert.match(llmsText, /\[من نحن\]\(https:\/\/najma-web\.mohamed-abouzied\.workers\.dev\/about\/\)/);
-  assert.match(llmsText, /\[Services\]\(https:\/\/najma-web\.mohamed-abouzied\.workers\.dev\/en\/services\/\)/);
+  assert.match(llmsText, /\[من نحن\]\(https:\/\/nagmspa\.com\/about\/\)/);
+  assert.match(llmsText, /\[Services\]\(https:\/\/nagmspa\.com\/en\/services\/\)/);
   assert.match(llmsText, /\/#faq/);
   assert.match(llmsText, /\/en\/#faq/);
   assert.match(llmsText, /## العروض/);
-  assert.match(llmsText, /\/offers\/body-polishing\//);
-  assert.match(llmsText, /\/en\/offers\/body-polishing\//);
+  assert.match(llmsText, /\/offers\/signature\//);
+  assert.match(llmsText, /\/en\/offers\/signature\//);
   assert.doesNotMatch(llmsText, /localhost|example\.com/);
   assert.doesNotMatch(llmsText, /\/book\/|\/go\/|\/api\//);
 
   assert.match(sitemapText, /\/offers\//);
-  assert.match(sitemapText, /\/offers\/exterior-wash\//);
-  assert.match(sitemapText, /\/offers\/engine-cleaning\//);
-  assert.match(sitemapText, /\/offers\/body-polishing\//);
+  assert.match(sitemapText, /\/offers\/signature\//);
+  assert.match(sitemapText, /\/offers\/recovery\//);
+  assert.match(sitemapText, /\/offers\/golden\//);
   assert.doesNotMatch(sitemapText, /\/book\/|\/go\/|\/api\//);
 });
 

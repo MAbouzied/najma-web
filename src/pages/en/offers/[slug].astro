@@ -19,12 +19,11 @@ const { offer } = Astro.props;
   locale={locale}
   offer={{
     slug: offer.slug,
-    image: offer.image,
     name: L(offer.name, locale),
     subtitle: L(offer.subtitle, locale),
     description: L(offer.description, locale),
     price: L(offer.price, locale),
-    originalPrice: offer.originalPrice ? L(offer.originalPrice, locale) : undefined,
-    features: offer.features ? localizeList(offer.features, locale) : [],
+    originalPrice: L(offer.originalPrice, locale),
+    features: localizeList(offer.features, locale),
   }}
 />

@@ -12,7 +12,7 @@ export interface Props {
     title: string;
     description: string;
     duration?: string;
-    price: string;
+    price?: string;
   };
   locale?: Locale;
 }
@@ -21,6 +21,7 @@ const { service, locale = 'ar' } = Astro.props;
 const dir = locale === 'en' ? 'ltr' : 'rtl';
 const detailHref = localePath(`/services/${service.slug}/`, locale);
 const bookingHref = buildServiceBookingUrl(service.title, locale);
+const priceLabel = service.price ?? (locale === 'en' ? 'Via offers' : 'ضمن العروض');
 ---
 
 <article
@@ -43,7 +44,7 @@ const bookingHref = buildServiceBookingUrl(service.title, locale);
       <h3 class="text-xl font-bold text-text-primary">{service.title}</h3>
       <p class="mt-2 min-h-12 text-sm leading-6 text-text-muted">{service.description}</p>
       <div class="mt-5 flex items-center justify-between border-t border-border-card pt-4">
-        <span class="font-bold text-gold">{service.price}</span>
+        <span class="font-bold text-gold">{priceLabel}</span>
         {service.duration && (
           <span class="flex items-center gap-2 text-xs text-text-muted">
             <img src="/assets/icons/hours.svg" alt="" width="15" height="15" class="size-[15px]" />

@@ -43,6 +43,7 @@
   },
   "devDependencies": {
     "@types/node": "^22.20.1",
+    "playwright": "^1.62.1",
     "wrangler": "^4.112.0"
   }
 }

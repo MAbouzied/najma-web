@@ -1,18 +1,18 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg-primary: #071919;
-  --color-bg-hero: #050f0f;
-  --color-bg-secondary: #091918;
-  --color-bg-tertiary: #0d2221;
-  --color-bg-footer: #0d221f;
-  --color-bg-card: #0c2322;
-  --color-bg-form: #0f2c2b;
-  --color-bg-stat: rgba(10, 26, 16, 0.6);
-  --color-bg-cta-edge: #092121;
-  --color-bg-cta-center: #020707;
-  --color-bg-input: rgba(7, 25, 25, 0.51);
-  --color-bg-badge: rgba(3, 17, 8, 0.5);
+  --color-bg-primary: #0e2323;
+  --color-bg-hero: #081616;
+  --color-bg-secondary: #102524;
+  --color-bg-tertiary: #142b2a;
+  --color-bg-footer: #142b28;
+  --color-bg-card: #132c2b;
+  --color-bg-form: #163534;
+  --color-bg-stat: rgba(16, 36, 28, 0.6);
+  --color-bg-cta-edge: #0e2929;
+  --color-bg-cta-center: #061010;
+  --color-bg-input: rgba(14, 35, 35, 0.51);
+  --color-bg-badge: rgba(8, 24, 14, 0.5);
 
   --color-gold: #e1af4a;
   --color-gold-dark: #a36e09;
@@ -30,7 +30,7 @@
   --color-border-badge: rgba(224, 175, 74, 0.4);
   --color-border-card: rgba(65, 58, 40, 0.33);
 
-  --color-bg-social: rgba(7, 25, 25, 0.57);
+  --color-bg-social: rgba(14, 35, 35, 0.57);
 }
 
 @utility bg-gold-gradient {

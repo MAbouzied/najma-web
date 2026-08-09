@@ -12,6 +12,7 @@ export interface Props {
     subtitle: string;
     description: string;
     price: string;
+    originalPrice?: string;
     features: string[];
     featured?: boolean;
   };
@@ -24,6 +25,7 @@ const detailHref = localePath(`/packages/${packageItem.slug}/`, locale);
 const bookingHref = buildPackageBookingUrl(packageItem.name, locale);
 const featuredLabel = locale === 'en' ? 'Most Popular' : 'الأكثر طلبًا';
 const detailLabel = locale === 'en' ? 'View Details' : 'عرض التفاصيل';
+const srLabel = locale === 'en' ? 'Price before discount ' : 'السعر قبل الخصم ';
 ---
 
 <article
@@ -47,7 +49,15 @@ const detailLabel = locale === 'en' ? 'View Details' : 'عرض التفاصيل'
   <a href={detailHref} class="flex flex-1 flex-col">
     <h3 class="text-2xl font-bold text-text-primary">{packageItem.name}</h3>
     <p class="mt-2 text-sm text-text-muted">{packageItem.subtitle}</p>
-    <p class="mt-6 text-3xl font-bold text-gold">{packageItem.price}</p>
+    <p class="mt-6 flex flex-wrap items-baseline gap-3">
+      <span class="text-3xl font-bold text-gold">{packageItem.price}</span>
+      {packageItem.originalPrice && (
+        <s class="text-lg text-text-muted">
+          <span class="sr-only">{srLabel}</span>
+          {packageItem.originalPrice}
+        </s>
+      )}
+    </p>
     <ul class="mt-6 flex flex-1 flex-col gap-3">
       {packageItem.features.map((feature) => (
         <li class="flex items-start gap-3 text-sm leading-6 text-text-muted">

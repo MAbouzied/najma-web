@@ -52,16 +52,32 @@ test('schema language, page URL, and locale-specific FAQ IDs are correct', () =>
 });
 
 test('service, package, and offer details expose Service and Offer entities', () => {
-  const samples = [
+  const servicePages = [
     pages.find((p) => p.route === '/services/massage-relaxation/'),
     pages.find((p) => p.route === '/en/services/massage-relaxation/'),
+  ];
+  const pricedPages = [
     pages.find((p) => p.route === '/packages/luxury/'),
     pages.find((p) => p.route === '/en/packages/luxury/'),
-    pages.find((p) => p.route === '/offers/body-polishing/'),
-    pages.find((p) => p.route === '/en/offers/body-polishing/'),
+    pages.find((p) => p.route === '/offers/signature/'),
+    pages.find((p) => p.route === '/en/offers/signature/'),
   ];
 
-  for (const page of samples) {
+  for (const page of servicePages) {
+    const graph = parseJsonLd(page.html)['@graph'];
+    const service = graph.find((n) => n['@type'] === 'Service');
+    assert.ok(service, page.route);
+    assert.ok(service.name);
+    assert.ok(service.url.includes(page.route));
+    // PDF prices treatments inside offers/packages only — no standalone SAR Offer.
+    assert.equal(graph.find((n) => n['@type'] === 'Offer'), undefined);
+    if (page.locale === 'en') {
+      assert.match(service.url, /\/en\//);
+      assert.doesNotMatch(service.name, /[\u0600-\u06FF]/);
+    }
+  }
+
+  for (const page of pricedPages) {
     const graph = parseJsonLd(page.html)['@graph'];
     const service = graph.find((n) => n['@type'] === 'Service');
     const offer = graph.find((n) => n['@type'] === 'Offer');
@@ -92,7 +108,7 @@ test('English catalogs use English names and English URLs', () => {
   const catalogs = [].concat(daySpa.hasOfferCatalog);
   assert.ok(catalogs.some((c) => c.name === 'Nagm Spa Services'));
   assert.ok(catalogs.some((c) => c.name === 'Nagm Spa Packages'));
-  assert.ok(catalogs.some((c) => c.name === 'Car Care Offers'));
+  assert.ok(catalogs.some((c) => c.name === 'Nagm Spa Special Offers'));
   for (const catalog of catalogs) {
     for (const item of catalog.itemListElement) {
       assert.match(item.url, /\/en\//);

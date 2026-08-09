@@ -4,21 +4,24 @@ import { join, relative } from 'node:path';
 
 const ROOT = process.cwd();
 const DIST = join(ROOT, 'dist', 'client');
-const ORIGIN = 'https://najma-web.mohamed-abouzied.workers.dev';
+const ORIGIN = 'https://nagmspa.com';
 
 const SERVICE_SLUGS = [
-  'massage-relaxation',
-  'hot-oil-massage',
-  'foot-massage',
-  'shiatsu',
+  'swedish-massage',
   'thai-massage',
-  'sports-massage',
+  'hot-stone-massage',
+  'cupping',
+  'massage-relaxation',
+  'shiatsu',
+  'hot-oil-massage',
   'star-spa-massage',
   'moroccan-bath',
-  'moroccan-bath-clay',
+  'royal-bath',
+  'steam-session',
   'manicure-pedicure',
+  'body-scrub',
 ];
-const PACKAGE_SLUGS = ['wedding', 'luxury', 'gift'];
+const PACKAGE_SLUGS = ['groom', 'luxury', 'gift'];
 const OFFER_SLUGS = [
   'recovery',
   'relaxation',

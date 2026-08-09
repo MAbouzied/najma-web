@@ -3,15 +3,12 @@ import { ADMIN_AUTH_DISABLED } from 'astro:env/server';
 import { assertStaffAccess, sanitizeReturnUrl } from './lib/auth/authorization.ts';
 import { adminApiError } from './lib/staff-access/http.ts';
 
+/** Mistaken car-care offer URLs — soft-land on the spa offers index. */
 const RETIRED_OFFER_SLUGS = new Set([
-  'recovery',
-  'relaxation',
-  'signature',
-  'care',
-  'elegance',
-  'prosperity',
-  'royal',
-  'golden',
+  'exterior-wash',
+  'interior-wash',
+  'engine-cleaning',
+  'body-polishing',
 ]);
 
 function retiredOfferRedirect(pathname: string): string | null {

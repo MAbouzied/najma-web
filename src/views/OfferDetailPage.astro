@@ -15,12 +15,11 @@ export interface Props {
   locale: Locale;
   offer: {
     slug: string;
-    image?: string;
     name: string;
     subtitle: string;
     description: string;
     price: string;
-    originalPrice?: string;
+    originalPrice: string;
     features: string[];
   };
 }
@@ -43,7 +42,7 @@ const breadcrumbs = [
   description={offer.description}
   pathname={localePath(`/offers/${offer.slug}/`, locale)}
   pageType="WebPage"
-  image={offer.image ?? null}
+  image={null}
   breadcrumbs={breadcrumbs}
   offers={[offer]}
   locale={locale}
@@ -54,57 +53,39 @@ const breadcrumbs = [
 
   <section class="section-block bg-bg-primary">
     <div class="page-container">
-      <div class:list={['grid items-start gap-10', offer.image && 'lg:grid-cols-2 lg:gap-14']} dir={dir}>
-        <div>
-          <Breadcrumbs items={breadcrumbs} locale={locale} />
+      <div class="mx-auto max-w-3xl" dir={dir}>
+        <Breadcrumbs items={breadcrumbs} locale={locale} />
 
-          <span class="mb-4 inline-flex items-center rounded-full border border-border-badge bg-bg-badge px-4 py-1 text-xs font-bold text-gold">
-            {campaign.discountLabel}
-          </span>
+        <span class="mb-4 inline-flex items-center rounded-full border border-border-badge bg-bg-badge px-4 py-1 text-xs font-bold text-gold">
+          {campaign.discountLabel}
+        </span>
 
-          <h1 class="text-4xl font-bold leading-tight text-text-primary">{offer.name}</h1>
-          <p class="mt-3 text-lg text-text-muted">{offer.subtitle}</p>
-          <p class="mt-4 leading-7 text-text-muted">{offer.description}</p>
-          <p class="mt-6 flex flex-wrap items-baseline gap-3">
-            <span class="text-4xl font-bold text-gold">{offer.price}</span>
-            {offer.originalPrice && (
-              <s class="text-xl text-text-muted">
-                <span class="sr-only">{srLabel}</span>
-                {offer.originalPrice}
-              </s>
-            )}
-          </p>
+        <h1 class="text-4xl font-bold leading-tight text-text-primary">{offer.name}</h1>
+        <p class="mt-3 text-lg text-text-muted">{offer.subtitle}</p>
+        <p class="mt-4 leading-7 text-text-muted">{offer.description}</p>
+        <p class="mt-6 flex flex-wrap items-baseline gap-3">
+          <span class="text-4xl font-bold text-gold">{offer.price}</span>
+          <s class="text-xl text-text-muted">
+            <span class="sr-only">{srLabel}</span>
+            {offer.originalPrice}
+          </s>
+        </p>
 
-          {offer.features.length > 0 && (
-            <div class="mt-8 rounded-2xl border border-border-card bg-bg-card p-6">
-              <h2 class="mb-4 text-lg font-bold text-text-primary">{t(locale, 'offerDetailComponents')}</h2>
-              <ul class="flex flex-col gap-3">
-                {offer.features.map((feature) => (
-                  <li class="flex items-center gap-3 text-sm leading-6 text-text-muted">
-                    <span class="flex size-6 shrink-0 items-center justify-center rounded-full bg-gold/20 text-xs text-gold">✓</span>
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-
-          <div class="mt-8 max-w-md">
-            <ContactActions whatsappHref={offerBookingHref} gtmLocation="offer_detail" locale={locale} />
-          </div>
+        <div class="mt-8 rounded-2xl border border-border-card bg-bg-card p-6">
+          <h2 class="mb-4 text-lg font-bold text-text-primary">{t(locale, 'offerDetailComponents')}</h2>
+          <ul class="flex flex-col gap-3">
+            {offer.features.map((feature) => (
+              <li class="flex items-center gap-3 text-sm leading-6 text-text-muted">
+                <span class="flex size-6 shrink-0 items-center justify-center rounded-full bg-gold/20 text-xs text-gold">✓</span>
+                {feature}
+              </li>
+            ))}
+          </ul>
         </div>
 
-        {offer.image && (
-          <img
-            src={offer.image}
-            alt={`${offer.name} — ${offer.price}`}
-            width="723"
-            height="1024"
-            loading="eager"
-            decoding="async"
-            class="w-full max-w-md rounded-3xl border border-border-card object-cover justify-self-center lg:max-w-none"
-          />
-        )}
+        <div class="mt-8 max-w-md">
+          <ContactActions whatsappHref={offerBookingHref} gtmLocation="offer_detail" locale={locale} />
+        </div>
       </div>
     </div>
   </section>
