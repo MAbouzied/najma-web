@@ -8,12 +8,10 @@ const [homeHtml, contactHtml, goHtml] = await Promise.all([
   readFile(new URL('../dist/client/go/index.html', import.meta.url), 'utf8'),
 ]);
 
-test('boots GA4 gtag with the configured measurement id', () => {
-  assert.match(homeHtml, /name="gtm-container-id"[^>]*content="G-KKSXRY8MSN"/);
-  assert.match(homeHtml, /const gtmId = "G-KKSXRY8MSN"/);
-  assert.match(homeHtml, /window\.dataLayer/);
-  assert.match(homeHtml, /googletagmanager\.com\/gtag\/js\?id=' \+ gtmId/);
-  assert.match(homeHtml, /gtag\('config', gtmId\)/);
+test('keeps analytics unloaded when the production measurement id is unset', () => {
+  assert.doesNotMatch(homeHtml, /name="gtm-container-id"/);
+  assert.doesNotMatch(homeHtml, /googletagmanager\.com\/gtag\/js/);
+  assert.doesNotMatch(homeHtml, /gtag\('config'/);
   assert.doesNotMatch(homeHtml, /googletagmanager\.com\/ns\.html\?id=/);
 });
 

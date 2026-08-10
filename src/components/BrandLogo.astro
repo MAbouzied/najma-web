@@ -1,7 +1,9 @@
 ---
+import { Image } from 'astro:assets';
 import type { Locale } from '../i18n/types';
 import { localePath } from '../i18n/paths';
 import { t } from '../i18n/t';
+import { siteImage } from '../lib/site-images';
 
 export interface Props {
   size?: 'header' | 'footer';
@@ -11,6 +13,7 @@ export interface Props {
 
 const { size = 'header', current = false, locale = 'ar' } = Astro.props;
 const imageSize = size === 'footer' ? 'size-[71px]' : 'size-[45px]';
+const pixelSize = size === 'footer' ? 71 : 45;
 const homeHref = localePath('/', locale);
 ---
 
@@ -20,11 +23,15 @@ const homeHref = localePath('/', locale);
   aria-label={t(locale, 'brandHomeAria')}
   aria-current={current ? 'page' : undefined}
 >
-  <img
-    src="/assets/nagm-logo.png"
+  <Image
+    src={siteImage.logo}
     alt=""
-    width={size === 'footer' ? 71 : 45}
-    height={size === 'footer' ? 71 : 45}
+    width={pixelSize}
+    height={pixelSize}
+    format="webp"
+    quality="mid"
+    loading="eager"
+    decoding="async"
     class:list={['block object-contain', imageSize]}
   />
   <span class:list={['text-gold-gradient font-bold tracking-[0.2px]', size === 'footer' ? 'text-xl' : 'text-xl']}>

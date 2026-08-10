@@ -72,10 +72,14 @@ export function expectedPrerenderedRoutes() {
   return [...staticAr, ...staticEn, ...details].sort();
 }
 
-/** Indexable routes including SSR blog URLs injected into the sitemap via customPages. */
+/** Indexable prerendered routes (blog URLs live in SSR `/sitemap-blog.xml`). */
 export function expectedRoutes() {
-  const blogRoutes = ['/blogs/', ...BLOG_SLUGS.map((slug) => `/blogs/${slug}/`)];
-  return [...expectedPrerenderedRoutes(), ...blogRoutes].sort();
+  return expectedPrerenderedRoutes();
+}
+
+/** Blog routes published by the live blog sitemap endpoint. */
+export function expectedBlogRoutes() {
+  return ['/blogs/', ...BLOG_SLUGS.map((slug) => `/blogs/${slug}/`)].sort();
 }
 
 export function isUtilityRoute(route) {
@@ -87,8 +91,13 @@ export function isUtilityRoute(route) {
   );
 }
 
+/** Built status HTML (e.g. Cloudflare 404 page) — not an indexable content route. */
+export function isStatusRoute(route) {
+  return route === '/404/' || route === '/en/404/';
+}
+
 export function isIndexableRoute(route) {
-  return !isUtilityRoute(route);
+  return !isUtilityRoute(route) && !isStatusRoute(route);
 }
 
 export function routeToDistPath(route) {
@@ -183,7 +192,7 @@ function parseUrlEntries(xml, label) {
   return entries;
 }
 
-export async function loadSitemapEntries() {
+export async function loadSitemapEntries({ includeBlog = false } = {}) {
   const index = await readFile(join(DIST, 'sitemap-index.xml'), 'utf8');
   assertWellFormedXml(index, 'sitemap-index.xml');
   if (!index.includes('<sitemapindex') || !index.includes('</sitemapindex>')) {
@@ -198,21 +207,38 @@ export async function loadSitemapEntries() {
   const entries = [];
   for (const ref of childRefs) {
     const name = ref.split('/').pop();
+    if (name === 'sitemap-blog.xml') {
+      // SSR endpoint — not emitted into dist/client during build.
+      if (!includeBlog) continue;
+      for (const route of expectedBlogRoutes()) {
+        const loc = `${ORIGIN}${route}`;
+        entries.push({
+          loc,
+          alternates: { ar: loc, 'x-default': loc },
+        });
+      }
+      continue;
+    }
     const xml = await readFile(join(DIST, name), 'utf8');
     entries.push(...parseUrlEntries(xml, name));
   }
   return entries;
 }
 
+export async function loadSitemapIndexText() {
+  return readFile(join(DIST, 'sitemap-index.xml'), 'utf8');
+}
+
 export async function loadSitemapUrls() {
   return (await loadSitemapEntries()).map((entry) => entry.loc);
 }
 
-export async function loadAllPages() {
+export async function loadAllPages({ includeStatus = false } = {}) {
   const files = await walkHtml();
   const pages = [];
   for (const file of files) {
     const route = routeFromFile(file);
+    if (!includeStatus && isStatusRoute(route)) continue;
     const html = await readFile(file, 'utf8');
     pages.push({
       route,

@@ -1,7 +1,9 @@
 ---
+import { Picture } from 'astro:assets';
 import SectionHeading from './SectionHeading.astro';
 import type { SiteAction } from '../data/site';
 import type { Locale } from '../i18n/types';
+import { localImage } from '../lib/site-images';
 
 export interface Props {
   locale?: Locale;
@@ -32,6 +34,7 @@ const {
 const contentDir = locale === 'en' ? 'ltr' : 'rtl';
 const imageDesktopOrder = imagePosition === 'left' ? 'lg:order-1' : 'lg:order-2';
 const contentDesktopOrder = imagePosition === 'left' ? 'lg:order-2' : 'lg:order-1';
+const imageMeta = localImage(image);
 ---
 
 <section
@@ -65,13 +68,15 @@ const contentDesktopOrder = imagePosition === 'left' ? 'lg:order-2' : 'lg:order-
     </div>
 
     <figure class:list={['order-2 overflow-hidden rounded-3xl border border-border-card', imageDesktopOrder]}>
-      <img
-        src={image}
+      <Picture
+        src={imageMeta}
+        formats={['avif', 'webp']}
+        widths={[480, 768, 1152]}
+        sizes="(max-width: 1023px) calc(100vw - 40px), min(576px, 45vw)"
+        quality="mid"
+        loading="lazy"
         alt={imageAlt}
-        width="576"
-        height="520"
         class="h-auto min-h-[320px] w-full object-cover lg:h-[520px]"
-        loading="eager"
       />
     </figure>
   </div>

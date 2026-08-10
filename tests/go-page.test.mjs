@@ -10,7 +10,10 @@ test('renders a dedicated contact landing with WhatsApp, call, and directions', 
   assert.match(goHtml, /الاتجاهات/);
   assert.match(goHtml, /api\.whatsapp\.com\/send\/\?phone=966579777407/);
   assert.match(goHtml, /tel:\+966579777407/);
-  assert.match(goHtml, /google\.com\/maps/);
+  assert.match(
+    goHtml,
+    /href="https:\/\/maps\.app\.goo\.gl\/4TJpLxDQE7TJ6D1D9"/,
+  );
   assert.match(goHtml, /حي المصيف/);
   assert.match(goHtml, /٢٤ ساعة|24/);
 });

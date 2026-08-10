@@ -4,7 +4,6 @@ import {
   WHATSAPP_PHONE_DISPLAY,
 } from '../lib/whatsapp';
 import type { Locale } from '../i18n/types';
-import { t } from '../i18n/t';
 
 export interface Branch {
   title: string;

@@ -2,23 +2,39 @@
 export const prerender = false;
 
 import BlogDetailPage from '../../views/BlogDetailPage.astro';
+import StatusPage from '../../components/StatusPage.astro';
 import { getBlogRepository } from '../../modules/blog/repository/get-blog-repository';
 import {
   BLOG_CACHE_MAX_AGE_SECONDS,
   BLOG_CACHE_SWR_SECONDS,
   blogArticleCacheTags,
 } from '../../modules/blog/cache';
+import type { BlogPost } from '../../modules/blog';
+import { t } from '../../i18n/t';
 
+const locale = 'ar' as const;
 const repository = getBlogRepository();
 const slug = Astro.params.slug ?? '';
-const allPosts = await repository.getPublishedPosts();
-const post = allPosts.find((item) => item.slug === slug) ?? null;
 
-if (!post) {
-  return new Response(null, { status: 404, statusText: 'Not Found' });
+let unavailable = false;
+let allPosts: BlogPost[] = [];
+let post: BlogPost | null = null;
+
+try {
+  allPosts = await repository.getPublishedPosts();
+  post = allPosts.find((item) => item.slug === slug) ?? null;
+} catch (error) {
+  console.error('[blogs] failed to load published posts', error);
+  unavailable = true;
+  Astro.response.status = 503;
+  Astro.response.headers.set('Cache-Control', 'no-store');
 }
 
-if (Astro.cache.enabled) {
+if (!unavailable && !post) {
+  Astro.response.status = 404;
+}
+
+if (!unavailable && post && Astro.cache.enabled) {
   Astro.cache.set({
     maxAge: BLOG_CACHE_MAX_AGE_SECONDS,
     swr: BLOG_CACHE_SWR_SECONDS,
@@ -27,4 +43,22 @@ if (Astro.cache.enabled) {
 }
 ---
 
-<BlogDetailPage post={post} allPosts={allPosts} />
+{
+  unavailable ? (
+    <StatusPage
+      status={503}
+      locale={locale}
+      title={t(locale, 'status503Title')}
+      description={t(locale, 'status503Description')}
+    />
+  ) : !post ? (
+    <StatusPage
+      status={404}
+      locale={locale}
+      title={t(locale, 'status404Title')}
+      description={t(locale, 'status404Description')}
+    />
+  ) : (
+    <BlogDetailPage post={post} allPosts={allPosts} />
+  )
+}

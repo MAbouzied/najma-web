@@ -100,8 +100,8 @@ const heroLine2 = breakAt > 0 ? heroDesc.slice(breakAt + 1) : '';
         <span class="text-gold-gradient">{brand}</span>
         <span class="text-text-primary">
           {locale === 'en' ? ' — where authenticity' : ' - حيث تلتقي الأصالة'}
-        </span>
-        <br />
+        </span>{' '}
+        <br aria-hidden="true" />
         <span class="text-text-primary">{locale === 'en' ? 'meets luxury' : 'بالرفاهية'}</span>
       </Fragment>
     </HeroSection>

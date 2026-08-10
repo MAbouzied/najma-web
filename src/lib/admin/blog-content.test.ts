@@ -42,7 +42,7 @@ describe('Lexical blog content', () => {
     const normalized = normalizeLexicalJson(json);
     assert.match(normalized, /"align":"left"/);
     assert.match(normalized, /"width":50/);
-    assert.match(lexicalJsonToHtml(normalized), /style="width:50%;margin-inline:auto 0"/);
+    assert.match(lexicalJsonToHtml(normalized), /style="width:50%;\s*margin-inline:auto 0"/);
   });
 
   it('keeps supported video alignment and width controls', () => {
@@ -52,6 +52,6 @@ describe('Lexical blog content', () => {
     const normalized = normalizeLexicalJson(json);
     assert.match(normalized, /"align":"right"/);
     assert.match(normalized, /"width":75/);
-    assert.match(lexicalJsonToHtml(normalized), /<figure class="blog-body__embed" style="width:75%;margin-inline:0 auto"/);
+    assert.match(lexicalJsonToHtml(normalized), /<figure class="blog-body__embed" style="width:75%;\s*margin-inline:0 auto"/);
   });
 });

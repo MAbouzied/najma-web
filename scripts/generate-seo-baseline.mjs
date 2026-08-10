@@ -114,19 +114,31 @@ function isUtilityRoute(route) {
   );
 }
 
-const sitemapPath = existsSync(join(DIST, 'sitemap-0.xml'))
-  ? join(DIST, 'sitemap-0.xml')
-  : join(DIST, 'sitemap-index.xml');
-const sitemapText = existsSync(sitemapPath)
-  ? await readFile(sitemapPath, 'utf8')
+function isStatusRoute(route) {
+  return route === '/404/' || route === '/en/404/';
+}
+
+const sitemapIndexPath = join(DIST, 'sitemap-index.xml');
+const sitemapIndexText = existsSync(sitemapIndexPath)
+  ? await readFile(sitemapIndexPath, 'utf8')
   : '';
-let sitemapUrls = [...sitemapText.matchAll(/<loc>([^<]+)<\/loc>/g)].map(
-  (m) => m[1],
+const sitemapChildRefs = [
+  ...sitemapIndexText.matchAll(/<loc>([^<]+)<\/loc>/g),
+].map((m) => m[1]);
+const hasLiveBlogSitemap = sitemapChildRefs.some((u) =>
+  u.includes('sitemap-blog.xml'),
 );
 
-if (sitemapUrls.some((u) => u.includes('sitemap-0.xml'))) {
-  const child = await readFile(join(DIST, 'sitemap-0.xml'), 'utf8');
-  sitemapUrls = [...child.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
+let sitemapUrls = [];
+for (const ref of sitemapChildRefs) {
+  const name = ref.split('/').pop();
+  if (!name || name === 'sitemap-blog.xml') continue;
+  const childPath = join(DIST, name);
+  if (!existsSync(childPath)) continue;
+  const child = await readFile(childPath, 'utf8');
+  sitemapUrls.push(
+    ...[...child.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]),
+  );
 }
 
 const sitemapPaths = new Set(
@@ -141,7 +153,10 @@ const sitemapPaths = new Set(
 );
 
 const files = await walkHtml(DIST);
-const generated = files.map(routeFromFile).sort();
+const generated = files
+  .map(routeFromFile)
+  .filter((route) => !isStatusRoute(route))
+  .sort();
 const expected = expectedRoutes();
 const expectedSet = new Set(expected);
 const generatedSet = new Set(generated);
@@ -149,6 +164,7 @@ const generatedSet = new Set(generated);
 const rows = [];
 for (const file of files) {
   const route = routeFromFile(file);
+  if (isStatusRoute(route)) continue;
   const html = await readFile(file, 'utf8');
   const locale = route === '/en' || route.startsWith('/en/') ? 'en' : 'ar';
   const title = attr(html, /<title>([^<]*)<\/title>/);
@@ -272,6 +288,8 @@ const issueCounts = issues.reduce((acc, i) => {
   return acc;
 }, {});
 
+const has404Page = existsSync(join(DIST, '404.html'));
+
 const manifest = {
   generatedAt: new Date().toISOString(),
   origin: ORIGIN,
@@ -280,6 +298,11 @@ const manifest = {
     generated: generated.length,
     sitemapUrls: sitemapUrls.length,
     issues: issues.length,
+  },
+  discovery: {
+    liveBlogSitemap: hasLiveBlogSitemap,
+    branded404Page: has404Page,
+    sitemapChildRefs,
   },
   expectedRoutes: expected,
   generatedRoutes: generated,
@@ -312,7 +335,9 @@ md.push('| Metric | Count |');
 md.push('|---|---:|');
 md.push(`| Expected routes | ${expected.length} |`);
 md.push(`| Generated HTML routes | ${generated.length} |`);
-md.push(`| Sitemap URLs | ${sitemapUrls.length} |`);
+md.push(`| Sitemap URLs (static) | ${sitemapUrls.length} |`);
+md.push(`| Live blog sitemap referenced | ${hasLiveBlogSitemap ? 'yes' : 'no'} |`);
+md.push(`| Branded 404.html | ${has404Page ? 'yes' : 'no'} |`);
 md.push(`| Missing routes | ${missing.length} |`);
 md.push(`| Unexpected routes | ${unexpected.length} |`);
 md.push(
@@ -320,6 +345,10 @@ md.push(
 );
 md.push(`| Duplicate titles (per locale) | ${duplicateTitles.length} |`);
 md.push(`| Detected issues | ${issues.length} |`);
+md.push('');
+md.push(
+  'Blog article URLs are published by the SSR endpoint `/sitemap-blog.xml` and are not duplicated into the static sitemap.',
+);
 md.push('');
 
 md.push('## Issue counts');

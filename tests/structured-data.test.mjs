@@ -23,7 +23,7 @@ test('schema language, page URL, and locale-specific FAQ IDs are correct', () =>
   for (const { route, html, locale } of indexable) {
     const graph = parseJsonLd(html)['@graph'];
     const page = graph.find((n) =>
-      ['WebPage', 'AboutPage', 'ContactPage'].includes(n['@type']),
+      ['WebPage', 'AboutPage', 'ContactPage', 'CollectionPage'].includes(n['@type']),
     );
     assert.ok(page, route);
     assert.equal(page.inLanguage, locale === 'en' ? 'en-US' : 'ar-SA');

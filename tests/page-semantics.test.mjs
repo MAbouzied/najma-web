@@ -32,7 +32,7 @@ test('locale-correct primary headings on key pages', () => {
   const arHome = pages.find((p) => p.route === '/');
   const enHome = pages.find((p) => p.route === '/en/');
   assert.match(h1Text(arHome.html), /استرخ/);
-  assert.match(h1Text(enHome.html), /Relax|Restore|Unwind/i);
+  assert.equal(h1Text(enHome.html), 'Relax. Restore. Enjoy your moment.');
   assert.doesNotMatch(h1Text(enHome.html), /[\u0600-\u06FF]/);
 });
 

@@ -6,8 +6,16 @@ import {
   GOOGLE_SERVICE_ACCOUNT_EMAIL,
   GOOGLE_SHEET_ID,
 } from 'astro:env/server';
+import { env } from 'cloudflare:workers';
 import { offers, packages, services } from '../../data/home';
+import { enforceRateLimit, rateLimitActor } from '../../lib/cloudflare/rate-limit.ts';
 import { appendBookingAndCustomer, isGoogleSheetsConfigured } from '../../lib/google-sheets';
+import {
+  BODY_LIMITS,
+  isRequestBodyTooLargeError,
+  readLimitedJson,
+} from '../../lib/http/request-body.ts';
+import { withSecurityHeaders } from '../../lib/http/security-headers.ts';
 
 export const prerender = false;
 
@@ -21,14 +29,14 @@ const departments = {
 type Department = keyof typeof departments;
 
 function json(body: object, status: number): Response {
-  return new Response(JSON.stringify(body), {
+  return withSecurityHeaders(new Response(JSON.stringify(body), {
     status,
     headers: {
       'content-type': 'application/json; charset=utf-8',
       'cache-control': 'no-store',
-      'x-robots-tag': 'noindex, nofollow',
+      'x-robots-tag': 'noindex, nofollow, nosnippet',
     },
-  });
+  }));
 }
 
 function normalizePhone(value: string): string | undefined {
@@ -59,18 +67,28 @@ function canonicalService(department: Department, value: string): string | undef
 }
 
 export const POST = (async ({ request }) => {
+  const limited = await enforceRateLimit(
+    env.LEAD_RATE_LIMITER,
+    `customer-lead:${rateLimitActor(request)}`,
+  );
+  if (limited) return withSecurityHeaders(limited);
+
   const requestUrl = new URL(request.url);
   const origin = request.headers.get('origin');
   if (origin && origin !== requestUrl.origin) return json({ error: 'Invalid origin' }, 403);
   if (!request.headers.get('content-type')?.toLowerCase().startsWith('application/json')) {
     return json({ error: 'JSON body required' }, 415);
   }
+
   let body: Record<string, unknown>;
   try {
-    const rawBody = await request.text();
-    if (rawBody.length > 10_000) return json({ error: 'Request too large' }, 413);
-    body = JSON.parse(rawBody) as Record<string, unknown>;
-  } catch {
+    const parsed = await readLimitedJson(request, BODY_LIMITS.customerLeadJson);
+    if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
+      return json({ error: 'Invalid JSON' }, 400);
+    }
+    body = parsed as Record<string, unknown>;
+  } catch (error) {
+    if (isRequestBodyTooLargeError(error)) return json({ error: 'Request too large' }, 413);
     return json({ error: 'Invalid JSON' }, 400);
   }
 

@@ -1,8 +1,10 @@
 ---
+import { Image } from 'astro:assets';
 import { buildServiceBookingUrl } from '../lib/whatsapp';
 import { localePath } from '../i18n/paths';
 import { t } from '../i18n/t';
 import type { Locale } from '../i18n/types';
+import { localImage } from '../lib/site-images';
 import ContactActions from './ContactActions.astro';
 
 export interface Props {
@@ -22,6 +24,7 @@ const dir = locale === 'en' ? 'ltr' : 'rtl';
 const detailHref = localePath(`/services/${service.slug}/`, locale);
 const bookingHref = buildServiceBookingUrl(service.title, locale);
 const priceLabel = service.price ?? (locale === 'en' ? 'Via offers' : 'ضمن العروض');
+const cardImage = localImage(service.image);
 ---
 
 <article
@@ -30,13 +33,16 @@ const priceLabel = service.price ?? (locale === 'en' ? 'Via offers' : 'ضمن ا
 >
   <a href={detailHref} class="block flex-1">
     <div class="relative h-56 overflow-hidden">
-      <img
-        src={service.image}
+      <Image
+        src={cardImage}
         alt=""
-        width="592"
-        height="352"
-        class="size-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+        widths={[320, 480, 640]}
+        sizes="(max-width: 639px) calc(100vw - 40px), (max-width: 1023px) calc(50vw - 56px), 286px"
+        format="webp"
+        quality="mid"
         loading="lazy"
+        decoding="async"
+        class="size-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
       />
       <div class="absolute inset-0 bg-gradient-to-t from-bg-card via-transparent to-transparent"></div>
     </div>

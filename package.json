@@ -10,9 +10,17 @@
     "dev": "astro dev",
     "build": "astro build",
     "deploy": "npm run build && wrangler deploy",
-    "test": "astro build && node --test tests/*.test.mjs && node --experimental-strip-types --test \"src/modules/**/*.test.ts\" \"src/lib/auth/**/*.test.ts\" \"src/lib/staff-access/**/*.test.ts\" \"src/lib/admin/**/*.test.ts\"",
+    "check": "astro check",
+    "test:unit": "node --experimental-strip-types --test \"src/modules/**/*.test.ts\" \"src/lib/auth/**/*.test.ts\" \"src/lib/staff-access/**/*.test.ts\" \"src/lib/admin/**/*.test.ts\" \"src/lib/http/**/*.test.ts\" \"src/lib/cloudflare/**/*.test.ts\" \"src/lib/blog-html-sanitize.test.ts\" \"src/lib/blog-sitemap.test.ts\" \"src/lib/site-images.test.ts\" \"src/lib/responsive-image-url.test.ts\"",
+    "test:dist": "node --test tests/*.test.mjs",
+    "preview:built": "npx wrangler dev --config dist/server/wrangler.json --port 4323 --ip 127.0.0.1",
+    "test:browser:built": "playwright test",
+    "test:browser": "npm run build && npm run test:browser:built",
+    "audit:links": "node scripts/run-link-audit.mjs",
+    "test": "npm run check && npm run test:unit && npm run build && npm run test:dist && npm run test:browser:built",
+    "types:cf": "wrangler types",
     "preview": "astro preview",
-    "preview:cf": "npm run build && wrangler dev",
+    "preview:cf": "npm run build && npm run preview:built",
     "astro": "astro",
     "studio:dev": "npm --prefix studio run dev",
     "studio:deploy": "npm --prefix studio run deploy"
@@ -22,6 +30,7 @@
     "@astrojs/cloudflare": "^14.1.7",
     "@astrojs/react": "^6.0.2",
     "@astrojs/sitemap": "^3.7.3",
+    "@fontsource-variable/cairo": "^5.3.0",
     "@lexical/history": "^0.49.0",
     "@lexical/html": "^0.49.0",
     "@lexical/link": "^0.49.0",
@@ -42,8 +51,10 @@
     "typescript": "^6.0.3"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.12.1",
+    "@playwright/test": "^1.62.1",
     "@types/node": "^22.20.1",
     "playwright": "^1.62.1",
-    "wrangler": "^4.112.0"
+    "wrangler": "^4.120.0"
   }
 }

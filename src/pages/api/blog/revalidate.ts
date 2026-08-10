@@ -4,17 +4,24 @@ import {
   BLOG_LISTING_CACHE_TAG,
   blogMutationCacheTags,
 } from '../../../modules/blog/cache.ts';
+import {
+  BODY_LIMITS,
+  isRequestBodyTooLargeError,
+  readLimitedJson,
+} from '../../../lib/http/request-body.ts';
+import { withSecurityHeaders } from '../../../lib/http/security-headers.ts';
 
 export const prerender = false;
 
 function json(data: unknown, status = 200): Response {
-  return new Response(JSON.stringify(data), {
+  return withSecurityHeaders(new Response(JSON.stringify(data), {
     status,
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
       'Cache-Control': 'no-store',
+      'X-Robots-Tag': 'noindex, nofollow, nosnippet',
     },
-  });
+  }));
 }
 
 function timingSafeEqualString(a: string, b: string): boolean {
@@ -42,10 +49,17 @@ export const POST: APIRoute = async (context) => {
     return json({ error: 'Unauthorized' }, 401);
   }
 
-  const payload = (await context.request.json().catch(() => ({}))) as {
-    postId?: unknown;
-  };
-  const postId = typeof payload.postId === 'string' ? payload.postId.trim() : '';
+  let postId = '';
+  try {
+    const payload = await readLimitedJson(context.request, BODY_LIMITS.revalidateJson) as {
+      postId?: unknown;
+    };
+    postId = typeof payload.postId === 'string' ? payload.postId.trim() : '';
+  } catch (error) {
+    if (isRequestBodyTooLargeError(error)) return json({ error: 'Request too large' }, 413);
+    return json({ error: 'Invalid JSON' }, 400);
+  }
+
   const tags = postId ? blogMutationCacheTags(postId) : [BLOG_LISTING_CACHE_TAG];
 
   if (context.cache?.enabled) {

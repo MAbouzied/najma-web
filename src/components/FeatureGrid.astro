@@ -1,4 +1,7 @@
 ---
+import { Image } from 'astro:assets';
+import { tryLocalImage } from '../lib/site-images';
+
 export interface Feature {
   icon: string;
   title: string;
@@ -20,14 +23,31 @@ const gridClass =
 
 <div data-feature-grid class={`grid gap-6 ${gridClass}`}>
   {
-    features.map((feature) => (
-      <article class="rounded-[20px] border border-border-card bg-bg-form p-6 sm:p-8">
-        <div class="flex size-12 items-center justify-center rounded-2xl bg-gold-gradient">
-          <img src={feature.icon} alt="" width="24" height="24" class="size-6" />
-        </div>
-        <h3 class="mt-5 text-xl font-bold leading-7 tracking-[0.2px] text-text-primary">{feature.title}</h3>
-        <p class="mt-2 text-sm leading-[1.65] text-text-muted">{feature.description}</p>
-      </article>
-    ))
+    features.map((feature) => {
+      const iconImage = tryLocalImage(feature.icon);
+      return (
+        <article class="rounded-[20px] border border-border-card bg-bg-form p-6 sm:p-8">
+          <div class="flex size-12 items-center justify-center rounded-2xl bg-gold-gradient">
+            {iconImage ? (
+              <Image
+                src={iconImage}
+                alt=""
+                width={24}
+                height={24}
+                format="webp"
+                quality="mid"
+                loading="lazy"
+                decoding="async"
+                class="size-6"
+              />
+            ) : (
+              <img src={feature.icon} alt="" width="24" height="24" class="size-6" />
+            )}
+          </div>
+          <h3 class="mt-5 text-xl font-bold leading-7 tracking-[0.2px] text-text-primary">{feature.title}</h3>
+          <p class="mt-2 text-sm leading-[1.65] text-text-muted">{feature.description}</p>
+        </article>
+      );
+    })
   }
 </div>

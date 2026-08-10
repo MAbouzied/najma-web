@@ -1,55 +1,32 @@
 ---
-import {
-  GTM_CONTAINER_ID,
-  isGaMeasurementId,
-  isGtmContainerConfigured,
-  isGtmContainerId,
-} from '../lib/gtm';
+interface Props {
+  measurementId: string;
+}
+
+const { measurementId } = Astro.props;
 ---
 
-<meta name="gtm-container-id" content={GTM_CONTAINER_ID} />
+<meta name="gtm-container-id" content={measurementId} />
 
 <script
   is:inline
   define:vars={{
-    gtmId: GTM_CONTAINER_ID,
-    gtmEnabled: isGtmContainerConfigured,
-    useGa: isGaMeasurementId,
-    useGtm: isGtmContainerId,
+    gtmId: measurementId,
   }}
 >
   window.dataLayer = window.dataLayer || [];
 
-  if (gtmEnabled && useGa) {
-    function gtag() {
-      window.dataLayer.push(arguments);
-    }
-    window.gtag = gtag;
-    gtag('js', new Date());
-    gtag('config', gtmId);
-
-    var gaScript = document.createElement('script');
-    gaScript.async = true;
-    gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + gtmId;
-    document.head.appendChild(gaScript);
-  } else {
-    window.dataLayer.push({
-      'gtm.start': new Date().getTime(),
-      event: 'gtm.js',
-    });
-
-    if (gtmEnabled && useGtm) {
-      (function (w, d, s, l, i) {
-        w[l] = w[l] || [];
-        var f = d.getElementsByTagName(s)[0];
-        var j = d.createElement(s);
-        var dl = l != 'dataLayer' ? '&l=' + l : '';
-        j.async = true;
-        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-        f.parentNode.insertBefore(j, f);
-      })(window, document, 'script', 'dataLayer', gtmId);
-    }
+  function gtag() {
+    window.dataLayer.push(arguments);
   }
+  window.gtag = gtag;
+  gtag('js', new Date());
+  gtag('config', gtmId);
+
+  var gaScript = document.createElement('script');
+  gaScript.async = true;
+  gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + gtmId;
+  document.head.appendChild(gaScript);
 </script>
 
 <script>
@@ -120,7 +97,6 @@ import {
       return;
     }
 
-    // Form submits are tracked on the submit event, not the button click.
     if (el.closest('form[data-gtm-event]')) {
       return;
     }

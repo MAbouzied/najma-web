@@ -25,13 +25,6 @@ const htmlDir = locale === 'en' ? 'ltr' : 'rtl';
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <meta name="robots" content="noindex, nofollow" />
-    <meta name="generator" content={Astro.generator} />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap"
-    />
     <title>{title}</title>
   </head>
   <body class="admin-layout-body">
@@ -45,7 +38,7 @@ const htmlDir = locale === 'en' ? 'ltr' : 'rtl';
     min-height: 100dvh;
     background: var(--color-bg-primary);
     color: var(--color-text-primary);
-    font-family: 'Cairo', sans-serif;
+    font-family: 'Cairo Variable', 'Cairo', sans-serif;
     -webkit-font-smoothing: antialiased;
   }
 </style>

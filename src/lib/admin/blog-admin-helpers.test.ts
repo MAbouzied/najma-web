@@ -8,7 +8,6 @@ import {
   adminAuthorDocumentId,
   adminCategoryDocumentId,
   assertAdminPublishCopy,
-  readAdminImportUrlBody,
   readAdminPostPayload,
   resolveAdminPublishedAt,
   resolveSanityAdminStatus,
@@ -77,46 +76,30 @@ describe('readAdminPostPayload', () => {
     });
 
     assert.equal(payload.contentJson, '{"root":{"children":[]}}');
-    assert.equal(payload.contentHtml, '<p>html</p>');
+    assert.equal(payload.contentHtml, '');
     assert.equal(payload.featured, true);
     assert.equal(payload.coverWidth, 1200);
     assert.equal(payload.coverHeight, undefined);
   });
 
-  it('omits blank contentJson so legacy HTML saves stay HTML-only', () => {
-    const payload = readAdminPostPayload({
+  it('rejects missing Lexical contentJson and ignores client HTML', () => {
+    assert.throws(() => readAdminPostPayload({
       title: 'عنوان',
       slug: 'slug',
       excerpt: 'excerpt',
       contentHtml: '<p>html</p>',
       contentJson: '   ',
+    }), /محتوى المقال غير صالح/);
+
+    const payload = readAdminPostPayload({
+      title: 'عنوان المقال الطويل بما يكفي',
+      slug: 'article-slug',
+      excerpt: 'ب'.repeat(ADMIN_EXCERPT_MIN),
+      contentHtml: '<script>alert(1)</script>',
+      contentJson: '{"root":{"children":[]}}',
     });
-    assert.equal(payload.contentJson, undefined);
-  });
-});
-
-describe('readAdminImportUrlBody', () => {
-  it('returns the trimmed url for a valid string', () => {
-    const result = readAdminImportUrlBody({ url: '  https://example.com/photo.jpg  ' });
-    assert.equal(result.url, 'https://example.com/photo.jpg');
-  });
-
-  it('throws for a missing url key', () => {
-    assert.throws(() => readAdminImportUrlBody({}), /أدخل رابط الصورة/);
-  });
-
-  it('throws for an empty string', () => {
-    assert.throws(() => readAdminImportUrlBody({ url: '' }), /أدخل رابط الصورة/);
-  });
-
-  it('throws for a whitespace-only string', () => {
-    assert.throws(() => readAdminImportUrlBody({ url: '   ' }), /أدخل رابط الصورة/);
-  });
-
-  it('throws for non-string values (number, null, object)', () => {
-    assert.throws(() => readAdminImportUrlBody({ url: 42 }),   /أدخل رابط الصورة/);
-    assert.throws(() => readAdminImportUrlBody({ url: null }), /أدخل رابط الصورة/);
-    assert.throws(() => readAdminImportUrlBody({ url: {} }),   /أدخل رابط الصورة/);
+    assert.equal(payload.contentHtml, '');
+    assert.equal(payload.contentJson, '{"root":{"children":[]}}');
   });
 });
 

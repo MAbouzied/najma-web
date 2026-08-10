@@ -45,17 +45,22 @@ test('renders complete canonical and social metadata on every page', () => {
     assert.match(html, /<meta property="og:locale" content="ar_SA">/);
     assert.match(html, /<meta property="og:title" content="[^"]+">/);
     assert.match(html, /<meta property="og:description" content="[^"]+">/);
-    assert.match(html, /<meta property="og:image" content="https:\/\/nagmspa\.com\/assets\/og\/nagm-spa-share\.jpg">/);
+    assert.match(html, /<meta property="og:image" content="https:\/\/nagmspa\.com\/assets\/og\/nagm-spa-share-1200x630\.jpg">/);
+    assert.match(html, /<meta property="og:image:type" content="image\/jpeg">/);
     assert.match(html, /<meta property="og:image:width" content="1200">/);
     assert.match(html, /<meta property="og:image:height" content="630">/);
     assert.match(html, /<meta name="twitter:card" content="summary_large_image">/);
-    assert.match(html, /<meta name="twitter:image" content="https:\/\/nagmspa\.com\/assets\/og\/nagm-spa-share\.jpg">/);
+    assert.match(html, /<meta name="twitter:image" content="https:\/\/nagmspa\.com\/assets\/og\/nagm-spa-share-1200x630\.jpg">/);
     assert.match(html, /<meta name="robots" content="index, follow, max-image-preview:large">/);
     assert.match(html, /<link rel="icon" href="\/favicon\.ico" sizes="any">/);
     assert.match(html, /<link rel="apple-touch-icon" sizes="180x180" href="\/apple-touch-icon\.png">/);
-    assert.match(html, /<link rel="preconnect" href="https:\/\/fonts\.gstatic\.com" crossorigin>/);
-    assert.match(html, /fonts\.googleapis\.com\/css2\?family=Cairo/);
-    assert.match(html, /<meta name="astro-view-transitions-enabled" content="true">/);
+    assert.match(html, /<link rel="sitemap" type="application\/xml" href="\/sitemap-index\.xml">/);
+    assert.match(html, /href="#main-content"/);
+    assert.match(html, /id="main-content"/);
+    assert.doesNotMatch(html, /fonts\.googleapis\.com/);
+    assert.doesNotMatch(html, /fonts\.gstatic\.com/);
+    assert.doesNotMatch(html, /<meta name="generator"/);
+    assert.doesNotMatch(html, /astro-view-transitions-enabled/);
   }
 });
 
@@ -64,6 +69,7 @@ test('links DaySpa, WebSite, and the correct page types', () => {
     [parseJsonLd(homeHtml), 'WebPage'],
     [parseJsonLd(aboutHtml), 'AboutPage'],
     [parseJsonLd(contactHtml), 'ContactPage'],
+    [parseJsonLd(offerIndexHtml), 'CollectionPage'],
   ];
 
   for (const [document, pageType] of expectedPageTypes) {
@@ -71,6 +77,16 @@ test('links DaySpa, WebSite, and the correct page types', () => {
     assert.ok(document['@graph'].some((node) => node['@type'] === 'DaySpa'));
     assert.ok(document['@graph'].some((node) => node['@type'] === 'WebSite'));
     assert.ok(document['@graph'].some((node) => node['@type'] === pageType));
+  }
+});
+
+test('detail pages infer Service mainEntity', () => {
+  for (const html of [serviceDetailHtml, packageDetailHtml, offerDetailHtml]) {
+    const page = parseJsonLd(html)['@graph'].find(
+      (node) => node['@type'] === 'WebPage' && node.mainEntity,
+    );
+    assert.ok(page?.mainEntity?.['@id'], 'expected inferred mainEntity');
+    assert.match(page.mainEntity['@id'], /#service$/);
   }
 });
 

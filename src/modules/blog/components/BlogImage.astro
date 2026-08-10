@@ -1,4 +1,6 @@
 ---
+import { buildWidthSrcset } from '../../../lib/responsive-image-url';
+
 export interface Props {
   src: string;
   alt: string;
@@ -8,6 +10,7 @@ export interface Props {
   loading?: 'eager' | 'lazy';
   class?: string;
   focalPoint?: { x: number; y: number };
+  sizes?: string;
 }
 
 const {
@@ -19,6 +22,7 @@ const {
   loading = 'lazy',
   class: className = '',
   focalPoint,
+  sizes = '(max-width: 768px) calc(100vw - 40px), 768px',
 } = Astro.props;
 
 const objectPosition =
@@ -30,11 +34,15 @@ const objectPosition =
         Math.max(0, focalPoint.y * 100),
       ).toFixed(2)}%`
     : undefined;
+
+const srcset = buildWidthSrcset(src, [480, 768, 1200, 1600], width);
 ---
 
 <figure class:list={['blog-image', className]}>
   <img
     src={src}
+    srcset={srcset}
+    sizes={srcset ? sizes : undefined}
     alt={alt}
     width={width}
     height={height}

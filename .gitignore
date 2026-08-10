@@ -2,6 +2,7 @@
 dist/
 # generated types
 .astro/
+worker-configuration.d.ts
 
 # dependencies
 node_modules/
@@ -26,3 +27,10 @@ fine-advantage-504306-c9-f4eb5ae91393.json
 
 # jetbrains setting folder
 .idea/
+
+# browser / audit artifacts (never commit generated reports)
+test-results/
+playwright-report/
+blob-report/
+seo-baseline/link-audit-results.json
+seo-baseline/link-audit-report.md

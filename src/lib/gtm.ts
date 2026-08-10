@@ -1,11 +1,11 @@
-/** Google Analytics 4 measurement ID (or a GTM- container ID). */
-export const GTM_CONTAINER_ID = 'G-KKSXRY8MSN';
+/** Validate a Google Analytics 4 measurement ID (G-XXXXXXXX). */
+export function isGaMeasurementId(value: unknown): value is string {
+  return typeof value === 'string' && /^G-[A-Z0-9]+$/i.test(value.trim());
+}
 
-/** False while a placeholder ID is in use — dataLayer events still fire. */
-export const isGtmContainerConfigured = !GTM_CONTAINER_ID.includes('XXXX');
-
-export const isGaMeasurementId = GTM_CONTAINER_ID.startsWith('G-');
-export const isGtmContainerId = GTM_CONTAINER_ID.startsWith('GTM-');
+export function isGtmContainerId(value: unknown): value is string {
+  return typeof value === 'string' && /^GTM-[A-Z0-9]+$/i.test(value.trim());
+}
 
 export const GTM_EVENTS = {
   whatsapp: 'contact_whatsapp',
@@ -47,9 +47,9 @@ export function resolveContactEvent(href: string): GtmContactEvent | null {
   }
 
   if (
-    value.includes('api.whatsapp.com') ||
-    value.includes('wa.me/') ||
-    value.includes('whatsapp.com')
+    value.includes('api.whatsapp.com')
+    || value.includes('wa.me/')
+    || value.includes('whatsapp.com')
   ) {
     return GTM_EVENTS.whatsapp;
   }

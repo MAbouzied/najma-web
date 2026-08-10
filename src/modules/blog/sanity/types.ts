@@ -37,6 +37,7 @@ export interface SanitySeo {
   description?: string | null;
   focusKeyword?: string | null;
   canonicalUrl?: string | null;
+  ogImage?: SanityImageValue | null;
 }
 
 export interface SanityRelatedPost {

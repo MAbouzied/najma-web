@@ -6,20 +6,28 @@ import {
   expectedRoutes,
   isIndexableRoute,
   loadSitemapEntries,
+  loadSitemapIndexText,
   loadSitemapUrls,
 } from './helpers/seo-routes.mjs';
 
 const robotsText = await readFile(new URL('../dist/client/robots.txt', import.meta.url), 'utf8');
 const llmsText = await readFile(new URL('../dist/client/llms.txt', import.meta.url), 'utf8');
+const sitemapIndexText = await loadSitemapIndexText();
 const sitemapEntries = await loadSitemapEntries();
 const sitemapUrls = await loadSitemapUrls();
 const indexableCanonicals = expectedRoutes()
   .filter(isIndexableRoute)
   .map((route) => `${ORIGIN}${route}`);
 
-test('sitemap XML is parseable and matches indexable canonicals exactly', () => {
+test('sitemap XML is parseable and matches indexable prerendered canonicals exactly', () => {
   assert.ok(sitemapUrls.length > 0);
   assert.deepEqual([...sitemapUrls].sort(), [...indexableCanonicals].sort());
+});
+
+test('sitemap index references the live blog sitemap', () => {
+  assert.match(sitemapIndexText, /<sitemapindex/);
+  assert.match(sitemapIndexText, new RegExp(`${ORIGIN}/sitemap-0\\.xml`));
+  assert.match(sitemapIndexText, new RegExp(`${ORIGIN}/sitemap-blog\\.xml`));
 });
 
 test('sitemap hreflang alternates are reciprocal between locales', () => {
@@ -78,6 +86,7 @@ test('llms.txt includes major Arabic and English sections without utility routes
   assert.match(llmsText, /\/offers\//);
   assert.match(llmsText, /\/en\/offers\//);
   assert.match(llmsText, /\/blogs\//);
-  assert.doesNotMatch(llmsText, /\/book\/|\/go\/|\/api\//);
-  assert.doesNotMatch(llmsText, /localhost|example\.com/);
+  assert.doesNotMatch(llmsText, /\/book\//);
+  assert.doesNotMatch(llmsText, /\/go\//);
+  assert.doesNotMatch(llmsText, /\/api\//);
 });

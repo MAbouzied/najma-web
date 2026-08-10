@@ -184,8 +184,8 @@ export function buildBlogCollectionSchemas(options: {
   description: string;
   posts: readonly BlogPost[];
 }): JsonLd[] {
+  // CollectionPage comes from SiteLayout pageType — avoid a duplicate node.
   return [
-    buildCollectionPageSchema(options),
     buildBlogBreadcrumbSchema(options.site),
     buildBlogItemListSchema(options),
   ];

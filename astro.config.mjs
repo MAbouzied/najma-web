@@ -5,7 +5,6 @@ import { cacheCloudflare } from '@astrojs/cloudflare/cache';
 import { defineConfig, envField } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
-import { getBlogSitemapPages } from './src/lib/blog-sitemap-pages.ts';
 
 const site = 'https://nagmspa.com';
 
@@ -57,10 +56,53 @@ export default defineConfig({
         access: 'public',
         optional: true,
       }),
+      PUBLIC_GA_MEASUREMENT_ID: envField.string({
+        context: 'client',
+        access: 'public',
+        optional: true,
+      }),
       BETTER_AUTH_SECRET: envField.string({ context: 'server', access: 'secret', optional: true }),
       BETTER_AUTH_URL: envField.string({ context: 'server', access: 'secret', optional: true }),
       GOOGLE_CLIENT_ID: envField.string({ context: 'server', access: 'secret', optional: true }),
       GOOGLE_CLIENT_SECRET: envField.string({ context: 'server', access: 'secret', optional: true }),
+    },
+  },
+  security: {
+    checkOrigin: true,
+    csp: {
+      algorithm: 'SHA-256',
+      directives: [
+        "default-src 'self'",
+        "base-uri 'self'",
+        "form-action 'self'",
+        "frame-ancestors 'none'",
+        "object-src 'none'",
+        "connect-src 'self' https://www.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com",
+        "img-src 'self' data: blob: https://cdn.sanity.io https://*.googleusercontent.com https://*.google-analytics.com",
+        "font-src 'self'",
+        "frame-src https://www.googletagmanager.com https://www.youtube-nocookie.com https://player.vimeo.com",
+        "media-src 'self' https://cdn.sanity.io",
+      ],
+      scriptDirective: {
+        // Keep false: 'strict-dynamic' disables host allowlisting, so Astro's
+        // <script type="module" src="/_astro/..."> tags are blocked (hashes only
+        // match inline bodies). Same-origin modules use 'self'; GTM uses the host below.
+        strictDynamic: false,
+        resources: [
+          { resource: "'self'", kind: 'element' },
+          {
+            resource: 'https://www.googletagmanager.com',
+            kind: 'element',
+          },
+          { resource: "'none'", kind: 'attribute' },
+        ],
+      },
+      styleDirective: {
+        resources: [
+          { resource: "'self'", kind: 'element' },
+          { resource: "'unsafe-inline'", kind: 'attribute' },
+        ],
+      },
     },
   },
   i18n: {
@@ -71,7 +113,8 @@ export default defineConfig({
   integrations: [
     react(),
     sitemap({
-      customPages: getBlogSitemapPages(site),
+      // Live blog URLs come from SSR `/sitemap-blog.xml` (repository-backed).
+      customSitemaps: [`${site}/sitemap-blog.xml`],
       i18n: {
         defaultLocale: 'ar',
         locales: { ar: 'ar', en: 'en' },
@@ -79,25 +122,10 @@ export default defineConfig({
       filter: (page) => {
         try {
           const path = new URL(page).pathname;
-          return !/\/(book|go|api|admin|login)(\/|$)/.test(path);
+          return !/\/(book|go|api|admin|login|blogs)(\/|$)/.test(path);
         } catch {
-          return !/\/(book|go|api|admin|login)(\/|$)/.test(page);
+          return !/\/(book|go|api|admin|login|blogs)(\/|$)/.test(page);
         }
-      },
-      // Blog is Arabic-only — keep a self hreflang=ar alternate, never invent /en/blogs*.
-      serialize(item) {
-        try {
-          const path = new URL(item.url).pathname;
-          if (path === '/blogs/' || path.startsWith('/blogs/')) {
-            return {
-              ...item,
-              links: [{ url: item.url, lang: 'ar' }],
-            };
-          }
-        } catch {
-          /* keep default item */
-        }
-        return item;
       },
     }),
   ],

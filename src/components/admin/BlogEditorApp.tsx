@@ -295,13 +295,12 @@ export default function BlogEditorApp({ post, services }: Props) {
   const [coverPreview, setCoverPreview] = useState(post.coverUrl);
   const [coverError, setCoverError] = useState('');
   const [inlineOpen, setInlineOpen] = useState(false);
-  const [inlineMode, setInlineMode] = useState<'device' | 'url'>('device');
   const [inlineFile, setInlineFile] = useState<File | null>(null);
-  const [inlineUrl, setInlineUrl] = useState('');
   const [inlineAlt, setInlineAlt] = useState('');
   const [inlineCaption, setInlineCaption] = useState('');
   const [inlineError, setInlineError] = useState('');
   const editorRef = useRef<LexicalEditor | null>(null);
+  const hasLegacyCoverUrl = Boolean(fields.coverUrl) && !fields.coverAssetId;
 
   useEffect(() => { const handler = (event: BeforeUnloadEvent) => { if (dirty) { event.preventDefault(); (event as unknown as { returnValue: string }).returnValue = ''; } }; window.addEventListener('beforeunload', handler); return () => window.removeEventListener('beforeunload', handler); }, [dirty]);
   const notify = (text: string, error = false) => { setMessage({ text, error }); window.setTimeout(() => setMessage(null), 5000); };
@@ -310,7 +309,10 @@ export default function BlogEditorApp({ post, services }: Props) {
   const editorHydrated = useRef(false);
   async function request(path: string, options: RequestInit = {}) {
     const headers = new Headers(options.headers);
-    if (!(options.body instanceof FormData)) headers.set('Content-Type', 'application/json');
+    const hasContentType = headers.has('Content-Type');
+    if (!hasContentType && !(options.body instanceof FormData) && !(options.body instanceof Blob)) {
+      headers.set('Content-Type', 'application/json');
+    }
     const response = await fetch(`/api/admin/blog/${path}`, { ...options, headers });
     const result = await response.json().catch(() => ({}));
     if (!response.ok) {
@@ -350,18 +352,40 @@ export default function BlogEditorApp({ post, services }: Props) {
   async function uploadCover(file: File) {
     if (!file.type.startsWith('image/') || file.size > 10 * 1024 * 1024) { setCoverError('اختر صورة حتى 10 ميجابايت.'); return; }
     setAction('cover'); setCoverError('');
-    try { const formData = new FormData(); formData.append('file', file, file.name); formData.append('alt', fields.coverAlt || file.name); const result = await request('assets', { method: 'POST', body: formData }) as { assetId: string; url: string }; setFields((current) => ({ ...current, coverUrl: result.url, coverAssetId: result.assetId, coverAlt: current.coverAlt || file.name.replace(/\.[^.]+$/, '') })); setCoverPreview(result.url); setDirty(true); notify('تم رفع الصورة الرئيسية.'); } catch (error) { setCoverError(error instanceof Error ? error.message : 'تعذر رفع الصورة.'); } finally { setAction(null); }
+    try {
+      const result = await request('assets', {
+        method: 'POST',
+        body: file,
+        headers: { 'Content-Type': file.type || 'application/octet-stream' },
+      }) as { assetId: string; url: string };
+      setFields((current) => ({
+        ...current,
+        coverUrl: result.url,
+        coverAssetId: result.assetId,
+        coverAlt: current.coverAlt || file.name.replace(/\.[^.]+$/, ''),
+      }));
+      setCoverPreview(result.url);
+      setDirty(true);
+      notify('تم رفع الصورة الرئيسية.');
+    } catch (error) {
+      setCoverError(error instanceof Error ? error.message : 'تعذر رفع الصورة.');
+    } finally {
+      setAction(null);
+    }
   }
   async function insertInlineImage() {
     if (!inlineAlt.trim() || action) { setInlineError('أدخل الوصف البديل للصورة.'); return; }
     setAction('inline'); setInlineError('');
     try {
-      let uploaded: { assetId: string; url: string };
-      if (inlineMode === 'device') {
-        if (!inlineFile) throw new Error('اختر صورة من جهازك أولاً.');
-        if (!inlineFile.type.startsWith('image/') || inlineFile.size > 10 * 1024 * 1024) throw new Error('اختر صورة حتى 10 ميجابايت.');
-        const formData = new FormData(); formData.append('file', inlineFile, inlineFile.name); uploaded = await request('assets', { method: 'POST', body: formData });
-      } else { uploaded = await request('assets/import', { method: 'POST', body: JSON.stringify({ url: inlineUrl }) }); }
+      if (!inlineFile) throw new Error('اختر صورة من جهازك أولاً.');
+      if (!inlineFile.type.startsWith('image/') || inlineFile.size > 10 * 1024 * 1024) {
+        throw new Error('اختر صورة حتى 10 ميجابايت.');
+      }
+      const uploaded = await request('assets', {
+        method: 'POST',
+        body: inlineFile,
+        headers: { 'Content-Type': inlineFile.type || 'application/octet-stream' },
+      }) as { assetId: string; url: string };
       const editor = editorRef.current;
       if (!editor) throw new Error('تعذر تجهيز محرر الصور.');
       editor.focus();
@@ -370,7 +394,7 @@ export default function BlogEditorApp({ post, services }: Props) {
         const selection = $getSelection();
         if ($isRangeSelection(selection)) selection.insertNodes([node]); else $getRoot().append(node);
       });
-      setInlineOpen(false); setInlineFile(null); setInlineUrl(''); setInlineAlt(''); setInlineCaption(''); setDirty(true);
+      setInlineOpen(false); setInlineFile(null); setInlineAlt(''); setInlineCaption(''); setDirty(true);
     } catch (error) { setInlineError(error instanceof Error ? error.message : 'تعذر إضافة الصورة.'); } finally { setAction(null); }
   }
   function openImageDialog() { setInlineOpen(true); setInlineError(''); }
@@ -387,11 +411,11 @@ export default function BlogEditorApp({ post, services }: Props) {
         <EditorField post={post} disabled={Boolean(action)} onImage={openImageDialog} onVideo={addVideo} onReady={(editor) => { editorRef.current = editor; window.setTimeout(() => { editorHydrated.current = true; }, 0); }} onChange={(state, html) => { setContent({ json: JSON.stringify(state.toJSON()), html }); if (editorHydrated.current) setDirty(true); }} />
       </div><aside className="editor-side">
         <div className="side-card"><h2>النشر</h2><label>الكاتب<input value={fields.author} onChange={(e) => updateField('author', e.target.value)} /></label><label className="check-row"><input type="checkbox" checked={featured} onChange={(e) => { setFeatured(e.target.checked); setDirty(true); }} /> مقال مميز</label><div className="side-actions"><button type="button" className="button button-secondary" disabled={Boolean(action)} onClick={() => save('save')}>{action === 'save' ? <><Spinner /> جارٍ حفظ المسودة…</> : 'حفظ كمسودة'}</button><button type="button" className="button button-primary" disabled={Boolean(action)} onClick={() => save('publish')}>{action === 'publish' ? <><Spinner /> جارٍ النشر…</> : 'نشر المقال'}</button></div></div>
-        <div className="side-card image-card"><h2>الصورة الرئيسية</h2><label className="file-upload-label">رفع صورة من جهازك<input type="file" accept="image/jpeg,image/png,image/webp,image/gif" onChange={(e) => { const file = e.target.files?.[0]; if (file) uploadCover(file); }} /><span className="file-upload-control"><span>اختيار صورة</span><small>PNG أو JPG أو WEBP حتى 10MB</small></span></label>{action === 'cover' ? <div className="image-upload-status"><Spinner /> جارٍ رفع الصورة…</div> : null}{coverError ? <div className="image-upload-status error">{coverError}</div> : null}{coverPreview ? <img className="image-upload-preview" src={coverPreview} alt={fields.coverAlt || fields.title} /> : null}<label>رابط الصورة<input value={fields.coverUrl} onChange={(e) => { updateField('coverUrl', e.target.value); setFields((current) => ({ ...current, coverAssetId: '' })); setCoverPreview(e.target.value); }} placeholder="https://… أو /assets/…" /></label><label>الوصف البديل<input value={fields.coverAlt} onChange={(e) => updateField('coverAlt', e.target.value)} placeholder="وصف الصورة" /></label></div>
+        <div className="side-card image-card"><h2>الصورة الرئيسية</h2><label className="file-upload-label">رفع صورة من جهازك<input type="file" accept="image/jpeg,image/png,image/webp,image/gif" onChange={(e) => { const file = e.target.files?.[0]; if (file) uploadCover(file); }} /><span className="file-upload-control"><span>اختيار صورة</span><small>PNG أو JPG أو WEBP حتى 10MB</small></span></label>{action === 'cover' ? <div className="image-upload-status"><Spinner /> جارٍ رفع الصورة…</div> : null}{coverError ? <div className="image-upload-status error">{coverError}</div> : null}{coverPreview ? <img className="image-upload-preview" src={coverPreview} alt={fields.coverAlt || fields.title} /> : null}{hasLegacyCoverUrl ? <label>رابط الصورة الحالي (للقراءة فقط)<input value={fields.coverUrl} readOnly /><small className="field-help">لاستبدال الصورة القديمة ارفع ملفاً جديداً من جهازك.</small></label> : null}<label>الوصف البديل<input value={fields.coverAlt} onChange={(e) => updateField('coverAlt', e.target.value)} placeholder="وصف الصورة" /></label></div>
         <div className="side-card"><h2>خدمة مرتبطة <span>(اختياري)</span></h2><select value={fields.relatedServiceId} onChange={(e) => updateField('relatedServiceId', e.target.value)}><option value="">بدون خدمة مرتبطة</option>{services.map((service) => <option key={service.id} value={service.id}>{service.title}</option>)}</select></div>
         <button type="button" className="button button-preview" disabled={Boolean(action)} onClick={() => save('preview')}>{action === 'preview' ? <><Spinner /> جارٍ تجهيز المعاينة…</> : 'معاينة المقال'}</button>
       </aside></div>
     </form>
-    {inlineOpen ? <div className="editor-modal-backdrop" role="presentation"><div className="editor-modal" role="dialog" aria-modal="true" aria-labelledby="inline-image-title"><h2 id="inline-image-title">إضافة صورة داخل المقال</h2><div className="modal-tabs"><button type="button" className={inlineMode === 'device' ? 'is-active' : ''} onClick={() => setInlineMode('device')}>من الجهاز</button><button type="button" className={inlineMode === 'url' ? 'is-active' : ''} onClick={() => setInlineMode('url')}>من رابط</button></div>{inlineMode === 'device' ? <label key="inline-device">اختر صورة<input type="file" accept="image/jpeg,image/png,image/webp,image/gif" onChange={(e) => setInlineFile(e.target.files?.[0] || null)} /></label> : <label key="inline-url">رابط الصورة<input value={inlineUrl} onChange={(e) => setInlineUrl(e.target.value)} placeholder="https://…" /></label>}<label>الوصف البديل<input value={inlineAlt} onChange={(e) => setInlineAlt(e.target.value)} required /></label><label>تعليق اختياري<input value={inlineCaption} onChange={(e) => setInlineCaption(e.target.value)} /></label>{inlineError ? <div className="image-upload-status error">{inlineError}</div> : null}<div className="modal-actions"><button type="button" className="button button-secondary" disabled={action === 'inline'} onClick={() => setInlineOpen(false)}>إلغاء</button><button type="button" className="button button-primary" disabled={action === 'inline'} onClick={insertInlineImage}>{action === 'inline' ? <><Spinner /> جارٍ رفع الصورة…</> : 'إضافة الصورة'}</button></div></div></div> : null}
+    {inlineOpen ? <div className="editor-modal-backdrop" role="presentation"><div className="editor-modal" role="dialog" aria-modal="true" aria-labelledby="inline-image-title"><h2 id="inline-image-title">إضافة صورة داخل المقال</h2><label>اختر صورة<input type="file" accept="image/jpeg,image/png,image/webp,image/gif" onChange={(e) => setInlineFile(e.target.files?.[0] || null)} /></label><label>الوصف البديل<input value={inlineAlt} onChange={(e) => setInlineAlt(e.target.value)} required /></label><label>تعليق اختياري<input value={inlineCaption} onChange={(e) => setInlineCaption(e.target.value)} /></label>{inlineError ? <div className="image-upload-status error">{inlineError}</div> : null}<div className="modal-actions"><button type="button" className="button button-secondary" disabled={action === 'inline'} onClick={() => setInlineOpen(false)}>إلغاء</button><button type="button" className="button button-primary" disabled={action === 'inline'} onClick={insertInlineImage}>{action === 'inline' ? <><Spinner /> جارٍ رفع الصورة…</> : 'إضافة الصورة'}</button></div></div></div> : null}
   </section>;
 }

@@ -1,21 +1,22 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import {
-  GTM_CONTAINER_ID,
   GTM_EVENTS,
   isGaMeasurementId,
-  isGtmContainerConfigured,
   isGtmContainerId,
   pushGtmEvent,
   resolveContactEvent,
   gtmContactAttrs,
 } from '../src/lib/gtm.ts';
 
-test('uses the configured GA4 measurement id', () => {
-  assert.equal(GTM_CONTAINER_ID, 'G-KKSXRY8MSN');
-  assert.equal(isGaMeasurementId, true);
-  assert.equal(isGtmContainerId, false);
-  assert.equal(isGtmContainerConfigured, true);
+test('validates GA4 measurement ids', () => {
+  assert.equal(isGaMeasurementId('G-KKSXRY8MSN'), true);
+  assert.equal(isGaMeasurementId('G-XXXX'), true);
+  assert.equal(isGaMeasurementId('GTM-ABC123'), false);
+  assert.equal(isGaMeasurementId(''), false);
+  assert.equal(isGaMeasurementId(undefined), false);
+  assert.equal(isGtmContainerId('GTM-ABC123'), true);
+  assert.equal(isGtmContainerId('G-KKSXRY8MSN'), false);
 });
 
 test('exposes contact and form event names', () => {

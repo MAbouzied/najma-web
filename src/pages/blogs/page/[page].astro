@@ -2,11 +2,27 @@
 export const prerender = false;
 
 import BlogsPage from '../../../views/BlogsPage.astro';
+import StatusPage from '../../../components/StatusPage.astro';
+import { t } from '../../../i18n/t';
 
+const locale = 'ar' as const;
 const pageNumber = Number.parseInt(Astro.params.page ?? '', 10);
-if (!Number.isInteger(pageNumber) || pageNumber < 2) {
-  return new Response(null, { status: 404, statusText: 'Not Found' });
+const invalidPage = !Number.isInteger(pageNumber) || pageNumber < 2;
+
+if (invalidPage) {
+  Astro.response.status = 404;
 }
 ---
 
-<BlogsPage page={pageNumber} />
+{
+  invalidPage ? (
+    <StatusPage
+      status={404}
+      locale={locale}
+      title={t(locale, 'status404Title')}
+      description={t(locale, 'status404Description')}
+    />
+  ) : (
+    <BlogsPage page={pageNumber} />
+  )
+}

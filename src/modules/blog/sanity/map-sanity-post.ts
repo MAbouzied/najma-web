@@ -1,7 +1,7 @@
 import { sanitizeBlogHtml } from '../../../lib/blog-content.ts';
 import { validateBlogPost } from '../model/blog-schema.ts';
 import type { BlogPost } from '../model/blog-types.ts';
-import { mapSanityImage, type SanityImageUrlConfig } from './image.ts';
+import { mapSanityImage, mapSanityOgImage, type SanityImageUrlConfig } from './image.ts';
 import type { SanityBlogPostDoc } from './types.ts';
 
 function requireString(
@@ -62,6 +62,10 @@ export function mapSanityPostToBlogPost(
       ? mapSanityImage(imageConfig, doc.author.image, authorName, documentId, 'author.image')
       : undefined;
 
+    const ogImage = doc.seo?.ogImage?.asset
+      ? mapSanityOgImage(imageConfig, doc.seo.ogImage, title, documentId, 'seo.ogImage')
+      : undefined;
+
     const relatedSlugs = (doc.relatedPosts ?? [])
       .map((item) => item.slug?.trim())
       .filter((slugValue): slugValue is string => Boolean(slugValue));
@@ -90,6 +94,7 @@ export function mapSanityPostToBlogPost(
           : {}),
         ...(doc.seo?.focusKeyword?.trim() ? { focusKeyword: doc.seo.focusKeyword.trim() } : {}),
         ...(doc.seo?.canonicalUrl?.trim() ? { canonicalUrl: doc.seo.canonicalUrl.trim() } : {}),
+        ...(ogImage ? { ogImage } : {}),
       },
       body: doc.bodyHtml?.trim()
         ? { format: 'html' as const, html: sanitizeBlogHtml(doc.bodyHtml) }

@@ -1,4 +1,5 @@
 ---
+import { Picture } from 'astro:assets';
 import SiteLayout from '../layouts/SiteLayout.astro';
 import Header from '../components/Header.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
@@ -9,6 +10,7 @@ import { localePath } from '../i18n/paths';
 import { t } from '../i18n/t';
 import type { Locale } from '../i18n/types';
 import { buildServiceBookingUrl } from '../lib/whatsapp';
+import { localImage } from '../lib/site-images';
 
 export interface Props {
   locale: Locale;
@@ -28,6 +30,7 @@ const dir = locale === 'en' ? 'ltr' : 'rtl';
 const call = getCallAction(locale);
 const serviceBookingHref = buildServiceBookingUrl(service.title, locale);
 const detailImage = service.heroImage ?? service.image;
+const detailImageMeta = localImage(detailImage);
 const priceLabel = service.price ?? (locale === 'en' ? 'Via offers' : 'ضمن العروض');
 const breadcrumbs = [
   { label: t(locale, 'breadcrumbHome'), href: localePath('/', locale) },
@@ -56,7 +59,16 @@ const breadcrumbs = [
         <Breadcrumbs items={breadcrumbs} locale={locale} />
 
         <div class="overflow-hidden rounded-3xl border border-border-card">
-          <img src={detailImage} alt={service.title} width="1200" height="600" class="h-72 w-full object-cover sm:h-96" />
+          <Picture
+            src={detailImageMeta}
+            formats={['avif', 'webp']}
+            widths={[640, 960, 1200, 1600]}
+            sizes="(max-width: 768px) calc(100vw - 40px), 768px"
+            quality="mid"
+            priority
+            alt={service.title}
+            class="h-72 w-full object-cover sm:h-96"
+          />
         </div>
 
         <h1 class="mt-8 text-4xl font-bold leading-tight text-text-primary">{service.title}</h1>

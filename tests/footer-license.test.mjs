@@ -21,17 +21,19 @@ test('renders official licensing data in the footer', () => {
 test('renders VAT registration number with certificate link to public image', () => {
   assert.match(homeHtml, /الرقم الضريبي[\s\S]*?310360176500003/);
   assert.match(homeHtml, /\/assets\/icons\/zatca-vat\.svg/);
-  assert.match(
-    homeHtml,
-    /data-vat-certificate-link[^>]*href="\/assets\/legal\/vat-registration-certificate\.png"[^>]*target="_blank"/,
-  );
+  const vatAnchor =
+    homeHtml.match(/<a\b[^>]*data-vat-certificate-link[^>]*>/)?.[0] ?? '';
+  assert.match(vatAnchor, /href="\/assets\/legal\/vat-registration-certificate\.png"/);
+  assert.match(vatAnchor, /target="_blank"/);
+  assert.match(vatAnchor, /rel="noopener noreferrer"/);
   assert.doesNotMatch(homeHtml, /data-vat-certificate-dialog/);
   assert.doesNotMatch(homeHtml, /data-license-missing/);
   assert.match(enHomeHtml, /VAT Number[\s\S]*?310360176500003/);
-  assert.match(
-    enHomeHtml,
-    /data-vat-certificate-link[^>]*href="\/assets\/legal\/vat-registration-certificate\.png"[^>]*target="_blank"/,
-  );
+  const enVatAnchor =
+    enHomeHtml.match(/<a\b[^>]*data-vat-certificate-link[^>]*>/)?.[0] ?? '';
+  assert.match(enVatAnchor, /href="\/assets\/legal\/vat-registration-certificate\.png"/);
+  assert.match(enVatAnchor, /target="_blank"/);
+  assert.match(enVatAnchor, /rel="noopener noreferrer"/);
 });
 
 test('presents licensing details as an accessible responsive card grid', () => {

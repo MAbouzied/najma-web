@@ -31,25 +31,30 @@ test('renders all data-driven homepage collections', () => {
   assert.equal((homeHtml.match(/data-package-card/g) ?? []).length, 3);
   assert.equal((homeHtml.match(/data-branch-card/g) ?? []).length, 1);
   assert.equal((homeHtml.match(/data-testimonial-card/g) ?? []).length, 6);
-  assert.equal((homeHtml.match(/<details/g) ?? []).length, 8);
+  // 8 FAQ items + zero-hydration mobile nav <details>
+  assert.equal((homeHtml.match(/<details/g) ?? []).length, 9);
+  assert.match(homeHtml, /data-mobile-nav/);
 });
 
 test('uses committed assets and shared site chrome', () => {
   assert.doesNotMatch(homeHtml, /figma\.com\/api\/mcp\/asset/);
-  assert.match(homeHtml, /\/assets\/home\/hero-interior\./);
-  assert.match(homeHtml, /\/assets\/home\/services\/relaxation-massage\./);
-  assert.match(homeHtml, /\/assets\/home\/services\/manicure-pedicure\./);
-  assert.match(homeHtml, /\/assets\/home\/benefits\/expert-therapists\./);
+  // LCP/card rasters go through Astro Image → /_astro/*; SEO still uses public /assets paths.
+  assert.match(homeHtml, /\/_astro\/hero-interior\.[^"']+/);
+  assert.match(homeHtml, /\/_astro\/relaxation-massage\.[^"']+/);
+  assert.match(homeHtml, /\/_astro\/manicure-pedicure\.[^"']+/);
+  assert.match(homeHtml, /\/_astro\/expert-therapists\.[^"']+/);
+  assert.match(homeHtml, /data-home-hero[\s\S]*?<picture[\s\S]*?<\/picture>/);
   assert.match(homeHtml, /data-site-header/);
   assert.match(homeHtml, /aria-current="page"/);
   assert.match(homeHtml, /data-site-cta/);
   assert.match(homeHtml, /data-site-footer/);
+  assert.match(homeHtml, /data-site-cta[\s\S]*?loading="lazy"/);
 });
 
 test('matches the intro order on one continuous background', () => {
   assert.match(
     homeHtml,
-    /data-home-intro-shell[^>]*class="[^"]*bg-bg-primary[^"]*"[\s\S]*?data-home-hero[\s\S]*?واستمتع بلحظتك[\s\S]*?\/assets\/home\/hero-interior\.jpg[\s\S]*?data-home-benefits/,
+    /data-home-intro-shell[^>]*class="[^"]*bg-bg-primary[^"]*"[\s\S]*?data-home-hero[\s\S]*?واستمتع بلحظتك[\s\S]*?\/_astro\/hero-interior\.[^"']+[\s\S]*?data-home-benefits/,
   );
 });
 

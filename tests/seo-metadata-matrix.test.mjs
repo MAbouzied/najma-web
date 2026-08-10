@@ -103,6 +103,6 @@ test('og:url matches canonical and social metadata is complete', () => {
     if (isBlogRoute(route)) continue;
 
     assert.match(html, /<meta property="og:type" content="website">/);
-    assert.equal(ogImage, `${ORIGIN}/assets/og/nagm-spa-share.jpg`);
+    assert.equal(ogImage, `${ORIGIN}/assets/og/nagm-spa-share-1200x630.jpg`);
   }
 });

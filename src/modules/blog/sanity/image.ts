@@ -48,6 +48,40 @@ function resolveImageSrc(
   return sanityImageUrl(config, value as SanityImageSource, width);
 }
 
+/** Fixed JPEG 1200×630 share crop for Open Graph / Twitter cards. */
+export function mapSanityOgImage(
+  config: SanityImageUrlConfig,
+  value: SanityImageValue | null | undefined,
+  fallbackAlt: string,
+  documentId: string,
+  field: string,
+): BlogImage {
+  const asset = value?.asset;
+  if (!asset?.url && !asset?._id) {
+    throw new Error(`Sanity document ${documentId}: missing ${field} image asset`);
+  }
+
+  const alt = value?.alt?.trim() || fallbackAlt;
+  if (!alt) {
+    throw new Error(`Sanity document ${documentId}: missing ${field}.alt`);
+  }
+
+  const src = builderFor(config)
+    .image(value as SanityImageSource)
+    .width(1200)
+    .height(630)
+    .fit('crop')
+    .format('jpg')
+    .url();
+
+  return {
+    src,
+    alt,
+    width: 1200,
+    height: 630,
+  };
+}
+
 export function mapSanityImage(
   config: SanityImageUrlConfig,
   value: SanityImageValue | null | undefined,

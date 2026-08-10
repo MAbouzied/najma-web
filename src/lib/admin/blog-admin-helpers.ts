@@ -30,15 +30,18 @@ function optionalNumber(value: unknown): number | undefined {
   return typeof value === 'number' && Number.isFinite(value) ? value : undefined;
 }
 
-/** Normalize the admin blog save/publish JSON body, including Lexical contentJson. */
+/** Normalize the admin blog save/publish JSON body. Client HTML is ignored; Lexical JSON is required. */
 export function readAdminPostPayload(payload: Partial<Record<string, unknown>>): AdminPostPayload {
   const contentJson = optionalString(payload.contentJson)?.trim();
+  if (!contentJson) {
+    throw new Error('محتوى المقال غير صالح.');
+  }
   return {
     title: String(payload.title ?? ''),
     slug: String(payload.slug ?? ''),
     excerpt: String(payload.excerpt ?? ''),
-    contentHtml: String(payload.contentHtml ?? ''),
-    ...(contentJson ? { contentJson } : {}),
+    contentHtml: '',
+    contentJson,
     category: optionalString(payload.category),
     author: optionalString(payload.author),
     coverUrl: optionalString(payload.coverUrl),
@@ -51,15 +54,26 @@ export function readAdminPostPayload(payload: Partial<Record<string, unknown>>):
   };
 }
 
-export interface AdminImportUrlBody {
-  url: string;
+const ADMIN_POST_ID = /^[A-Za-z0-9_-]{8,100}$/;
+
+export class AdminBlogNotFoundError extends Error {
+  constructor() {
+    super('المقال غير موجود');
+    this.name = 'AdminBlogNotFoundError';
+  }
 }
 
-/** Validate JSON body for POST /api/admin/blog/assets/import. */
-export function readAdminImportUrlBody(payload: Partial<Record<string, unknown>>): AdminImportUrlBody {
-  const url = typeof payload.url === 'string' ? payload.url.trim() : '';
-  if (!url) throw new Error('أدخل رابط الصورة.');
-  return { url };
+export function isAdminBlogNotFoundError(error: unknown): error is AdminBlogNotFoundError {
+  return error instanceof AdminBlogNotFoundError;
+}
+
+/** Strict admin blog document id parsing. Rejects malformed values before any Sanity IO. */
+export function parseAdminPostId(value: unknown): string {
+  const id = typeof value === 'string' ? value.trim() : '';
+  if (!ADMIN_POST_ID.test(id)) {
+    throw new AdminBlogNotFoundError();
+  }
+  return id;
 }
 
 /** Existing posts keep their established URL unless the editor changes it explicitly. */

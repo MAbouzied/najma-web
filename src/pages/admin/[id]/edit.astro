@@ -3,10 +3,19 @@ export const prerender = false;
 
 import AdminShell from '../../../components/admin/AdminShell.astro';
 import BlogEditor from '../../../components/admin/BlogEditor.astro';
-import { getAdminPost, listAdminServices } from '../../../lib/admin/blog-admin.ts';
+import { getAdminPost, listAdminServices, type AdminPost } from '../../../lib/admin/blog-admin.ts';
+import {
+  isAdminBlogNotFoundError,
+  parseAdminPostId,
+} from '../../../lib/admin/blog-admin-helpers.ts';
 
-const id = Astro.params.id;
-const post = id ? await getAdminPost(id) : null;
+let post: AdminPost | null = null;
+try {
+  const id = parseAdminPostId(Astro.params.id);
+  post = await getAdminPost(id);
+} catch (error) {
+  if (!isAdminBlogNotFoundError(error)) throw error;
+}
 if (!post) {
   Astro.response.status = 404;
 }

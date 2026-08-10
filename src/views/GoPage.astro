@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import SiteLayout from '../layouts/SiteLayout.astro';
 import BrandLogo from '../components/BrandLogo.astro';
 import WhatsAppIcon from '../components/WhatsAppIcon.astro';
@@ -13,6 +14,7 @@ import { localePath } from '../i18n/paths';
 import { t } from '../i18n/t';
 import type { Locale } from '../i18n/types';
 import { GTM_EVENTS, gtmContactAttrs } from '../lib/gtm';
+import { siteImage } from '../lib/site-images';
 
 export interface Props {
   locale: Locale;
@@ -37,11 +39,14 @@ const contact = getContactDetails(locale);
   locale={locale}
 >
   <section class="relative min-h-dvh overflow-hidden bg-bg-primary" dir={dir}>
-    <img
-      src="/assets/home/hero-interior.jpg"
+    <Image
+      src={siteImage.heroInterior}
       alt=""
-      width="1600"
-      height="1067"
+      widths={[640, 960, 1600]}
+      sizes="100vw"
+      format="webp"
+      quality="mid"
+      priority
       class="absolute inset-0 size-full object-cover opacity-35"
     />
     <div class="absolute inset-0 bg-gradient-to-b from-bg-hero/80 via-bg-primary/85 to-bg-primary"></div>

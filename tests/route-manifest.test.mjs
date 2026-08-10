@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { access } from 'node:fs/promises';
+import { access, readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import test from 'node:test';
 import {
@@ -14,14 +14,26 @@ import {
 } from './helpers/seo-routes.mjs';
 
 const pages = await loadAllPages();
+const allPagesIncludingStatus = await loadAllPages({ includeStatus: true });
 const generated = pages.map((p) => p.route);
 const expectedStatic = expectedPrerenderedRoutes();
 
 test('generates the complete Arabic and English prerendered route set', () => {
   // 64 bilingual routes — blog listing/articles are SSR and not written to dist/client
   assert.equal(expectedStatic.length, 64);
-  assert.equal(expectedRoutes().length, 71);
+  assert.equal(expectedRoutes().length, 64);
   assert.deepEqual(generated, expectedStatic);
+  assert.ok(allPagesIncludingStatus.some((page) => page.route === '/404/'));
+});
+
+test('emits a branded 404.html used by Astro status routes', async () => {
+  await access(join(DIST, '404.html'));
+});
+
+test('Cloudflare assets leave unmatched navigations to the Worker (SSR-safe)', async () => {
+  // "404-page" intercepts Sec-Fetch-Mode: navigate before the Worker, breaking /blogs/ etc.
+  const wrangler = JSON.parse(await readFile(join(DIST, '..', 'server', 'wrangler.json'), 'utf8'));
+  assert.equal(wrangler.assets?.not_found_handling, 'none');
 });
 
 test('includes exact service, package, and offer slugs in both locales', () => {
@@ -52,7 +64,9 @@ test('every bilingual Arabic route has an English counterpart and vice versa', (
 });
 
 test('does not emit unexpected HTML pages outside the prerendered manifest', () => {
-  const unexpected = generated.filter((route) => !expectedStatic.includes(route));
+  const unexpected = generated.filter(
+    (route) => !expectedStatic.includes(route) && route !== '/404/',
+  );
   assert.deepEqual(unexpected, []);
 });
 

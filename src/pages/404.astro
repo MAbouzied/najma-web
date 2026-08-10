@@ -1,0 +1,18 @@
+---
+import StatusPage from '../components/StatusPage.astro';
+import type { Locale } from '../i18n/types';
+import { t } from '../i18n/t';
+
+const pathname = Astro.url.pathname;
+const locale: Locale =
+  pathname === '/en' || pathname.startsWith('/en/') ? 'en' : 'ar';
+
+Astro.response.status = 404;
+---
+
+<StatusPage
+  status={404}
+  locale={locale}
+  title={t(locale, 'status404Title')}
+  description={t(locale, 'status404Description')}
+/>

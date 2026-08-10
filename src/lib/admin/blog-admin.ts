@@ -5,10 +5,12 @@ import { calculateReadingTimeMinutes } from '../../modules/blog/lib/reading-time
 import type { BlogPost } from '../../modules/blog/model/blog-types.ts';
 import { sanitizeBlogHtml, htmlToPlainText, lexicalJsonToHtml, lexicalJsonToPlainText, normalizeLexicalJson } from './blog-content.ts';
 import {
+  AdminBlogNotFoundError,
   adminAuthorDocumentId,
   adminCategoryDocumentId,
   assertAdminPublishCopy,
   isSanityDraftId,
+  parseAdminPostId,
   resolveAdminPublishedAt,
   resolveSanityAdminStatus,
 } from './blog-admin-helpers.ts';
@@ -96,8 +98,12 @@ function emptyAdminDraft(id: string): AdminPost {
 }
 
 export async function reserveAdminDraft(reservationId: string): Promise<AdminPost> {
-  const id = reservationId.trim();
-  if (!id || !/^[a-zA-Z0-9_-]{8,100}$/.test(id)) throw new Error('معرف المسودة غير صالح.');
+  let id: string;
+  try {
+    id = parseAdminPostId(reservationId);
+  } catch {
+    throw new Error('معرف المسودة غير صالح.');
+  }
   if (BLOG_PROVIDER !== 'sanity') {
     const existing = mockStore.get(id);
     if (existing) {
@@ -243,7 +249,8 @@ function saveMock(id: string | undefined, input: AdminPostInput, publish: boolea
 
 function getSanityClient(): SanityClient {
   if (!SANITY_PROJECT_ID || !SANITY_DATASET || !SANITY_API_VERSION || !SANITY_WRITE_TOKEN) {
-    throw new Error('Sanity admin writes require SANITY_PROJECT_ID, SANITY_DATASET, SANITY_API_VERSION and SANITY_WRITE_TOKEN.');
+    console.error('[admin-blog] Sanity write configuration is incomplete.');
+    throw new Error('تعذر تنفيذ العملية حالياً.');
   }
   return createClient({ projectId: SANITY_PROJECT_ID, dataset: SANITY_DATASET, apiVersion: SANITY_API_VERSION, token: SANITY_WRITE_TOKEN, useCdn: false, perspective: 'raw' });
 }
@@ -292,9 +299,16 @@ export async function listAdminPosts(options: AdminPostListOptions = {}): Promis
 }
 
 export async function getAdminPost(id: string): Promise<AdminPost | null> {
-  if (BLOG_PROVIDER !== 'sanity') return mockStore.get(id) ?? null;
+  const documentId = parseAdminPostId(id);
+  if (BLOG_PROVIDER !== 'sanity') return mockStore.get(documentId) ?? null;
   const client = getSanityClient();
-  const row = await client.fetch<Record<string, unknown> | null>(`coalesce(*[_id == $draftId][0], *[_id == $id][0]) ${sanityProjection()}`, { id, draftId: `drafts.${id}` });
+  const row = await client.fetch<Record<string, unknown> | null>(
+    `coalesce(
+      *[_type == "blogPost" && _id == $draftId][0],
+      *[_type == "blogPost" && _id == $id][0]
+    ) ${sanityProjection()}`,
+    { id: documentId, draftId: `drafts.${documentId}` },
+  );
   return row ? mapSanityAdmin(row) : null;
 }
 
@@ -304,10 +318,18 @@ export async function saveAdminPost(
   publish: boolean,
   options: { deletePublished?: boolean } = {},
 ): Promise<AdminPost> {
-  if (BLOG_PROVIDER !== 'sanity') return saveMock(id, input, publish);
+  if (BLOG_PROVIDER !== 'sanity') {
+    if (id !== undefined) {
+      const documentId = parseAdminPostId(id);
+      if (!mockStore.has(documentId)) throw new AdminBlogNotFoundError();
+      return saveMock(documentId, input, publish);
+    }
+    return saveMock(undefined, input, publish);
+  }
   const client = getSanityClient();
-  const documentId = id ?? crypto.randomUUID();
-  const existing = id ? await getAdminPost(documentId) : null;
+  const documentId = id === undefined ? crypto.randomUUID() : parseAdminPostId(id);
+  const existing = id === undefined ? null : await getAdminPost(documentId);
+  if (id !== undefined && !existing) throw new AdminBlogNotFoundError();
   const slug = input.slug.trim() ? slugify(input.slug) : (input.title.trim() ? slugify(input.title) : '');
   if (publish) assertPublishFields({ ...input, slug });
   if (slug) {
@@ -360,14 +382,15 @@ export async function saveAdminPost(
 }
 
 export async function setAdminPostStatus(id: string, publish: boolean): Promise<AdminPost | null> {
-  const existing = await getAdminPost(id);
+  const documentId = parseAdminPostId(id);
+  const existing = await getAdminPost(documentId);
   if (!existing) return null;
   if (publish) assertPublishFields(existing);
   if (publish && BLOG_PROVIDER === 'sanity' && !existing.coverAssetId && !existing.coverUrl.trim()) {
-    throw new Error('أضف صورة رئيسية من خلال رفع ملف أو إدخال رابط صورة قبل نشر المقال.');
+    throw new Error('أضف صورة رئيسية من خلال رفع ملف قبل نشر المقال.');
   }
   return saveAdminPost(
-    id,
+    documentId,
     { ...existing, contentHtml: existing.contentHtml, contentJson: existing.contentJson || undefined },
     publish,
     { deletePublished: !publish && BLOG_PROVIDER === 'sanity' && existing.status === 'published' },
@@ -375,11 +398,18 @@ export async function setAdminPostStatus(id: string, publish: boolean): Promise<
 }
 
 export async function deleteAdminPost(id: string): Promise<void> {
-  if (BLOG_PROVIDER !== 'sanity') { mockStore.delete(id); return; }
+  const documentId = parseAdminPostId(id);
+  if (BLOG_PROVIDER !== 'sanity') {
+    if (!mockStore.has(documentId)) throw new AdminBlogNotFoundError();
+    mockStore.delete(documentId);
+    return;
+  }
+  const existing = await getAdminPost(documentId);
+  if (!existing) throw new AdminBlogNotFoundError();
   await getSanityClient()
     .transaction()
-    .delete(id)
-    .delete(`drafts.${id}`)
+    .delete(documentId)
+    .delete(`drafts.${documentId}`)
     .commit();
 }
 
@@ -387,16 +417,18 @@ export function listAdminServices(): Array<{ id: string; title: string }> {
   return services.map((service) => ({ id: service.slug, title: service.title.ar }));
 }
 
-export async function uploadAdminImage(file: File): Promise<{ assetId: string; url: string; width: number | null; height: number | null }> {
+export async function uploadAdminImage(input: {
+  bytes: Uint8Array;
+  filename: string;
+  contentType: string;
+}): Promise<{ assetId: string; url: string; width: number | null; height: number | null }> {
   if (BLOG_PROVIDER !== 'sanity') {
-    throw new Error('رفع الصور يحتاج BLOG_PROVIDER=sanity مع إعدادات Sanity كاملة.');
+    throw new Error('رفع الصور غير متاح حالياً.');
   }
   const client = getSanityClient();
-  // Sanity's Node client rejects browser File objects ("must be a string, buffer or stream").
-  const body = Buffer.from(await file.arrayBuffer());
-  const asset = await client.assets.upload('image', body, {
-    filename: file.name || 'blog-cover',
-    contentType: file.type || undefined,
+  const asset = await client.assets.upload('image', Buffer.from(input.bytes), {
+    filename: input.filename,
+    contentType: input.contentType,
   });
   return {
     assetId: asset._id,
@@ -406,38 +438,3 @@ export async function uploadAdminImage(file: File): Promise<{ assetId: string; u
   };
 }
 
-function assertSafeRemoteImageUrl(raw: string): URL {
-  let url: URL;
-  try { url = new URL(raw); } catch { throw new Error('رابط الصورة غير صالح.'); }
-  if (url.protocol !== 'https:') throw new Error('يجب أن يبدأ رابط الصورة بـ https.');
-  if (url.username || url.password) throw new Error('لا يمكن استخدام رابط يحتوي بيانات دخول.');
-  const host = url.hostname.toLowerCase();
-  if (host === 'localhost' || host.endsWith('.localhost') || host.endsWith('.local') || host === '0.0.0.0' || host === '::1' || /^(10|127|169\.254|192\.168)\./.test(host) || /^172\.(1[6-9]|2\d|3[0-1])\./.test(host)) {
-    throw new Error('لا يمكن استيراد صورة من هذا المضيف.');
-  }
-  return url;
-}
-
-export async function importAdminImageFromUrl(rawUrl: string): Promise<{ assetId: string; url: string; width: number | null; height: number | null }> {
-  let url = assertSafeRemoteImageUrl(rawUrl);
-  let response: Response | null = null;
-  for (let attempt = 0; attempt < 4; attempt += 1) {
-    response = await fetch(url, { redirect: 'manual', signal: AbortSignal.timeout(12_000), headers: { Accept: 'image/*' } });
-    if (response.status >= 300 && response.status < 400) {
-      const location = response.headers.get('location');
-      if (!location) throw new Error('رابط الصورة أعاد إعادة توجيه غير صالح.');
-      url = assertSafeRemoteImageUrl(new URL(location, url).toString());
-      continue;
-    }
-    break;
-  }
-  if (!response || !response.ok) throw new Error('تعذر تحميل الصورة من الرابط.');
-  const contentType = response.headers.get('content-type')?.split(';')[0].trim().toLowerCase() || '';
-  if (!['image/jpeg', 'image/png', 'image/webp', 'image/gif'].includes(contentType)) throw new Error('الرابط لا يشير إلى صورة مدعومة.');
-  const contentLength = Number(response.headers.get('content-length') || 0);
-  if (contentLength > 10 * 1024 * 1024) throw new Error('حجم الصورة يجب ألا يتجاوز 10 ميجابايت.');
-  const bytes = await response.arrayBuffer();
-  if (bytes.byteLength > 10 * 1024 * 1024) throw new Error('حجم الصورة يجب ألا يتجاوز 10 ميجابايت.');
-  const file = new File([bytes], `blog-import.${contentType.split('/')[1] || 'image'}`, { type: contentType });
-  return uploadAdminImage(file);
-}

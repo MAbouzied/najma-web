@@ -1,8 +1,23 @@
 import {
+  BODY_LIMITS,
+  isRequestBodyTooLargeError,
+  readLimitedJson,
+} from '../http/request-body.ts';
+import {
   isStaffAccessError,
   staffAccessErrorMessage,
   type StaffAccessErrorCode,
 } from './errors.ts';
+
+export class StaffRequestBodyError extends Error {
+  readonly status: number;
+
+  constructor(message: string, status: number) {
+    super(message);
+    this.name = 'StaffRequestBodyError';
+    this.status = status;
+  }
+}
 
 export type AdminApiErrorCode =
   | StaffAccessErrorCode
@@ -59,11 +74,14 @@ export function hasSameOrigin(request: Request): boolean {
 
 export async function readEmailBody(request: Request): Promise<string | undefined> {
   try {
-    const body = await request.json() as unknown;
-    if (!body || typeof body !== 'object') return undefined;
+    const body = await readLimitedJson(request, BODY_LIMITS.staffJson);
+    if (!body || typeof body !== 'object' || Array.isArray(body)) return undefined;
     const email = (body as { email?: unknown }).email;
     return typeof email === 'string' ? email : undefined;
-  } catch {
+  } catch (error) {
+    if (isRequestBodyTooLargeError(error)) {
+      throw new StaffRequestBodyError('Request too large', 413);
+    }
     return undefined;
   }
 }

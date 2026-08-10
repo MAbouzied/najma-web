@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import { ClientRouter } from 'astro:transitions';
+import { PUBLIC_GA_MEASUREMENT_ID } from 'astro:env/client';
 import FloatingContact from '../components/FloatingContact.astro';
 import Footer from '../components/Footer.astro';
 import Gtm from '../components/Gtm.astro';
@@ -8,7 +8,7 @@ import JsonLd from '../components/JsonLd.astro';
 import type { Locale } from '../i18n/types';
 import { isBlogPath, localePath, stripLocalePrefix } from '../i18n/paths';
 import { t } from '../i18n/t';
-import { GTM_CONTAINER_ID, isGtmContainerConfigured, isGtmContainerId } from '../lib/gtm';
+import { isGaMeasurementId } from '../lib/gtm';
 import {
   buildStructuredData,
   resolveSeoUrl,
@@ -35,6 +35,9 @@ export interface Props {
   pageType?: PageSchemaType;
   image?: string | null;
   socialImage?: string;
+  socialImageWidth?: number;
+  socialImageHeight?: number;
+  socialImageType?: string;
   faqItems?: ResolvedFaq[];
   services?: ResolvedService[];
   packages?: ResolvedPackage[];
@@ -50,6 +53,7 @@ export interface Props {
   additionalSchemas?: Record<string, unknown>[];
   imageAlt?: string;
   mainEntityId?: string;
+  seoMode?: 'default' | 'status';
 }
 
 const {
@@ -58,7 +62,10 @@ const {
   pathname = Astro.url.pathname,
   pageType = 'WebPage',
   image,
-  socialImage = '/assets/og/nagm-spa-share.jpg',
+  socialImage,
+  socialImageWidth,
+  socialImageHeight,
+  socialImageType,
   faqItems = [],
   services = [],
   packages = [],
@@ -74,13 +81,21 @@ const {
   additionalSchemas = [],
   imageAlt,
   mainEntityId,
+  seoMode = 'default',
 } = Astro.props;
+const isStatusSeo = seoMode === 'status';
 const htmlLang = locale === 'en' ? 'en' : 'ar';
 const htmlDir = locale === 'en' ? 'ltr' : 'rtl';
 const siteOrigin = Astro.site?.href;
 const canonicalUrl = resolveSeoUrl(pathname, siteOrigin);
-const socialImageUrl = resolveSeoUrl(socialImage, siteOrigin);
+const usingDefaultShareImage = socialImage === undefined;
+const resolvedSocialImage = socialImage ?? '/assets/og/nagm-spa-share-1200x630.jpg';
+const resolvedSocialImageWidth = socialImageWidth ?? (usingDefaultShareImage ? 1200 : undefined);
+const resolvedSocialImageHeight = socialImageHeight ?? (usingDefaultShareImage ? 630 : undefined);
+const resolvedSocialImageType = socialImageType ?? (usingDefaultShareImage ? 'image/jpeg' : undefined);
+const socialImageUrl = resolveSeoUrl(resolvedSocialImage, siteOrigin);
 const ogImageAlt = imageAlt ?? title;
+const resolvedRobots = isStatusSeo ? 'noindex, nofollow' : robots;
 
 const neutralPath = stripLocalePrefix(pathname);
 const arabicOnlyAlternates = isBlogPath(pathname);
@@ -88,26 +103,34 @@ const arHref = resolveSeoUrl(localePath(neutralPath, 'ar'), siteOrigin);
 const enHref = resolveSeoUrl(localePath(neutralPath, 'en'), siteOrigin);
 
 const primaryImage = image === null ? null : (image ?? '/assets/home/hero-interior.jpg');
-const structuredData = buildStructuredData({
-  title,
-  description,
-  pathname,
-  pageType,
-  image: primaryImage,
-  siteOrigin,
-  faqItems,
-  services,
-  packages,
-  offers,
-  breadcrumbLabel,
-  breadcrumbs,
-  locale,
-  mainEntityId,
-});
+const structuredData = isStatusSeo
+  ? null
+  : buildStructuredData({
+      title,
+      description,
+      pathname,
+      pageType,
+      image: primaryImage,
+      siteOrigin,
+      faqItems,
+      services,
+      packages,
+      offers,
+      breadcrumbLabel,
+      breadcrumbs,
+      locale,
+      mainEntityId,
+    });
 
-if (additionalSchemas.length > 0) {
+if (structuredData && additionalSchemas.length > 0) {
   structuredData['@graph'] = [...structuredData['@graph'], ...additionalSchemas];
 }
+
+const analyticsEnabled =
+  import.meta.env.PROD && isGaMeasurementId(PUBLIC_GA_MEASUREMENT_ID);
+const gaMeasurementId = analyticsEnabled && PUBLIC_GA_MEASUREMENT_ID
+  ? PUBLIC_GA_MEASUREMENT_ID.trim()
+  : '';
 ---
 
 <!doctype html>
@@ -119,68 +142,61 @@ if (additionalSchemas.length > 0) {
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
-    <meta name="robots" content={robots} />
+    <meta name="robots" content={resolvedRobots} />
     <meta name="color-scheme" content="dark" />
-    <meta name="generator" content={Astro.generator} />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap"
-    />
-    <link rel="canonical" href={canonicalUrl} />
-    <link rel="alternate" hreflang="ar" href={arHref} />
-    {!arabicOnlyAlternates && <link rel="alternate" hreflang="en" href={enHref} />}
-    <link rel="alternate" hreflang="x-default" href={arHref} />
+    {!isStatusSeo && <link rel="canonical" href={canonicalUrl} />}
+    {!isStatusSeo && <link rel="alternate" hreflang="ar" href={arHref} />}
+    {!isStatusSeo && !arabicOnlyAlternates && <link rel="alternate" hreflang="en" href={enHref} />}
+    {!isStatusSeo && <link rel="alternate" hreflang="x-default" href={arHref} />}
+    <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
 
-    <meta property="og:locale" content={locale === 'en' ? 'en_US' : 'ar_SA'} />
-    {!arabicOnlyAlternates && (
-      <meta property="og:locale:alternate" content={locale === 'en' ? 'ar_SA' : 'en_US'} />
-    )}
-    <meta property="og:type" content={ogType} />
-    <meta property="og:site_name" content={t(locale, 'brandName')} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonicalUrl} />
-    <meta property="og:image" content={socialImageUrl} />
-    {siteOrigin && <meta property="og:image:secure_url" content={socialImageUrl} />}
-    <meta property="og:image:type" content="image/jpeg" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content={ogImageAlt} />
-    {ogType === 'article' && article && (
+    {!isStatusSeo && (
       <>
-        <meta property="article:published_time" content={article.publishedTime} />
-        <meta property="article:modified_time" content={article.modifiedTime ?? article.publishedTime} />
-        {article.author && <meta property="article:author" content={article.author} />}
-        {article.section && <meta property="article:section" content={article.section} />}
-        {article.tags?.map((tag) => <meta property="article:tag" content={tag} />)}
+        <meta property="og:locale" content={locale === 'en' ? 'en_US' : 'ar_SA'} />
+        {!arabicOnlyAlternates && (
+          <meta property="og:locale:alternate" content={locale === 'en' ? 'ar_SA' : 'en_US'} />
+        )}
+        <meta property="og:type" content={ogType} />
+        <meta property="og:site_name" content={t(locale, 'brandName')} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:image" content={socialImageUrl} />
+        {siteOrigin && <meta property="og:image:secure_url" content={socialImageUrl} />}
+        {resolvedSocialImageType && (
+          <meta property="og:image:type" content={resolvedSocialImageType} />
+        )}
+        {resolvedSocialImageWidth != null && (
+          <meta property="og:image:width" content={String(resolvedSocialImageWidth)} />
+        )}
+        {resolvedSocialImageHeight != null && (
+          <meta property="og:image:height" content={String(resolvedSocialImageHeight)} />
+        )}
+        <meta property="og:image:alt" content={ogImageAlt} />
+        {ogType === 'article' && article && (
+          <>
+            <meta property="article:published_time" content={article.publishedTime} />
+            <meta property="article:modified_time" content={article.modifiedTime ?? article.publishedTime} />
+            {article.author && <meta property="article:author" content={article.author} />}
+            {article.section && <meta property="article:section" content={article.section} />}
+            {article.tags?.map((tag) => <meta property="article:tag" content={tag} />)}
+          </>
+        )}
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={description} />
+        <meta name="twitter:image" content={socialImageUrl} />
+        <meta name="twitter:image:alt" content={ogImageAlt} />
       </>
     )}
-
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={socialImageUrl} />
-    <meta name="twitter:image:alt" content={ogImageAlt} />
     <title>{title}</title>
-    <JsonLd data={structuredData} />
-    <Gtm />
-    <ClientRouter />
+    {structuredData && <JsonLd data={structuredData} />}
+    {analyticsEnabled && <Gtm measurementId={gaMeasurementId} />}
   </head>
   <body>
-    {isGtmContainerConfigured && isGtmContainerId && (
-      <noscript>
-        <iframe
-          src={`https://www.googletagmanager.com/ns.html?id=${GTM_CONTAINER_ID}`}
-          height="0"
-          width="0"
-          class="hidden"
-          title="Google Tag Manager"
-        ></iframe>
-      </noscript>
-    )}
-    <main>
+    <a class="skip-link" href="#main-content">{t(locale, 'skipToContent')}</a>
+    <main id="main-content" tabindex="-1">
       <slot />
     </main>
     {showFooter && <Footer locale={locale} />}

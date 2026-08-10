@@ -1,53 +1,50 @@
 # SEO Status Report
 
-Generated after Phases 1–13 implementation work.
-Canonical origin (unchanged pending confirmation): `https://najma-web.mohamed-abouzied.workers.dev`
+Canonical origin: `https://nagmspa.com`
 
-## Phase 2 blocker
+## Baseline (after Phase 3)
 
-Confirm whether production should stay on the Workers URL or move to a custom domain such as `nagmspa.com`.
-No domain guess was made; `astro.config.mjs` `site` remains the Workers origin.
+| Metric | Count |
+|---|---:|
+| Expected prerendered routes | 64 |
+| Generated HTML routes | 64 |
+| Static sitemap URLs | 60 |
+| Live blog sitemap referenced | yes (`/sitemap-blog.xml`) |
+| Branded `404.html` | yes |
+| Heuristic SEO issues | 0 |
+| Dist tests | 121 pass |
+| Unit tests | 83 pass |
+| `astro check` | 0 errors |
 
-## Baseline vs current
+## Phase 3 completed
 
-| Metric | Phase 1 baseline | After fixes |
-|---|---:|---:|
-| Expected routes | 58 | 58 |
-| Generated HTML routes | 58 | 58 |
-| Sitemap URLs | 58 | 54 |
-| Missing bilingual counterparts | 0 | 0 |
-| Duplicate titles / locale | 0 | 0 |
-| Heuristic SEO issues | 8 | 0 |
-| Automated tests | 64 pass | 100 pass |
+- Live repository-backed `/sitemap-blog.xml` via `customSitemaps`
+- Branded 404/503 `StatusPage` + `SiteLayout` `seoMode="status"`
+- Exact `1200×630` share image + truthful social image width/height/type
+- Studio/Sanity `seo.ogImage` support
+- Zero-hydration mobile nav + skip link to `#main-content`
+- Heading text boundaries on home/About H1s
+- `CollectionPage` for services/packages/offers/blog indexes
+- Detail pages infer `Service` `mainEntity`
+- API `X-Robots-Tag: noindex, nofollow, nosnippet` (confirmed from Phase 2)
 
-## Completed
+## Phase 4 completed
 
-- Route manifest + matrix in `seo-baseline/`
-- Route-specific robots (`index, follow, max-image-preview:large` default; `noindex, follow` for `/book` and `/go`)
-- API `X-Robots-Tag: noindex, nofollow` + `robots.txt` `Disallow: /api/`
-- Sitemap excludes `/book`, `/go`, `/api` (without falsely excluding `/offers/golden`)
-- Shared localized views for all major routes; thin Arabic/English page wrappers
-- Breadcrumbs locale-aware (`aria-label`, `dir`)
-- English contact form/branches localization via `ContactPage`
-- Structured data localized (catalogs, country, FAQ IDs/URLs, slug-based IDs, detail Service+Offer entities)
-- Homepage packages included in JSON-LD
-- `llms.txt` Arabic + English coverage; utility routes removed
-- New test suites: route-manifest, seo-metadata-matrix, bilingual-seo, structured-data, discovery-files, link-integrity, page-semantics
-- GTM files and placeholder ID left unchanged
+- Removed unused `ClientRouter` / view transitions
+- Local rasters via Astro `Image`/`Picture` (`src/assets` + `site-images` registry); SEO/OG keep public `/assets` URLs
+- Blog covers emit Sanity CDN `srcset`
+- Confirmed `/_astro/*` immutable + `/assets/*` 1-day/SWR headers
 
-## Remaining / external
+## Still open (Phase 5)
 
-1. Confirm production canonical domain, then update `site` and re-verify discovery files.
-2. Content differentiation pass (Phase 8): reduce repeated WhatsApp copy; strengthen unique intent per service.
-3. Expired-offer lifecycle policy when an offer is retired (redirect vs noindex).
-4. Local Lighthouse / Core Web Vitals on desktop + mobile (Phase 12).
-5. Post-deploy: Rich Results Test, Search Console sitemap submit, live crawl (Phase 14).
+1. Lighthouse CI budgets (C5)
+2. Split test scripts, Playwright/axe/LHCI, GitHub Actions (D3–D5)
+3. Studio npm audit clean (Sanity major upgrade)
 
-## Verification commands
+## Verification
 
 ```bash
-npm run astro check
+npx astro check
 npm test
+node scripts/generate-seo-baseline.mjs
 ```
-
-Both currently pass (`astro check`: 0 errors; `npm test`: 100/100).

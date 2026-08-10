@@ -10,30 +10,47 @@ import { getStaffAccessService } from '../staff-access/server.ts';
 
 export type { GoogleUserInfoProfile } from './profile-authorization.ts';
 
+function resolveAuthBaseUrl(raw: string | undefined): string {
+  if (!raw?.trim()) {
+    throw new Error('Staff authentication is not configured.');
+  }
+
+  let url: URL;
+  try {
+    url = new URL(raw.trim());
+  } catch {
+    throw new Error('Staff authentication is not configured.');
+  }
+
+  if (url.protocol !== 'https:' && url.protocol !== 'http:') {
+    throw new Error('Staff authentication is not configured.');
+  }
+
+  // Production and preview must use HTTPS; local development may use http://localhost.
+  const isLocalHttp = url.protocol === 'http:'
+    && (url.hostname === 'localhost' || url.hostname === '127.0.0.1');
+  if (url.protocol !== 'https:' && !(import.meta.env.DEV && isLocalHttp)) {
+    throw new Error('Staff authentication is not configured.');
+  }
+
+  return url.origin;
+}
+
 function requireAuthEnv(): {
   secret: string;
   baseURL: string;
   clientId: string;
   clientSecret: string;
 } {
-  const missing = [
-    !BETTER_AUTH_SECRET ? 'BETTER_AUTH_SECRET' : null,
-    !BETTER_AUTH_URL ? 'BETTER_AUTH_URL' : null,
-    !GOOGLE_CLIENT_ID ? 'GOOGLE_CLIENT_ID' : null,
-    !GOOGLE_CLIENT_SECRET ? 'GOOGLE_CLIENT_SECRET' : null,
-  ].filter((value): value is string => value !== null);
-
-  if (missing.length > 0) {
-    throw new Error(
-      `Staff authentication is not configured. Missing: ${missing.join(', ')}.`,
-    );
+  if (!BETTER_AUTH_SECRET || !GOOGLE_CLIENT_ID || !GOOGLE_CLIENT_SECRET) {
+    throw new Error('Staff authentication is not configured.');
   }
 
   return {
-    secret: BETTER_AUTH_SECRET as string,
-    baseURL: BETTER_AUTH_URL as string,
-    clientId: GOOGLE_CLIENT_ID as string,
-    clientSecret: GOOGLE_CLIENT_SECRET as string,
+    secret: BETTER_AUTH_SECRET,
+    baseURL: resolveAuthBaseUrl(BETTER_AUTH_URL),
+    clientId: GOOGLE_CLIENT_ID,
+    clientSecret: GOOGLE_CLIENT_SECRET,
   };
 }
 

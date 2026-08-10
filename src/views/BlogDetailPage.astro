@@ -16,6 +16,7 @@ import {
 import { getBookingAction, getCallAction } from '../data/site';
 import { localePath } from '../i18n/paths';
 import { t } from '../i18n/t';
+import { mimeTypeFromUrl } from '../lib/media-type';
 
 export interface Props {
   post: BlogPost;
@@ -31,6 +32,10 @@ const title = articleSeoTitle(post);
 const description = articleSeoDescription(post);
 const readingTimeMinutes = readingTimeForPost(post);
 const mainEntityId = `${new URL(path, site).href}#blogposting`;
+const shareImage = post.seo.ogImage ?? post.cover;
+const shareImageType = post.seo.ogImage
+  ? 'image/jpeg'
+  : mimeTypeFromUrl(shareImage.src);
 const breadcrumbs = [
   { label: t(locale, 'breadcrumbHome'), href: localePath('/', locale) },
   { label: t(locale, 'breadcrumbBlogs'), href: '/blogs/' },
@@ -46,8 +51,11 @@ const call = getCallAction(locale);
   pathname={path}
   pageType="WebPage"
   image={post.cover.src}
-  socialImage={post.cover.src}
-  imageAlt={post.cover.alt}
+  socialImage={shareImage.src}
+  socialImageWidth={shareImage.width}
+  socialImageHeight={shareImage.height}
+  socialImageType={shareImageType}
+  imageAlt={shareImage.alt}
   locale={locale}
   ogType="article"
   mainEntityId={mainEntityId}

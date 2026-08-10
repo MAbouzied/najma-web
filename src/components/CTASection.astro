@@ -1,13 +1,16 @@
 ---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import type { SiteAction } from '../data/site';
 import { gtmAttrsForHref } from '../lib/gtm';
+import { siteImage } from '../lib/site-images';
 
 export interface Props {
   title: string;
   description: string;
   primaryAction?: SiteAction;
   secondaryAction?: SiteAction;
-  backgroundImage?: string;
+  backgroundImage?: ImageMetadata;
 }
 
 const {
@@ -15,7 +18,7 @@ const {
   description,
   primaryAction,
   secondaryAction,
-  backgroundImage = '/assets/contact-cta.jpg',
+  backgroundImage = siteImage.contactCta,
 } = Astro.props;
 
 function isHttp(href: string) {
@@ -26,11 +29,15 @@ function isHttp(href: string) {
 <section data-site-cta class="w-full overflow-hidden bg-bg-primary">
   <div class="page-container section-block">
     <div class="relative min-h-[390px] overflow-hidden rounded-3xl">
-      <img
+      <Image
         src={backgroundImage}
         alt=""
-        width="1280"
-        height="774"
+        widths={[640, 960, 1280]}
+        sizes="(max-width: 1280px) calc(100vw - 40px), 1216px"
+        format="webp"
+        quality="mid"
+        loading="lazy"
+        decoding="async"
         class="absolute inset-0 size-full object-cover opacity-30"
       />
       <div class="cta-overlay absolute inset-0"></div>

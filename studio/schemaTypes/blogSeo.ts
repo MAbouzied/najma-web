@@ -18,5 +18,11 @@ export const blogSeo = defineType({
       rows: 3,
       validation: (rule) => rule.max(180),
     }),
+    defineField({
+      name: 'ogImage',
+      title: 'Share image (1200×630)',
+      type: 'blogImage',
+      description: 'Optional Open Graph image. Rendered as a fixed 1200×630 JPEG for social shares.',
+    }),
   ],
 });

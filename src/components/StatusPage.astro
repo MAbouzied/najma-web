@@ -1,0 +1,49 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import Header from './Header.astro';
+import { localePath } from '../i18n/paths';
+import { t } from '../i18n/t';
+import type { Locale } from '../i18n/types';
+
+export interface Props {
+  status: 404 | 503;
+  locale?: Locale;
+  title: string;
+  description: string;
+}
+
+const { status, locale = 'ar', title, description } = Astro.props;
+const dir = locale === 'en' ? 'ltr' : 'rtl';
+const homeHref = localePath('/', locale);
+const altLocale: Locale = locale === 'en' ? 'ar' : 'en';
+const altHomeHref = localePath('/', altLocale);
+const documentTitle = `${title} - ${t(locale, 'brandName')}`;
+---
+
+<SiteLayout
+  title={documentTitle}
+  description={description}
+  pathname={Astro.url.pathname}
+  locale={locale}
+  seoMode="status"
+  robots="noindex, nofollow"
+  showFloatingContact={false}
+>
+  <div data-hero-shell class="bg-bg-hero">
+    <Header locale={locale} />
+  </div>
+
+  <section class="section-block bg-bg-primary" dir={dir}>
+    <div class="page-container mx-auto max-w-2xl text-center">
+      <p class="text-sm font-semibold tracking-wide text-gold" aria-hidden="true">{status}</p>
+      <h1 class="mt-3 text-3xl font-bold text-text-primary sm:text-4xl">{title}</h1>
+      <p class="mt-4 text-base leading-relaxed text-text-muted sm:text-lg">{description}</p>
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+        <a href={homeHref} class="gold-button">{t(locale, 'statusHome')}</a>
+        <a href={altHomeHref} class="outline-button" hreflang={altLocale}>
+          {t(locale, 'statusAltHome')}
+        </a>
+      </div>
+    </div>
+  </section>
+</SiteLayout>

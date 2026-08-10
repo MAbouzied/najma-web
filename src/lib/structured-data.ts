@@ -3,7 +3,7 @@ import { localePath, stripLocalePrefix } from '../i18n/paths';
 import { t } from '../i18n/t';
 import type { Locale } from '../i18n/types';
 
-export type PageSchemaType = 'WebPage' | 'AboutPage' | 'ContactPage';
+export type PageSchemaType = 'WebPage' | 'AboutPage' | 'ContactPage' | 'CollectionPage';
 
 export interface BreadcrumbItem {
   label: string;
@@ -16,7 +16,7 @@ export interface ResolvedService {
   title: string;
   description: string;
   duration?: string;
-  price: string;
+  price?: string;
 }
 
 export interface ResolvedPackage {
@@ -141,7 +141,7 @@ export function buildStructuredData({
     },
     image: [
       resolveSeoUrl('/assets/home/hero-slider.jpg', siteOrigin),
-      resolveSeoUrl('/assets/og/nagm-spa-share.jpg', siteOrigin),
+      resolveSeoUrl('/assets/og/nagm-spa-share-1200x630.jpg', siteOrigin),
     ],
     logo: {
       '@type': 'ImageObject',
@@ -179,7 +179,7 @@ export function buildStructuredData({
       };
     }
     detailEntities.push(serviceEntity);
-    const price = toSchemaPrice(service.price);
+    const price = service.price ? toSchemaPrice(service.price) : '';
     if (price) {
       detailEntities.push({
         '@type': 'Offer',
@@ -407,6 +407,13 @@ export function buildStructuredData({
     publisher: { '@id': businessId },
   };
 
+  const inferredMainEntityId =
+    mainEntityId ??
+    (() => {
+      const primary = detailEntities.find((entity) => entity['@type'] === 'Service');
+      return typeof primary?.['@id'] === 'string' ? primary['@id'] : undefined;
+    })();
+
   const page: Record<string, unknown> = {
     '@type': pageType,
     '@id': pageId,
@@ -416,7 +423,7 @@ export function buildStructuredData({
     inLanguage,
     isPartOf: { '@id': websiteId },
     about: { '@id': businessId },
-    ...(mainEntityId ? { mainEntity: { '@id': mainEntityId } } : {}),
+    ...(inferredMainEntityId ? { mainEntity: { '@id': inferredMainEntityId } } : {}),
   };
 
   const graph: Record<string, unknown>[] = [business, website];

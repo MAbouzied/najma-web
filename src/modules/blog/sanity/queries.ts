@@ -39,7 +39,23 @@ export const blogPostProjection = `{
   publishedAt,
   updatedAt,
   featured,
-  seo,
+  seo{
+    title,
+    description,
+    focusKeyword,
+    canonicalUrl,
+    ogImage{
+      asset->{
+        _id,
+        url,
+        metadata{ dimensions }
+      },
+      alt,
+      caption,
+      hotspot,
+      crop
+    }
+  },
   body[]{
     ...,
     _type == "image" => {

@@ -69,7 +69,8 @@ test('gives the Arabic hero title enough line height to avoid glyph clipping', (
 });
 
 test('wires GTM events on contact methods and the submit form', () => {
-  assert.match(contactHtml, /G-KKSXRY8MSN/);
+  assert.doesNotMatch(contactHtml, /name="gtm-container-id"/);
+  assert.doesNotMatch(contactHtml, /gtag\/js\?id=/);
   assert.match(contactHtml, /data-gtm-event="contact_whatsapp"/);
   assert.match(contactHtml, /data-gtm-event="contact_call"/);
   assert.match(contactHtml, /data-gtm-event="contact_email"/);

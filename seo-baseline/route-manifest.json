@@ -1,11 +1,19 @@
 {
-  "generatedAt": "2026-08-02T11:39:47.814Z",
-  "origin": "https://najma-web.mohamed-abouzied.workers.dev",
+  "generatedAt": "2026-08-10T06:05:03.880Z",
+  "origin": "https://nagmspa.com",
   "counts": {
-    "expected": 58,
-    "generated": 58,
-    "sitemapUrls": 54,
+    "expected": 64,
+    "generated": 64,
+    "sitemapUrls": 60,
     "issues": 0
+  },
+  "discovery": {
+    "liveBlogSitemap": true,
+    "branded404Page": true,
+    "sitemapChildRefs": [
+      "https://nagmspa.com/sitemap-blog.xml",
+      "https://nagmspa.com/sitemap-0.xml"
+    ]
   },
   "expectedRoutes": [
     "/",
@@ -28,18 +36,21 @@
     "/en/offers/signature/",
     "/en/packages/",
     "/en/packages/gift/",
+    "/en/packages/groom/",
     "/en/packages/luxury/",
-    "/en/packages/wedding/",
     "/en/services/",
-    "/en/services/foot-massage/",
+    "/en/services/body-scrub/",
+    "/en/services/cupping/",
     "/en/services/hot-oil-massage/",
+    "/en/services/hot-stone-massage/",
     "/en/services/manicure-pedicure/",
     "/en/services/massage-relaxation/",
-    "/en/services/moroccan-bath-clay/",
     "/en/services/moroccan-bath/",
+    "/en/services/royal-bath/",
     "/en/services/shiatsu/",
-    "/en/services/sports-massage/",
     "/en/services/star-spa-massage/",
+    "/en/services/steam-session/",
+    "/en/services/swedish-massage/",
     "/en/services/thai-massage/",
     "/go/",
     "/offers/",
@@ -53,18 +64,21 @@
     "/offers/signature/",
     "/packages/",
     "/packages/gift/",
+    "/packages/groom/",
     "/packages/luxury/",
-    "/packages/wedding/",
     "/services/",
-    "/services/foot-massage/",
+    "/services/body-scrub/",
+    "/services/cupping/",
     "/services/hot-oil-massage/",
+    "/services/hot-stone-massage/",
     "/services/manicure-pedicure/",
     "/services/massage-relaxation/",
-    "/services/moroccan-bath-clay/",
     "/services/moroccan-bath/",
+    "/services/royal-bath/",
     "/services/shiatsu/",
-    "/services/sports-massage/",
     "/services/star-spa-massage/",
+    "/services/steam-session/",
+    "/services/swedish-massage/",
     "/services/thai-massage/"
   ],
   "generatedRoutes": [
@@ -88,18 +102,21 @@
     "/en/offers/signature/",
     "/en/packages/",
     "/en/packages/gift/",
+    "/en/packages/groom/",
     "/en/packages/luxury/",
-    "/en/packages/wedding/",
     "/en/services/",
-    "/en/services/foot-massage/",
+    "/en/services/body-scrub/",
+    "/en/services/cupping/",
     "/en/services/hot-oil-massage/",
+    "/en/services/hot-stone-massage/",
     "/en/services/manicure-pedicure/",
     "/en/services/massage-relaxation/",
-    "/en/services/moroccan-bath-clay/",
     "/en/services/moroccan-bath/",
+    "/en/services/royal-bath/",
     "/en/services/shiatsu/",
-    "/en/services/sports-massage/",
     "/en/services/star-spa-massage/",
+    "/en/services/steam-session/",
+    "/en/services/swedish-massage/",
     "/en/services/thai-massage/",
     "/go/",
     "/offers/",
@@ -113,18 +130,21 @@
     "/offers/signature/",
     "/packages/",
     "/packages/gift/",
+    "/packages/groom/",
     "/packages/luxury/",
-    "/packages/wedding/",
     "/services/",
-    "/services/foot-massage/",
+    "/services/body-scrub/",
+    "/services/cupping/",
     "/services/hot-oil-massage/",
+    "/services/hot-stone-massage/",
     "/services/manicure-pedicure/",
     "/services/massage-relaxation/",
-    "/services/moroccan-bath-clay/",
     "/services/moroccan-bath/",
+    "/services/royal-bath/",
     "/services/shiatsu/",
-    "/services/sports-massage/",
     "/services/star-spa-massage/",
+    "/services/steam-session/",
+    "/services/swedish-massage/",
     "/services/thai-massage/"
   ],
   "missingRoutes": [],
@@ -132,60 +152,66 @@
   "missingCounterparts": [],
   "duplicateTitles": [],
   "sitemapUrls": [
-    "https://najma-web.mohamed-abouzied.workers.dev/",
-    "https://najma-web.mohamed-abouzied.workers.dev/about/",
-    "https://najma-web.mohamed-abouzied.workers.dev/contact/",
-    "https://najma-web.mohamed-abouzied.workers.dev/en/",
-    "https://najma-web.mohamed-abouzied.workers.dev/en/about/",
-    "https://najma-web.mohamed-abouzied.workers.dev/en/contact/",
-    "https://najma-web.mohamed-abouzied.workers.dev/en/offers/",
-    "https://najma-web.mohamed-abouzied.workers.dev/en/offers/care/",
-    "https://najma-web.mohamed-abouzied.workers.dev/en/offers/elegance/",
-    "https://najma-web.mohamed-abouzied.workers.dev/en/offers/golden/",
-    "https://najma-web.mohamed-abouzied.workers.dev/en/offers/prosperity/",
-    "https://najma-web.mohamed-abouzied.workers.dev/en/offers/recovery/",
-    "https://najma-web.mohamed-abouzied.workers.dev/en/offers/relaxation/",
-    "https://najma-web.mohamed-abouzied.workers.dev/en/offers/royal/",
-    "https://najma-web.mohamed-abouzied.workers.dev/en/offers/signature/",
-    "https://najma-web.mohamed-abouzied.workers.dev/en/packages/",
-    "https://najma-web.mohamed-abouzied.workers.dev/en/packages/gift/",
-    "https://najma-web.mohamed-abouzied.workers.dev/en/packages/luxury/",
-    "https://najma-web.mohamed-abouzied.workers.dev/en/packages/wedding/",
-    "https://najma-web.mohamed-abouzied.workers.dev/en/services/",
-    "https://najma-web.mohamed-abouzied.workers.dev/en/services/foot-massage/",
-    "https://najma-web.mohamed-abouzied.workers.dev/en/services/hot-oil-massage/",
-    "https://najma-web.mohamed-abouzied.workers.dev/en/services/manicure-pedicure/",
-    "https://najma-web.mohamed-abouzied.workers.dev/en/services/massage-relaxation/",
-    "https://najma-web.mohamed-abouzied.workers.dev/en/services/moroccan-bath-clay/",
-    "https://najma-web.mohamed-abouzied.workers.dev/en/services/moroccan-bath/",
-    "https://najma-web.mohamed-abouzied.workers.dev/en/services/shiatsu/",
-    "https://najma-web.mohamed-abouzied.workers.dev/en/services/sports-massage/",
-    "https://najma-web.mohamed-abouzied.workers.dev/en/services/star-spa-massage/",
-    "https://najma-web.mohamed-abouzied.workers.dev/en/services/thai-massage/",
-    "https://najma-web.mohamed-abouzied.workers.dev/offers/",
-    "https://najma-web.mohamed-abouzied.workers.dev/offers/care/",
-    "https://najma-web.mohamed-abouzied.workers.dev/offers/elegance/",
-    "https://najma-web.mohamed-abouzied.workers.dev/offers/golden/",
-    "https://najma-web.mohamed-abouzied.workers.dev/offers/prosperity/",
-    "https://najma-web.mohamed-abouzied.workers.dev/offers/recovery/",
-    "https://najma-web.mohamed-abouzied.workers.dev/offers/relaxation/",
-    "https://najma-web.mohamed-abouzied.workers.dev/offers/royal/",
-    "https://najma-web.mohamed-abouzied.workers.dev/offers/signature/",
-    "https://najma-web.mohamed-abouzied.workers.dev/packages/",
-    "https://najma-web.mohamed-abouzied.workers.dev/packages/gift/",
-    "https://najma-web.mohamed-abouzied.workers.dev/packages/luxury/",
-    "https://najma-web.mohamed-abouzied.workers.dev/packages/wedding/",
-    "https://najma-web.mohamed-abouzied.workers.dev/services/",
-    "https://najma-web.mohamed-abouzied.workers.dev/services/foot-massage/",
-    "https://najma-web.mohamed-abouzied.workers.dev/services/hot-oil-massage/",
-    "https://najma-web.mohamed-abouzied.workers.dev/services/manicure-pedicure/",
-    "https://najma-web.mohamed-abouzied.workers.dev/services/massage-relaxation/",
-    "https://najma-web.mohamed-abouzied.workers.dev/services/moroccan-bath-clay/",
-    "https://najma-web.mohamed-abouzied.workers.dev/services/moroccan-bath/",
-    "https://najma-web.mohamed-abouzied.workers.dev/services/shiatsu/",
-    "https://najma-web.mohamed-abouzied.workers.dev/services/sports-massage/",
-    "https://najma-web.mohamed-abouzied.workers.dev/services/star-spa-massage/",
-    "https://najma-web.mohamed-abouzied.workers.dev/services/thai-massage/"
+    "https://nagmspa.com/",
+    "https://nagmspa.com/about/",
+    "https://nagmspa.com/contact/",
+    "https://nagmspa.com/en/",
+    "https://nagmspa.com/en/about/",
+    "https://nagmspa.com/en/contact/",
+    "https://nagmspa.com/en/offers/",
+    "https://nagmspa.com/en/offers/care/",
+    "https://nagmspa.com/en/offers/elegance/",
+    "https://nagmspa.com/en/offers/golden/",
+    "https://nagmspa.com/en/offers/prosperity/",
+    "https://nagmspa.com/en/offers/recovery/",
+    "https://nagmspa.com/en/offers/relaxation/",
+    "https://nagmspa.com/en/offers/royal/",
+    "https://nagmspa.com/en/offers/signature/",
+    "https://nagmspa.com/en/packages/",
+    "https://nagmspa.com/en/packages/gift/",
+    "https://nagmspa.com/en/packages/groom/",
+    "https://nagmspa.com/en/packages/luxury/",
+    "https://nagmspa.com/en/services/",
+    "https://nagmspa.com/en/services/body-scrub/",
+    "https://nagmspa.com/en/services/cupping/",
+    "https://nagmspa.com/en/services/hot-oil-massage/",
+    "https://nagmspa.com/en/services/hot-stone-massage/",
+    "https://nagmspa.com/en/services/manicure-pedicure/",
+    "https://nagmspa.com/en/services/massage-relaxation/",
+    "https://nagmspa.com/en/services/moroccan-bath/",
+    "https://nagmspa.com/en/services/royal-bath/",
+    "https://nagmspa.com/en/services/shiatsu/",
+    "https://nagmspa.com/en/services/star-spa-massage/",
+    "https://nagmspa.com/en/services/steam-session/",
+    "https://nagmspa.com/en/services/swedish-massage/",
+    "https://nagmspa.com/en/services/thai-massage/",
+    "https://nagmspa.com/offers/",
+    "https://nagmspa.com/offers/care/",
+    "https://nagmspa.com/offers/elegance/",
+    "https://nagmspa.com/offers/golden/",
+    "https://nagmspa.com/offers/prosperity/",
+    "https://nagmspa.com/offers/recovery/",
+    "https://nagmspa.com/offers/relaxation/",
+    "https://nagmspa.com/offers/royal/",
+    "https://nagmspa.com/offers/signature/",
+    "https://nagmspa.com/packages/",
+    "https://nagmspa.com/packages/gift/",
+    "https://nagmspa.com/packages/groom/",
+    "https://nagmspa.com/packages/luxury/",
+    "https://nagmspa.com/services/",
+    "https://nagmspa.com/services/body-scrub/",
+    "https://nagmspa.com/services/cupping/",
+    "https://nagmspa.com/services/hot-oil-massage/",
+    "https://nagmspa.com/services/hot-stone-massage/",
+    "https://nagmspa.com/services/manicure-pedicure/",
+    "https://nagmspa.com/services/massage-relaxation/",
+    "https://nagmspa.com/services/moroccan-bath/",
+    "https://nagmspa.com/services/royal-bath/",
+    "https://nagmspa.com/services/shiatsu/",
+    "https://nagmspa.com/services/star-spa-massage/",
+    "https://nagmspa.com/services/steam-session/",
+    "https://nagmspa.com/services/swedish-massage/",
+    "https://nagmspa.com/services/thai-massage/"
   ],
   "issueCounts": {},
   "issues": [],
@@ -196,9 +222,9 @@
       "status": 200,
       "title": "نجم سبا | مساج وحمام مغربي في حفر الباطن",
       "description": "نجم سبا — مركز مساج واسترخاء في حفر الباطن، حي المصيف. مساج سويدي وتايلندي وحمام مغربي بأيدي أخصائيين. مفتوح ٢٤ ساعة.",
-      "canonical": "https://najma-web.mohamed-abouzied.workers.dev/",
+      "canonical": "https://nagmspa.com/",
       "robots": "index, follow, max-image-preview:large",
-      "h1": "استرخِ، استعد طاقتك،واستمتع بلحظتك",
+      "h1": "استرخِ، استعد طاقتك، واستمتع بلحظتك",
       "schemaTypes": [
         "DaySpa",
         "WebSite",
@@ -207,20 +233,20 @@
         "FAQPage"
       ],
       "inSitemap": true,
-      "ogUrl": "https://najma-web.mohamed-abouzied.workers.dev/",
+      "ogUrl": "https://nagmspa.com/",
       "ogUrlMatchesCanonical": true,
       "hreflang": [
         {
           "lang": "ar",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/"
+          "href": "https://nagmspa.com/"
         },
         {
           "lang": "en",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/en/"
+          "href": "https://nagmspa.com/en/"
         },
         {
           "lang": "x-default",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/"
+          "href": "https://nagmspa.com/"
         }
       ],
       "expected": true
@@ -231,9 +257,9 @@
       "status": 200,
       "title": "من نحن - نجم سبا",
       "description": "تعرّف على قصة نجم سبا، حيث تلتقي الأصالة بالرفاهية في تجربة استرخاء لا تُنسى.",
-      "canonical": "https://najma-web.mohamed-abouzied.workers.dev/about/",
+      "canonical": "https://nagmspa.com/about/",
       "robots": "index, follow, max-image-preview:large",
-      "h1": "نجم سبا - حيث تلتقي الأصالةبالرفاهية",
+      "h1": "نجم سبا - حيث تلتقي الأصالة بالرفاهية",
       "schemaTypes": [
         "DaySpa",
         "WebSite",
@@ -242,20 +268,20 @@
         "BreadcrumbList"
       ],
       "inSitemap": true,
-      "ogUrl": "https://najma-web.mohamed-abouzied.workers.dev/about/",
+      "ogUrl": "https://nagmspa.com/about/",
       "ogUrlMatchesCanonical": true,
       "hreflang": [
         {
           "lang": "ar",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/about/"
+          "href": "https://nagmspa.com/about/"
         },
         {
           "lang": "en",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/en/about/"
+          "href": "https://nagmspa.com/en/about/"
         },
         {
           "lang": "x-default",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/about/"
+          "href": "https://nagmspa.com/about/"
         }
       ],
       "expected": true
@@ -266,7 +292,7 @@
       "status": 200,
       "title": "احجز موعدك - نجم سبا",
       "description": "سجّل اسمك ورقم جوالك واختر الخدمة، ثم أكمل الحجز مباشرة عبر واتساب.",
-      "canonical": "https://najma-web.mohamed-abouzied.workers.dev/book/",
+      "canonical": "https://nagmspa.com/book/",
       "robots": "noindex, follow",
       "h1": "احجز وقتك للراحة",
       "schemaTypes": [
@@ -276,20 +302,20 @@
         "WebPage"
       ],
       "inSitemap": false,
-      "ogUrl": "https://najma-web.mohamed-abouzied.workers.dev/book/",
+      "ogUrl": "https://nagmspa.com/book/",
       "ogUrlMatchesCanonical": true,
       "hreflang": [
         {
           "lang": "ar",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/book/"
+          "href": "https://nagmspa.com/book/"
         },
         {
           "lang": "en",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/en/book/"
+          "href": "https://nagmspa.com/en/book/"
         },
         {
           "lang": "x-default",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/book/"
+          "href": "https://nagmspa.com/book/"
         }
       ],
       "expected": true
@@ -300,7 +326,7 @@
       "status": 200,
       "title": "اتصل بنا - نجم سبا",
       "description": "تواصل مع نجم سبا في حفر الباطن — حي المصيف. واتساب واتصال واتجاهات على مدار الساعة.",
-      "canonical": "https://najma-web.mohamed-abouzied.workers.dev/contact/",
+      "canonical": "https://nagmspa.com/contact/",
       "robots": "index, follow, max-image-preview:large",
       "h1": "اتصل بنا",
       "schemaTypes": [
@@ -311,20 +337,20 @@
         "BreadcrumbList"
       ],
       "inSitemap": true,
-      "ogUrl": "https://najma-web.mohamed-abouzied.workers.dev/contact/",
+      "ogUrl": "https://nagmspa.com/contact/",
       "ogUrlMatchesCanonical": true,
       "hreflang": [
         {
           "lang": "ar",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/contact/"
+          "href": "https://nagmspa.com/contact/"
         },
         {
           "lang": "en",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/en/contact/"
+          "href": "https://nagmspa.com/en/contact/"
         },
         {
           "lang": "x-default",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/contact/"
+          "href": "https://nagmspa.com/contact/"
         }
       ],
       "expected": true
@@ -335,9 +361,9 @@
       "status": 200,
       "title": "Nagm Spa | Massage &amp; Moroccan Bath in Hafar Al-Batin",
       "description": "Nagm Spa — massage and relaxation center in Hafar Al-Batin, Al-Musayyif district. Swedish &amp; Thai massage and Moroccan bath by professionals. Open 24 hours.",
-      "canonical": "https://najma-web.mohamed-abouzied.workers.dev/en/",
+      "canonical": "https://nagmspa.com/en/",
       "robots": "index, follow, max-image-preview:large",
-      "h1": "Relax. Restore.Enjoy your moment.",
+      "h1": "Relax. Restore. Enjoy your moment.",
       "schemaTypes": [
         "DaySpa",
         "WebSite",
@@ -346,20 +372,20 @@
         "FAQPage"
       ],
       "inSitemap": true,
-      "ogUrl": "https://najma-web.mohamed-abouzied.workers.dev/en/",
+      "ogUrl": "https://nagmspa.com/en/",
       "ogUrlMatchesCanonical": true,
       "hreflang": [
         {
           "lang": "ar",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/"
+          "href": "https://nagmspa.com/"
         },
         {
           "lang": "en",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/en/"
+          "href": "https://nagmspa.com/en/"
         },
         {
           "lang": "x-default",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/"
+          "href": "https://nagmspa.com/"
         }
       ],
       "expected": true
@@ -370,9 +396,9 @@
       "status": 200,
       "title": "About Us - Nagm Spa",
       "description": "Discover the story of Nagm Spa, where authenticity meets luxury in an unforgettable relaxation experience.",
-      "canonical": "https://najma-web.mohamed-abouzied.workers.dev/en/about/",
+      "canonical": "https://nagmspa.com/en/about/",
       "robots": "index, follow, max-image-preview:large",
-      "h1": "Nagm Spa — where authenticitymeets luxury",
+      "h1": "Nagm Spa — where authenticity meets luxury",
       "schemaTypes": [
         "DaySpa",
         "WebSite",
@@ -381,20 +407,20 @@
         "BreadcrumbList"
       ],
       "inSitemap": true,
-      "ogUrl": "https://najma-web.mohamed-abouzied.workers.dev/en/about/",
+      "ogUrl": "https://nagmspa.com/en/about/",
       "ogUrlMatchesCanonical": true,
       "hreflang": [
         {
           "lang": "ar",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/about/"
+          "href": "https://nagmspa.com/about/"
         },
         {
           "lang": "en",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/en/about/"
+          "href": "https://nagmspa.com/en/about/"
         },
         {
           "lang": "x-default",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/about/"
+          "href": "https://nagmspa.com/about/"
         }
       ],
       "expected": true
@@ -405,7 +431,7 @@
       "status": 200,
       "title": "Book an Appointment - Nagm Spa",
       "description": "Enter your name and mobile number, choose your service, then continue your booking on WhatsApp.",
-      "canonical": "https://najma-web.mohamed-abouzied.workers.dev/en/book/",
+      "canonical": "https://nagmspa.com/en/book/",
       "robots": "noindex, follow",
       "h1": "Reserve time to unwind",
       "schemaTypes": [
@@ -415,20 +441,20 @@
         "WebPage"
       ],
       "inSitemap": false,
-      "ogUrl": "https://najma-web.mohamed-abouzied.workers.dev/en/book/",
+      "ogUrl": "https://nagmspa.com/en/book/",
       "ogUrlMatchesCanonical": true,
       "hreflang": [
         {
           "lang": "ar",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/book/"
+          "href": "https://nagmspa.com/book/"
         },
         {
           "lang": "en",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/en/book/"
+          "href": "https://nagmspa.com/en/book/"
         },
         {
           "lang": "x-default",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/book/"
+          "href": "https://nagmspa.com/book/"
         }
       ],
       "expected": true
@@ -439,7 +465,7 @@
       "status": 200,
       "title": "Contact Us - Nagm Spa",
       "description": "Get in touch with Nagm Spa in Hafar Al-Batin — Al-Musayyif district. WhatsApp, call, and directions available 24/7.",
-      "canonical": "https://najma-web.mohamed-abouzied.workers.dev/en/contact/",
+      "canonical": "https://nagmspa.com/en/contact/",
       "robots": "index, follow, max-image-preview:large",
       "h1": "Contact Us",
       "schemaTypes": [
@@ -450,20 +476,20 @@
         "BreadcrumbList"
       ],
       "inSitemap": true,
-      "ogUrl": "https://najma-web.mohamed-abouzied.workers.dev/en/contact/",
+      "ogUrl": "https://nagmspa.com/en/contact/",
       "ogUrlMatchesCanonical": true,
       "hreflang": [
         {
           "lang": "ar",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/contact/"
+          "href": "https://nagmspa.com/contact/"
         },
         {
           "lang": "en",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/en/contact/"
+          "href": "https://nagmspa.com/en/contact/"
         },
         {
           "lang": "x-default",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/contact/"
+          "href": "https://nagmspa.com/contact/"
         }
       ],
       "expected": true
@@ -474,7 +500,7 @@
       "status": 200,
       "title": "Contact Nagm Spa | WhatsApp · Call · Directions",
       "description": "Quick contact page for Nagm Spa in Hafar Al-Batin — Al-Musayyif: WhatsApp, call, and location directions. Open 24 hours.",
-      "canonical": "https://najma-web.mohamed-abouzied.workers.dev/en/go/",
+      "canonical": "https://nagmspa.com/en/go/",
       "robots": "noindex, follow",
       "h1": "Contact Us Now",
       "schemaTypes": [
@@ -484,20 +510,20 @@
         "WebPage"
       ],
       "inSitemap": false,
-      "ogUrl": "https://najma-web.mohamed-abouzied.workers.dev/en/go/",
+      "ogUrl": "https://nagmspa.com/en/go/",
       "ogUrlMatchesCanonical": true,
       "hreflang": [
         {
           "lang": "ar",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/go/"
+          "href": "https://nagmspa.com/go/"
         },
         {
           "lang": "en",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/en/go/"
+          "href": "https://nagmspa.com/en/go/"
         },
         {
           "lang": "x-default",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/go/"
+          "href": "https://nagmspa.com/go/"
         }
       ],
       "expected": true
@@ -506,33 +532,33 @@
       "route": "/en/offers/",
       "locale": "en",
       "status": 200,
-      "title": "Summer Deals - Nagm Spa",
-      "description": "Exclusive summer deals on massage and bath services at Nagm Spa — discounts up to 20%.",
-      "canonical": "https://najma-web.mohamed-abouzied.workers.dev/en/offers/",
+      "title": "Special Offers - Nagm Spa",
+      "description": "Exclusive offers on massage and bath services at Nagm Spa — discounts up to 20%.",
+      "canonical": "https://nagmspa.com/en/offers/",
       "robots": "index, follow, max-image-preview:large",
-      "h1": "Your Summer, Your Way",
+      "h1": "Nagm Spa Special Offers",
       "schemaTypes": [
         "DaySpa",
         "WebSite",
         "ImageObject",
-        "WebPage",
+        "CollectionPage",
         "BreadcrumbList"
       ],
       "inSitemap": true,
-      "ogUrl": "https://najma-web.mohamed-abouzied.workers.dev/en/offers/",
+      "ogUrl": "https://nagmspa.com/en/offers/",
       "ogUrlMatchesCanonical": true,
       "hreflang": [
         {
           "lang": "ar",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/offers/"
+          "href": "https://nagmspa.com/offers/"
         },
         {
           "lang": "en",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/en/offers/"
+          "href": "https://nagmspa.com/en/offers/"
         },
         {
           "lang": "x-default",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/offers/"
+          "href": "https://nagmspa.com/offers/"
         }
       ],
       "expected": true
@@ -542,34 +568,33 @@
       "locale": "en",
       "status": 200,
       "title": "Care Package - Nagm Spa",
-      "description": "Care package from Nagm Spa combines relaxation, Shiatsu, and Thai massage with manicure &amp; pedicure. Book your package via WhatsApp now.",
-      "canonical": "https://najma-web.mohamed-abouzied.workers.dev/en/offers/care/",
+      "description": "Care package from Nagm Spa combines relaxation, Shiatsu, and Thai massage with hand &amp; foot pedicure. Book via WhatsApp now.",
+      "canonical": "https://nagmspa.com/en/offers/care/",
       "robots": "index, follow, max-image-preview:large",
       "h1": "Care Package",
       "schemaTypes": [
         "DaySpa",
         "WebSite",
-        "ImageObject",
         "WebPage",
         "Service",
         "Offer",
         "BreadcrumbList"
       ],
       "inSitemap": true,
-      "ogUrl": "https://najma-web.mohamed-abouzied.workers.dev/en/offers/care/",
+      "ogUrl": "https://nagmspa.com/en/offers/care/",
       "ogUrlMatchesCanonical": true,
       "hreflang": [
         {
           "lang": "ar",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/offers/care/"
+          "href": "https://nagmspa.com/offers/care/"
         },
         {
           "lang": "en",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/en/offers/care/"
+          "href": "https://nagmspa.com/en/offers/care/"
         },
         {
           "lang": "x-default",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/offers/care/"
+          "href": "https://nagmspa.com/offers/care/"
         }
       ],
       "expected": true
@@ -579,34 +604,33 @@
       "locale": "en",
       "status": 200,
       "title": "Elegance Offer - Nagm Spa",
-      "description": "Elegance offer from Nagm Spa: Swedish and Thai massage with a luxurious royal bath and steam session for a refined day of relaxation. Book your offer via WhatsApp now.",
-      "canonical": "https://najma-web.mohamed-abouzied.workers.dev/en/offers/elegance/",
+      "description": "Elegance offer from Nagm Spa: Swedish and Thai massage with a luxury royal bath and steam session. Book via WhatsApp now.",
+      "canonical": "https://nagmspa.com/en/offers/elegance/",
       "robots": "index, follow, max-image-preview:large",
       "h1": "Elegance Offer",
       "schemaTypes": [
         "DaySpa",
         "WebSite",
-        "ImageObject",
         "WebPage",
         "Service",
         "Offer",
         "BreadcrumbList"
       ],
       "inSitemap": true,
-      "ogUrl": "https://najma-web.mohamed-abouzied.workers.dev/en/offers/elegance/",
+      "ogUrl": "https://nagmspa.com/en/offers/elegance/",
       "ogUrlMatchesCanonical": true,
       "hreflang": [
         {
           "lang": "ar",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/offers/elegance/"
+          "href": "https://nagmspa.com/offers/elegance/"
         },
         {
           "lang": "en",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/en/offers/elegance/"
+          "href": "https://nagmspa.com/en/offers/elegance/"
         },
         {
           "lang": "x-default",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/offers/elegance/"
+          "href": "https://nagmspa.com/offers/elegance/"
         }
       ],
       "expected": true
@@ -616,34 +640,33 @@
       "locale": "en",
       "status": 200,
       "title": "Golden Offer - Nagm Spa",
-      "description": "Golden offer from Nagm Spa combines relaxation massage, Thai massage, cupping, and hot stones with a luxurious royal bath. Book your offer via WhatsApp now.",
-      "canonical": "https://najma-web.mohamed-abouzied.workers.dev/en/offers/golden/",
+      "description": "Golden offer from Nagm Spa combines relaxation and Thai massage, cupping, and hot stones with luxury royal bath and steam. Book via WhatsApp now.",
+      "canonical": "https://nagmspa.com/en/offers/golden/",
       "robots": "index, follow, max-image-preview:large",
       "h1": "Golden Offer",
       "schemaTypes": [
         "DaySpa",
         "WebSite",
-        "ImageObject",
         "WebPage",
         "Service",
         "Offer",
         "BreadcrumbList"
       ],
       "inSitemap": true,
-      "ogUrl": "https://najma-web.mohamed-abouzied.workers.dev/en/offers/golden/",
+      "ogUrl": "https://nagmspa.com/en/offers/golden/",
       "ogUrlMatchesCanonical": true,
       "hreflang": [
         {
           "lang": "ar",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/offers/golden/"
+          "href": "https://nagmspa.com/offers/golden/"
         },
         {
           "lang": "en",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/en/offers/golden/"
+          "href": "https://nagmspa.com/en/offers/golden/"
         },
         {
           "lang": "x-default",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/offers/golden/"
+          "href": "https://nagmspa.com/offers/golden/"
         }
       ],
       "expected": true
@@ -653,34 +676,33 @@
       "locale": "en",
       "status": 200,
       "title": "Prosperity Offer - Nagm Spa",
-      "description": "Prosperity offer from Nagm Spa combines Swedish massage, classic Moroccan bath, and steam session for quiet, balanced comfort. Book via WhatsApp now.",
-      "canonical": "https://najma-web.mohamed-abouzied.workers.dev/en/offers/prosperity/",
+      "description": "Prosperity offer from Nagm Spa combines Swedish massage, classic Moroccan bath, and a steam session for quiet, balanced comfort. Book via WhatsApp now.",
+      "canonical": "https://nagmspa.com/en/offers/prosperity/",
       "robots": "index, follow, max-image-preview:large",
       "h1": "Prosperity Offer",
       "schemaTypes": [
         "DaySpa",
         "WebSite",
-        "ImageObject",
         "WebPage",
         "Service",
         "Offer",
         "BreadcrumbList"
       ],
       "inSitemap": true,
-      "ogUrl": "https://najma-web.mohamed-abouzied.workers.dev/en/offers/prosperity/",
+      "ogUrl": "https://nagmspa.com/en/offers/prosperity/",
       "ogUrlMatchesCanonical": true,
       "hreflang": [
         {
           "lang": "ar",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/offers/prosperity/"
+          "href": "https://nagmspa.com/offers/prosperity/"
         },
         {
           "lang": "en",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/en/offers/prosperity/"
+          "href": "https://nagmspa.com/en/offers/prosperity/"
         },
         {
           "lang": "x-default",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/offers/prosperity/"
+          "href": "https://nagmspa.com/offers/prosperity/"
         }
       ],
       "expected": true
@@ -690,34 +712,33 @@
       "locale": "en",
       "status": 200,
       "title": "Recovery Offer - Nagm Spa",
-      "description": "Recovery offer from Nagm Spa combines Swedish massage, Thai massage, and cupping massage to relieve tension and restore your energy. Book your offer via WhatsApp now.",
-      "canonical": "https://najma-web.mohamed-abouzied.workers.dev/en/offers/recovery/",
+      "description": "Recovery offer from Nagm Spa combines Swedish massage, Thai massage, and Chinese cupping to relieve tension and restore energy. Book via WhatsApp now.",
+      "canonical": "https://nagmspa.com/en/offers/recovery/",
       "robots": "index, follow, max-image-preview:large",
       "h1": "Recovery Offer",
       "schemaTypes": [
         "DaySpa",
         "WebSite",
-        "ImageObject",
         "WebPage",
         "Service",
         "Offer",
         "BreadcrumbList"
       ],
       "inSitemap": true,
-      "ogUrl": "https://najma-web.mohamed-abouzied.workers.dev/en/offers/recovery/",
+      "ogUrl": "https://nagmspa.com/en/offers/recovery/",
       "ogUrlMatchesCanonical": true,
       "hreflang": [
         {
           "lang": "ar",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/offers/recovery/"
+          "href": "https://nagmspa.com/offers/recovery/"
         },
         {
           "lang": "en",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/en/offers/recovery/"
+          "href": "https://nagmspa.com/en/offers/recovery/"
         },
         {
           "lang": "x-default",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/offers/recovery/"
+          "href": "https://nagmspa.com/offers/recovery/"
         }
       ],
       "expected": true
@@ -727,34 +748,33 @@
       "locale": "en",
       "status": 200,
       "title": "Relaxation Offer - Nagm Spa",
-      "description": "Relaxation offer from Nagm Spa: Swedish and Thai massage with hot stone massage for a deeply calming and comfortable session. Book your offer via WhatsApp now.",
-      "canonical": "https://najma-web.mohamed-abouzied.workers.dev/en/offers/relaxation/",
+      "description": "Relaxation offer from Nagm Spa: Swedish and Thai massage with hot stone massage for a deeply calming session. Book via WhatsApp now.",
+      "canonical": "https://nagmspa.com/en/offers/relaxation/",
       "robots": "index, follow, max-image-preview:large",
       "h1": "Relaxation Offer",
       "schemaTypes": [
         "DaySpa",
         "WebSite",
-        "ImageObject",
         "WebPage",
         "Service",
         "Offer",
         "BreadcrumbList"
       ],
       "inSitemap": true,
-      "ogUrl": "https://najma-web.mohamed-abouzied.workers.dev/en/offers/relaxation/",
+      "ogUrl": "https://nagmspa.com/en/offers/relaxation/",
       "ogUrlMatchesCanonical": true,
       "hreflang": [
         {
           "lang": "ar",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/offers/relaxation/"
+          "href": "https://nagmspa.com/offers/relaxation/"
         },
         {
           "lang": "en",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/en/offers/relaxation/"
+          "href": "https://nagmspa.com/en/offers/relaxation/"
         },
         {
           "lang": "x-default",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/offers/relaxation/"
+          "href": "https://nagmspa.com/offers/relaxation/"
         }
       ],
       "expected": true
@@ -765,33 +785,32 @@
       "status": 200,
       "title": "Royal Offer - Nagm Spa",
       "description": "Royal offer from Nagm Spa — Nagm Spa massage, hot oil, cupping, and hot stones with royal bath, pedicure, body scrub, and steam. Book via WhatsApp now.",
-      "canonical": "https://najma-web.mohamed-abouzied.workers.dev/en/offers/royal/",
+      "canonical": "https://nagmspa.com/en/offers/royal/",
       "robots": "index, follow, max-image-preview:large",
       "h1": "Royal Offer",
       "schemaTypes": [
         "DaySpa",
         "WebSite",
-        "ImageObject",
         "WebPage",
         "Service",
         "Offer",
         "BreadcrumbList"
       ],
       "inSitemap": true,
-      "ogUrl": "https://najma-web.mohamed-abouzied.workers.dev/en/offers/royal/",
+      "ogUrl": "https://nagmspa.com/en/offers/royal/",
       "ogUrlMatchesCanonical": true,
       "hreflang": [
         {
           "lang": "ar",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/offers/royal/"
+          "href": "https://nagmspa.com/offers/royal/"
         },
         {
           "lang": "en",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/en/offers/royal/"
+          "href": "https://nagmspa.com/en/offers/royal/"
         },
         {
           "lang": "x-default",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/offers/royal/"
+          "href": "https://nagmspa.com/offers/royal/"
         }
       ],
       "expected": true
@@ -801,34 +820,33 @@
       "locale": "en",
       "status": 200,
       "title": "Nagm Spa Signature - Nagm Spa",
-      "description": "Nagm Spa Signature — a complete experience combining massage, royal bath, pedicure, body scrub, and steam session. Book your offer via WhatsApp now.",
-      "canonical": "https://najma-web.mohamed-abouzied.workers.dev/en/offers/signature/",
+      "description": "Nagm Spa Signature — a complete experience combining massage, hot oil, royal bath, pedicure, body scrub, and steam. Book via WhatsApp now.",
+      "canonical": "https://nagmspa.com/en/offers/signature/",
       "robots": "index, follow, max-image-preview:large",
       "h1": "Nagm Spa Signature",
       "schemaTypes": [
         "DaySpa",
         "WebSite",
-        "ImageObject",
         "WebPage",
         "Service",
         "Offer",
         "BreadcrumbList"
       ],
       "inSitemap": true,
-      "ogUrl": "https://najma-web.mohamed-abouzied.workers.dev/en/offers/signature/",
+      "ogUrl": "https://nagmspa.com/en/offers/signature/",
       "ogUrlMatchesCanonical": true,
       "hreflang": [
         {
           "lang": "ar",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/offers/signature/"
+          "href": "https://nagmspa.com/offers/signature/"
         },
         {
           "lang": "en",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/en/offers/signature/"
+          "href": "https://nagmspa.com/en/offers/signature/"
         },
         {
           "lang": "x-default",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/offers/signature/"
+          "href": "https://nagmspa.com/offers/signature/"
         }
       ],
       "expected": true
@@ -839,31 +857,31 @@
       "status": 200,
       "title": "Our Packages - Nagm Spa",
       "description": "Special massage and Moroccan bath packages at great prices — Nagm Spa, Hafar Al-Batin.",
-      "canonical": "https://najma-web.mohamed-abouzied.workers.dev/en/packages/",
+      "canonical": "https://nagmspa.com/en/packages/",
       "robots": "index, follow, max-image-preview:large",
       "h1": "Perfect Care Packages",
       "schemaTypes": [
         "DaySpa",
         "WebSite",
         "ImageObject",
-        "WebPage",
+        "CollectionPage",
         "BreadcrumbList"
       ],
       "inSitemap": true,
-      "ogUrl": "https://najma-web.mohamed-abouzied.workers.dev/en/packages/",
+      "ogUrl": "https://nagmspa.com/en/packages/",
       "ogUrlMatchesCanonical": true,
       "hreflang": [
         {
           "lang": "ar",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/packages/"
+          "href": "https://nagmspa.com/packages/"
         },
         {
           "lang": "en",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/en/packages/"
+          "href": "https://nagmspa.com/en/packages/"
         },
         {
           "lang": "x-default",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/packages/"
+          "href": "https://nagmspa.com/packages/"
         }
       ],
       "expected": true
@@ -872,35 +890,70 @@
       "route": "/en/packages/gift/",
       "locale": "en",
       "status": 200,
-      "title": "Gift Package - Nagm Spa",
-      "description": "Gift package from Nagm Spa — an elegant gift card that allows choosing any service from our massage, bath, and pedicure menu. The perfect relaxation gift — order via WhatsApp now.",
-      "canonical": "https://najma-web.mohamed-abouzied.workers.dev/en/packages/gift/",
+      "title": "Gift Offer - Nagm Spa",
+      "description": "Gift offer from Nagm Spa — a complete experience of massage, royal bath, pedicure, and body scrub, plus dessert and a flower bouquet. Order via WhatsApp now.",
+      "canonical": "https://nagmspa.com/en/packages/gift/",
       "robots": "index, follow, max-image-preview:large",
-      "h1": "Gift Package",
+      "h1": "Gift Offer",
       "schemaTypes": [
         "DaySpa",
         "WebSite",
-        "ImageObject",
         "WebPage",
         "Service",
         "Offer",
         "BreadcrumbList"
       ],
       "inSitemap": true,
-      "ogUrl": "https://najma-web.mohamed-abouzied.workers.dev/en/packages/gift/",
+      "ogUrl": "https://nagmspa.com/en/packages/gift/",
       "ogUrlMatchesCanonical": true,
       "hreflang": [
         {
           "lang": "ar",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/packages/gift/"
+          "href": "https://nagmspa.com/packages/gift/"
         },
         {
           "lang": "en",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/en/packages/gift/"
+          "href": "https://nagmspa.com/en/packages/gift/"
         },
         {
           "lang": "x-default",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/packages/gift/"
+          "href": "https://nagmspa.com/packages/gift/"
+        }
+      ],
+      "expected": true
+    },
+    {
+      "route": "/en/packages/groom/",
+      "locale": "en",
+      "status": 200,
+      "title": "Groom Package - Nagm Spa",
+      "description": "Groom package from Nagm Spa — mix massage, hot stones, royal Moroccan bath, and hand &amp; foot pedicure with a hot or cold drink. Book via WhatsApp now.",
+      "canonical": "https://nagmspa.com/en/packages/groom/",
+      "robots": "index, follow, max-image-preview:large",
+      "h1": "Groom Package",
+      "schemaTypes": [
+        "DaySpa",
+        "WebSite",
+        "WebPage",
+        "Service",
+        "Offer",
+        "BreadcrumbList"
+      ],
+      "inSitemap": true,
+      "ogUrl": "https://nagmspa.com/en/packages/groom/",
+      "ogUrlMatchesCanonical": true,
+      "hreflang": [
+        {
+          "lang": "ar",
+          "href": "https://nagmspa.com/packages/groom/"
+        },
+        {
+          "lang": "en",
+          "href": "https://nagmspa.com/en/packages/groom/"
+        },
+        {
+          "lang": "x-default",
+          "href": "https://nagmspa.com/packages/groom/"
         }
       ],
       "expected": true
@@ -909,72 +962,34 @@
       "route": "/en/packages/luxury/",
       "locale": "en",
       "status": 200,
-      "title": "Luxury Package - Nagm Spa",
-      "description": "Luxury package from Nagm Spa: Moroccan clay bath and extended Nagm Spa massage for a complete day of luxurious relaxation. Book your package via WhatsApp now.",
-      "canonical": "https://najma-web.mohamed-abouzied.workers.dev/en/packages/luxury/",
+      "title": "Luxury Offer - Nagm Spa",
+      "description": "Luxury offer from Nagm Spa combines Nagm Spa massage, hot oil, cupping, and hot stones with royal bath, steam, pedicure, and body scrub — plus drink and dessert. Book via WhatsApp now.",
+      "canonical": "https://nagmspa.com/en/packages/luxury/",
       "robots": "index, follow, max-image-preview:large",
-      "h1": "Luxury Package",
+      "h1": "Luxury Offer",
       "schemaTypes": [
         "DaySpa",
         "WebSite",
-        "ImageObject",
         "WebPage",
         "Service",
         "Offer",
         "BreadcrumbList"
       ],
       "inSitemap": true,
-      "ogUrl": "https://najma-web.mohamed-abouzied.workers.dev/en/packages/luxury/",
+      "ogUrl": "https://nagmspa.com/en/packages/luxury/",
       "ogUrlMatchesCanonical": true,
       "hreflang": [
         {
           "lang": "ar",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/packages/luxury/"
+          "href": "https://nagmspa.com/packages/luxury/"
         },
         {
           "lang": "en",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/en/packages/luxury/"
+          "href": "https://nagmspa.com/en/packages/luxury/"
         },
         {
           "lang": "x-default",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/packages/luxury/"
-        }
-      ],
-      "expected": true
-    },
-    {
-      "route": "/en/packages/wedding/",
-      "locale": "en",
-      "status": 200,
-      "title": "Wedding Package - Nagm Spa",
-      "description": "Wedding package from Nagm Spa — classic Moroccan bath, relaxation massage, and manicure &amp; pedicure for the perfect wedding day look. Book your package via WhatsApp now.",
-      "canonical": "https://najma-web.mohamed-abouzied.workers.dev/en/packages/wedding/",
-      "robots": "index, follow, max-image-preview:large",
-      "h1": "Wedding Package",
-      "schemaTypes": [
-        "DaySpa",
-        "WebSite",
-        "ImageObject",
-        "WebPage",
-        "Service",
-        "Offer",
-        "BreadcrumbList"
-      ],
-      "inSitemap": true,
-      "ogUrl": "https://najma-web.mohamed-abouzied.workers.dev/en/packages/wedding/",
-      "ogUrlMatchesCanonical": true,
-      "hreflang": [
-        {
-          "lang": "ar",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/packages/wedding/"
-        },
-        {
-          "lang": "en",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/en/packages/wedding/"
-        },
-        {
-          "lang": "x-default",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/packages/wedding/"
+          "href": "https://nagmspa.com/packages/luxury/"
         }
       ],
       "expected": true
@@ -985,68 +1000,103 @@
       "status": 200,
       "title": "Our Services - Nagm Spa",
       "description": "Explore massage, Moroccan bath, and personal care services at Nagm Spa — Hafar Al-Batin.",
-      "canonical": "https://najma-web.mohamed-abouzied.workers.dev/en/services/",
+      "canonical": "https://nagmspa.com/en/services/",
       "robots": "index, follow, max-image-preview:large",
       "h1": "Our Premium Services",
       "schemaTypes": [
         "DaySpa",
         "WebSite",
         "ImageObject",
-        "WebPage",
+        "CollectionPage",
         "BreadcrumbList"
       ],
       "inSitemap": true,
-      "ogUrl": "https://najma-web.mohamed-abouzied.workers.dev/en/services/",
+      "ogUrl": "https://nagmspa.com/en/services/",
       "ogUrlMatchesCanonical": true,
       "hreflang": [
         {
           "lang": "ar",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/services/"
+          "href": "https://nagmspa.com/services/"
         },
         {
           "lang": "en",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/en/services/"
+          "href": "https://nagmspa.com/en/services/"
         },
         {
           "lang": "x-default",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/services/"
+          "href": "https://nagmspa.com/services/"
         }
       ],
       "expected": true
     },
     {
-      "route": "/en/services/foot-massage/",
+      "route": "/en/services/body-scrub/",
       "locale": "en",
       "status": 200,
-      "title": "Hand &amp; Foot Massage - Nagm Spa",
-      "description": "Hand and foot massage at Nagm Spa — specialized care that relaxes the entire body and relieves fatigue from your extremities throughout. A refreshing experience — book via WhatsApp now.",
-      "canonical": "https://najma-web.mohamed-abouzied.workers.dev/en/services/foot-massage/",
+      "title": "Body Scrub - Nagm Spa",
+      "description": "Body scrub in Nagm Spa offers — smoother, fresher skin as part of a complete care experience.",
+      "canonical": "https://nagmspa.com/en/services/body-scrub/",
       "robots": "index, follow, max-image-preview:large",
-      "h1": "Hand &amp; Foot Massage",
+      "h1": "Body Scrub",
       "schemaTypes": [
         "DaySpa",
         "WebSite",
         "ImageObject",
         "WebPage",
         "Service",
-        "Offer",
         "BreadcrumbList"
       ],
       "inSitemap": true,
-      "ogUrl": "https://najma-web.mohamed-abouzied.workers.dev/en/services/foot-massage/",
+      "ogUrl": "https://nagmspa.com/en/services/body-scrub/",
       "ogUrlMatchesCanonical": true,
       "hreflang": [
         {
           "lang": "ar",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/services/foot-massage/"
+          "href": "https://nagmspa.com/services/body-scrub/"
         },
         {
           "lang": "en",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/en/services/foot-massage/"
+          "href": "https://nagmspa.com/en/services/body-scrub/"
         },
         {
           "lang": "x-default",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/services/foot-massage/"
+          "href": "https://nagmspa.com/services/body-scrub/"
+        }
+      ],
+      "expected": true
+    },
+    {
+      "route": "/en/services/cupping/",
+      "locale": "en",
+      "status": 200,
+      "title": "Chinese Cupping Massage - Nagm Spa",
+      "description": "Chinese cupping massage in Nagm Spa offers — supports circulation and eases deep tension.",
+      "canonical": "https://nagmspa.com/en/services/cupping/",
+      "robots": "index, follow, max-image-preview:large",
+      "h1": "Chinese Cupping Massage",
+      "schemaTypes": [
+        "DaySpa",
+        "WebSite",
+        "ImageObject",
+        "WebPage",
+        "Service",
+        "BreadcrumbList"
+      ],
+      "inSitemap": true,
+      "ogUrl": "https://nagmspa.com/en/services/cupping/",
+      "ogUrlMatchesCanonical": true,
+      "hreflang": [
+        {
+          "lang": "ar",
+          "href": "https://nagmspa.com/services/cupping/"
+        },
+        {
+          "lang": "en",
+          "href": "https://nagmspa.com/en/services/cupping/"
+        },
+        {
+          "lang": "x-default",
+          "href": "https://nagmspa.com/services/cupping/"
         }
       ],
       "expected": true
@@ -1056,8 +1106,8 @@
       "locale": "en",
       "status": 200,
       "title": "Hot Oil Massage - Nagm Spa",
-      "description": "Hot oil massage at Nagm Spa — warm oils that relax muscles, improve blood circulation, and deliver deep, comfortable relaxation. Book your session via WhatsApp now.",
-      "canonical": "https://najma-web.mohamed-abouzied.workers.dev/en/services/hot-oil-massage/",
+      "description": "Hot oil massage in Nagm Spa offers — warm oils for deep muscle ease and comfortable relief.",
+      "canonical": "https://nagmspa.com/en/services/hot-oil-massage/",
       "robots": "index, follow, max-image-preview:large",
       "h1": "Hot Oil Massage",
       "schemaTypes": [
@@ -1066,24 +1116,59 @@
         "ImageObject",
         "WebPage",
         "Service",
-        "Offer",
         "BreadcrumbList"
       ],
       "inSitemap": true,
-      "ogUrl": "https://najma-web.mohamed-abouzied.workers.dev/en/services/hot-oil-massage/",
+      "ogUrl": "https://nagmspa.com/en/services/hot-oil-massage/",
       "ogUrlMatchesCanonical": true,
       "hreflang": [
         {
           "lang": "ar",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/services/hot-oil-massage/"
+          "href": "https://nagmspa.com/services/hot-oil-massage/"
         },
         {
           "lang": "en",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/en/services/hot-oil-massage/"
+          "href": "https://nagmspa.com/en/services/hot-oil-massage/"
         },
         {
           "lang": "x-default",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/services/hot-oil-massage/"
+          "href": "https://nagmspa.com/services/hot-oil-massage/"
+        }
+      ],
+      "expected": true
+    },
+    {
+      "route": "/en/services/hot-stone-massage/",
+      "locale": "en",
+      "status": 200,
+      "title": "Hot Stone Massage - Nagm Spa",
+      "description": "Hot stone massage in Nagm Spa offers — soothing heat that melts tension and deepens relaxation.",
+      "canonical": "https://nagmspa.com/en/services/hot-stone-massage/",
+      "robots": "index, follow, max-image-preview:large",
+      "h1": "Hot Stone Massage",
+      "schemaTypes": [
+        "DaySpa",
+        "WebSite",
+        "ImageObject",
+        "WebPage",
+        "Service",
+        "BreadcrumbList"
+      ],
+      "inSitemap": true,
+      "ogUrl": "https://nagmspa.com/en/services/hot-stone-massage/",
+      "ogUrlMatchesCanonical": true,
+      "hreflang": [
+        {
+          "lang": "ar",
+          "href": "https://nagmspa.com/services/hot-stone-massage/"
+        },
+        {
+          "lang": "en",
+          "href": "https://nagmspa.com/en/services/hot-stone-massage/"
+        },
+        {
+          "lang": "x-default",
+          "href": "https://nagmspa.com/services/hot-stone-massage/"
         }
       ],
       "expected": true
@@ -1092,35 +1177,34 @@
       "route": "/en/services/manicure-pedicure/",
       "locale": "en",
       "status": 200,
-      "title": "Manicure &amp; Pedicure - Nagm Spa",
-      "description": "Manicure and pedicure at Nagm Spa — complete care for your nails and skin for a polished, elegant look. A comfortable experience — book your appointment via WhatsApp now.",
-      "canonical": "https://najma-web.mohamed-abouzied.workers.dev/en/services/manicure-pedicure/",
+      "title": "Hand &amp; Foot Pedicure - Nagm Spa",
+      "description": "Hand and foot pedicure in Nagm Spa offers — polished care for a neat, comfortable finish.",
+      "canonical": "https://nagmspa.com/en/services/manicure-pedicure/",
       "robots": "index, follow, max-image-preview:large",
-      "h1": "Manicure &amp; Pedicure",
+      "h1": "Hand &amp; Foot Pedicure",
       "schemaTypes": [
         "DaySpa",
         "WebSite",
         "ImageObject",
         "WebPage",
         "Service",
-        "Offer",
         "BreadcrumbList"
       ],
       "inSitemap": true,
-      "ogUrl": "https://najma-web.mohamed-abouzied.workers.dev/en/services/manicure-pedicure/",
+      "ogUrl": "https://nagmspa.com/en/services/manicure-pedicure/",
       "ogUrlMatchesCanonical": true,
       "hreflang": [
         {
           "lang": "ar",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/services/manicure-pedicure/"
+          "href": "https://nagmspa.com/services/manicure-pedicure/"
         },
         {
           "lang": "en",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/en/services/manicure-pedicure/"
+          "href": "https://nagmspa.com/en/services/manicure-pedicure/"
         },
         {
           "lang": "x-default",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/services/manicure-pedicure/"
+          "href": "https://nagmspa.com/services/manicure-pedicure/"
         }
       ],
       "expected": true
@@ -1130,8 +1214,8 @@
       "locale": "en",
       "status": 200,
       "title": "Relaxation Massage - Nagm Spa",
-      "description": "Book a relaxation massage at Nagm Spa — a calming session that relieves stress and restores body and mind balance with professional specialists. A soothing experience — book via WhatsApp now.",
-      "canonical": "https://najma-web.mohamed-abouzied.workers.dev/en/services/massage-relaxation/",
+      "description": "Relaxation massage in Nagm Spa offers — a calm session to restore balance for body and mind.",
+      "canonical": "https://nagmspa.com/en/services/massage-relaxation/",
       "robots": "index, follow, max-image-preview:large",
       "h1": "Relaxation Massage",
       "schemaTypes": [
@@ -1140,61 +1224,23 @@
         "ImageObject",
         "WebPage",
         "Service",
-        "Offer",
         "BreadcrumbList"
       ],
       "inSitemap": true,
-      "ogUrl": "https://najma-web.mohamed-abouzied.workers.dev/en/services/massage-relaxation/",
+      "ogUrl": "https://nagmspa.com/en/services/massage-relaxation/",
       "ogUrlMatchesCanonical": true,
       "hreflang": [
         {
           "lang": "ar",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/services/massage-relaxation/"
+          "href": "https://nagmspa.com/services/massage-relaxation/"
         },
         {
           "lang": "en",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/en/services/massage-relaxation/"
+          "href": "https://nagmspa.com/en/services/massage-relaxation/"
         },
         {
           "lang": "x-default",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/services/massage-relaxation/"
-        }
-      ],
-      "expected": true
-    },
-    {
-      "route": "/en/services/moroccan-bath-clay/",
-      "locale": "en",
-      "status": 200,
-      "title": "Moroccan Bath with Moroccan Clay - Nagm Spa",
-      "description": "Moroccan bath with Moroccan clay at Nagm Spa — deep cleansing and skin radiance with a luxurious authentic bath experience. Book your appointment via WhatsApp now.",
-      "canonical": "https://najma-web.mohamed-abouzied.workers.dev/en/services/moroccan-bath-clay/",
-      "robots": "index, follow, max-image-preview:large",
-      "h1": "Moroccan Bath with Moroccan Clay",
-      "schemaTypes": [
-        "DaySpa",
-        "WebSite",
-        "ImageObject",
-        "WebPage",
-        "Service",
-        "Offer",
-        "BreadcrumbList"
-      ],
-      "inSitemap": true,
-      "ogUrl": "https://najma-web.mohamed-abouzied.workers.dev/en/services/moroccan-bath-clay/",
-      "ogUrlMatchesCanonical": true,
-      "hreflang": [
-        {
-          "lang": "ar",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/services/moroccan-bath-clay/"
-        },
-        {
-          "lang": "en",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/en/services/moroccan-bath-clay/"
-        },
-        {
-          "lang": "x-default",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/services/moroccan-bath-clay/"
+          "href": "https://nagmspa.com/services/massage-relaxation/"
         }
       ],
       "expected": true
@@ -1204,8 +1250,8 @@
       "locale": "en",
       "status": 200,
       "title": "Classic Moroccan Bath - Nagm Spa",
-      "description": "Classic Moroccan bath at Nagm Spa combines steam, traditional black soap, and skin exfoliation for instant deep freshness and radiance. A luxurious authentic experience — book your appointment via WhatsApp.",
-      "canonical": "https://najma-web.mohamed-abouzied.workers.dev/en/services/moroccan-bath/",
+      "description": "Classic Moroccan bath in Nagm Spa offers — freshness and radiance with an authentic hammam experience.",
+      "canonical": "https://nagmspa.com/en/services/moroccan-bath/",
       "robots": "index, follow, max-image-preview:large",
       "h1": "Classic Moroccan Bath",
       "schemaTypes": [
@@ -1214,24 +1260,59 @@
         "ImageObject",
         "WebPage",
         "Service",
-        "Offer",
         "BreadcrumbList"
       ],
       "inSitemap": true,
-      "ogUrl": "https://najma-web.mohamed-abouzied.workers.dev/en/services/moroccan-bath/",
+      "ogUrl": "https://nagmspa.com/en/services/moroccan-bath/",
       "ogUrlMatchesCanonical": true,
       "hreflang": [
         {
           "lang": "ar",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/services/moroccan-bath/"
+          "href": "https://nagmspa.com/services/moroccan-bath/"
         },
         {
           "lang": "en",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/en/services/moroccan-bath/"
+          "href": "https://nagmspa.com/en/services/moroccan-bath/"
         },
         {
           "lang": "x-default",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/services/moroccan-bath/"
+          "href": "https://nagmspa.com/services/moroccan-bath/"
+        }
+      ],
+      "expected": true
+    },
+    {
+      "route": "/en/services/royal-bath/",
+      "locale": "en",
+      "status": 200,
+      "title": "Luxury Royal Bath - Nagm Spa",
+      "description": "Luxury royal bath in Nagm Spa offers — a premium ritual for deep care and relaxation.",
+      "canonical": "https://nagmspa.com/en/services/royal-bath/",
+      "robots": "index, follow, max-image-preview:large",
+      "h1": "Luxury Royal Bath",
+      "schemaTypes": [
+        "DaySpa",
+        "WebSite",
+        "ImageObject",
+        "WebPage",
+        "Service",
+        "BreadcrumbList"
+      ],
+      "inSitemap": true,
+      "ogUrl": "https://nagmspa.com/en/services/royal-bath/",
+      "ogUrlMatchesCanonical": true,
+      "hreflang": [
+        {
+          "lang": "ar",
+          "href": "https://nagmspa.com/services/royal-bath/"
+        },
+        {
+          "lang": "en",
+          "href": "https://nagmspa.com/en/services/royal-bath/"
+        },
+        {
+          "lang": "x-default",
+          "href": "https://nagmspa.com/services/royal-bath/"
         }
       ],
       "expected": true
@@ -1241,8 +1322,8 @@
       "locale": "en",
       "status": 200,
       "title": "Shiatsu Massage - Nagm Spa",
-      "description": "Shiatsu massage at Nagm Spa — rhythmic pressure on energy meridians to stimulate blood circulation and release deep tension. An authentic experience — book via WhatsApp now.",
-      "canonical": "https://najma-web.mohamed-abouzied.workers.dev/en/services/shiatsu/",
+      "description": "Shiatsu massage in Nagm Spa offers — rhythmic pressure on energy pathways to release tight spots.",
+      "canonical": "https://nagmspa.com/en/services/shiatsu/",
       "robots": "index, follow, max-image-preview:large",
       "h1": "Shiatsu Massage",
       "schemaTypes": [
@@ -1251,61 +1332,23 @@
         "ImageObject",
         "WebPage",
         "Service",
-        "Offer",
         "BreadcrumbList"
       ],
       "inSitemap": true,
-      "ogUrl": "https://najma-web.mohamed-abouzied.workers.dev/en/services/shiatsu/",
+      "ogUrl": "https://nagmspa.com/en/services/shiatsu/",
       "ogUrlMatchesCanonical": true,
       "hreflang": [
         {
           "lang": "ar",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/services/shiatsu/"
+          "href": "https://nagmspa.com/services/shiatsu/"
         },
         {
           "lang": "en",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/en/services/shiatsu/"
+          "href": "https://nagmspa.com/en/services/shiatsu/"
         },
         {
           "lang": "x-default",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/services/shiatsu/"
-        }
-      ],
-      "expected": true
-    },
-    {
-      "route": "/en/services/sports-massage/",
-      "locale": "en",
-      "status": 200,
-      "title": "Sports Massage - Nagm Spa",
-      "description": "Sports massage at Nagm Spa is designed to relieve muscle tension and improve post-exertion recovery with professional specialists. A session tailored to your needs — book your appointment via WhatsApp now.",
-      "canonical": "https://najma-web.mohamed-abouzied.workers.dev/en/services/sports-massage/",
-      "robots": "index, follow, max-image-preview:large",
-      "h1": "Sports Massage",
-      "schemaTypes": [
-        "DaySpa",
-        "WebSite",
-        "ImageObject",
-        "WebPage",
-        "Service",
-        "Offer",
-        "BreadcrumbList"
-      ],
-      "inSitemap": true,
-      "ogUrl": "https://najma-web.mohamed-abouzied.workers.dev/en/services/sports-massage/",
-      "ogUrlMatchesCanonical": true,
-      "hreflang": [
-        {
-          "lang": "ar",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/services/sports-massage/"
-        },
-        {
-          "lang": "en",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/en/services/sports-massage/"
-        },
-        {
-          "lang": "x-default",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/services/sports-massage/"
+          "href": "https://nagmspa.com/services/shiatsu/"
         }
       ],
       "expected": true
@@ -1315,8 +1358,8 @@
       "locale": "en",
       "status": 200,
       "title": "Nagm Spa Signature Massage - Nagm Spa",
-      "description": "Nagm Spa signature massage — a comprehensive long session combining relaxation and deep care to fully restore your energy. A unique experience — book your appointment via WhatsApp now.",
-      "canonical": "https://najma-web.mohamed-abouzied.workers.dev/en/services/star-spa-massage/",
+      "description": "Nagm Spa signature massage within offers — a complete session combining relaxation and deep care.",
+      "canonical": "https://nagmspa.com/en/services/star-spa-massage/",
       "robots": "index, follow, max-image-preview:large",
       "h1": "Nagm Spa Signature Massage",
       "schemaTypes": [
@@ -1325,24 +1368,95 @@
         "ImageObject",
         "WebPage",
         "Service",
-        "Offer",
         "BreadcrumbList"
       ],
       "inSitemap": true,
-      "ogUrl": "https://najma-web.mohamed-abouzied.workers.dev/en/services/star-spa-massage/",
+      "ogUrl": "https://nagmspa.com/en/services/star-spa-massage/",
       "ogUrlMatchesCanonical": true,
       "hreflang": [
         {
           "lang": "ar",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/services/star-spa-massage/"
+          "href": "https://nagmspa.com/services/star-spa-massage/"
         },
         {
           "lang": "en",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/en/services/star-spa-massage/"
+          "href": "https://nagmspa.com/en/services/star-spa-massage/"
         },
         {
           "lang": "x-default",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/services/star-spa-massage/"
+          "href": "https://nagmspa.com/services/star-spa-massage/"
+        }
+      ],
+      "expected": true
+    },
+    {
+      "route": "/en/services/steam-session/",
+      "locale": "en",
+      "status": 200,
+      "title": "Steam Session - Nagm Spa",
+      "description": "Steam session in Nagm Spa offers — a calming prep for body care within your package.",
+      "canonical": "https://nagmspa.com/en/services/steam-session/",
+      "robots": "index, follow, max-image-preview:large",
+      "h1": "Steam Session",
+      "schemaTypes": [
+        "DaySpa",
+        "WebSite",
+        "ImageObject",
+        "WebPage",
+        "Service",
+        "BreadcrumbList"
+      ],
+      "inSitemap": true,
+      "ogUrl": "https://nagmspa.com/en/services/steam-session/",
+      "ogUrlMatchesCanonical": true,
+      "hreflang": [
+        {
+          "lang": "ar",
+          "href": "https://nagmspa.com/services/steam-session/"
+        },
+        {
+          "lang": "en",
+          "href": "https://nagmspa.com/en/services/steam-session/"
+        },
+        {
+          "lang": "x-default",
+          "href": "https://nagmspa.com/services/steam-session/"
+        }
+      ],
+      "expected": true
+    },
+    {
+      "route": "/en/services/swedish-massage/",
+      "locale": "en",
+      "status": 200,
+      "title": "Swedish Massage - Nagm Spa",
+      "description": "Swedish massage in Nagm Spa offers — flowing strokes that relax muscles and ease tension. Book via WhatsApp within the offer that suits you.",
+      "canonical": "https://nagmspa.com/en/services/swedish-massage/",
+      "robots": "index, follow, max-image-preview:large",
+      "h1": "Swedish Massage",
+      "schemaTypes": [
+        "DaySpa",
+        "WebSite",
+        "ImageObject",
+        "WebPage",
+        "Service",
+        "BreadcrumbList"
+      ],
+      "inSitemap": true,
+      "ogUrl": "https://nagmspa.com/en/services/swedish-massage/",
+      "ogUrlMatchesCanonical": true,
+      "hreflang": [
+        {
+          "lang": "ar",
+          "href": "https://nagmspa.com/services/swedish-massage/"
+        },
+        {
+          "lang": "en",
+          "href": "https://nagmspa.com/en/services/swedish-massage/"
+        },
+        {
+          "lang": "x-default",
+          "href": "https://nagmspa.com/services/swedish-massage/"
         }
       ],
       "expected": true
@@ -1352,8 +1466,8 @@
       "locale": "en",
       "status": 200,
       "title": "Thai Massage - Nagm Spa",
-      "description": "Thai massage at Nagm Spa combines stretching and deep pressure to increase flexibility and rejuvenate body energy. An authentic experience by professionals — book your appointment via WhatsApp now.",
-      "canonical": "https://najma-web.mohamed-abouzied.workers.dev/en/services/thai-massage/",
+      "description": "Thai massage in Nagm Spa offers — stretching and deep pressure for flexibility and renewed energy. Book within the right offer.",
+      "canonical": "https://nagmspa.com/en/services/thai-massage/",
       "robots": "index, follow, max-image-preview:large",
       "h1": "Thai Massage",
       "schemaTypes": [
@@ -1362,24 +1476,23 @@
         "ImageObject",
         "WebPage",
         "Service",
-        "Offer",
         "BreadcrumbList"
       ],
       "inSitemap": true,
-      "ogUrl": "https://najma-web.mohamed-abouzied.workers.dev/en/services/thai-massage/",
+      "ogUrl": "https://nagmspa.com/en/services/thai-massage/",
       "ogUrlMatchesCanonical": true,
       "hreflang": [
         {
           "lang": "ar",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/services/thai-massage/"
+          "href": "https://nagmspa.com/services/thai-massage/"
         },
         {
           "lang": "en",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/en/services/thai-massage/"
+          "href": "https://nagmspa.com/en/services/thai-massage/"
         },
         {
           "lang": "x-default",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/services/thai-massage/"
+          "href": "https://nagmspa.com/services/thai-massage/"
         }
       ],
       "expected": true
@@ -1390,7 +1503,7 @@
       "status": 200,
       "title": "تواصل مع نجم سبا | واتساب · اتصال · اتجاهات",
       "description": "صفحة تواصل سريعة لنجم سبا في حفر الباطن — حي المصيف: واتساب، اتصال، واتجاهات الموقع. مفتوح ٢٤ ساعة.",
-      "canonical": "https://najma-web.mohamed-abouzied.workers.dev/go/",
+      "canonical": "https://nagmspa.com/go/",
       "robots": "noindex, follow",
       "h1": "تواصل معنا الآن",
       "schemaTypes": [
@@ -1400,20 +1513,20 @@
         "WebPage"
       ],
       "inSitemap": false,
-      "ogUrl": "https://najma-web.mohamed-abouzied.workers.dev/go/",
+      "ogUrl": "https://nagmspa.com/go/",
       "ogUrlMatchesCanonical": true,
       "hreflang": [
         {
           "lang": "ar",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/go/"
+          "href": "https://nagmspa.com/go/"
         },
         {
           "lang": "en",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/en/go/"
+          "href": "https://nagmspa.com/en/go/"
         },
         {
           "lang": "x-default",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/go/"
+          "href": "https://nagmspa.com/go/"
         }
       ],
       "expected": true
@@ -1422,33 +1535,33 @@
       "route": "/offers/",
       "locale": "ar",
       "status": 200,
-      "title": "عروض الصيف - نجم سبا",
-      "description": "عروض صيف حصرية على خدمات المساج والحمام في نجم سبا — خصومات تصل لـ ٢٠٪.",
-      "canonical": "https://najma-web.mohamed-abouzied.workers.dev/offers/",
+      "title": "عروض نجم سبا",
+      "description": "عروض حصرية على خدمات المساج والحمام في نجم سبا — خصومات تصل لـ ٢٠٪.",
+      "canonical": "https://nagmspa.com/offers/",
       "robots": "index, follow, max-image-preview:large",
-      "h1": "صيفك على كيفك",
+      "h1": "عروض نجم سبا",
       "schemaTypes": [
         "DaySpa",
         "WebSite",
         "ImageObject",
-        "WebPage",
+        "CollectionPage",
         "BreadcrumbList"
       ],
       "inSitemap": true,
-      "ogUrl": "https://najma-web.mohamed-abouzied.workers.dev/offers/",
+      "ogUrl": "https://nagmspa.com/offers/",
       "ogUrlMatchesCanonical": true,
       "hreflang": [
         {
           "lang": "ar",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/offers/"
+          "href": "https://nagmspa.com/offers/"
         },
         {
           "lang": "en",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/en/offers/"
+          "href": "https://nagmspa.com/en/offers/"
         },
         {
           "lang": "x-default",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/offers/"
+          "href": "https://nagmspa.com/offers/"
         }
       ],
       "expected": true
@@ -1458,34 +1571,33 @@
       "locale": "ar",
       "status": 200,
       "title": "باقة العناية - نجم سبا",
-      "description": "باقة العناية من نجم سبا تجمع مساج الاسترخاء والشياتسو والتايلندي مع بدكير اليدين والقدمين. احجز باقتك عبر واتساب الآن بسهولة.",
-      "canonical": "https://najma-web.mohamed-abouzied.workers.dev/offers/care/",
+      "description": "باقة العناية من نجم سبا تجمع مساج الاسترخاء والشياتسو والتايلندي مع بدكير اليدين والقدمين. احجز عبر واتساب الآن.",
+      "canonical": "https://nagmspa.com/offers/care/",
       "robots": "index, follow, max-image-preview:large",
       "h1": "باقة العناية",
       "schemaTypes": [
         "DaySpa",
         "WebSite",
-        "ImageObject",
         "WebPage",
         "Service",
         "Offer",
         "BreadcrumbList"
       ],
       "inSitemap": true,
-      "ogUrl": "https://najma-web.mohamed-abouzied.workers.dev/offers/care/",
+      "ogUrl": "https://nagmspa.com/offers/care/",
       "ogUrlMatchesCanonical": true,
       "hreflang": [
         {
           "lang": "ar",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/offers/care/"
+          "href": "https://nagmspa.com/offers/care/"
         },
         {
           "lang": "en",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/en/offers/care/"
+          "href": "https://nagmspa.com/en/offers/care/"
         },
         {
           "lang": "x-default",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/offers/care/"
+          "href": "https://nagmspa.com/offers/care/"
         }
       ],
       "expected": true
@@ -1495,34 +1607,33 @@
       "locale": "ar",
       "status": 200,
       "title": "عرض الفخامة - نجم سبا",
-      "description": "عرض الفخامة من نجم سبا: مساج سويدي وتايلندي مع حمام ملكي فاخر وجلسة بخار ليوم استرخاء راقٍ. احجز عرضك عبر واتساب الآن.",
-      "canonical": "https://najma-web.mohamed-abouzied.workers.dev/offers/elegance/",
+      "description": "عرض الفخامة من نجم سبا: مساج سويدي وتايلندي مع حمام ملكي فاخر وجلسة بخار ليوم استرخاء راقٍ. احجز عبر واتساب الآن.",
+      "canonical": "https://nagmspa.com/offers/elegance/",
       "robots": "index, follow, max-image-preview:large",
       "h1": "عرض الفخامة",
       "schemaTypes": [
         "DaySpa",
         "WebSite",
-        "ImageObject",
         "WebPage",
         "Service",
         "Offer",
         "BreadcrumbList"
       ],
       "inSitemap": true,
-      "ogUrl": "https://najma-web.mohamed-abouzied.workers.dev/offers/elegance/",
+      "ogUrl": "https://nagmspa.com/offers/elegance/",
       "ogUrlMatchesCanonical": true,
       "hreflang": [
         {
           "lang": "ar",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/offers/elegance/"
+          "href": "https://nagmspa.com/offers/elegance/"
         },
         {
           "lang": "en",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/en/offers/elegance/"
+          "href": "https://nagmspa.com/en/offers/elegance/"
         },
         {
           "lang": "x-default",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/offers/elegance/"
+          "href": "https://nagmspa.com/offers/elegance/"
         }
       ],
       "expected": true
@@ -1532,34 +1643,33 @@
       "locale": "ar",
       "status": 200,
       "title": "العرض الذهبي - نجم سبا",
-      "description": "العرض الذهبي من نجم سبا يجمع مساج الاسترخاء والتايلندي والكاسات والأحجار الساخنة مع حمام ملكي فاخر. احجز عرضك عبر واتساب الآن.",
-      "canonical": "https://najma-web.mohamed-abouzied.workers.dev/offers/golden/",
+      "description": "العرض الذهبي من نجم سبا يجمع مساج الاسترخاء والتايلندي والكاسات والأحجار الساخنة مع حمام ملكي فاخر وجلسة بخار. احجز عبر واتساب الآن.",
+      "canonical": "https://nagmspa.com/offers/golden/",
       "robots": "index, follow, max-image-preview:large",
       "h1": "العرض الذهبي",
       "schemaTypes": [
         "DaySpa",
         "WebSite",
-        "ImageObject",
         "WebPage",
         "Service",
         "Offer",
         "BreadcrumbList"
       ],
       "inSitemap": true,
-      "ogUrl": "https://najma-web.mohamed-abouzied.workers.dev/offers/golden/",
+      "ogUrl": "https://nagmspa.com/offers/golden/",
       "ogUrlMatchesCanonical": true,
       "hreflang": [
         {
           "lang": "ar",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/offers/golden/"
+          "href": "https://nagmspa.com/offers/golden/"
         },
         {
           "lang": "en",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/en/offers/golden/"
+          "href": "https://nagmspa.com/en/offers/golden/"
         },
         {
           "lang": "x-default",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/offers/golden/"
+          "href": "https://nagmspa.com/offers/golden/"
         }
       ],
       "expected": true
@@ -1568,35 +1678,34 @@
       "route": "/offers/prosperity/",
       "locale": "ar",
       "status": 200,
-      "title": "العرض الرخاء - نجم سبا",
-      "description": "العرض الرخاء من نجم سبا يجمع المساج السويدي والحمام المغربي الكلاسيكي وجلسة البخار لراحة هادئة ومتوازنة. احجز عبر واتساب الآن.",
-      "canonical": "https://najma-web.mohamed-abouzied.workers.dev/offers/prosperity/",
+      "title": "عرض الرخاء - نجم سبا",
+      "description": "عرض الرخاء من نجم سبا يجمع المساج السويدي والحمام المغربي الكلاسيكي وجلسة البخار لراحة هادئة ومتوازنة. احجز عبر واتساب الآن.",
+      "canonical": "https://nagmspa.com/offers/prosperity/",
       "robots": "index, follow, max-image-preview:large",
-      "h1": "العرض الرخاء",
+      "h1": "عرض الرخاء",
       "schemaTypes": [
         "DaySpa",
         "WebSite",
-        "ImageObject",
         "WebPage",
         "Service",
         "Offer",
         "BreadcrumbList"
       ],
       "inSitemap": true,
-      "ogUrl": "https://najma-web.mohamed-abouzied.workers.dev/offers/prosperity/",
+      "ogUrl": "https://nagmspa.com/offers/prosperity/",
       "ogUrlMatchesCanonical": true,
       "hreflang": [
         {
           "lang": "ar",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/offers/prosperity/"
+          "href": "https://nagmspa.com/offers/prosperity/"
         },
         {
           "lang": "en",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/en/offers/prosperity/"
+          "href": "https://nagmspa.com/en/offers/prosperity/"
         },
         {
           "lang": "x-default",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/offers/prosperity/"
+          "href": "https://nagmspa.com/offers/prosperity/"
         }
       ],
       "expected": true
@@ -1606,34 +1715,33 @@
       "locale": "ar",
       "status": 200,
       "title": "عرض التعافي - نجم سبا",
-      "description": "عرض التعافي من نجم سبا يجمع المساج السويدي والتايلندي ومساج الكاسات الصينية لتخفيف الشد واستعادة نشاطك. احجز عرضك عبر واتساب الآن.",
-      "canonical": "https://najma-web.mohamed-abouzied.workers.dev/offers/recovery/",
+      "description": "عرض التعافي من نجم سبا يجمع المساج السويدي والتايلندي ومساج الكاسات الصينية لتخفيف الشد واستعادة نشاطك. احجز عبر واتساب الآن.",
+      "canonical": "https://nagmspa.com/offers/recovery/",
       "robots": "index, follow, max-image-preview:large",
       "h1": "عرض التعافي",
       "schemaTypes": [
         "DaySpa",
         "WebSite",
-        "ImageObject",
         "WebPage",
         "Service",
         "Offer",
         "BreadcrumbList"
       ],
       "inSitemap": true,
-      "ogUrl": "https://najma-web.mohamed-abouzied.workers.dev/offers/recovery/",
+      "ogUrl": "https://nagmspa.com/offers/recovery/",
       "ogUrlMatchesCanonical": true,
       "hreflang": [
         {
           "lang": "ar",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/offers/recovery/"
+          "href": "https://nagmspa.com/offers/recovery/"
         },
         {
           "lang": "en",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/en/offers/recovery/"
+          "href": "https://nagmspa.com/en/offers/recovery/"
         },
         {
           "lang": "x-default",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/offers/recovery/"
+          "href": "https://nagmspa.com/offers/recovery/"
         }
       ],
       "expected": true
@@ -1643,34 +1751,33 @@
       "locale": "ar",
       "status": 200,
       "title": "عرض الاسترخاء - نجم سبا",
-      "description": "عرض الاسترخاء من نجم سبا: مساج سويدي وتايلندي مع مساج الأحجار الساخنة لجلسة هدوء عميقة ومريحة. احجز عرضك عبر واتساب الآن بسهولة.",
-      "canonical": "https://najma-web.mohamed-abouzied.workers.dev/offers/relaxation/",
+      "description": "عرض الاسترخاء من نجم سبا: مساج سويدي وتايلندي مع مساج الأحجار الساخنة لجلسة هدوء عميقة ومريحة. احجز عرضك عبر واتساب الآن.",
+      "canonical": "https://nagmspa.com/offers/relaxation/",
       "robots": "index, follow, max-image-preview:large",
       "h1": "عرض الاسترخاء",
       "schemaTypes": [
         "DaySpa",
         "WebSite",
-        "ImageObject",
         "WebPage",
         "Service",
         "Offer",
         "BreadcrumbList"
       ],
       "inSitemap": true,
-      "ogUrl": "https://najma-web.mohamed-abouzied.workers.dev/offers/relaxation/",
+      "ogUrl": "https://nagmspa.com/offers/relaxation/",
       "ogUrlMatchesCanonical": true,
       "hreflang": [
         {
           "lang": "ar",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/offers/relaxation/"
+          "href": "https://nagmspa.com/offers/relaxation/"
         },
         {
           "lang": "en",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/en/offers/relaxation/"
+          "href": "https://nagmspa.com/en/offers/relaxation/"
         },
         {
           "lang": "x-default",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/offers/relaxation/"
+          "href": "https://nagmspa.com/offers/relaxation/"
         }
       ],
       "expected": true
@@ -1681,33 +1788,32 @@
       "status": 200,
       "title": "العرض الملكي - نجم سبا",
       "description": "العرض الملكي من نجم سبا — مساج نجم سبا والزيت الحار والكاسات والأحجار مع حمام ملكي وبدكير وصنفرة وبخار. احجز عبر واتساب الآن.",
-      "canonical": "https://najma-web.mohamed-abouzied.workers.dev/offers/royal/",
+      "canonical": "https://nagmspa.com/offers/royal/",
       "robots": "index, follow, max-image-preview:large",
       "h1": "العرض الملكي",
       "schemaTypes": [
         "DaySpa",
         "WebSite",
-        "ImageObject",
         "WebPage",
         "Service",
         "Offer",
         "BreadcrumbList"
       ],
       "inSitemap": true,
-      "ogUrl": "https://najma-web.mohamed-abouzied.workers.dev/offers/royal/",
+      "ogUrl": "https://nagmspa.com/offers/royal/",
       "ogUrlMatchesCanonical": true,
       "hreflang": [
         {
           "lang": "ar",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/offers/royal/"
+          "href": "https://nagmspa.com/offers/royal/"
         },
         {
           "lang": "en",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/en/offers/royal/"
+          "href": "https://nagmspa.com/en/offers/royal/"
         },
         {
           "lang": "x-default",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/offers/royal/"
+          "href": "https://nagmspa.com/offers/royal/"
         }
       ],
       "expected": true
@@ -1717,34 +1823,33 @@
       "locale": "ar",
       "status": 200,
       "title": "نجم سبا سجنتشر - نجم سبا",
-      "description": "نجم سبا سجنتشر — تجربة متكاملة تجمع المساج والحمام الملكي والبدكير وصنفرة البشرة وجلسة البخار. احجز عرضك عبر واتساب الآن.",
-      "canonical": "https://najma-web.mohamed-abouzied.workers.dev/offers/signature/",
+      "description": "نجم سبا سجنتشر — تجربة متكاملة تجمع المساج والزيت الحار والحمام الملكي والبدكير وصنفرة البشرة وجلسة البخار. احجز عبر واتساب الآن.",
+      "canonical": "https://nagmspa.com/offers/signature/",
       "robots": "index, follow, max-image-preview:large",
       "h1": "نجم سبا سجنتشر",
       "schemaTypes": [
         "DaySpa",
         "WebSite",
-        "ImageObject",
         "WebPage",
         "Service",
         "Offer",
         "BreadcrumbList"
       ],
       "inSitemap": true,
-      "ogUrl": "https://najma-web.mohamed-abouzied.workers.dev/offers/signature/",
+      "ogUrl": "https://nagmspa.com/offers/signature/",
       "ogUrlMatchesCanonical": true,
       "hreflang": [
         {
           "lang": "ar",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/offers/signature/"
+          "href": "https://nagmspa.com/offers/signature/"
         },
         {
           "lang": "en",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/en/offers/signature/"
+          "href": "https://nagmspa.com/en/offers/signature/"
         },
         {
           "lang": "x-default",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/offers/signature/"
+          "href": "https://nagmspa.com/offers/signature/"
         }
       ],
       "expected": true
@@ -1755,31 +1860,31 @@
       "status": 200,
       "title": "باقاتنا - نجم سبا",
       "description": "باقات مساج وحمام مغربي مميزة بأسعار خاصة في نجم سبا — حفر الباطن.",
-      "canonical": "https://najma-web.mohamed-abouzied.workers.dev/packages/",
+      "canonical": "https://nagmspa.com/packages/",
       "robots": "index, follow, max-image-preview:large",
       "h1": "باقات العناية المثالية",
       "schemaTypes": [
         "DaySpa",
         "WebSite",
         "ImageObject",
-        "WebPage",
+        "CollectionPage",
         "BreadcrumbList"
       ],
       "inSitemap": true,
-      "ogUrl": "https://najma-web.mohamed-abouzied.workers.dev/packages/",
+      "ogUrl": "https://nagmspa.com/packages/",
       "ogUrlMatchesCanonical": true,
       "hreflang": [
         {
           "lang": "ar",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/packages/"
+          "href": "https://nagmspa.com/packages/"
         },
         {
           "lang": "en",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/en/packages/"
+          "href": "https://nagmspa.com/en/packages/"
         },
         {
           "lang": "x-default",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/packages/"
+          "href": "https://nagmspa.com/packages/"
         }
       ],
       "expected": true
@@ -1788,35 +1893,70 @@
       "route": "/packages/gift/",
       "locale": "ar",
       "status": 200,
-      "title": "باقة الإهداء - نجم سبا",
-      "description": "باقة الإهداء من نجم سبا — بطاقة هدية أنيقة تتيح اختيار الخدمة المناسبة من قائمة المساج والحمام والبدكير. هدية راحة مثالية — اطلبها عبر واتساب الآن.",
-      "canonical": "https://najma-web.mohamed-abouzied.workers.dev/packages/gift/",
+      "title": "عرض الهدية - نجم سبا",
+      "description": "عرض الهدية من نجم سبا — تجربة متكاملة من المساج والحمام الملكي والبدكير والصنفرة، مع حلا وبوكيه ورد. اطلبها عبر واتساب الآن.",
+      "canonical": "https://nagmspa.com/packages/gift/",
       "robots": "index, follow, max-image-preview:large",
-      "h1": "باقة الإهداء",
+      "h1": "عرض الهدية",
       "schemaTypes": [
         "DaySpa",
         "WebSite",
-        "ImageObject",
         "WebPage",
         "Service",
         "Offer",
         "BreadcrumbList"
       ],
       "inSitemap": true,
-      "ogUrl": "https://najma-web.mohamed-abouzied.workers.dev/packages/gift/",
+      "ogUrl": "https://nagmspa.com/packages/gift/",
       "ogUrlMatchesCanonical": true,
       "hreflang": [
         {
           "lang": "ar",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/packages/gift/"
+          "href": "https://nagmspa.com/packages/gift/"
         },
         {
           "lang": "en",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/en/packages/gift/"
+          "href": "https://nagmspa.com/en/packages/gift/"
         },
         {
           "lang": "x-default",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/packages/gift/"
+          "href": "https://nagmspa.com/packages/gift/"
+        }
+      ],
+      "expected": true
+    },
+    {
+      "route": "/packages/groom/",
+      "locale": "ar",
+      "status": 200,
+      "title": "باقة المعرس - نجم سبا",
+      "description": "باقة المعرس من نجم سبا — مساج مكس، أحجار ساخنة، حمام مغربي ملكي، وبدكير يدين وقدمين مع مشروب ساخن أو بارد. احجز عبر واتساب الآن.",
+      "canonical": "https://nagmspa.com/packages/groom/",
+      "robots": "index, follow, max-image-preview:large",
+      "h1": "باقة المعرس",
+      "schemaTypes": [
+        "DaySpa",
+        "WebSite",
+        "WebPage",
+        "Service",
+        "Offer",
+        "BreadcrumbList"
+      ],
+      "inSitemap": true,
+      "ogUrl": "https://nagmspa.com/packages/groom/",
+      "ogUrlMatchesCanonical": true,
+      "hreflang": [
+        {
+          "lang": "ar",
+          "href": "https://nagmspa.com/packages/groom/"
+        },
+        {
+          "lang": "en",
+          "href": "https://nagmspa.com/en/packages/groom/"
+        },
+        {
+          "lang": "x-default",
+          "href": "https://nagmspa.com/packages/groom/"
         }
       ],
       "expected": true
@@ -1825,72 +1965,34 @@
       "route": "/packages/luxury/",
       "locale": "ar",
       "status": 200,
-      "title": "باقة الرفاهية - نجم سبا",
-      "description": "باقة الرفاهية من نجم سبا: حمام مغربي بالطين المغربي ومساج نجم سبا الطويل ليوم استرخاء فاخر متكامل. احجز باقتك عبر واتساب الآن بسهولة.",
-      "canonical": "https://najma-web.mohamed-abouzied.workers.dev/packages/luxury/",
+      "title": "العرض الرفاهية - نجم سبا",
+      "description": "العرض الرفاهية من نجم سبا يجمع مساج نجم سبا والزيت الحار والكاسات والأحجار مع حمام ملكي وبخار وبدكير وصنفرة، ويشمل مشروبًا وحلا. احجز عبر واتساب الآن.",
+      "canonical": "https://nagmspa.com/packages/luxury/",
       "robots": "index, follow, max-image-preview:large",
-      "h1": "باقة الرفاهية",
+      "h1": "العرض الرفاهية",
       "schemaTypes": [
         "DaySpa",
         "WebSite",
-        "ImageObject",
         "WebPage",
         "Service",
         "Offer",
         "BreadcrumbList"
       ],
       "inSitemap": true,
-      "ogUrl": "https://najma-web.mohamed-abouzied.workers.dev/packages/luxury/",
+      "ogUrl": "https://nagmspa.com/packages/luxury/",
       "ogUrlMatchesCanonical": true,
       "hreflang": [
         {
           "lang": "ar",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/packages/luxury/"
+          "href": "https://nagmspa.com/packages/luxury/"
         },
         {
           "lang": "en",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/en/packages/luxury/"
+          "href": "https://nagmspa.com/en/packages/luxury/"
         },
         {
           "lang": "x-default",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/packages/luxury/"
-        }
-      ],
-      "expected": true
-    },
-    {
-      "route": "/packages/wedding/",
-      "locale": "ar",
-      "status": 200,
-      "title": "باقة العرسان - نجم سبا",
-      "description": "باقة العرسان من نجم سبا — حمام مغربي كلاسيك ومساج الاسترخاء وبدكير اليدين والقدمين لإطلالة مثالية يوم الزفاف. احجز باقتك عبر واتساب الآن بسهولة.",
-      "canonical": "https://najma-web.mohamed-abouzied.workers.dev/packages/wedding/",
-      "robots": "index, follow, max-image-preview:large",
-      "h1": "باقة العرسان",
-      "schemaTypes": [
-        "DaySpa",
-        "WebSite",
-        "ImageObject",
-        "WebPage",
-        "Service",
-        "Offer",
-        "BreadcrumbList"
-      ],
-      "inSitemap": true,
-      "ogUrl": "https://najma-web.mohamed-abouzied.workers.dev/packages/wedding/",
-      "ogUrlMatchesCanonical": true,
-      "hreflang": [
-        {
-          "lang": "ar",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/packages/wedding/"
-        },
-        {
-          "lang": "en",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/en/packages/wedding/"
-        },
-        {
-          "lang": "x-default",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/packages/wedding/"
+          "href": "https://nagmspa.com/packages/luxury/"
         }
       ],
       "expected": true
@@ -1901,68 +2003,103 @@
       "status": 200,
       "title": "خدماتنا - نجم سبا",
       "description": "استكشف خدمات المساج والحمام المغربي والعناية الشخصية في نجم سبا — حفر الباطن.",
-      "canonical": "https://najma-web.mohamed-abouzied.workers.dev/services/",
+      "canonical": "https://nagmspa.com/services/",
       "robots": "index, follow, max-image-preview:large",
       "h1": "خدماتنا المتميزة",
       "schemaTypes": [
         "DaySpa",
         "WebSite",
         "ImageObject",
-        "WebPage",
+        "CollectionPage",
         "BreadcrumbList"
       ],
       "inSitemap": true,
-      "ogUrl": "https://najma-web.mohamed-abouzied.workers.dev/services/",
+      "ogUrl": "https://nagmspa.com/services/",
       "ogUrlMatchesCanonical": true,
       "hreflang": [
         {
           "lang": "ar",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/services/"
+          "href": "https://nagmspa.com/services/"
         },
         {
           "lang": "en",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/en/services/"
+          "href": "https://nagmspa.com/en/services/"
         },
         {
           "lang": "x-default",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/services/"
+          "href": "https://nagmspa.com/services/"
         }
       ],
       "expected": true
     },
     {
-      "route": "/services/foot-massage/",
+      "route": "/services/body-scrub/",
       "locale": "ar",
       "status": 200,
-      "title": "مساج القدمين واليدين - نجم سبا",
-      "description": "مساج القدمين واليدين في نجم سبا — عناية متخصصة تُريح الجسم بالكامل وتخفف الإرهاق من أطرافك حتى كامل جسدك. تجربة منعشة — احجز عبر واتساب الآن.",
-      "canonical": "https://najma-web.mohamed-abouzied.workers.dev/services/foot-massage/",
+      "title": "صنفرة بشرة - نجم سبا",
+      "description": "صنفرة البشرة ضمن عروض نجم سبا — تنعيم ونضارة كجزء من تجربة العناية المتكاملة.",
+      "canonical": "https://nagmspa.com/services/body-scrub/",
       "robots": "index, follow, max-image-preview:large",
-      "h1": "مساج القدمين واليدين",
+      "h1": "صنفرة بشرة",
       "schemaTypes": [
         "DaySpa",
         "WebSite",
         "ImageObject",
         "WebPage",
         "Service",
-        "Offer",
         "BreadcrumbList"
       ],
       "inSitemap": true,
-      "ogUrl": "https://najma-web.mohamed-abouzied.workers.dev/services/foot-massage/",
+      "ogUrl": "https://nagmspa.com/services/body-scrub/",
       "ogUrlMatchesCanonical": true,
       "hreflang": [
         {
           "lang": "ar",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/services/foot-massage/"
+          "href": "https://nagmspa.com/services/body-scrub/"
         },
         {
           "lang": "en",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/en/services/foot-massage/"
+          "href": "https://nagmspa.com/en/services/body-scrub/"
         },
         {
           "lang": "x-default",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/services/foot-massage/"
+          "href": "https://nagmspa.com/services/body-scrub/"
+        }
+      ],
+      "expected": true
+    },
+    {
+      "route": "/services/cupping/",
+      "locale": "ar",
+      "status": 200,
+      "title": "مساج كاسات صينية - نجم سبا",
+      "description": "مساج الكاسات الصينية ضمن عروض نجم سبا — تحفيز للدورة الدموية وتخفيف الشد العميق.",
+      "canonical": "https://nagmspa.com/services/cupping/",
+      "robots": "index, follow, max-image-preview:large",
+      "h1": "مساج كاسات صينية",
+      "schemaTypes": [
+        "DaySpa",
+        "WebSite",
+        "ImageObject",
+        "WebPage",
+        "Service",
+        "BreadcrumbList"
+      ],
+      "inSitemap": true,
+      "ogUrl": "https://nagmspa.com/services/cupping/",
+      "ogUrlMatchesCanonical": true,
+      "hreflang": [
+        {
+          "lang": "ar",
+          "href": "https://nagmspa.com/services/cupping/"
+        },
+        {
+          "lang": "en",
+          "href": "https://nagmspa.com/en/services/cupping/"
+        },
+        {
+          "lang": "x-default",
+          "href": "https://nagmspa.com/services/cupping/"
         }
       ],
       "expected": true
@@ -1972,8 +2109,8 @@
       "locale": "ar",
       "status": 200,
       "title": "مساج الزيت الحار - نجم سبا",
-      "description": "مساج الزيت الحار في نجم سبا — زيوت دافئة تُرخّي العضلات وتحسّن الدورة الدموية وتمنحك استرخاءً عميقًا ومريحًا. احجز جلستك عبر واتساب الآن بسهولة.",
-      "canonical": "https://najma-web.mohamed-abouzied.workers.dev/services/hot-oil-massage/",
+      "description": "مساج الزيت الحار ضمن عروض نجم سبا — زيوت دافئة لاسترخاء عضلي عميق وراحة مريحة.",
+      "canonical": "https://nagmspa.com/services/hot-oil-massage/",
       "robots": "index, follow, max-image-preview:large",
       "h1": "مساج الزيت الحار",
       "schemaTypes": [
@@ -1982,24 +2119,59 @@
         "ImageObject",
         "WebPage",
         "Service",
-        "Offer",
         "BreadcrumbList"
       ],
       "inSitemap": true,
-      "ogUrl": "https://najma-web.mohamed-abouzied.workers.dev/services/hot-oil-massage/",
+      "ogUrl": "https://nagmspa.com/services/hot-oil-massage/",
       "ogUrlMatchesCanonical": true,
       "hreflang": [
         {
           "lang": "ar",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/services/hot-oil-massage/"
+          "href": "https://nagmspa.com/services/hot-oil-massage/"
         },
         {
           "lang": "en",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/en/services/hot-oil-massage/"
+          "href": "https://nagmspa.com/en/services/hot-oil-massage/"
         },
         {
           "lang": "x-default",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/services/hot-oil-massage/"
+          "href": "https://nagmspa.com/services/hot-oil-massage/"
+        }
+      ],
+      "expected": true
+    },
+    {
+      "route": "/services/hot-stone-massage/",
+      "locale": "ar",
+      "status": 200,
+      "title": "مساج أحجار ساخنة - نجم سبا",
+      "description": "مساج الأحجار الساخنة ضمن عروض نجم سبا — حرارة مهدئة تُذيب الشد وتعمّق الاسترخاء.",
+      "canonical": "https://nagmspa.com/services/hot-stone-massage/",
+      "robots": "index, follow, max-image-preview:large",
+      "h1": "مساج أحجار ساخنة",
+      "schemaTypes": [
+        "DaySpa",
+        "WebSite",
+        "ImageObject",
+        "WebPage",
+        "Service",
+        "BreadcrumbList"
+      ],
+      "inSitemap": true,
+      "ogUrl": "https://nagmspa.com/services/hot-stone-massage/",
+      "ogUrlMatchesCanonical": true,
+      "hreflang": [
+        {
+          "lang": "ar",
+          "href": "https://nagmspa.com/services/hot-stone-massage/"
+        },
+        {
+          "lang": "en",
+          "href": "https://nagmspa.com/en/services/hot-stone-massage/"
+        },
+        {
+          "lang": "x-default",
+          "href": "https://nagmspa.com/services/hot-stone-massage/"
         }
       ],
       "expected": true
@@ -2008,35 +2180,34 @@
       "route": "/services/manicure-pedicure/",
       "locale": "ar",
       "status": 200,
-      "title": "بدكير اليدين والقدمين - نجم سبا",
-      "description": "بدكير اليدين والقدمين في نجم سبا — عناية متكاملة لأظافرك وبشرتك بمظهر أنيق ومرتب. تجربة مريحة — احجز موعدك عبر واتساب الآن.",
-      "canonical": "https://najma-web.mohamed-abouzied.workers.dev/services/manicure-pedicure/",
+      "title": "بدكير يدين وقدمين - نجم سبا",
+      "description": "بدكير اليدين والقدمين ضمن عروض نجم سبا — عناية أنيقة لمظهر مرتب ومريح.",
+      "canonical": "https://nagmspa.com/services/manicure-pedicure/",
       "robots": "index, follow, max-image-preview:large",
-      "h1": "بدكير اليدين والقدمين",
+      "h1": "بدكير يدين وقدمين",
       "schemaTypes": [
         "DaySpa",
         "WebSite",
         "ImageObject",
         "WebPage",
         "Service",
-        "Offer",
         "BreadcrumbList"
       ],
       "inSitemap": true,
-      "ogUrl": "https://najma-web.mohamed-abouzied.workers.dev/services/manicure-pedicure/",
+      "ogUrl": "https://nagmspa.com/services/manicure-pedicure/",
       "ogUrlMatchesCanonical": true,
       "hreflang": [
         {
           "lang": "ar",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/services/manicure-pedicure/"
+          "href": "https://nagmspa.com/services/manicure-pedicure/"
         },
         {
           "lang": "en",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/en/services/manicure-pedicure/"
+          "href": "https://nagmspa.com/en/services/manicure-pedicure/"
         },
         {
           "lang": "x-default",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/services/manicure-pedicure/"
+          "href": "https://nagmspa.com/services/manicure-pedicure/"
         }
       ],
       "expected": true
@@ -2045,72 +2216,34 @@
       "route": "/services/massage-relaxation/",
       "locale": "ar",
       "status": 200,
-      "title": "مساج الاسترخاء - نجم سبا",
-      "description": "احجز مساج الاسترخاء في نجم سبا — جلسة هادئة تُخفف التوتر وتستعيد توازن الجسم والعقل بأيدي أخصائيين محترفين. تجربة مريحة — احجز عبر واتساب الآن.",
-      "canonical": "https://najma-web.mohamed-abouzied.workers.dev/services/massage-relaxation/",
+      "title": "مساج استرخاء - نجم سبا",
+      "description": "مساج الاسترخاء ضمن عروض نجم سبا — جلسة هادئة لاستعادة التوازن وتهدئة الجسد والعقل.",
+      "canonical": "https://nagmspa.com/services/massage-relaxation/",
       "robots": "index, follow, max-image-preview:large",
-      "h1": "مساج الاسترخاء",
+      "h1": "مساج استرخاء",
       "schemaTypes": [
         "DaySpa",
         "WebSite",
         "ImageObject",
         "WebPage",
         "Service",
-        "Offer",
         "BreadcrumbList"
       ],
       "inSitemap": true,
-      "ogUrl": "https://najma-web.mohamed-abouzied.workers.dev/services/massage-relaxation/",
+      "ogUrl": "https://nagmspa.com/services/massage-relaxation/",
       "ogUrlMatchesCanonical": true,
       "hreflang": [
         {
           "lang": "ar",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/services/massage-relaxation/"
+          "href": "https://nagmspa.com/services/massage-relaxation/"
         },
         {
           "lang": "en",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/en/services/massage-relaxation/"
+          "href": "https://nagmspa.com/en/services/massage-relaxation/"
         },
         {
           "lang": "x-default",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/services/massage-relaxation/"
-        }
-      ],
-      "expected": true
-    },
-    {
-      "route": "/services/moroccan-bath-clay/",
-      "locale": "ar",
-      "status": 200,
-      "title": "حمام مغربي بالطين المغربي - نجم سبا",
-      "description": "حمام مغربي بالطين المغربي في نجم سبا — تنظيف عميق ونضارة للبشرة مع تجربة حمام أصيلة فاخرة. احجز موعدك عبر واتساب الآن بسهولة.",
-      "canonical": "https://najma-web.mohamed-abouzied.workers.dev/services/moroccan-bath-clay/",
-      "robots": "index, follow, max-image-preview:large",
-      "h1": "حمام مغربي بالطين المغربي",
-      "schemaTypes": [
-        "DaySpa",
-        "WebSite",
-        "ImageObject",
-        "WebPage",
-        "Service",
-        "Offer",
-        "BreadcrumbList"
-      ],
-      "inSitemap": true,
-      "ogUrl": "https://najma-web.mohamed-abouzied.workers.dev/services/moroccan-bath-clay/",
-      "ogUrlMatchesCanonical": true,
-      "hreflang": [
-        {
-          "lang": "ar",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/services/moroccan-bath-clay/"
-        },
-        {
-          "lang": "en",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/en/services/moroccan-bath-clay/"
-        },
-        {
-          "lang": "x-default",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/services/moroccan-bath-clay/"
+          "href": "https://nagmspa.com/services/massage-relaxation/"
         }
       ],
       "expected": true
@@ -2119,35 +2252,70 @@
       "route": "/services/moroccan-bath/",
       "locale": "ar",
       "status": 200,
-      "title": "حمام مغربي كلاسيك - نجم سبا",
-      "description": "حمام مغربي كلاسيك في نجم سبا يجمع البخار والصابون البلدي وتقشير البشرة لنضارة وانتعاش فوري وعميق. تجربة أصيلة فاخرة — احجز موعدك عبر واتساب.",
-      "canonical": "https://najma-web.mohamed-abouzied.workers.dev/services/moroccan-bath/",
+      "title": "حمام مغربي كلاسيكي - نجم سبا",
+      "description": "حمام مغربي كلاسيكي ضمن عروض نجم سبا — انتعاش ونضارة بتجربة حمام أصيلة.",
+      "canonical": "https://nagmspa.com/services/moroccan-bath/",
       "robots": "index, follow, max-image-preview:large",
-      "h1": "حمام مغربي كلاسيك",
+      "h1": "حمام مغربي كلاسيكي",
       "schemaTypes": [
         "DaySpa",
         "WebSite",
         "ImageObject",
         "WebPage",
         "Service",
-        "Offer",
         "BreadcrumbList"
       ],
       "inSitemap": true,
-      "ogUrl": "https://najma-web.mohamed-abouzied.workers.dev/services/moroccan-bath/",
+      "ogUrl": "https://nagmspa.com/services/moroccan-bath/",
       "ogUrlMatchesCanonical": true,
       "hreflang": [
         {
           "lang": "ar",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/services/moroccan-bath/"
+          "href": "https://nagmspa.com/services/moroccan-bath/"
         },
         {
           "lang": "en",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/en/services/moroccan-bath/"
+          "href": "https://nagmspa.com/en/services/moroccan-bath/"
         },
         {
           "lang": "x-default",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/services/moroccan-bath/"
+          "href": "https://nagmspa.com/services/moroccan-bath/"
+        }
+      ],
+      "expected": true
+    },
+    {
+      "route": "/services/royal-bath/",
+      "locale": "ar",
+      "status": 200,
+      "title": "حمام ملكي فاخر - نجم سبا",
+      "description": "حمام ملكي فاخر ضمن عروض نجم سبا — تجربة فاخرة للعناية العميقة والاسترخاء.",
+      "canonical": "https://nagmspa.com/services/royal-bath/",
+      "robots": "index, follow, max-image-preview:large",
+      "h1": "حمام ملكي فاخر",
+      "schemaTypes": [
+        "DaySpa",
+        "WebSite",
+        "ImageObject",
+        "WebPage",
+        "Service",
+        "BreadcrumbList"
+      ],
+      "inSitemap": true,
+      "ogUrl": "https://nagmspa.com/services/royal-bath/",
+      "ogUrlMatchesCanonical": true,
+      "hreflang": [
+        {
+          "lang": "ar",
+          "href": "https://nagmspa.com/services/royal-bath/"
+        },
+        {
+          "lang": "en",
+          "href": "https://nagmspa.com/en/services/royal-bath/"
+        },
+        {
+          "lang": "x-default",
+          "href": "https://nagmspa.com/services/royal-bath/"
         }
       ],
       "expected": true
@@ -2156,72 +2324,34 @@
       "route": "/services/shiatsu/",
       "locale": "ar",
       "status": 200,
-      "title": "مساج الشياتسو - نجم سبا",
-      "description": "مساج الشياتسو في نجم سبا — ضغط إيقاعي على مسارات الطاقة لتحفيز الدورة الدموية وإطلاق التشنجات العميقة. تجربة أصيلة — احجز عبر واتساب الآن.",
-      "canonical": "https://najma-web.mohamed-abouzied.workers.dev/services/shiatsu/",
+      "title": "مساج شياتسو - نجم سبا",
+      "description": "مساج الشياتسو ضمن عروض نجم سبا — ضغط إيقاعي على مسارات الطاقة لإطلاق التشنجات.",
+      "canonical": "https://nagmspa.com/services/shiatsu/",
       "robots": "index, follow, max-image-preview:large",
-      "h1": "مساج الشياتسو",
+      "h1": "مساج شياتسو",
       "schemaTypes": [
         "DaySpa",
         "WebSite",
         "ImageObject",
         "WebPage",
         "Service",
-        "Offer",
         "BreadcrumbList"
       ],
       "inSitemap": true,
-      "ogUrl": "https://najma-web.mohamed-abouzied.workers.dev/services/shiatsu/",
+      "ogUrl": "https://nagmspa.com/services/shiatsu/",
       "ogUrlMatchesCanonical": true,
       "hreflang": [
         {
           "lang": "ar",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/services/shiatsu/"
+          "href": "https://nagmspa.com/services/shiatsu/"
         },
         {
           "lang": "en",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/en/services/shiatsu/"
+          "href": "https://nagmspa.com/en/services/shiatsu/"
         },
         {
           "lang": "x-default",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/services/shiatsu/"
-        }
-      ],
-      "expected": true
-    },
-    {
-      "route": "/services/sports-massage/",
-      "locale": "ar",
-      "status": 200,
-      "title": "المساج الرياضي - نجم سبا",
-      "description": "المساج الرياضي في نجم سبا مخصص لتخفيف شد العضلات وتحسين التعافي بعد الجهد بأيدي أخصائيين محترفين. جلسة تناسب احتياجك — احجز موعدك عبر واتساب الآن.",
-      "canonical": "https://najma-web.mohamed-abouzied.workers.dev/services/sports-massage/",
-      "robots": "index, follow, max-image-preview:large",
-      "h1": "المساج الرياضي",
-      "schemaTypes": [
-        "DaySpa",
-        "WebSite",
-        "ImageObject",
-        "WebPage",
-        "Service",
-        "Offer",
-        "BreadcrumbList"
-      ],
-      "inSitemap": true,
-      "ogUrl": "https://najma-web.mohamed-abouzied.workers.dev/services/sports-massage/",
-      "ogUrlMatchesCanonical": true,
-      "hreflang": [
-        {
-          "lang": "ar",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/services/sports-massage/"
-        },
-        {
-          "lang": "en",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/en/services/sports-massage/"
-        },
-        {
-          "lang": "x-default",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/services/sports-massage/"
+          "href": "https://nagmspa.com/services/shiatsu/"
         }
       ],
       "expected": true
@@ -2231,8 +2361,8 @@
       "locale": "ar",
       "status": 200,
       "title": "مساج نجم سبا - نجم سبا",
-      "description": "مساج نجم سبا التوقيع — جلسة طويلة متكاملة تجمع الاسترخاء والعناية العميقة لاستعادة طاقتك بالكامل. تجربة مميزة — احجز موعدك عبر واتساب الآن.",
-      "canonical": "https://najma-web.mohamed-abouzied.workers.dev/services/star-spa-massage/",
+      "description": "مساج نجم سبا التوقيع ضمن العروض — جلسة متكاملة تجمع الاسترخاء والعناية العميقة.",
+      "canonical": "https://nagmspa.com/services/star-spa-massage/",
       "robots": "index, follow, max-image-preview:large",
       "h1": "مساج نجم سبا",
       "schemaTypes": [
@@ -2241,24 +2371,95 @@
         "ImageObject",
         "WebPage",
         "Service",
-        "Offer",
         "BreadcrumbList"
       ],
       "inSitemap": true,
-      "ogUrl": "https://najma-web.mohamed-abouzied.workers.dev/services/star-spa-massage/",
+      "ogUrl": "https://nagmspa.com/services/star-spa-massage/",
       "ogUrlMatchesCanonical": true,
       "hreflang": [
         {
           "lang": "ar",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/services/star-spa-massage/"
+          "href": "https://nagmspa.com/services/star-spa-massage/"
         },
         {
           "lang": "en",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/en/services/star-spa-massage/"
+          "href": "https://nagmspa.com/en/services/star-spa-massage/"
         },
         {
           "lang": "x-default",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/services/star-spa-massage/"
+          "href": "https://nagmspa.com/services/star-spa-massage/"
+        }
+      ],
+      "expected": true
+    },
+    {
+      "route": "/services/steam-session/",
+      "locale": "ar",
+      "status": 200,
+      "title": "جلسة بخار - نجم سبا",
+      "description": "جلسة بخار ضمن عروض نجم سبا — تهيئة مهدئة للجسم قبل أو مع باقة العناية.",
+      "canonical": "https://nagmspa.com/services/steam-session/",
+      "robots": "index, follow, max-image-preview:large",
+      "h1": "جلسة بخار",
+      "schemaTypes": [
+        "DaySpa",
+        "WebSite",
+        "ImageObject",
+        "WebPage",
+        "Service",
+        "BreadcrumbList"
+      ],
+      "inSitemap": true,
+      "ogUrl": "https://nagmspa.com/services/steam-session/",
+      "ogUrlMatchesCanonical": true,
+      "hreflang": [
+        {
+          "lang": "ar",
+          "href": "https://nagmspa.com/services/steam-session/"
+        },
+        {
+          "lang": "en",
+          "href": "https://nagmspa.com/en/services/steam-session/"
+        },
+        {
+          "lang": "x-default",
+          "href": "https://nagmspa.com/services/steam-session/"
+        }
+      ],
+      "expected": true
+    },
+    {
+      "route": "/services/swedish-massage/",
+      "locale": "ar",
+      "status": 200,
+      "title": "مساج سويدي - نجم سبا",
+      "description": "مساج سويدي ضمن عروض نجم سبا — لمسات انسيابية تُرخي العضلات وتُهدئ التوتر. احجز عبر واتساب ضمن الباقة المناسبة لك.",
+      "canonical": "https://nagmspa.com/services/swedish-massage/",
+      "robots": "index, follow, max-image-preview:large",
+      "h1": "مساج سويدي",
+      "schemaTypes": [
+        "DaySpa",
+        "WebSite",
+        "ImageObject",
+        "WebPage",
+        "Service",
+        "BreadcrumbList"
+      ],
+      "inSitemap": true,
+      "ogUrl": "https://nagmspa.com/services/swedish-massage/",
+      "ogUrlMatchesCanonical": true,
+      "hreflang": [
+        {
+          "lang": "ar",
+          "href": "https://nagmspa.com/services/swedish-massage/"
+        },
+        {
+          "lang": "en",
+          "href": "https://nagmspa.com/en/services/swedish-massage/"
+        },
+        {
+          "lang": "x-default",
+          "href": "https://nagmspa.com/services/swedish-massage/"
         }
       ],
       "expected": true
@@ -2268,8 +2469,8 @@
       "locale": "ar",
       "status": 200,
       "title": "مساج تايلندي - نجم سبا",
-      "description": "المساج التايلندي في نجم سبا يجمع التمدد والضغط العميق لزيادة المرونة وتجديد طاقة الجسم. تجربة أصيلة بأيدي محترفين — احجز موعدك عبر واتساب الآن.",
-      "canonical": "https://najma-web.mohamed-abouzied.workers.dev/services/thai-massage/",
+      "description": "مساج تايلندي ضمن عروض نجم سبا — تمدد وضغط عميق لزيادة المرونة وتجديد الطاقة. احجز ضمن العرض المناسب لك.",
+      "canonical": "https://nagmspa.com/services/thai-massage/",
       "robots": "index, follow, max-image-preview:large",
       "h1": "مساج تايلندي",
       "schemaTypes": [
@@ -2278,24 +2479,23 @@
         "ImageObject",
         "WebPage",
         "Service",
-        "Offer",
         "BreadcrumbList"
       ],
       "inSitemap": true,
-      "ogUrl": "https://najma-web.mohamed-abouzied.workers.dev/services/thai-massage/",
+      "ogUrl": "https://nagmspa.com/services/thai-massage/",
       "ogUrlMatchesCanonical": true,
       "hreflang": [
         {
           "lang": "ar",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/services/thai-massage/"
+          "href": "https://nagmspa.com/services/thai-massage/"
         },
         {
           "lang": "en",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/en/services/thai-massage/"
+          "href": "https://nagmspa.com/en/services/thai-massage/"
         },
         {
           "lang": "x-default",
-          "href": "https://najma-web.mohamed-abouzied.workers.dev/services/thai-massage/"
+          "href": "https://nagmspa.com/services/thai-massage/"
         }
       ],
       "expected": true
