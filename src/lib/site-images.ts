@@ -21,12 +21,15 @@ import cupping from '../assets/home/services/cupping.jpg';
 import relaxationMassage from '../assets/home/services/relaxation-massage.jpg';
 import shiatsuMassage from '../assets/home/services/shiatsu-massage.jpg';
 import hotOilMassage from '../assets/home/services/hot-oil-massage.jpg';
+import starSpaMassage from '../assets/home/services/star-spa-massage.jpg';
 import moroccanBath from '../assets/home/services/moroccan-bath.jpg';
 import moroccanClay from '../assets/home/services/moroccan-clay.jpg';
 import aromatherapy from '../assets/home/services/aromatherapy.jpg';
+import steamSession from '../assets/home/services/steam-session.jpg';
 import manicurePedicure from '../assets/home/services/manicure-pedicure.jpg';
 import manicurePedicureHero from '../assets/home/services/manicure-pedicure-hero.jpg';
 import facialCare from '../assets/home/services/facial-care.jpg';
+import bodyScrub from '../assets/home/services/body-scrub.jpg';
 
 /**
  * Maps stable public SEO URLs (`/assets/...`) to compile-time ImageMetadata.
@@ -52,12 +55,15 @@ const byPublicPath: Record<string, ImageMetadata> = {
   '/assets/home/services/relaxation-massage.jpg': relaxationMassage,
   '/assets/home/services/shiatsu-massage.jpg': shiatsuMassage,
   '/assets/home/services/hot-oil-massage.jpg': hotOilMassage,
+  '/assets/home/services/star-spa-massage.jpg': starSpaMassage,
   '/assets/home/services/moroccan-bath.jpg': moroccanBath,
   '/assets/home/services/moroccan-clay.jpg': moroccanClay,
   '/assets/home/services/aromatherapy.jpg': aromatherapy,
+  '/assets/home/services/steam-session.jpg': steamSession,
   '/assets/home/services/manicure-pedicure.jpg': manicurePedicure,
   '/assets/home/services/manicure-pedicure-hero.jpg': manicurePedicureHero,
   '/assets/home/services/facial-care.jpg': facialCare,
+  '/assets/home/services/body-scrub.jpg': bodyScrub,
 };
 
 export function tryLocalImage(publicPath: string): ImageMetadata | undefined {

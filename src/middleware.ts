@@ -2,6 +2,7 @@ import { defineMiddleware } from 'astro:middleware';
 import { ADMIN_AUTH_DISABLED } from 'astro:env/server';
 import { isAdminAuthBypassed } from './lib/auth/admin-mode.ts';
 import { assertStaffAccess, sanitizeReturnUrl } from './lib/auth/authorization.ts';
+import { resolveLegacyRoute } from './lib/http/legacy-routes.ts';
 import { withSecurityHeaders } from './lib/http/security-headers.ts';
 import { adminApiError } from './lib/staff-access/http.ts';
 
@@ -20,6 +21,8 @@ function retiredOfferRedirect(pathname: string): string | null {
   if (!RETIRED_OFFER_SLUGS.has(slug)) return null;
   return match[1] ? '/en/offers/' : '/offers/';
 }
+
+const GONE_HTML = '<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><title>410 — تمت إزالة الصفحة</title></head><body><h1>410 — تمت إزالة الصفحة</h1><p>هذه الصفحة لم تعد متاحة. <a href="/">العودة للرئيسية</a></p></body></html>';
 
 function isAdminPage(pathname: string): boolean {
   return pathname === '/admin' || pathname.startsWith('/admin/');
@@ -76,6 +79,23 @@ export const onRequest = defineMiddleware(async (context, next) => {
   if (offerRedirect) {
     return context.redirect(offerRedirect, 301);
   }
+
+  const legacy = resolveLegacyRoute(context.url.pathname);
+  if (legacy) {
+    if (legacy.kind === 'gone') {
+      return withSecurityHeaders(
+        new Response(GONE_HTML, {
+          status: 410,
+          headers: { 'Content-Type': 'text/html; charset=utf-8' },
+        }),
+        { 'X-Robots-Tag': 'noindex, nofollow' },
+      );
+    }
+    const target = new URL(legacy.destination, context.url.origin);
+    target.search = context.url.search;
+    return context.redirect(target.pathname + target.search, 301);
+  }
+
   const adminPage = isAdminPage(pathname);
   const adminApi = isAdminApi(pathname);
   const protectedSurface = adminPage || adminApi;

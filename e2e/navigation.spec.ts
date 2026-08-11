@@ -36,4 +36,21 @@ test.describe('navigation and a11y chrome', () => {
     await expect(page).toHaveURL(/\/$/);
     await expect(page.locator('html')).toHaveAttribute('lang', 'ar');
   });
+
+  test('internal nav stays soft like an SPA (no full document reload)', async ({ page }) => {
+    await gotoReady(page, '/');
+    await page.evaluate(() => {
+      (window as Window & { __nagmSoftNavMarker?: boolean }).__nagmSoftNavMarker = true;
+    });
+
+    await page.locator('header a[href="/about/"]').first().click();
+    await expect(page).toHaveURL(/\/about\/?$/);
+    await expect(page.locator('main#main-content')).toBeVisible();
+    await expect(page.locator('h1')).toHaveCount(1);
+
+    const kept = await page.evaluate(
+      () => (window as Window & { __nagmSoftNavMarker?: boolean }).__nagmSoftNavMarker === true,
+    );
+    expect(kept, 'window state should survive soft navigation').toBe(true);
+  });
 });

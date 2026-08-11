@@ -1,0 +1,70 @@
+---
+/**
+ * Next.js-style soft navigation + top progress bar.
+ * ClientRouter cannot run with Astro CSP, so this keeps same-document navigations.
+ */
+---
+
+<script>
+  import { initSoftNav } from '../lib/soft-nav';
+  initSoftNav();
+</script>
+
+<style is:global>
+  .nagm-nav-progress {
+    position: fixed;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    z-index: 9999;
+    width: 0;
+    height: 2px;
+    pointer-events: none;
+    opacity: 0;
+    background: linear-gradient(
+      90deg,
+      var(--color-gold-dark) 0%,
+      var(--color-gold) 45%,
+      var(--color-gold-light) 100%
+    );
+    transition:
+      width 280ms ease-out,
+      opacity 200ms ease;
+  }
+
+  .nagm-nav-progress[data-state='loading'] {
+    opacity: 1;
+    width: 72%;
+    transition:
+      width 8s cubic-bezier(0.1, 0.05, 0, 1),
+      opacity 120ms ease;
+  }
+
+  .nagm-nav-progress[data-state='done'] {
+    opacity: 1;
+    width: 100%;
+    transition:
+      width 160ms ease-out,
+      opacity 200ms ease;
+  }
+
+  .nagm-nav-progress[data-state='idle'] {
+    opacity: 0;
+    width: 0;
+    transition:
+      opacity 200ms ease,
+      width 0ms linear 200ms;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .nagm-nav-progress,
+    .nagm-nav-progress[data-state='loading'],
+    .nagm-nav-progress[data-state='done'],
+    .nagm-nav-progress[data-state='idle'] {
+      transition: opacity 120ms ease;
+    }
+
+    .nagm-nav-progress[data-state='loading'] {
+      width: 100%;
+    }
+  }
+</style>

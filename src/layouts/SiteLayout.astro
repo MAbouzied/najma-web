@@ -5,6 +5,7 @@ import FloatingContact from '../components/FloatingContact.astro';
 import Footer from '../components/Footer.astro';
 import Gtm from '../components/Gtm.astro';
 import JsonLd from '../components/JsonLd.astro';
+import SoftNav from '../components/SoftNav.astro';
 import type { Locale } from '../i18n/types';
 import { isBlogPath, localePath, stripLocalePrefix } from '../i18n/paths';
 import { t } from '../i18n/t';
@@ -201,5 +202,6 @@ const gaMeasurementId = analyticsEnabled && PUBLIC_GA_MEASUREMENT_ID
     </main>
     {showFooter && <Footer locale={locale} />}
     {showFloatingContact && <FloatingContact locale={locale} />}
+    <SoftNav />
   </body>
 </html>

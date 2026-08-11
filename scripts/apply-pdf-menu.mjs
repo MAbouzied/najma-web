@@ -110,7 +110,7 @@ const servicesBlock = `export const services: Service[] = [
   },
   {
     slug: 'star-spa-massage',
-    image: '/assets/home/services/swedish-massage.jpg',
+    image: '/assets/home/services/star-spa-massage.jpg',
     title: { ar: 'مساج نجم سبا', en: 'Nagm Spa Signature Massage' },
     description: {
       ar: 'مساج نجم سبا التوقيع ضمن العروض — جلسة متكاملة تجمع الاسترخاء والعناية العميقة.',
@@ -140,7 +140,7 @@ const servicesBlock = `export const services: Service[] = [
   },
   {
     slug: 'steam-session',
-    image: '/assets/home/services/aromatherapy.jpg',
+    image: '/assets/home/services/steam-session.jpg',
     title: { ar: 'جلسة بخار', en: 'Steam Session' },
     description: {
       ar: 'جلسة بخار ضمن عروض نجم سبا — تهيئة مهدئة للجسم قبل أو مع باقة العناية.',
@@ -161,7 +161,7 @@ const servicesBlock = `export const services: Service[] = [
   },
   {
     slug: 'body-scrub',
-    image: '/assets/home/services/facial-care.jpg',
+    image: '/assets/home/services/body-scrub.jpg',
     title: { ar: 'صنفرة بشرة', en: 'Body Scrub' },
     description: {
       ar: 'صنفرة البشرة ضمن عروض نجم سبا — تنعيم ونضارة كجزء من تجربة العناية المتكاملة.',
