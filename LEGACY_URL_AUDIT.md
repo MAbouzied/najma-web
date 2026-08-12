@@ -1,8 +1,9 @@
 # Legacy WordPress URL Audit
 
-**Audit date:** 2026-08-11
-**Query:** `site:nagmspa.com` (Google Search, 4 pages, filter=0)
-**Supplementary queries:** `site:nagmspa.com/product/`, `site:nagmspa.com/product-category/`, `site:nagmspa.com/author/`
+**Audit date:** 2026-08-12  
+**Query:** `site:nagmspa.com` (Google Search, 4 pages via Playwright)  
+**Indexed unique URLs found:** 34  
+**Supplementary source:** prior audit (2026-08-11) for product/author families
 
 ## Valid legacy spa pages
 
@@ -25,6 +26,11 @@
 | `/product/*` (unmatched) | WooCommerce product | `/offers/` | 301 |
 | `/product-category/*` | WooCommerce category | `/offers/` | 301 |
 | `/author/*` | WordPress author archive | `/` | 301 |
+| `/tag/*` (non-spam) | WordPress tag archive | `/blogs/` | 301 |
+| `/category/*` (non-spam) | WordPress category archive | `/blogs/` | 301 |
+| any other unmapped content path | orphaned WP/old URL | `/` | 301 |
+
+Static assets (`*.png`, `robots.txt`, sitemaps, `/_astro/*`) and current app routes are never intercepted.
 
 ## Hacked/spam URLs (410 Gone)
 
@@ -41,6 +47,7 @@ These URLs were injected into the old WordPress site and contain gambling, datin
 | `/tag/1-win-bet/` | Gambling spam |
 | `/tag/gugo-bet-login/` | Gambling spam |
 | `/tag/best-coins-for-staking/` | Gambling spam |
+| `/tag/sat-bet/` | Gambling spam (indexed 2026-08-12) |
 | `/category/mono-brand/` | Gambling spam |
 | `/category/1xbet-kr/` | Gambling spam |
 | `/category/sat-bet-582/` | Gambling spam |
@@ -58,15 +65,24 @@ These URLs were injected into the old WordPress site and contain gambling, datin
 | `/find-china-dating-girls-your-key-to-a-fulfilling-relationship/` | Dating spam |
 | `/top-australian-free-e-wallet-casinos-for-hassle-free-gaming/` | Gambling spam |
 | `/meet-local-grannies-looking-for-sex/` | Dating spam |
+| `/erotic-monkey-assessment-top-erotic-experience-services/` | Adult spam (indexed 2026-08-12) |
 
-## Passthrough (no action needed)
+## Google-indexed URLs that already exist (passthrough)
 
 - `/` — Current homepage
 - `/about/` — Current about page
 - `/contact/` — Current contact page
+
+## Passthrough (no action needed)
+
 - `/services/*` — Current service routes
 - `/offers/*` — Current offer routes
 - `/packages/*` — Current package routes
 - `/en/*` — English locale routes
 - `/blogs/*` — Blog routes (SSR)
 - `/api/*`, `/admin/*`, `/_astro/*` — Internal routes
+- File-like paths (`*.xml`, `*.txt`, images, scripts)
+
+## Production note
+
+Legacy redirects require the Cloudflare Worker to run before static assets (`run_worker_first = true`, `not_found_handling = "none"`). Redeploy after changing `legacy-routes.ts` or `wrangler.toml`.

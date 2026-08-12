@@ -34,6 +34,13 @@ test('Cloudflare assets leave unmatched navigations to the Worker (SSR-safe)', a
   // "404-page" intercepts Sec-Fetch-Mode: navigate before the Worker, breaking /blogs/ etc.
   const wrangler = JSON.parse(await readFile(join(DIST, '..', 'server', 'wrangler.json'), 'utf8'));
   assert.equal(wrangler.assets?.not_found_handling, 'none');
+  assert.equal(wrangler.assets?.run_worker_first, true);
+});
+
+test('root wrangler.toml runs the Worker before assets for legacy redirects', async () => {
+  const toml = await readFile(join(process.cwd(), 'wrangler.toml'), 'utf8');
+  assert.match(toml, /not_found_handling\s*=\s*"none"/);
+  assert.match(toml, /run_worker_first\s*=\s*true/);
 });
 
 test('includes exact service, package, and offer slugs in both locales', () => {

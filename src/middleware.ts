@@ -2,27 +2,9 @@ import { defineMiddleware } from 'astro:middleware';
 import { ADMIN_AUTH_DISABLED } from 'astro:env/server';
 import { isAdminAuthBypassed } from './lib/auth/admin-mode.ts';
 import { assertStaffAccess, sanitizeReturnUrl } from './lib/auth/authorization.ts';
-import { resolveLegacyRoute } from './lib/http/legacy-routes.ts';
+import { resolveLegacyResponse } from './lib/http/legacy-response.ts';
 import { withSecurityHeaders } from './lib/http/security-headers.ts';
 import { adminApiError } from './lib/staff-access/http.ts';
-
-/** Mistaken car-care offer URLs — soft-land on the spa offers index. */
-const RETIRED_OFFER_SLUGS = new Set([
-  'exterior-wash',
-  'interior-wash',
-  'engine-cleaning',
-  'body-polishing',
-]);
-
-function retiredOfferRedirect(pathname: string): string | null {
-  const match = pathname.match(/^(\/en)?\/offers\/([^/]+)\/?$/);
-  if (!match) return null;
-  const slug = match[2];
-  if (!RETIRED_OFFER_SLUGS.has(slug)) return null;
-  return match[1] ? '/en/offers/' : '/offers/';
-}
-
-const GONE_HTML = '<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><title>410 — تمت إزالة الصفحة</title></head><body><h1>410 — تمت إزالة الصفحة</h1><p>هذه الصفحة لم تعد متاحة. <a href="/">العودة للرئيسية</a></p></body></html>';
 
 function isAdminPage(pathname: string): boolean {
   return pathname === '/admin' || pathname.startsWith('/admin/');
@@ -75,26 +57,10 @@ function forbiddenResponse(isApi: boolean): Response {
 
 export const onRequest = defineMiddleware(async (context, next) => {
   const pathname = context.url.pathname.replace(/\/$/, '') || '/';
-  const offerRedirect = retiredOfferRedirect(pathname);
-  if (offerRedirect) {
-    return context.redirect(offerRedirect, 301);
-  }
 
-  const legacy = resolveLegacyRoute(context.url.pathname);
-  if (legacy) {
-    if (legacy.kind === 'gone') {
-      return withSecurityHeaders(
-        new Response(GONE_HTML, {
-          status: 410,
-          headers: { 'Content-Type': 'text/html; charset=utf-8' },
-        }),
-        { 'X-Robots-Tag': 'noindex, nofollow' },
-      );
-    }
-    const target = new URL(legacy.destination, context.url.origin);
-    target.search = context.url.search;
-    return context.redirect(target.pathname + target.search, 301);
-  }
+  // Defense in depth: worker entry also handles these before Astro.
+  const legacyResponse = resolveLegacyResponse(context.url.pathname, context.url.search);
+  if (legacyResponse) return legacyResponse;
 
   const adminPage = isAdminPage(pathname);
   const adminApi = isAdminApi(pathname);

@@ -88,6 +88,7 @@ describe('spam URLs return 410 gone', () => {
     '/tag/1-win-bet/',
     '/tag/gugo-bet-login/',
     '/tag/best-coins-for-staking/',
+    '/tag/sat-bet/',
   ];
 
   const spamCategories = [
@@ -111,6 +112,7 @@ describe('spam URLs return 410 gone', () => {
     '/find-china-dating-girls-your-key-to-a-fulfilling-relationship/',
     '/top-australian-free-e-wallet-casinos-for-hassle-free-gaming/',
     '/meet-local-grannies-looking-for-sex/',
+    '/erotic-monkey-assessment-top-erotic-experience-services/',
   ];
 
   for (const path of [...spamTags, ...spamCategories, ...spamPages]) {
@@ -159,7 +161,11 @@ describe('current routes pass through', () => {
     '/admin/',
     '/admin/create',
     '/login',
+    '/404',
+    '/404/',
     '/_astro/something.js',
+    '/__astro_static_paths',
+    '/__astro_prerender',
   ];
 
   for (const path of currentRoutes) {
@@ -167,11 +173,25 @@ describe('current routes pass through', () => {
   }
 });
 
+// ─── Unmapped content → home ────────────────────────────────────────
+
+describe('unmapped content paths redirect home', () => {
+  it('/totally-random-path/ → /', () =>
+    expectRedirect('/totally-random-path/', '/'));
+
+  it('/old-wordpress-page/ → /', () =>
+    expectRedirect('/old-wordpress-page/', '/'));
+});
+
 // ─── Edge cases ─────────────────────────────────────────────────────
 
 describe('edge cases', () => {
-  it('unknown path passes through', () =>
-    expectPassthrough('/totally-random-path/'));
+  it('static assets pass through (no home redirect)', () => {
+    expectPassthrough('/missing-image.png');
+    expectPassthrough('/robots.txt');
+    expectPassthrough('/sitemap-index.xml');
+    expectPassthrough('/_astro/chunk.js');
+  });
 
   it('redirect target is not itself a legacy source', () => {
     const result = resolveLegacyRoute('/home/');
@@ -181,9 +201,8 @@ describe('edge cases', () => {
     assert.equal(again, null, 'redirect destination must not trigger another legacy rule');
   });
 
-  it('malformed percent encoding passes through without error', () => {
-    const result = resolveLegacyRoute('/%ZZ%invalid/');
-    assert.ok(result === null || result.kind === 'gone' || result.kind === 'redirect');
+  it('malformed percent encoding redirects home without throwing', () => {
+    expectRedirect('/%ZZ%invalid/', '/');
   });
 
   it('/product/ bare path (no slug) → /offers/', () =>

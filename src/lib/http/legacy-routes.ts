@@ -53,6 +53,7 @@ const SPAM_TAG_SLUGS = new Set([
   '1-win-bet',
   'gugo-bet-login',
   'best-coins-for-staking',
+  'sat-bet',
 ]);
 
 const SPAM_CATEGORY_SLUGS = new Set([
@@ -76,9 +77,12 @@ const SPAM_PAGE_SLUGS = new Set([
   'find-china-dating-girls-your-key-to-a-fulfilling-relationship',
   'top-australian-free-e-wallet-casinos-for-hassle-free-gaming',
   'meet-local-grannies-looking-for-sex',
+  'erotic-monkey-assessment-top-erotic-experience-services',
 ]);
 
 // ─── Routes that must never be intercepted ──────────────────────────
+// WARNING: Unmapped content paths 301 to `/`. When adding a new top-level
+// Astro page (e.g. /careers), add it here or it will redirect to home.
 
 const PASSTHROUGH_PREFIXES = [
   '/services/',
@@ -90,14 +94,66 @@ const PASSTHROUGH_PREFIXES = [
   '/go/',
   '/api/',
   '/admin/',
-  '/login',
+  '/login/',
   '/_astro/',
+  // Cloudflare prerender protocol (must never redirect)
+  '/__astro_',
 ] as const;
 
-const PASSTHROUGH_EXACT = new Set(['/', '/about', '/contact', '/services', '/offers', '/packages', '/en', '/blogs', '/book', '/go', '/login']);
+const PASSTHROUGH_EXACT = new Set([
+  '/',
+  '/about',
+  '/contact',
+  '/services',
+  '/offers',
+  '/packages',
+  '/en',
+  '/blogs',
+  '/book',
+  '/go',
+  '/login',
+  '/admin',
+  '/api',
+  // Must pass through or prerender writes a broken redirect into dist/client/404.html
+  '/404',
+]);
+
+/** Known static file extensions — keep spam dotted slugs eligible for 410. */
+const STATIC_ASSET_EXTENSIONS = new Set([
+  'js',
+  'mjs',
+  'css',
+  'map',
+  'png',
+  'jpg',
+  'jpeg',
+  'webp',
+  'avif',
+  'gif',
+  'svg',
+  'ico',
+  'txt',
+  'xml',
+  'json',
+  'pdf',
+  'woff',
+  'woff2',
+  'ttf',
+  'otf',
+]);
+
+/** File-like paths (assets, sitemaps, robots) must reach the normal handlers / 404. */
+function looksLikeStaticAsset(normalized: string): boolean {
+  const lastSegment = normalized.split('/').pop() ?? '';
+  const dot = lastSegment.lastIndexOf('.');
+  if (dot <= 0 || dot === lastSegment.length - 1) return false;
+  const ext = lastSegment.slice(dot + 1).toLowerCase();
+  return STATIC_ASSET_EXTENSIONS.has(ext);
+}
 
 function isPassthrough(normalized: string): boolean {
   if (PASSTHROUGH_EXACT.has(normalized)) return true;
+  if (looksLikeStaticAsset(normalized)) return true;
   for (const prefix of PASSTHROUGH_PREFIXES) {
     if (normalized.startsWith(prefix)) return true;
   }
@@ -109,6 +165,7 @@ function isPassthrough(normalized: string): boolean {
 /**
  * Classify a legacy WordPress pathname.
  * Returns `null` for current-site paths that should be handled normally.
+ * Unmapped content paths redirect home so old Google results do not 404.
  */
 export function resolveLegacyRoute(pathname: string): LegacyRouteResult {
   const norm = normalize(pathname);
@@ -164,5 +221,6 @@ export function resolveLegacyRoute(pathname: string): LegacyRouteResult {
   const topSlug = norm.slice(1); // strip leading /
   if (SPAM_PAGE_SLUGS.has(topSlug)) return { kind: 'gone' };
 
-  return null;
+  // 8. Any other old/unmapped content URL → home (avoid Google 404s)
+  return { kind: 'redirect', destination: '/' };
 }

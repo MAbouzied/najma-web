@@ -17,7 +17,8 @@ test.describe('public page smoke', () => {
   }
 
   test('branded 404 returns status 404', async ({ request }) => {
-    const response = await request.get('/this-route-does-not-exist-nagm/');
+    // Top-level unknown paths 301 to home; use a locale passthrough miss for 404.
+    const response = await request.get('/en/this-route-does-not-exist-nagm/');
     expect(response.status()).toBe(404);
     const body = await response.text();
     expect(body).toMatch(/الصفحة غير موجودة|Page not found/);

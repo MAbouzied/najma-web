@@ -1,5 +1,6 @@
 name = "najma-web"
-main = "@astrojs/cloudflare/entrypoints/server"
+# Custom entry runs WordPress legacy redirects before Astro asset fallback.
+main = "src/worker.ts"
 compatibility_date = "2026-07-21"
 compatibility_flags = ["nodejs_compat"]
 
@@ -16,8 +17,8 @@ html_handling = "auto-trailing-slash"
 # "404-page" short-circuits browser navigations (Sec-Fetch-Mode: navigate) to the
 # static 404.html and never invokes the Worker — breaking SSR routes like /blogs/.
 not_found_handling = "none"
-# Ensure the Worker runs first so legacy-route middleware can intercept old
-# WordPress URLs before the assets handler serves a static 404.
+# Ensure the Worker runs first so src/worker.ts can intercept old WordPress
+# URLs before the assets handler serves a static 404.
 run_worker_first = true
 
 [[ratelimits]]

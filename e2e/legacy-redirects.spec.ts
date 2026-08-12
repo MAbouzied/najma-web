@@ -35,6 +35,10 @@ const REDIRECT_CASES: [string, string | RegExp][] = [
   // Non-spam tag/category → /blogs/
   ['/tag/some-tag/', '/blogs/'],
   ['/category/some-category/', '/blogs/'],
+
+  // Unmapped old content → home
+  ['/old-wordpress-page/', '/'],
+  ['/totally-random-path/', '/'],
 ];
 
 test.describe('legacy 301 redirects', () => {
@@ -76,6 +80,7 @@ const GONE_CASES = [
   '/tag/1-win-bet/',
   '/tag/gugo-bet-login/',
   '/tag/best-coins-for-staking/',
+  '/tag/sat-bet/',
   '/category/mono-brand/',
   '/category/1xbet-kr/',
   '/category/sat-bet-582/',
@@ -93,6 +98,7 @@ const GONE_CASES = [
   '/find-china-dating-girls-your-key-to-a-fulfilling-relationship/',
   '/top-australian-free-e-wallet-casinos-for-hassle-free-gaming/',
   '/meet-local-grannies-looking-for-sex/',
+  '/erotic-monkey-assessment-top-erotic-experience-services/',
 ];
 
 test.describe('spam URLs return 410 Gone', () => {
