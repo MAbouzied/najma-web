@@ -22,3 +22,8 @@ test('does not mark HTML catch-all as immutable', () => {
   const catchAll = headersText.split('/_astro/*')[0] ?? headersText;
   assert.doesNotMatch(catchAll, /\/\*\s*\n[^\n]*immutable/);
 });
+
+test('delivers frame-ancestors via HTTP header on catch-all routes', () => {
+  const catchAll = headersText.split('/_astro/*')[0] ?? headersText;
+  assert.match(catchAll, /Content-Security-Policy:\s*frame-ancestors 'none'/);
+});

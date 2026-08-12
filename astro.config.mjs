@@ -75,7 +75,7 @@ export default defineConfig({
         "default-src 'self'",
         "base-uri 'self'",
         "form-action 'self'",
-        "frame-ancestors 'none'",
+        // Clickjacking protection is set on the HTTP response (meta CSP cannot express it).
         "object-src 'none'",
         "connect-src 'self' https://www.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com",
         "img-src 'self' data: blob: https://cdn.sanity.io https://*.googleusercontent.com https://*.google-analytics.com",

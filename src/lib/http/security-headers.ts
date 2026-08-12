@@ -1,5 +1,9 @@
-/** Baseline browser security headers for SSR/API responses (non-CSP). */
+/**
+ * Baseline browser security headers for SSR/API responses.
+ * CSP frame-ancestors must be an HTTP header (ignored in Astro's <meta> CSP).
+ */
 export const BASELINE_SECURITY_HEADERS: Record<string, string> = {
+  'Content-Security-Policy': "frame-ancestors 'none'",
   'X-Content-Type-Options': 'nosniff',
   'X-Frame-Options': 'DENY',
   'Referrer-Policy': 'strict-origin-when-cross-origin',

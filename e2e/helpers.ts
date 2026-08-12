@@ -16,7 +16,6 @@ export const CRITICAL_ROUTES = [
 
 /** Browser noise that is not an application regression. */
 const IGNORED_CONSOLE = [
-  /frame-ancestors.*ignored when delivered via a <meta> element/i,
   /ResizeObserver loop/i,
 ];
 

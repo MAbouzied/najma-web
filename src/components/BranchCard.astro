@@ -27,31 +27,34 @@ const branchBookingHref = buildWhatsAppUrl(
 >
   <h3 class="text-xl font-semibold leading-7 tracking-[0.2px] text-text-primary">{branch.title}</h3>
   <dl class="mt-4 flex flex-col gap-3 text-sm leading-5 text-text-muted">
-    <div class="flex items-center gap-2">
-      <img src="/assets/icons/location.svg" alt="" width="16" height="16" class="size-4 shrink-0" />
+    <div>
       <dt class="sr-only">{locale === 'en' ? 'Address' : 'العنوان'}</dt>
-      <dd>{branch.address}</dd>
+      <dd class="flex items-center gap-2">
+        <img src="/assets/icons/location.svg" alt="" width="16" height="16" class="size-4 shrink-0" />
+        <span>{branch.address}</span>
+      </dd>
     </div>
-    <div class="flex items-center gap-2">
-      <img src="/assets/icons/hours.svg" alt="" width="16" height="16" class="size-4 shrink-0" />
+    <div>
       <dt class="sr-only">{locale === 'en' ? 'Hours' : 'ساعات العمل'}</dt>
-      <dd>{branch.hours}</dd>
+      <dd class="flex items-center gap-2">
+        <img src="/assets/icons/hours.svg" alt="" width="16" height="16" class="size-4 shrink-0" />
+        <span>{branch.hours}</span>
+      </dd>
     </div>
-    <div class="flex items-center gap-2">
-      <img src="/assets/icons/branch-phone.svg" alt="" width="16" height="16" class="size-4 shrink-0" />
+    <div>
       <dt class="sr-only">{t(locale, 'contactLabelPhone')}</dt>
-      <dd>
+      <dd class="flex items-center gap-2" dir="ltr">
+        <img src="/assets/icons/branch-phone.svg" alt="" width="16" height="16" class="size-4 shrink-0" />
         {branch.phoneHref ? (
           <a
             href={branch.phoneHref}
             class="transition-colors hover:text-gold"
-            dir="ltr"
             {...gtmContactAttrs(GTM_EVENTS.call, 'branch_card')}
           >
             {branch.phone}
           </a>
         ) : (
-          branch.phone
+          <span>{branch.phone}</span>
         )}
       </dd>
     </div>
