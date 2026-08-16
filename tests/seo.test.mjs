@@ -178,7 +178,7 @@ test('adds nested breadcrumb schema and UI for service and package detail pages'
   assert.equal(packageBreadcrumb.itemListElement.length, 3);
   assert.equal(packageBreadcrumb.itemListElement[0].name, 'الرئيسية');
   assert.equal(packageBreadcrumb.itemListElement[1].name, 'باقاتنا');
-  assert.equal(packageBreadcrumb.itemListElement[2].name, 'العرض الرفاهية');
+  assert.equal(packageBreadcrumb.itemListElement[2].name, 'باقة الرفاهية');
   assert.match(packageDetailHtml, /data-breadcrumbs/);
   assert.doesNotMatch(packageDetailHtml, /العودة للباقات/);
 
