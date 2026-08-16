@@ -272,6 +272,34 @@ textarea.form-control {
     --color-border-input: rgba(168, 190, 196, 0.36);
     --color-border-card: rgba(168, 190, 196, 0.2);
   }
+
+  html[data-theme='sand'] {
+    --color-bg-primary: #fdf3e7;
+    --color-bg-hero: #f8eee0;
+    --color-bg-secondary: #f3e8d8;
+    --color-bg-tertiary: #eadcc9;
+    --color-bg-footer: #f0e4d4;
+    --color-bg-card: #fff8ef;
+    --color-bg-form: #fffaf3;
+    --color-bg-stat: rgba(233, 221, 208, 0.7);
+    --color-bg-cta-edge: #eadcc9;
+    --color-bg-cta-center: #f7ecde;
+    --color-bg-input: rgba(253, 243, 231, 0.85);
+    --color-bg-badge: rgba(233, 221, 208, 0.85);
+    --color-bg-social: rgba(233, 221, 208, 0.7);
+    --color-gold: #6e4324;
+    --color-gold-dark: #4a2c1d;
+    --color-gold-light: #8f5c33;
+    --color-text-muted: #5c4030;
+    --color-text-primary: #4a2c1d;
+    --color-text-nav: #4a2c1d;
+    --color-text-placeholder: rgba(74, 44, 29, 0.45);
+    --color-text-btn: #fdf3e7;
+    --color-border-input: rgba(74, 44, 29, 0.22);
+    --color-border-badge: rgba(183, 143, 101, 0.45);
+    --color-border-card: rgba(74, 44, 29, 0.12);
+    --color-logo-plate: #111111;
+  }
 }
 
 .theme-swatch[data-swatch='deep'] {
@@ -288,6 +316,42 @@ textarea.form-control {
 
 .theme-swatch[data-swatch='mist'] {
   background: #8aa4aa;
+}
+
+.theme-swatch[data-swatch='sand'] {
+  background: #fdf3e7;
+}
+
+html[data-theme='sand'] .brand-logo-mark {
+  background: var(--color-logo-plate);
+  border-radius: 0.75rem;
+}
+
+html[data-theme='sand'] .skip-link {
+  background: var(--color-text-primary);
+  color: var(--color-bg-primary);
+}
+
+html[data-theme='sand'] .gold-button,
+html[data-theme='sand'] .bg-gold-gradient {
+  background-image: none;
+  background-color: var(--color-text-primary);
+  color: var(--color-bg-primary);
+}
+
+html[data-theme='sand'] .gold-button {
+  box-shadow: 0 20px 60px -20px color-mix(in srgb, var(--color-text-primary) 35%, transparent);
+}
+
+html[data-theme='sand'] .outline-button {
+  border-color: color-mix(in srgb, var(--color-text-primary) 35%, transparent);
+  color: var(--color-text-primary);
+}
+
+@media (hover: hover) {
+  html[data-theme='sand'] .outline-button:hover {
+    background: color-mix(in srgb, var(--color-text-primary) 6%, transparent);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

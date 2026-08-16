@@ -41,6 +41,7 @@ export const ui = {
     themeGrove: 'هادئ',
     themeCedar: 'دافئ',
     themeMist: 'مضيء',
+    themeSand: 'رملي',
 
     licenseTitle: 'بيانات الترخيص الرسمية',
     licenseCommercialRegister: 'السجل التجاري (الرقم الوطني الموحد)',
@@ -329,6 +330,7 @@ export const ui = {
     themeGrove: 'Soft',
     themeCedar: 'Warm',
     themeMist: 'Airy',
+    themeSand: 'Sand',
 
     licenseTitle: 'Official Licensing Information',
     licenseCommercialRegister: 'Commercial Register (Unified National No.)',

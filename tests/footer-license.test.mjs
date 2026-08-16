@@ -36,14 +36,16 @@ test('renders VAT registration number with certificate link to public image', ()
   assert.match(enVatAnchor, /rel="noopener noreferrer"/);
 });
 
-test('renders a footer theme switcher with four named colors', () => {
+test('renders a footer theme switcher with five named colors', () => {
   assert.match(homeHtml, /data-theme-switcher/);
   assert.match(homeHtml, /data-theme-option="deep"/);
   assert.match(homeHtml, /data-theme-option="grove"/);
   assert.match(homeHtml, /data-theme-option="cedar"/);
   assert.match(homeHtml, /data-theme-option="mist"/);
+  assert.match(homeHtml, /data-theme-option="sand"/);
   assert.match(homeHtml, /الحالي/);
   assert.match(homeHtml, /هادئ/);
+  assert.match(homeHtml, /رملي/);
   assert.match(homeHtml, /closest\('\[data-theme-option\]'\)/);
   assert.match(homeHtml, /setAttribute\('data-theme'/);
 });

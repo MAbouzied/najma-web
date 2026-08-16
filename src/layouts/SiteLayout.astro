@@ -145,10 +145,11 @@ const gaMeasurementId = analyticsEnabled && PUBLIC_GA_MEASUREMENT_ID
           grove: { ar: 'هادئ', en: 'Soft' },
           cedar: { ar: 'دافئ', en: 'Warm' },
           mist: { ar: 'مضيء', en: 'Airy' },
+          sand: { ar: 'رملي', en: 'Sand' },
         };
 
         function resolve(value) {
-          return value === 'deep' || value === 'grove' || value === 'cedar' || value === 'mist'
+          return value === 'deep' || value === 'grove' || value === 'cedar' || value === 'mist' || value === 'sand'
             ? value
             : 'grove';
         }
