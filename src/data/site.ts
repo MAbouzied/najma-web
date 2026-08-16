@@ -90,8 +90,8 @@ export function getServiceLinks(locale: Locale): SiteLink[] {
 
 export function getSocialLinks(locale: Locale) {
   return [
-    { label: t(locale, 'socialInstagram'), href: 'https://www.instagram.com/nagmspa/', icon: '/assets/icons/instagram.svg' },
-    { label: t(locale, 'socialSnapchat'), href: 'https://www.snapchat.com/add/nagmspa', icon: '/assets/icons/snapchat.svg' },
+    { label: t(locale, 'socialInstagram'), href: 'https://www.instagram.com/nagmspa/', icon: 'instagram' as const },
+    { label: t(locale, 'socialSnapchat'), href: 'https://www.snapchat.com/add/nagmspa', icon: 'snapchat' as const },
   ];
 }
 

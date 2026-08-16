@@ -266,24 +266,26 @@ test('serves crawl and LLM discovery files without placeholder origins', () => {
   assert.match(llmsText, /\/offers\/signature\//);
   assert.match(llmsText, /\/en\/offers\/signature\//);
   assert.doesNotMatch(llmsText, /localhost|example\.com/);
-  assert.doesNotMatch(llmsText, /\/book\/|\/go\/|\/api\//);
+  assert.doesNotMatch(llmsText, /\/book\/|\/go\/|\/form\/|\/api\//);
 
   assert.match(sitemapText, /\/offers\//);
   assert.match(sitemapText, /\/offers\/signature\//);
   assert.match(sitemapText, /\/offers\/recovery\//);
   assert.match(sitemapText, /\/offers\/golden\//);
-  assert.doesNotMatch(sitemapText, /\/book\/|\/go\/|\/api\//);
+  assert.doesNotMatch(sitemapText, /\/book\/|\/go\/|\/form\/|\/api\//);
 });
 
 test('marks booking and link-hub pages as noindex', async () => {
-  const [bookHtml, enBookHtml, goHtml, enGoHtml] = await Promise.all([
+  const [bookHtml, enBookHtml, goHtml, enGoHtml, formHtml, enFormHtml] = await Promise.all([
     readDist('book/index.html'),
     readDist('en/book/index.html'),
     readDist('go/index.html'),
     readDist('en/go/index.html'),
+    readDist('form/index.html'),
+    readDist('en/form/index.html'),
   ]);
 
-  for (const html of [bookHtml, enBookHtml, goHtml, enGoHtml]) {
+  for (const html of [bookHtml, enBookHtml, goHtml, enGoHtml, formHtml, enFormHtml]) {
     assert.match(html, /<meta name="robots" content="noindex, follow">/);
   }
 });

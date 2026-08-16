@@ -40,6 +40,7 @@ function expectedRoutes() {
     '/contact/',
     '/book/',
     '/go/',
+    '/form/',
     '/services/',
     '/packages/',
     '/offers/',
@@ -110,7 +111,9 @@ function isUtilityRoute(route) {
     route === '/book/' ||
     route === '/en/book/' ||
     route === '/go/' ||
-    route === '/en/go/'
+    route === '/en/go/' ||
+    route === '/form/' ||
+    route === '/en/form/'
   );
 }
 

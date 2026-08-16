@@ -1,7 +1,7 @@
 ---
 import BrandLogo from './BrandLogo.astro';
+import LanguageSwitcher from './LanguageSwitcher.astro';
 import { getNavigationLinks, getBookingAction, getCallAction, type Locale, type PageId } from '../data/site';
-import { localePath, switchLocalePath } from '../i18n/paths';
 import { t } from '../i18n/t';
 import { GTM_EVENTS, gtmContactAttrs } from '../lib/gtm';
 
@@ -15,15 +15,6 @@ const isEnglish = locale === 'en';
 const navLinks = getNavigationLinks(locale);
 const booking = getBookingAction(locale);
 const call = getCallAction(locale);
-const altLocale = isEnglish ? 'ar' : 'en';
-const pathname = Astro.url.pathname;
-const isStatusPath = /(?:^|\/)404\/?$/.test(pathname);
-// Status pages are not bilingual routes — language switch returns to the other locale home.
-const languageHref = isStatusPath
-  ? localePath('/', altLocale)
-  : `${switchLocalePath(pathname, altLocale)}${Astro.url.search}`;
-const languageLabel = isEnglish ? 'AR' : 'EN';
-const languageAriaLabel = isEnglish ? t(locale, 'langSwitchAr') : t(locale, 'langSwitchEn');
 const mainNavLabel = isEnglish ? 'Main navigation' : 'التنقل الرئيسي';
 ---
 
@@ -80,15 +71,7 @@ const mainNavLabel = isEnglish ? 'Main navigation' : 'التنقل الرئيس�
           </ul>
         </nav>
       </details>
-      <a
-        href={languageHref}
-        class="outline-button min-h-0 gap-1.5 px-3 py-2 text-xs font-semibold uppercase tracking-wide sm:px-4"
-        aria-label={languageAriaLabel}
-        hreflang={isEnglish ? 'ar' : 'en'}
-      >
-        <img src="/assets/icons/lang.svg" alt="" width="16" height="16" class="size-4" />
-        <span>{languageLabel}</span>
-      </a>
+      <LanguageSwitcher locale={locale} />
       <a
         href={call.href}
         class="outline-button hidden min-h-0 px-3 py-2 text-xs font-semibold sm:inline-flex sm:px-4"

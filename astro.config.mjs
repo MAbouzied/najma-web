@@ -122,9 +122,9 @@ export default defineConfig({
       filter: (page) => {
         try {
           const path = new URL(page).pathname;
-          return !/\/(book|go|api|admin|login|blogs)(\/|$)/.test(path);
+          return !/\/(book|go|form|api|admin|login|blogs)(\/|$)/.test(path);
         } catch {
-          return !/\/(book|go|api|admin|login|blogs)(\/|$)/.test(page);
+          return !/\/(book|go|form|api|admin|login|blogs)(\/|$)/.test(page);
         }
       },
     }),

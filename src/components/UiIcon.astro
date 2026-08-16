@@ -1,0 +1,67 @@
+---
+export type UiIconName = 'location' | 'hours' | 'phone' | 'send' | 'instagram' | 'snapchat' | 'lang';
+
+export interface Props {
+  name: UiIconName;
+  class?: string;
+}
+
+const { name, class: className = 'size-4' } = Astro.props;
+---
+
+{
+  name === 'location' && (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" class:list={[className, 'shrink-0']} aria-hidden="true">
+      <path d="M8.401 14.533C9.641 13.462 13.333 9.995 13.333 6.667a5.333 5.333 0 1 0-10.666 0c0 3.328 3.692 6.795 4.932 7.866a.667.667 0 0 0 .802 0Z" stroke="currentColor" stroke-width="1.333" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M8 8.667A2 2 0 1 0 8 4.667a2 2 0 0 0 0 4Z" stroke="currentColor" stroke-width="1.333" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  )
+}
+{
+  name === 'hours' && (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" class:list={[className, 'shrink-0']} aria-hidden="true">
+      <path d="M8 14.667A6.667 6.667 0 1 0 8 1.333a6.667 6.667 0 0 0 0 13.334Z" stroke="currentColor" stroke-width="1.333" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M8 4v4l2.667 1.333" stroke="currentColor" stroke-width="1.333" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  )
+}
+{
+  name === 'phone' && (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" class:list={[className, 'shrink-0']} aria-hidden="true">
+      <path d="M9.221 11.045a1.33 1.33 0 0 0 1.475-.202L10.267 10.533A2 2 0 0 1 11.333 10H13.333A1.333 1.333 0 0 1 14.667 11.333V13.333A1.333 1.333 0 0 1 13.333 14.667C6.15 14.667 1.333 9.85 1.333 2.667A1.333 1.333 0 0 1 2.667 1.333H4.667A1.333 1.333 0 0 1 6 2.667V4.667A2 2 0 0 1 5.467 5.733L5.155 5.967a1.33 1.33 0 0 0-.195 1.822 10.67 10.67 0 0 0 4.261 3.256Z" stroke="currentColor" stroke-width="1.333" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  )
+}
+{
+  name === 'send' && (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" class:list={[className, 'shrink-0']} aria-hidden="true">
+      <path d="M9.691 14.457a.667.667 0 0 0 .624-.016L14.649 1.775a.667.667 0 0 0-.424-1.424L1.559 5.685a.667.667 0 0 0 .016 1.245l5.287 2.12a2 2 0 0 1 .741.74l2.12 5.288a.667.667 0 0 0 .968.379Z" stroke="currentColor" stroke-width="1.333" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M14.569 1.431 7.276 8.724" stroke="currentColor" stroke-width="1.333" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  )
+}
+{
+  name === 'instagram' && (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" class:list={[className, 'shrink-0']} aria-hidden="true">
+      <path d="M11.333 1.333H4.667A3.333 3.333 0 0 0 1.333 4.667v6.666a3.333 3.333 0 0 0 3.334 3.334h6.666a3.333 3.333 0 0 0 3.334-3.334V4.667a3.333 3.333 0 0 0-3.334-3.334Z" stroke="currentColor" stroke-width="1.333" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M10.667 7.58a2.667 2.667 0 1 1-5.247.276A2.667 2.667 0 0 1 10.667 7.58Z" stroke="currentColor" stroke-width="1.333" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M11.667 4.333h.006" stroke="currentColor" stroke-width="1.333" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  )
+}
+{
+  name === 'lang' && (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" class:list={[className, 'shrink-0']} aria-hidden="true">
+      <circle cx="8" cy="8" r="6.333" stroke="currentColor" stroke-width="1.333" />
+      <path d="M1.667 8h12.666" stroke="currentColor" stroke-width="1.333" stroke-linecap="round" />
+      <path d="M8 1.667c1.667 1.666 2.5 3.833 2.5 6.333S9.667 12.667 8 14.333C6.333 12.667 5.5 10.5 5.5 8S6.333 3.333 8 1.667Z" stroke="currentColor" stroke-width="1.333" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  )
+}
+{
+  name === 'snapchat' && (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class:list={[className, 'shrink-0']} aria-hidden="true">
+      <path fill="currentColor" d="M12 2a6 6 0 0 0-6 6v1.875L5.1 9.2a1 1 0 1 0-1.2 1.6l1.866 1.4c-.444 1.168-1.527 2.39-3.28 3.443a1.01 1.01 0 0 0-.318 1.412C3.286 18.732 5.06 20 7 20c1.784 0 3.007 2 5 2c2.011 0 3.209-2 5-2c1.94 0 3.714-1.268 4.832-2.945a1.01 1.01 0 0 0-.318-1.412c-1.753-1.053-2.836-2.275-3.28-3.443l1.866-1.4a1 1 0 1 0-1.2-1.6l-.9.675V8a6 6 0 0 0-6-6" />
+    </svg>
+  )
+}

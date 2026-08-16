@@ -469,10 +469,6 @@ export const faqs: Faq[] = [
     answer: { ar: 'نعم، يمكنك تعديل أو إلغاء الحجز قبل الموعد بـ ٢٤ ساعة دون رسوم.', en: 'Yes, you can modify or cancel your booking up to 24 hours before the appointment at no charge.' },
   },
   {
-    question: { ar: 'هل الجلسات مناسبة للحامل؟', en: 'Are the sessions suitable for pregnant women?' },
-    answer: { ar: 'نوفر جلسات مخصصة للحامل بعد استشارة الطبيب، ويرجى إبلاغ فريق الحجز مسبقًا.', en: 'We offer specialized sessions for pregnant women after doctor consultation. Please inform the booking team in advance.' },
-  },
-  {
     question: { ar: 'هل توفرون غرفًا خاصة؟', en: 'Do you offer private rooms?' },
     answer: { ar: 'نعم، جميع جلساتنا تُقدّم في غرف خاصة مصممة لتوفير الراحة والخصوصية التامة.', en: 'Yes, all our sessions are provided in private rooms designed for comfort and complete privacy.' },
   },

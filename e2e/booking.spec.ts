@@ -24,6 +24,29 @@ async function captureWhatsApp(page: import('@playwright/test').Page) {
   });
 }
 
+test.describe('booking form layout', () => {
+  test('stacks labels above fields on a narrow phone', async ({ page }, testInfo) => {
+    test.skip(testInfo.project.name !== 'chromium-mobile', 'Mobile layout check');
+
+    await page.goto('/book/', { waitUntil: 'networkidle' });
+    const fields = page.locator('#booking-form .field');
+    await expect(fields).toHaveCount(4);
+
+    for (let index = 0; index < 4; index += 1) {
+      const field = fields.nth(index);
+      const label = field.locator(':scope > span');
+      const control = field.locator('input, select, textarea').first();
+      const labelBox = await label.boundingBox();
+      const controlBox = await control.boundingBox();
+
+      expect(labelBox, `field ${index} label`).toBeTruthy();
+      expect(controlBox, `field ${index} control`).toBeTruthy();
+      expect(controlBox!.y).toBeGreaterThan(labelBox!.y + labelBox!.height - 1);
+      expect(controlBox!.width).toBeGreaterThan(240);
+    }
+  });
+});
+
 test.describe('booking WhatsApp flow', () => {
   test('Arabic booking deep-link preselects and opens WhatsApp', async ({ page }) => {
     await page.route('**/api/customers**', async (route) => {

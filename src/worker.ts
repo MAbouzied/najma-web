@@ -11,7 +11,11 @@ export default {
   fetch(request: Request, env: WorkerEnv, ctx: ExecutionContext): Response | Promise<Response> {
     const url = new URL(request.url);
     // Never intercept Astro's Cloudflare prerender protocol endpoints.
-    if (!url.pathname.startsWith('/__astro_')) {
+    if (
+      !url.pathname.startsWith('/__astro_')
+      && !url.pathname.startsWith('/_image')
+      && !url.pathname.startsWith('/@')
+    ) {
       const early = resolveLegacyResponse(url.pathname, url.search);
       if (early) return early;
     }

@@ -1,0 +1,32 @@
+---
+import UiIcon from './UiIcon.astro';
+import { localePath, switchLocalePath } from '../i18n/paths';
+import { t } from '../i18n/t';
+import type { Locale } from '../i18n/types';
+
+export interface Props {
+  locale?: Locale;
+}
+
+const { locale = 'ar' } = Astro.props;
+const isEnglish = locale === 'en';
+const altLocale = isEnglish ? 'ar' : 'en';
+const pathname = Astro.url.pathname;
+const isStatusPath = /(?:^|\/)404\/?$/.test(pathname);
+const languageHref = isStatusPath
+  ? localePath('/', altLocale)
+  : `${switchLocalePath(pathname, altLocale)}${Astro.url.search}`;
+const languageLabel = isEnglish ? 'AR' : 'EN';
+const languageAriaLabel = isEnglish ? t(locale, 'langSwitchAr') : t(locale, 'langSwitchEn');
+---
+
+<a
+  href={languageHref}
+  class="outline-button min-h-0 gap-1.5 px-3 py-2 text-xs font-semibold uppercase tracking-wide sm:px-4"
+  aria-label={languageAriaLabel}
+  hreflang={altLocale}
+  data-language-switcher
+>
+  <UiIcon name="lang" class="size-4 text-gold" />
+  <span>{languageLabel}</span>
+</a>

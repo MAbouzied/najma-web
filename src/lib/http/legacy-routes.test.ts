@@ -156,6 +156,7 @@ describe('current routes pass through', () => {
     '/blogs/dalil-anwaa-almasaj-hafr-albatin/',
     '/book/',
     '/go/',
+    '/form/',
     '/api/customers',
     '/api/auth/callback',
     '/admin/',
@@ -191,6 +192,10 @@ describe('edge cases', () => {
     expectPassthrough('/robots.txt');
     expectPassthrough('/sitemap-index.xml');
     expectPassthrough('/_astro/chunk.js');
+    expectPassthrough('/_image');
+    expectPassthrough('/assets/icons/send.svg');
+    expectPassthrough('/assets/nagm-logo.png');
+    expectPassthrough('/favicon.ico');
   });
 
   it('redirect target is not itself a legacy source', () => {

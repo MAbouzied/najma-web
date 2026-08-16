@@ -9,11 +9,12 @@ export interface Props {
   size?: 'header' | 'footer';
   current?: boolean;
   locale?: Locale;
+  showName?: boolean;
 }
 
-const { size = 'header', current = false, locale = 'ar' } = Astro.props;
-const imageSize = size === 'footer' ? 'size-[71px]' : 'size-[45px]';
-const pixelSize = size === 'footer' ? 71 : 45;
+const { size = 'header', current = false, locale = 'ar', showName = true } = Astro.props;
+const imageSize = size === 'footer' ? 'size-20' : 'size-12';
+const pixelSize = size === 'footer' ? 160 : 96;
 const homeHref = localePath('/', locale);
 ---
 
@@ -28,13 +29,15 @@ const homeHref = localePath('/', locale);
     alt=""
     width={pixelSize}
     height={pixelSize}
-    format="webp"
-    quality="mid"
+    format="png"
+    quality="max"
     loading="eager"
     decoding="async"
     class:list={['block object-contain', imageSize]}
   />
-  <span class:list={['text-gold-gradient font-bold tracking-[0.2px]', size === 'footer' ? 'text-xl' : 'text-xl']}>
-    {t(locale, 'brandName')}
-  </span>
+  {showName && (
+    <span class="text-gold-gradient text-xl font-bold tracking-[0.2px]">
+      {t(locale, 'brandName')}
+    </span>
+  )}
 </a>

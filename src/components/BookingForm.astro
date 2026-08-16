@@ -48,26 +48,26 @@ const copy = isEnglish
 
 <form
   id="booking-form"
-  class="rounded-3xl border border-border-card bg-bg-form p-6 shadow-[0_28px_80px_-52px_var(--color-gold)] sm:p-9"
+  class="w-full min-w-0 max-w-full overflow-x-clip rounded-3xl border border-border-card bg-bg-form p-5 shadow-[0_28px_80px_-52px_var(--color-gold)] sm:p-9"
   data-locale={locale}
   data-saving={copy.saving}
   data-redirecting={copy.redirecting}
   data-invalid={copy.invalid}
 >
-  <div class="grid gap-5 sm:grid-cols-2">
-    <label class="field">
+  <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
+    <label class="field flex min-w-0 flex-col gap-2 text-sm text-text-muted">
       <span>{copy.name}</span>
-      <input name="name" type="text" autocomplete="name" minlength="2" maxlength="80" placeholder={copy.namePlaceholder} required />
+      <input class="form-control" name="name" type="text" autocomplete="name" minlength="2" maxlength="80" placeholder={copy.namePlaceholder} required />
     </label>
-    <label class="field">
+    <label class="field flex min-w-0 flex-col gap-2 text-sm text-text-muted">
       <span>{copy.phone}</span>
-      <input name="phone" type="tel" inputmode="tel" autocomplete="tel" pattern="(?:\+?966|0)?5[0-9]{8}" placeholder={copy.phonePlaceholder} required dir="ltr" />
+      <input class="form-control" name="phone" type="tel" inputmode="tel" autocomplete="tel" pattern="(?:\+?966|0)?5[0-9]{8}" placeholder={copy.phonePlaceholder} required dir="ltr" />
     </label>
   </div>
 
-  <label class="field mt-5">
+  <label class="field mt-5 flex min-w-0 flex-col gap-2 text-sm text-text-muted">
     <span>{copy.booking}</span>
-    <select name="booking" required>
+    <select class="form-control" name="booking" required>
       <option value="">{copy.choose}</option>
       <optgroup label={copy.services}>
         {services.map((service) => (
@@ -93,9 +93,9 @@ const copy = isEnglish
     </select>
   </label>
 
-  <label class="field mt-5">
+  <label class="field mt-5 flex min-w-0 flex-col gap-2 text-sm text-text-muted">
     <span>{copy.note}</span>
-    <textarea name="note" rows="4" maxlength="500" placeholder={copy.notePlaceholder}></textarea>
+    <textarea class="form-control" name="note" rows="4" maxlength="500" placeholder={copy.notePlaceholder}></textarea>
   </label>
 
   <label class="hidden" aria-hidden="true">
@@ -103,8 +103,8 @@ const copy = isEnglish
     <input name="company" type="text" tabindex="-1" autocomplete="off" />
   </label>
 
-  <div class="mt-6 flex flex-wrap items-center gap-4">
-    <button type="submit" class="gold-button">
+  <div class="mt-6 flex flex-col items-stretch gap-4 sm:flex-row sm:flex-wrap sm:items-center">
+    <button type="submit" class="gold-button w-full disabled:cursor-wait disabled:opacity-60 sm:w-auto">
       <WhatsAppIcon class="size-[17px] text-text-btn" />
       {copy.submit}
     </button>
@@ -171,44 +171,3 @@ const copy = isEnglish
   }
 </script>
 
-<style>
-  .field {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    color: var(--color-text-muted);
-    font-size: 14px;
-  }
-
-  input,
-  select,
-  textarea {
-    width: 100%;
-    border: 1px solid var(--color-border-input);
-    border-radius: 16px;
-    background: var(--color-bg-input);
-    color: var(--color-text-primary);
-    padding: 12px 17px;
-  }
-
-  input,
-  select {
-    min-height: 48px;
-  }
-
-  textarea {
-    resize: vertical;
-  }
-
-  input:focus,
-  select:focus,
-  textarea:focus {
-    border-color: var(--color-gold);
-    outline: none;
-  }
-
-  button:disabled {
-    cursor: wait;
-    opacity: 0.65;
-  }
-</style>

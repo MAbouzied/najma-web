@@ -167,7 +167,7 @@ export const ui = {
     contactFormName: 'الاسم الكامل',
     contactFormEmail: 'البريد الإلكتروني',
     contactFormService: 'الخدمة المطلوبة',
-    contactFormMessage: 'رسالتك',
+    contactFormMessage: 'رسالتك (اختياري)',
     contactFormPhonePlaceholder: '+٩٦٦',
     contactFormNamePlaceholder: 'اكتب اسمك',
     contactFormServicePlaceholder: 'مثال: مساج سويدي، حمام مغربي...',
@@ -186,6 +186,10 @@ export const ui = {
     goWhatsappLabel: 'واتساب',
     goCallLabel: 'اتصال',
     goDirectionsLabel: 'الاتجاهات',
+
+    formPageTitle: 'تواصل معنا - نجم سبا',
+    formPageDescription:
+      'أرسل اسمك ورقم جوالك واختر الخدمة، ثم أكمل التواصل عبر واتساب. مفتوح ٢٤ ساعة في حفر الباطن.',
 
     servicesHeroBadge: 'خدماتنا',
     servicesHeroTitle: 'خدماتنا',
@@ -438,7 +442,7 @@ export const ui = {
     contactFormName: 'Full Name',
     contactFormEmail: 'Email',
     contactFormService: 'Requested Service',
-    contactFormMessage: 'Your Message',
+    contactFormMessage: 'Your message (optional)',
     contactFormPhonePlaceholder: '+966',
     contactFormNamePlaceholder: 'Enter your name',
     contactFormServicePlaceholder: 'e.g. Swedish massage, Moroccan bath...',
@@ -457,6 +461,10 @@ export const ui = {
     goWhatsappLabel: 'WhatsApp',
     goCallLabel: 'Call',
     goDirectionsLabel: 'Directions',
+
+    formPageTitle: 'Contact us - Nagm Spa',
+    formPageDescription:
+      'Enter your name and mobile number, choose a service, then continue on WhatsApp. Open 24 hours in Hafar Al-Batin.',
 
     servicesHeroBadge: 'Our Services',
     servicesHeroTitle: 'Our',
