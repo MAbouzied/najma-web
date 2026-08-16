@@ -31,8 +31,8 @@ test('renders all data-driven homepage collections', () => {
   assert.equal((homeHtml.match(/data-package-card/g) ?? []).length, 3);
   assert.equal((homeHtml.match(/data-branch-card/g) ?? []).length, 1);
   assert.equal((homeHtml.match(/data-testimonial-card/g) ?? []).length, 6);
-  // 8 FAQ items + zero-hydration mobile nav <details>
-  assert.equal((homeHtml.match(/<details/g) ?? []).length, 9);
+  // 7 FAQ items + mobile nav + header theme + footer theme
+  assert.equal((homeHtml.match(/<details/g) ?? []).length, 10);
   assert.match(homeHtml, /data-mobile-nav/);
 });
 
@@ -67,7 +67,8 @@ test('links service and package cards to detail pages with WhatsApp and call but
   assert.match(homeHtml, /href="\/offers\/"[^>]*>[\s\S]*?كل العروض/);
   assert.match(homeHtml, /data-package-card[\s\S]*?href="\/packages\/luxury\/"/);
   assert.match(homeHtml, /data-package-card[\s\S]*?api\.whatsapp\.com\/send\/\?phone=966579777407/);
-  assert.match(homeHtml, /\/assets\/icons\/lang\.svg/);
+  assert.match(homeHtml, /data-language-switcher/);
+  assert.match(homeHtml, /data-theme-switcher/);
   assert.match(homeHtml, />EN</);
   assert.match(homeHtml, /آراؤنا على خرائط جوجل/);
 });

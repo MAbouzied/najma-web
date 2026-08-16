@@ -1,5 +1,15 @@
 ---
-export type UiIconName = 'location' | 'hours' | 'phone' | 'send' | 'instagram' | 'snapchat' | 'lang';
+export type UiIconName =
+  | 'location'
+  | 'hours'
+  | 'phone'
+  | 'send'
+  | 'instagram'
+  | 'snapchat'
+  | 'lang'
+  | 'arrow'
+  | 'star'
+  | 'mail';
 
 export interface Props {
   name: UiIconName;
@@ -55,6 +65,29 @@ const { name, class: className = 'size-4' } = Astro.props;
       <circle cx="8" cy="8" r="6.333" stroke="currentColor" stroke-width="1.333" />
       <path d="M1.667 8h12.666" stroke="currentColor" stroke-width="1.333" stroke-linecap="round" />
       <path d="M8 1.667c1.667 1.666 2.5 3.833 2.5 6.333S9.667 12.667 8 14.333C6.333 12.667 5.5 10.5 5.5 8S6.333 3.333 8 1.667Z" stroke="currentColor" stroke-width="1.333" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  )
+}
+{
+  name === 'arrow' && (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" class:list={[className, 'shrink-0']} aria-hidden="true">
+      <path d="M8 12.667 3.333 8 8 3.333" stroke="currentColor" stroke-width="1.333" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M12.667 8H3.333" stroke="currentColor" stroke-width="1.333" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  )
+}
+{
+  name === 'star' && (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14" fill="none" class:list={[className, 'shrink-0']} aria-hidden="true">
+      <path d="M7 1.165 8.187 4.884a1.17 1.17 0 0 0 .93.93L12.835 7l-3.718 1.187a1.17 1.17 0 0 0-.93.93L7 12.835 5.813 9.116a1.17 1.17 0 0 0-.93-.93L1.165 7l3.718-1.187a1.17 1.17 0 0 0 .93-.93Z" stroke="currentColor" stroke-width="1.167" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  )
+}
+{
+  name === 'mail' && (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" class:list={[className, 'shrink-0']} aria-hidden="true">
+      <path d="M22 7 13.01 12.727a2 2 0 0 1-2.01 0L2 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
     </svg>
   )
 }

@@ -36,6 +36,18 @@ test('renders VAT registration number with certificate link to public image', ()
   assert.match(enVatAnchor, /rel="noopener noreferrer"/);
 });
 
+test('renders a footer theme switcher with four named colors', () => {
+  assert.match(homeHtml, /data-theme-switcher/);
+  assert.match(homeHtml, /data-theme-option="deep"/);
+  assert.match(homeHtml, /data-theme-option="grove"/);
+  assert.match(homeHtml, /data-theme-option="cedar"/);
+  assert.match(homeHtml, /data-theme-option="mist"/);
+  assert.match(homeHtml, /الحالي/);
+  assert.match(homeHtml, /هادئ/);
+  assert.match(homeHtml, /closest\('\[data-theme-option\]'\)/);
+  assert.match(homeHtml, /setAttribute\('data-theme'/);
+});
+
 test('presents licensing details as an accessible responsive card grid', () => {
   assert.match(homeHtml, /<dl[^>]*data-license-grid/);
   assert.equal(homeHtml.match(/data-license-card/g)?.length, 5);

@@ -5,6 +5,7 @@ import { buildWhatsAppUrl } from '../lib/whatsapp';
 import { t } from '../i18n/t';
 import type { Locale } from '../i18n/types';
 import ContactActions from './ContactActions.astro';
+import UiIcon from './UiIcon.astro';
 
 export interface Props {
   branch: Branch;
@@ -30,21 +31,21 @@ const branchBookingHref = buildWhatsAppUrl(
     <div>
       <dt class="sr-only">{locale === 'en' ? 'Address' : 'العنوان'}</dt>
       <dd class="flex items-center gap-2">
-        <img src="/assets/icons/location.svg" alt="" width="16" height="16" class="size-4 shrink-0" />
+        <UiIcon name="location" class="size-4" />
         <span>{branch.address}</span>
       </dd>
     </div>
     <div>
       <dt class="sr-only">{locale === 'en' ? 'Hours' : 'ساعات العمل'}</dt>
       <dd class="flex items-center gap-2">
-        <img src="/assets/icons/hours.svg" alt="" width="16" height="16" class="size-4 shrink-0" />
+        <UiIcon name="hours" class="size-4" />
         <span>{branch.hours}</span>
       </dd>
     </div>
     <div>
       <dt class="sr-only">{t(locale, 'contactLabelPhone')}</dt>
       <dd class="flex items-center gap-2" dir="ltr">
-        <img src="/assets/icons/branch-phone.svg" alt="" width="16" height="16" class="size-4 shrink-0" />
+        <UiIcon name="phone" class="size-4" />
         {branch.phoneHref ? (
           <a
             href={branch.phoneHref}

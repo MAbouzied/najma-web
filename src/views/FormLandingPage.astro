@@ -3,6 +3,7 @@ import BrandLogo from '../components/BrandLogo.astro';
 import BranchesSection from '../components/BranchesSection.astro';
 import ContactForm from '../components/ContactForm.astro';
 import LanguageSwitcher from '../components/LanguageSwitcher.astro';
+import ThemeSwitcher from '../components/ThemeSwitcher.astro';
 import SiteLayout from '../layouts/SiteLayout.astro';
 import { getBranches } from '../data/branches';
 import { localePath } from '../i18n/paths';
@@ -35,7 +36,10 @@ const branches = getBranches(locale);
     <div class="page-container flex min-h-dvh w-full min-w-0 flex-col py-8 sm:py-10">
       <div class="flex items-center justify-between gap-4">
         <BrandLogo locale={locale} showName={false} />
-        <LanguageSwitcher locale={locale} />
+        <div class="flex items-center gap-2">
+          <LanguageSwitcher locale={locale} />
+          <ThemeSwitcher locale={locale} placement="down" compact />
+        </div>
       </div>
 
       <nav class="mt-6" aria-label={t(locale, 'breadcrumbsAria')} data-form-landing-crumb>

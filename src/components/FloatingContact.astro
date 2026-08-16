@@ -3,6 +3,7 @@ import { getBookingAction, getCallAction, type Locale } from '../data/site';
 import { t } from '../i18n/t';
 import { GTM_EVENTS, gtmContactAttrs } from '../lib/gtm';
 import WhatsAppIcon from './WhatsAppIcon.astro';
+import UiIcon from './UiIcon.astro';
 
 export interface Props {
   locale?: Locale;
@@ -34,7 +35,7 @@ const call = getCallAction(locale);
       aria-label={t(locale, 'actionCallNow')}
       {...gtmContactAttrs(GTM_EVENTS.call, 'floating')}
     >
-      <img src="/assets/icons/branch-phone.svg" alt="" width="20" height="20" class="size-5" />
+      <UiIcon name="phone" class="size-5" />
     </a>
   </div>
 </div>

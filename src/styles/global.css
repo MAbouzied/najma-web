@@ -200,6 +200,96 @@ textarea.form-control {
   }
 }
 
+@layer theme {
+  html[data-theme='deep'] {
+    --color-bg-primary: #0e2323;
+    --color-bg-hero: #081616;
+    --color-bg-secondary: #102524;
+    --color-bg-tertiary: #142b2a;
+    --color-bg-footer: #142b28;
+    --color-bg-card: #132c2b;
+    --color-bg-form: #163534;
+    --color-bg-stat: rgba(16, 36, 28, 0.6);
+    --color-bg-cta-edge: #0e2929;
+    --color-bg-cta-center: #061010;
+    --color-bg-input: rgba(14, 35, 35, 0.51);
+    --color-bg-badge: rgba(8, 24, 14, 0.5);
+    --color-bg-social: rgba(14, 35, 35, 0.57);
+  }
+
+  html[data-theme='grove'] {
+    --color-bg-primary: #1a3c39;
+    --color-bg-hero: #14322f;
+    --color-bg-secondary: #1e4440;
+    --color-bg-tertiary: #234c47;
+    --color-bg-footer: #204843;
+    --color-bg-card: #22504b;
+    --color-bg-form: #275651;
+    --color-bg-stat: rgba(32, 68, 58, 0.6);
+    --color-bg-cta-edge: #1a403c;
+    --color-bg-cta-center: #122926;
+    --color-bg-input: rgba(22, 52, 48, 0.55);
+    --color-bg-badge: rgba(20, 48, 40, 0.5);
+    --color-bg-social: rgba(22, 52, 48, 0.57);
+  }
+
+  html[data-theme='cedar'] {
+    --color-bg-primary: #224640;
+    --color-bg-hero: #1b3a35;
+    --color-bg-secondary: #264e48;
+    --color-bg-tertiary: #2b5650;
+    --color-bg-footer: #254c46;
+    --color-bg-card: #2a544e;
+    --color-bg-form: #2f5c56;
+    --color-bg-stat: rgba(34, 70, 64, 0.6);
+    --color-bg-cta-edge: #224640;
+    --color-bg-cta-center: #16322e;
+    --color-bg-input: rgba(26, 56, 52, 0.55);
+    --color-bg-badge: rgba(24, 52, 48, 0.5);
+    --color-bg-social: rgba(26, 56, 52, 0.57);
+    --color-gold: #e1af4a;
+    --color-gold-dark: #a36e09;
+    --color-gold-light: #eccd8c;
+  }
+
+  html[data-theme='mist'] {
+    --color-bg-primary: #2a3940;
+    --color-bg-hero: #1e2b31;
+    --color-bg-secondary: #33444c;
+    --color-bg-tertiary: #3b4f58;
+    --color-bg-footer: #2f4048;
+    --color-bg-card: #385058;
+    --color-bg-form: #415960;
+    --color-bg-stat: rgba(48, 68, 76, 0.58);
+    --color-bg-cta-edge: #2a3940;
+    --color-bg-cta-center: #172328;
+    --color-bg-input: rgba(36, 52, 58, 0.55);
+    --color-bg-badge: rgba(40, 58, 64, 0.5);
+    --color-bg-social: rgba(36, 52, 58, 0.58);
+    --color-text-muted: #c3d0d3;
+    --color-text-nav: #dce6e8;
+    --color-text-placeholder: rgba(220, 230, 232, 0.5);
+    --color-border-input: rgba(168, 190, 196, 0.36);
+    --color-border-card: rgba(168, 190, 196, 0.2);
+  }
+}
+
+.theme-swatch[data-swatch='deep'] {
+  background: #0e2323;
+}
+
+.theme-swatch[data-swatch='grove'] {
+  background: #1a3c39;
+}
+
+.theme-swatch[data-swatch='cedar'] {
+  background: #224640;
+}
+
+.theme-swatch[data-swatch='mist'] {
+  background: #8aa4aa;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

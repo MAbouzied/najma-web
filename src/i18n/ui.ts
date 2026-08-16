@@ -36,6 +36,11 @@ export const ui = {
     footerOurServices: 'خدماتنا',
     footerContactUs: 'تواصل معنا',
     footerCopyright: '© 2026 نجم سبا. جميع الحقوق محفوظة.',
+    themeSwitcherLabel: 'لون الموقع',
+    themeDeep: 'الحالي',
+    themeGrove: 'هادئ',
+    themeCedar: 'دافئ',
+    themeMist: 'مضيء',
 
     licenseTitle: 'بيانات الترخيص الرسمية',
     licenseCommercialRegister: 'السجل التجاري (الرقم الوطني الموحد)',
@@ -311,6 +316,11 @@ export const ui = {
     footerOurServices: 'Our Services',
     footerContactUs: 'Contact Us',
     footerCopyright: '© 2026 Nagm Spa. All rights reserved.',
+    themeSwitcherLabel: 'Site color',
+    themeDeep: 'Current',
+    themeGrove: 'Soft',
+    themeCedar: 'Warm',
+    themeMist: 'Airy',
 
     licenseTitle: 'Official Licensing Information',
     licenseCommercialRegister: 'Commercial Register (Unified National No.)',

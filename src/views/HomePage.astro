@@ -11,6 +11,7 @@ import BranchGrid from '../components/BranchGrid.astro';
 import TestimonialGrid from '../components/TestimonialGrid.astro';
 import FaqAccordion from '../components/FaqAccordion.astro';
 import CTASection from '../components/CTASection.astro';
+import UiIcon from '../components/UiIcon.astro';
 import {
 	getBenefits,
 	getFaqs,
@@ -174,7 +175,7 @@ const offersDescription = t(locale, 'homeOffersDescription').replace('{discount}
 					rel="noopener noreferrer"
 					class="outline-button"
 				>
-					<img src="/assets/icons/star.svg" alt="" width="16" height="16" class="size-4" />
+					<UiIcon name="star" class="size-4" />
 					{t(locale, 'homeTestimonialsGoogleLink')}
 				</a>
 			</div>

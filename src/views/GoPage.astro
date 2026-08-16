@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import SiteLayout from '../layouts/SiteLayout.astro';
 import BrandLogo from '../components/BrandLogo.astro';
 import WhatsAppIcon from '../components/WhatsAppIcon.astro';
+import UiIcon from '../components/UiIcon.astro';
 import {
   buildCallHref,
   buildGeneralContactUrl,
@@ -82,7 +83,7 @@ const contact = getContactDetails(locale);
           class="outline-button w-full min-h-14 text-base"
           {...gtmContactAttrs(GTM_EVENTS.call, 'go')}
         >
-          <img src="/assets/icons/branch-phone.svg" alt="" width="20" height="20" class="size-5" />
+          <UiIcon name="phone" class="size-5" />
           {t(locale, 'goCallLabel')}
         </a>
         <a
@@ -91,7 +92,7 @@ const contact = getContactDetails(locale);
           rel="noopener noreferrer"
           class="outline-button w-full min-h-14 text-base"
         >
-          <img src="/assets/icons/location.svg" alt="" width="20" height="20" class="size-5" />
+          <UiIcon name="location" class="size-5" />
           {t(locale, 'goDirectionsLabel')}
         </a>
       </div>

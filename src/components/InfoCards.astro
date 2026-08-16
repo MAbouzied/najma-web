@@ -1,9 +1,14 @@
 ---
 import type { Locale } from '../i18n/types';
 import { gtmAttrsForHref } from '../lib/gtm';
+import type { UiIconName } from './UiIcon.astro';
+import UiIcon from './UiIcon.astro';
+import WhatsAppIcon from './WhatsAppIcon.astro';
+
+export type InfoCardIcon = UiIconName | 'whatsapp';
 
 export interface Card {
-  icon: string;
+  icon: InfoCardIcon;
   label: string;
   value: string;
   href?: string;
@@ -38,8 +43,12 @@ function valueDir(value: string) {
           class="flex min-h-[178px] flex-col items-center justify-center gap-1 rounded-[20px] border border-border-card bg-bg-card p-6 text-center transition-transform hover:-translate-y-1"
           {...(card.href ? gtmAttrsForHref(card.href, 'info_cards') : {})}
         >
-          <div class="mb-2 flex size-12 items-center justify-center rounded-2xl bg-gold-gradient">
-            <img src={card.icon} alt="" width="24" height="24" class="size-6" />
+          <div class="mb-2 flex size-12 items-center justify-center rounded-2xl bg-gold-gradient text-text-btn">
+            {card.icon === 'whatsapp' ? (
+              <WhatsAppIcon class="size-6 text-text-btn" />
+            ) : (
+              <UiIcon name={card.icon} class="size-6" />
+            )}
           </div>
           <h2 class="pt-1 text-lg font-semibold leading-7 text-text-primary">{card.label}</h2>
           <span class="text-sm leading-5 text-text-muted" dir={valueDir(card.value)}>

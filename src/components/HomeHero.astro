@@ -5,6 +5,7 @@ import type { SiteAction } from '../data/site';
 import type { Locale } from '../i18n/types';
 import { gtmAttrsForHref } from '../lib/gtm';
 import { siteImage } from '../lib/site-images';
+import UiIcon from './UiIcon.astro';
 
 export interface Props {
   locale?: Locale;
@@ -44,7 +45,7 @@ const isExternalLink = (href: string) => /^(https?:\/\/|tel:|mailto:)/.test(href
   <div class="mx-auto flex w-full max-w-[896px] flex-col items-center px-5 py-16 text-center sm:px-8 lg:py-24" dir={dir}>
     <div>
       <div class="inline-flex items-center gap-2 rounded-full border border-border-badge bg-bg-badge px-4 py-1.5">
-        <img src="/assets/icons/star.svg" alt="" width="14" height="14" class="size-3.5" />
+        <UiIcon name="star" class="size-3.5" />
         <span class="text-xs font-medium text-gold">{eyebrow}</span>
       </div>
       <h1 class="mt-5 py-2 text-4xl font-bold leading-[1.25] tracking-[0.48px] sm:text-5xl lg:text-[60px]">
@@ -72,7 +73,7 @@ const isExternalLink = (href: string) => /^(https?:\/\/|tel:|mailto:)/.test(href
           class="gold-button"
           {...gtmAttrsForHref(primaryAction.href, 'home_hero')}
         >
-          <img src="/assets/icons/arrow.svg" alt="" width="16" height="16" class="size-4" />
+          <UiIcon name="arrow" class="size-4" />
           {primaryAction.label}
         </a>
       </div>

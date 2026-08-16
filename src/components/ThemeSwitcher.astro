@@ -1,0 +1,62 @@
+---
+import { THEME_IDS, type ThemeId } from '../lib/theme';
+import { t } from '../i18n/t';
+import type { Locale } from '../i18n/types';
+
+export interface Props {
+  locale?: Locale;
+  placement?: 'up' | 'down';
+  compact?: boolean;
+}
+
+const { locale = 'ar', placement = 'up', compact = false } = Astro.props;
+const labels: Record<ThemeId, string> = {
+  deep: t(locale, 'themeDeep'),
+  grove: t(locale, 'themeGrove'),
+  cedar: t(locale, 'themeCedar'),
+  mist: t(locale, 'themeMist'),
+};
+---
+
+<details class="theme-switcher relative" data-theme-switcher>
+  <summary
+    class="outline-button min-h-11 cursor-pointer list-none gap-2 px-3 py-2 text-xs font-semibold [&::-webkit-details-marker]:hidden"
+    aria-label={t(locale, 'themeSwitcherLabel')}
+  >
+    <span class="theme-swatch size-4 shrink-0 rounded-full border border-border-badge" data-theme-current-swatch></span>
+    {!compact && <span data-theme-current-label>{t(locale, 'themeSwitcherLabel')}</span>}
+  </summary>
+  <ul
+    class:list={[
+      'absolute inset-inline-end-0 z-30 min-w-44 rounded-xl border border-border-card bg-bg-card p-2 shadow-[0_16px_40px_-24px_var(--color-gold)]',
+      placement === 'down' ? 'top-full mt-2' : 'bottom-full mb-2',
+    ]}
+    role="menu"
+    aria-label={t(locale, 'themeSwitcherLabel')}
+  >
+    {
+      THEME_IDS.map((id) => (
+        <li role="presentation">
+          <button
+            type="button"
+            role="menuitemradio"
+            class="theme-option flex w-full items-center gap-2 rounded-lg px-2.5 py-2 text-start text-sm text-text-nav transition-colors hover:bg-bg-secondary hover:text-gold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+            data-theme-option={id}
+            aria-checked="false"
+          >
+            <span class="theme-swatch size-4 shrink-0 rounded-full border border-border-badge" data-swatch={id}></span>
+            <span>{labels[id]}</span>
+          </button>
+        </li>
+      ))
+    }
+  </ul>
+</details>
+
+<style>
+  .theme-option[aria-checked='true'] {
+    background: var(--color-bg-secondary);
+    color: var(--color-gold);
+    font-weight: 700;
+  }
+</style>

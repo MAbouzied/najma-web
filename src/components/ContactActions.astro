@@ -4,6 +4,7 @@ import { buildCallHref } from '../lib/whatsapp';
 import type { Locale } from '../i18n/types';
 import { t } from '../i18n/t';
 import WhatsAppIcon from './WhatsAppIcon.astro';
+import UiIcon from './UiIcon.astro';
 
 export interface Props {
   whatsappHref: string;
@@ -55,7 +56,7 @@ const outlineClass =
     aria-label={callLabel}
     {...gtmContactAttrs(GTM_EVENTS.call, gtmLocation)}
   >
-    <img src="/assets/icons/branch-phone.svg" alt="" width="16" height="16" class="size-4" />
+    <UiIcon name="phone" class="size-4" />
     {callLabel}
   </a>
 </div>

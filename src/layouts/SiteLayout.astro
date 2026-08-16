@@ -135,8 +135,74 @@ const gaMeasurementId = analyticsEnabled && PUBLIC_GA_MEASUREMENT_ID
 ---
 
 <!doctype html>
-<html lang={htmlLang} dir={htmlDir}>
+<html lang={htmlLang} dir={htmlDir} data-theme="grove">
   <head>
+    <script is:inline>
+      (function () {
+        var key = 'nagm-theme';
+        var labels = {
+          deep: { ar: 'الحالي', en: 'Current' },
+          grove: { ar: 'هادئ', en: 'Soft' },
+          cedar: { ar: 'دافئ', en: 'Warm' },
+          mist: { ar: 'مضيء', en: 'Airy' },
+        };
+
+        function resolve(value) {
+          return value === 'deep' || value === 'grove' || value === 'cedar' || value === 'mist'
+            ? value
+            : 'grove';
+        }
+
+        function apply(theme) {
+          document.documentElement.setAttribute('data-theme', theme);
+          try {
+            localStorage.setItem(key, theme);
+          } catch (error) {
+            // Private mode can block storage; the in-page theme still applies.
+          }
+        }
+
+        function sync(theme) {
+          var locale = document.documentElement.lang === 'en' ? 'en' : 'ar';
+          var switchers = document.querySelectorAll('[data-theme-switcher]');
+          for (var i = 0; i < switchers.length; i += 1) {
+            var root = switchers[i];
+            var swatch = root.querySelector('[data-theme-current-swatch]');
+            var label = root.querySelector('[data-theme-current-label]');
+            if (swatch) swatch.setAttribute('data-swatch', theme);
+            if (label) label.textContent = labels[theme][locale];
+            var options = root.querySelectorAll('[data-theme-option]');
+            for (var j = 0; j < options.length; j += 1) {
+              var button = options[j];
+              button.setAttribute(
+                'aria-checked',
+                button.getAttribute('data-theme-option') === theme ? 'true' : 'false',
+              );
+            }
+          }
+        }
+
+        try {
+          apply(resolve(localStorage.getItem(key)));
+        } catch (error) {
+          apply('grove');
+        }
+        sync(resolve(document.documentElement.getAttribute('data-theme')));
+
+        document.addEventListener('click', function (event) {
+          var target = event.target;
+          if (!target || !target.closest) return;
+          var option = target.closest('[data-theme-option]');
+          if (!option) return;
+          event.preventDefault();
+          var theme = resolve(option.getAttribute('data-theme-option'));
+          apply(theme);
+          sync(theme);
+          var switcher = option.closest('[data-theme-switcher]');
+          if (switcher) switcher.open = false;
+        });
+      })();
+    </script>
     <meta charset="utf-8" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />

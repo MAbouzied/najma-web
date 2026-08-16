@@ -6,6 +6,7 @@ import { t } from '../i18n/t';
 import type { Locale } from '../i18n/types';
 import { localImage } from '../lib/site-images';
 import ContactActions from './ContactActions.astro';
+import UiIcon from './UiIcon.astro';
 
 export interface Props {
   service: {
@@ -53,7 +54,7 @@ const cardImage = localImage(service.image);
         <span class="font-bold text-gold">{priceLabel}</span>
         {service.duration && (
           <span class="flex items-center gap-2 text-xs text-text-muted">
-            <img src="/assets/icons/hours.svg" alt="" width="15" height="15" class="size-[15px]" />
+            <UiIcon name="hours" class="size-[15px]" />
             {service.duration}
           </span>
         )}

@@ -1,4 +1,6 @@
 ---
+import UiIcon from './UiIcon.astro';
+
 export interface Props {
   badge?: string;
   title?: string;
@@ -15,7 +17,7 @@ const hasTitleSlot = Astro.slots.has('title');
     {
       badge && (
         <div class="flex items-center gap-2 rounded-full border border-border-badge bg-bg-badge px-4 py-1.5">
-          <img src="/assets/icons/star.svg" alt="" width="14" height="14" class="size-3.5" />
+          <UiIcon name="star" class="size-3.5" />
           <span class="text-gold text-xs font-medium">{badge}</span>
         </div>
       )

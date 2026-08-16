@@ -5,6 +5,7 @@ import Header from '../components/Header.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import ContactActions from '../components/ContactActions.astro';
 import CTASection from '../components/CTASection.astro';
+import UiIcon from '../components/UiIcon.astro';
 import { getCallAction } from '../data/site';
 import { localePath } from '../i18n/paths';
 import { t } from '../i18n/t';
@@ -77,7 +78,7 @@ const breadcrumbs = [
         <div class="mt-8 flex flex-wrap items-center gap-6 border-t border-border-card pt-6">
           {service.duration && (
             <div class="flex items-center gap-2 text-sm text-text-muted">
-              <img src="/assets/icons/hours.svg" alt="" width="16" height="16" class="size-4" />
+              <UiIcon name="hours" class="size-4" />
               <span>{t(locale, 'serviceDetailDuration')} {service.duration}</span>
             </div>
           )}
