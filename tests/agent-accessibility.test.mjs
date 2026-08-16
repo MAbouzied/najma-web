@@ -52,3 +52,8 @@ test('frame-ancestors is delivered via Cloudflare _headers', () => {
     /Content-Security-Policy:\s*frame-ancestors 'none'/,
   );
 });
+
+test('allows Snap Pixel Setup Tool scripts and frames', () => {
+  assert.match(astroConfig, /resource: 'https:\/\/\*\.snapchat\.com'/);
+  assert.match(astroConfig, /"frame-src[\s\S]*https:\/\/\*\.snapchat\.com"/);
+});

@@ -79,7 +79,7 @@ export default defineConfig({
         "object-src 'none'",
         "connect-src 'self' https://www.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com https://sc-static.net https://tr.snapchat.com https://*.snapchat.com",
         "img-src 'self' data: blob: https://cdn.sanity.io https://*.googleusercontent.com https://*.google-analytics.com https://tr.snapchat.com https://*.snapchat.com",
-        "font-src 'self'",
+        "font-src 'self' https://*.snapchat.com",
         "frame-src https://www.googletagmanager.com https://www.youtube-nocookie.com https://player.vimeo.com https://tr.snapchat.com https://*.snapchat.com",
         "media-src 'self' https://cdn.sanity.io",
       ],
@@ -102,12 +102,17 @@ export default defineConfig({
             resource: 'https://tr.snapchat.com',
             kind: 'element',
           },
+          {
+            resource: 'https://*.snapchat.com',
+            kind: 'element',
+          },
           { resource: "'none'", kind: 'attribute' },
         ],
       },
       styleDirective: {
         resources: [
           { resource: "'self'", kind: 'element' },
+          { resource: 'https://*.snapchat.com', kind: 'element' },
           { resource: "'unsafe-inline'", kind: 'attribute' },
         ],
       },
