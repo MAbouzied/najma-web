@@ -43,7 +43,11 @@ test('uses committed assets and shared site chrome', () => {
   assert.match(homeHtml, /\/_astro\/relaxation-massage\.[^"']+/);
   assert.match(homeHtml, /\/_astro\/manicure-pedicure\.[^"']+/);
   assert.match(homeHtml, /\/_astro\/expert-therapists\.[^"']+/);
-  assert.match(homeHtml, /data-home-hero[\s\S]*?<picture[\s\S]*?<\/picture>/);
+  assert.match(homeHtml, /data-home-hero[\s\S]*?data-hero-slider[\s\S]*?<picture[\s\S]*?<\/picture>/);
+  assert.equal((homeHtml.match(/data-hero-slide/g) ?? []).length, 6);
+  assert.match(homeHtml, /data-hero-next/);
+  assert.match(homeHtml, /data-hero-prev/);
+  assert.match(homeHtml, /showHeroSlide/);
   assert.match(homeHtml, /data-site-header/);
   assert.match(homeHtml, /aria-current="page"/);
   assert.match(homeHtml, /data-site-cta/);

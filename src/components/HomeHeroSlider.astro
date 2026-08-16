@@ -1,0 +1,141 @@
+---
+import { Picture } from 'astro:assets';
+import { HERO_SLIDE_ALT_KEYS, HERO_SLIDE_IDS } from '../lib/hero-slides';
+import { heroSlideImage } from '../lib/site-images';
+import { t } from '../i18n/t';
+import type { Locale } from '../i18n/types';
+import UiIcon from './UiIcon.astro';
+
+export interface Props {
+  locale?: Locale;
+}
+
+const { locale = 'ar' } = Astro.props;
+const slides = HERO_SLIDE_IDS.map((id) => ({
+  id,
+  image: heroSlideImage[id],
+  alt: t(locale, HERO_SLIDE_ALT_KEYS[id]),
+}));
+---
+
+<div
+  class="hero-slider w-full"
+  data-hero-slider
+  data-hero-index="0"
+  aria-roledescription="carousel"
+  aria-label={t(locale, 'homeHeroSliderAria')}
+>
+  <div class="hero-frame relative overflow-hidden rounded-2xl">
+    {
+      slides.map((slide, index) => (
+        <figure
+          data-hero-slide
+          class:list={['hero-slide', index === 0 && 'is-active']}
+          aria-hidden={index === 0 ? 'false' : 'true'}
+        >
+          <Picture
+            src={slide.image}
+            formats={['avif', 'webp']}
+            widths={[640, 960, 1280]}
+            sizes="(max-width: 640px) calc(100vw - 40px), (max-width: 1280px) calc(100vw - 64px), 768px"
+            quality="mid"
+            priority={index === 0}
+            alt={slide.alt}
+          />
+        </figure>
+      ))
+    }
+
+    <button
+      type="button"
+      class="hero-nav outline-button min-h-11 min-w-11 bg-bg-card/90 px-0 py-0"
+      data-hero-prev
+      aria-label={t(locale, 'homeHeroSliderPrev')}
+    >
+      <UiIcon name="arrow" class={locale === 'ar' ? 'size-4 rotate-180' : 'size-4'} />
+    </button>
+    <button
+      type="button"
+      class="hero-nav outline-button min-h-11 min-w-11 bg-bg-card/90 px-0 py-0"
+      data-hero-next
+      aria-label={t(locale, 'homeHeroSliderNext')}
+    >
+      <UiIcon name="arrow" class={locale === 'en' ? 'size-4 rotate-180' : 'size-4'} />
+    </button>
+  </div>
+
+  <div class="mt-4 flex flex-wrap items-center justify-center gap-2" role="tablist" aria-label={t(locale, 'homeHeroSliderAria')}>
+    {
+      slides.map((_, index) => (
+        <button
+          type="button"
+          class="hero-dot size-2.5 rounded-full border border-border-badge"
+          data-hero-dot
+          aria-label={`${index + 1}`}
+          aria-current={index === 0 ? 'true' : 'false'}
+        />
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .hero-frame {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+  }
+
+  .hero-slide {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 800ms ease, visibility 800ms ease;
+  }
+
+  .hero-slide.is-active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .hero-slide :global(picture),
+  .hero-slide :global(img) {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .hero-nav {
+    position: absolute;
+    top: 50%;
+    z-index: 2;
+    transform: translateY(-50%);
+  }
+
+  .hero-nav[data-hero-prev] {
+    inset-inline-start: 0.75rem;
+  }
+
+  .hero-nav[data-hero-next] {
+    inset-inline-end: 0.75rem;
+  }
+
+  .hero-dot[aria-current='true'] {
+    background: var(--color-gold);
+    border-color: var(--color-gold);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-slide {
+      transition: none;
+    }
+  }
+</style>

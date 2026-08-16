@@ -11,7 +11,7 @@
     "build": "astro build",
     "deploy": "npm run build && wrangler deploy",
     "check": "astro check",
-    "test:unit": "node --experimental-strip-types --test \"src/modules/**/*.test.ts\" \"src/lib/auth/**/*.test.ts\" \"src/lib/staff-access/**/*.test.ts\" \"src/lib/admin/**/*.test.ts\" \"src/lib/http/**/*.test.ts\" \"src/lib/cloudflare/**/*.test.ts\" \"src/lib/blog-html-sanitize.test.ts\" \"src/lib/blog-sitemap.test.ts\" \"src/lib/site-images.test.ts\" \"src/lib/responsive-image-url.test.ts\" \"src/lib/soft-nav.test.ts\" \"src/lib/theme.test.ts\"",
+    "test:unit": "node --experimental-strip-types --test \"src/modules/**/*.test.ts\" \"src/lib/auth/**/*.test.ts\" \"src/lib/staff-access/**/*.test.ts\" \"src/lib/admin/**/*.test.ts\" \"src/lib/http/**/*.test.ts\" \"src/lib/cloudflare/**/*.test.ts\" \"src/lib/blog-html-sanitize.test.ts\" \"src/lib/blog-sitemap.test.ts\" \"src/lib/site-images.test.ts\" \"src/lib/responsive-image-url.test.ts\" \"src/lib/soft-nav.test.ts\" \"src/lib/theme.test.ts\" \"src/lib/hero-slides.test.ts\"",
     "test:dist": "node --test tests/*.test.mjs",
     "preview:built": "npx wrangler dev --config dist/server/wrangler.json --port 4323 --ip 127.0.0.1",
     "test:browser:built": "playwright test",

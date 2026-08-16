@@ -1,10 +1,16 @@
 import type { ImageMetadata } from 'astro';
+import type { HeroSlideId } from './hero-slides';
 
 import logo from '../assets/nagm-logo.png';
 import contactCta from '../assets/contact-cta.jpg';
 import aboutMission from '../assets/about/mission.jpg';
 import aboutVision from '../assets/about/vision.jpg';
 import heroInterior from '../assets/home/hero-interior.jpg';
+import heroHallway from '../assets/home/hero-hallway.jpg';
+import heroEntrance from '../assets/home/hero-entrance.jpg';
+import heroRoomSign from '../assets/home/hero-room-sign.jpg';
+import heroMirror from '../assets/home/hero-mirror.jpg';
+import heroLounge from '../assets/home/hero-lounge.jpg';
 
 import expertTherapists from '../assets/home/benefits/expert-therapists.png';
 import luxuryProducts from '../assets/home/benefits/luxury-products.png';
@@ -78,10 +84,24 @@ export function localImage(publicPath: string): ImageMetadata {
   return image;
 }
 
+export const heroSlideImage: Record<HeroSlideId, ImageMetadata> = {
+  facade: heroInterior,
+  hallway: heroHallway,
+  entrance: heroEntrance,
+  'room-sign': heroRoomSign,
+  mirror: heroMirror,
+  lounge: heroLounge,
+};
+
 export const siteImage = {
   logo,
   contactCta,
   heroInterior,
+  heroHallway,
+  heroEntrance,
+  heroRoomSign,
+  heroMirror,
+  heroLounge,
   aboutMission,
   aboutVision,
 } as const;
