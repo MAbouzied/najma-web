@@ -34,6 +34,13 @@ test.describe('Snap Pixel', () => {
     expect(getErrors().filter((error) => /Content-Security-Policy|snaptr|sc-static/i.test(error))).toEqual([]);
   });
 
+  test('queues VIEW_CONTENT on a service detail page', async ({ page }) => {
+    await gotoReady(page, '/services/swedish-massage/');
+    const html = await page.content();
+    expect(html).toContain("snaptr('track', 'VIEW_CONTENT'");
+    expect(html).toContain('swedish-massage');
+  });
+
   test('is absent from login', async ({ page }) => {
     await page.goto('/login/', { waitUntil: 'domcontentloaded' });
     await expect(page.locator('meta[name="snap-pixel-id"]')).toHaveCount(0);

@@ -1,14 +1,24 @@
 ---
+import { contentFromPathname } from '../lib/snap-pixel';
+
 interface Props {
   pixelId: string;
 }
 
 const { pixelId } = Astro.props;
+const firstContent = contentFromPathname(Astro.url.pathname);
 ---
 
 <meta name="snap-pixel-id" content={pixelId} />
 
-<script is:inline define:vars={{ snapPixelId: pixelId }}>
+<script
+  is:inline
+  define:vars={{
+    snapPixelId: pixelId,
+    firstItemIds: firstContent?.item_ids ?? [],
+    firstItemCategory: firstContent?.item_category ?? '',
+  }}
+>
   (function (e, t, n) {
     if (e.snaptr) return;
     var a = (e.snaptr = function () {
@@ -21,14 +31,62 @@ const { pixelId } = Astro.props;
     var u = t.getElementsByTagName('script')[0];
     u.parentNode.insertBefore(s, u);
   })(window, document, 'https://sc-static.net/scevent.min.js');
+
+  var pageParams = firstItemCategory
+    ? { item_ids: firstItemIds, item_category: firstItemCategory }
+    : {};
   window.snaptr('init', snapPixelId, {});
-  window.snaptr('track', 'PAGE_VIEW');
+  window.snaptr('track', 'PAGE_VIEW', pageParams);
+  if (firstItemCategory) {
+    window.snaptr('track', 'VIEW_CONTENT', {
+      item_ids: firstItemIds,
+      item_category: firstItemCategory,
+      currency: 'SAR',
+    });
+  }
 </script>
 
 <script>
-  import { trackSnapPageView } from '../lib/snap-pixel';
+  import {
+    contentFromBookingHref,
+    contentFromPathname,
+    trackSnapAddCart,
+    trackSnapPageView,
+    trackSnapViewContent,
+  } from '../lib/snap-pixel';
 
-  document.addEventListener('nagm:page-load', () => {
-    trackSnapPageView();
-  });
+  function trackRoute(pathname: string) {
+    const content = contentFromPathname(pathname);
+    trackSnapPageView(content ?? {});
+    if (content) {
+      trackSnapViewContent({ ...content, currency: 'SAR' });
+    }
+  }
+
+  function onClick(event: Event) {
+    const target = event.target;
+    if (!(target instanceof Element)) {
+      return;
+    }
+
+    const link = target.closest('a[href]');
+    if (!(link instanceof HTMLAnchorElement)) {
+      return;
+    }
+
+    const content = contentFromBookingHref(link.href);
+    if (!content) {
+      return;
+    }
+
+    trackSnapAddCart(content);
+  }
+
+  if (!window.__nagmSnapBound) {
+    document.addEventListener('nagm:page-load', () => {
+      trackRoute(window.location.pathname);
+    });
+    document.addEventListener('click', onClick, true);
+    window.__nagmSnapBound = true;
+  }
 </script>

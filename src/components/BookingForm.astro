@@ -114,6 +114,7 @@ const copy = isEnglish
 
 <script>
   import { submitCustomerLead } from '../lib/customer-leads';
+  import { snapParamsFromBookingValue, trackSnapAddCart, trackSnapPurchase } from '../lib/snap-pixel';
   import { buildWhatsAppUrl } from '../lib/whatsapp';
 
   const form = document.querySelector<HTMLFormElement>('#booking-form');
@@ -129,6 +130,15 @@ const copy = isEnglish
       );
       if (option) bookingSelect.value = option.value;
     }
+
+    if (bookingSelect.value) {
+      trackSnapAddCart(snapParamsFromBookingValue(bookingSelect.value));
+    }
+
+    bookingSelect.addEventListener('change', () => {
+      if (!bookingSelect.value) return;
+      trackSnapAddCart(snapParamsFromBookingValue(bookingSelect.value));
+    });
 
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
@@ -161,6 +171,10 @@ const copy = isEnglish
         language,
         company,
       });
+      trackSnapPurchase(snapParamsFromBookingValue(bookingSelect.value, {
+        phone,
+        transactionId: `booking-${Date.now()}`,
+      }));
 
       const whatsappUrl = buildWhatsAppUrl(message);
       if (status) status.textContent = form.dataset.redirecting ?? '';

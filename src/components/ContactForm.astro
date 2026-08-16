@@ -108,6 +108,7 @@ const waLabels =
 
 <script>
   import { submitCustomerLead } from '../lib/customer-leads';
+  import { snapParamsFromBookingValue, trackSnapPurchase } from '../lib/snap-pixel';
 
   document.getElementById('contact-form')?.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -157,6 +158,10 @@ const waLabels =
       language: form.dataset.locale === 'en' ? 'en' : 'ar',
       company,
     });
+    trackSnapPurchase(snapParamsFromBookingValue(serviceValue, {
+      phone,
+      transactionId: `contact-${Date.now()}`,
+    }));
 
     const url = `https://api.whatsapp.com/send/?phone=${form.dataset.whatsappPhone}&text=${encodeURIComponent(body)}&type=phone_number&app_absent=0`;
     if (whatsappWindow) whatsappWindow.location.href = url;
