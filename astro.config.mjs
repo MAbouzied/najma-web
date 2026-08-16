@@ -77,10 +77,10 @@ export default defineConfig({
         "form-action 'self'",
         // Clickjacking protection is set on the HTTP response (meta CSP cannot express it).
         "object-src 'none'",
-        "connect-src 'self' https://www.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com",
-        "img-src 'self' data: blob: https://cdn.sanity.io https://*.googleusercontent.com https://*.google-analytics.com",
+        "connect-src 'self' https://www.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com https://sc-static.net https://tr.snapchat.com https://*.snapchat.com",
+        "img-src 'self' data: blob: https://cdn.sanity.io https://*.googleusercontent.com https://*.google-analytics.com https://tr.snapchat.com https://*.snapchat.com",
         "font-src 'self'",
-        "frame-src https://www.googletagmanager.com https://www.youtube-nocookie.com https://player.vimeo.com",
+        "frame-src https://www.googletagmanager.com https://www.youtube-nocookie.com https://player.vimeo.com https://tr.snapchat.com https://*.snapchat.com",
         "media-src 'self' https://cdn.sanity.io",
       ],
       scriptDirective: {
@@ -92,6 +92,14 @@ export default defineConfig({
           { resource: "'self'", kind: 'element' },
           {
             resource: 'https://www.googletagmanager.com',
+            kind: 'element',
+          },
+          {
+            resource: 'https://sc-static.net',
+            kind: 'element',
+          },
+          {
+            resource: 'https://tr.snapchat.com',
             kind: 'element',
           },
           { resource: "'none'", kind: 'attribute' },
