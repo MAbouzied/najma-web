@@ -135,7 +135,7 @@ const gaMeasurementId = analyticsEnabled && PUBLIC_GA_MEASUREMENT_ID
 ---
 
 <!doctype html>
-<html lang={htmlLang} dir={htmlDir} data-theme="grove">
+<html lang={htmlLang} dir={htmlDir} data-theme="sand">
   <head>
     <script is:inline>
       (function () {
@@ -151,7 +151,7 @@ const gaMeasurementId = analyticsEnabled && PUBLIC_GA_MEASUREMENT_ID
         function resolve(value) {
           return value === 'deep' || value === 'grove' || value === 'cedar' || value === 'mist' || value === 'sand'
             ? value
-            : 'grove';
+            : 'sand';
         }
 
         function apply(theme) {
@@ -186,7 +186,7 @@ const gaMeasurementId = analyticsEnabled && PUBLIC_GA_MEASUREMENT_ID
         try {
           apply(resolve(localStorage.getItem(key)));
         } catch (error) {
-          apply('grove');
+          apply('sand');
         }
         sync(resolve(document.documentElement.getAttribute('data-theme')));
 

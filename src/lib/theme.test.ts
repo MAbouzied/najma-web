@@ -8,7 +8,7 @@ const themeCss = readFileSync(new URL('../styles/global.css', import.meta.url), 
 describe('site theme ids', () => {
   it('keeps the current deep green plus four named options', () => {
     assert.deepEqual(THEME_IDS, ['deep', 'grove', 'cedar', 'mist', 'sand']);
-    assert.equal(DEFAULT_THEME, 'grove');
+    assert.equal(DEFAULT_THEME, 'sand');
   });
 
   it('accepts only known theme ids', () => {
@@ -19,9 +19,9 @@ describe('site theme ids', () => {
     assert.equal(isThemeId(''), false);
   });
 
-  it('falls back to the lighter default when storage is empty or invalid', () => {
-    assert.equal(resolveTheme(null), 'grove');
-    assert.equal(resolveTheme('nope'), 'grove');
+  it('falls back to sand when storage is empty or invalid', () => {
+    assert.equal(resolveTheme(null), 'sand');
+    assert.equal(resolveTheme('nope'), 'sand');
     assert.equal(resolveTheme('cedar'), 'cedar');
     assert.equal(resolveTheme('sand'), 'sand');
   });
