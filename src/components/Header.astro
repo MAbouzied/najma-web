@@ -1,7 +1,6 @@
 ---
 import BrandLogo from './BrandLogo.astro';
 import LanguageSwitcher from './LanguageSwitcher.astro';
-import ThemeSwitcher from './ThemeSwitcher.astro';
 import UiIcon from './UiIcon.astro';
 import { getNavigationLinks, getBookingAction, getCallAction, type Locale, type PageId } from '../data/site';
 import { t } from '../i18n/t';
@@ -74,7 +73,6 @@ const mainNavLabel = isEnglish ? 'Main navigation' : 'التنقل الرئيس�
         </nav>
       </details>
       <LanguageSwitcher locale={locale} />
-      <ThemeSwitcher locale={locale} placement="down" compact />
       <a
         href={call.href}
         class="outline-button hidden min-h-0 px-3 py-2 text-xs font-semibold sm:inline-flex sm:px-4"

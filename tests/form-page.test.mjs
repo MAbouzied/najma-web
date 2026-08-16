@@ -16,7 +16,7 @@ test('contact form landing omits chrome and keeps a small breadcrumb title', () 
   assert.match(formHtml, /٢٤ ساعة|24/);
   assert.match(formHtml, /dir="ltr"[^>]*>\+?966|dir="ltr">\+966579777407/);
   assert.match(formHtml, /data-language-switcher/);
-  assert.match(formHtml, /data-theme-switcher/);
+  assert.doesNotMatch(formHtml, /data-theme-switcher/);
   assert.match(formHtml, /hreflang="en"/);
   assert.doesNotMatch(formHtml, /name="email"/);
   assert.match(formHtml, /name="message"/);

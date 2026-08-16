@@ -39,7 +39,7 @@ test('does not render fake branches', () => {
 test('uses committed assets instead of emoji or remote assets', () => {
   assert.doesNotMatch(contactHtml, /📞|✉️|📍/u);
   assert.doesNotMatch(contactHtml, /figma\.com\/api\/mcp\/asset/);
-  assert.match(contactHtml, /data-theme-switcher/);
+  assert.doesNotMatch(contactHtml, /data-theme-switcher/);
   assert.match(contactHtml, /\/assets\/nagm-logo\./);
   assert.match(contactHtml, /\/assets\/contact-cta\./);
 });
@@ -58,7 +58,7 @@ test('renders the header and hero as one solid-color section', () => {
 });
 
 test('uses the gold icon variants in the footer contact details', () => {
-  assert.match(contactHtml, /<footer[\s\S]*?data-theme-switcher[\s\S]*?<\/footer>/);
+  assert.match(contactHtml, /<footer[\s\S]*?data-site-footer/);
 });
 
 test('gives the Arabic hero title enough line height to avoid glyph clipping', () => {
