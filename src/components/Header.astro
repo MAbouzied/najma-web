@@ -41,6 +41,25 @@ const mainNavLabel = isEnglish ? 'Main navigation' : 'التنقل الرئيس�
     </nav>
 
     <div class="flex shrink-0 items-center gap-2 sm:gap-3">
+      <LanguageSwitcher locale={locale} />
+      <a
+        href={call.href}
+        class="outline-button hidden min-h-0 px-3 py-2 text-xs font-semibold sm:inline-flex sm:px-4"
+        aria-label={t(locale, 'actionCallNow')}
+        {...gtmContactAttrs(GTM_EVENTS.call, 'header')}
+      >
+        <UiIcon name="phone" class="size-4" />
+        <span class="hidden md:inline">{t(locale, 'actionCall')}</span>
+      </a>
+      <a
+        href={booking.href}
+        class="gold-button shrink-0"
+        {...gtmContactAttrs(GTM_EVENTS.whatsapp, 'header')}
+      >
+        <UiIcon name="arrow" class="size-4" />
+        <span class="hidden sm:inline">{booking.label}</span>
+        <span class="sm:hidden">{t(locale, 'actionBookShort')}</span>
+      </a>
       <details data-mobile-nav class="relative lg:hidden">
         <summary class="outline-button min-h-11 cursor-pointer list-none px-3 [&::-webkit-details-marker]:hidden">
           <svg aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" fill="none" class="size-5">
@@ -72,25 +91,6 @@ const mainNavLabel = isEnglish ? 'Main navigation' : 'التنقل الرئيس�
           </ul>
         </nav>
       </details>
-      <LanguageSwitcher locale={locale} />
-      <a
-        href={call.href}
-        class="outline-button hidden min-h-0 px-3 py-2 text-xs font-semibold sm:inline-flex sm:px-4"
-        aria-label={t(locale, 'actionCallNow')}
-        {...gtmContactAttrs(GTM_EVENTS.call, 'header')}
-      >
-        <UiIcon name="phone" class="size-4" />
-        <span class="hidden md:inline">{t(locale, 'actionCall')}</span>
-      </a>
-      <a
-        href={booking.href}
-        class="gold-button shrink-0"
-        {...gtmContactAttrs(GTM_EVENTS.whatsapp, 'header')}
-      >
-        <UiIcon name="arrow" class="size-4" />
-        <span class="hidden sm:inline">{booking.label}</span>
-        <span class="sm:hidden">{t(locale, 'actionBookShort')}</span>
-      </a>
     </div>
   </div>
 </header>

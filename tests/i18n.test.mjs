@@ -2,10 +2,18 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 
+const uiSource = await readFile(new URL('../src/i18n/ui.ts', import.meta.url), 'utf8');
 const enHome = await readFile(new URL('../dist/client/en/index.html', import.meta.url), 'utf8');
 const arHome = await readFile(new URL('../dist/client/index.html', import.meta.url), 'utf8');
 const enAbout = await readFile(new URL('../dist/client/en/about/index.html', import.meta.url), 'utf8');
 const enServices = await readFile(new URL('../dist/client/en/services/index.html', import.meta.url), 'utf8');
+
+test('hero eyebrow names Hafar Al-Batin, not the whole kingdom', () => {
+  assert.match(uiSource, /homeHeroEyebrow: 'تجربة سبا فاخرة في حفر الباطن'/);
+  assert.match(uiSource, /homeHeroEyebrow: 'Premium Spa Experience in Hafar Al-Batin'/);
+  assert.doesNotMatch(uiSource, /homeHeroEyebrow: 'تجربة سبا فاخرة في المملكة'/);
+  assert.doesNotMatch(uiSource, /homeHeroEyebrow: 'Premium Spa Experience in Saudi Arabia'/);
+});
 
 test('English home renders translated content and locale-aware logo home link', () => {
   assert.match(enHome, /lang="en"/);

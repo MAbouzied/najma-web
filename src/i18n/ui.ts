@@ -56,7 +56,7 @@ export const ui = {
     langSwitchAr: 'العربية',
     langSwitchEn: 'English',
 
-    homeHeroEyebrow: 'تجربة سبا فاخرة في المملكة',
+    homeHeroEyebrow: 'تجربة سبا فاخرة في حفر الباطن',
     homeHeroTitle: 'استرخِ، استعد طاقتك،',
     homeHeroHighlightedTitle: 'واستمتع بلحظتك',
     homeHeroDescription:
@@ -339,7 +339,7 @@ export const ui = {
     langSwitchAr: 'العربية',
     langSwitchEn: 'English',
 
-    homeHeroEyebrow: 'Premium Spa Experience in Saudi Arabia',
+    homeHeroEyebrow: 'Premium Spa Experience in Hafar Al-Batin',
     homeHeroTitle: 'Relax. Restore.',
     homeHeroHighlightedTitle: 'Enjoy your moment.',
     homeHeroDescription:
