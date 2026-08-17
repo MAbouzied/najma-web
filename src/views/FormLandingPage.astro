@@ -1,7 +1,7 @@
 ---
 import BrandLogo from '../components/BrandLogo.astro';
 import BranchesSection from '../components/BranchesSection.astro';
-import ContactForm from '../components/ContactForm.astro';
+import FormActions from '../components/FormActions.astro';
 import LanguageSwitcher from '../components/LanguageSwitcher.astro';
 import SiteLayout from '../layouts/SiteLayout.astro';
 import { getBranches } from '../data/branches';
@@ -62,7 +62,7 @@ const branches = getBranches(locale);
           branches={branches}
           locale={locale}
         />
-        <ContactForm compact locale={locale} />
+        <FormActions locale={locale} />
       </div>
 
       <p class="mt-8 text-center text-xs text-text-muted">

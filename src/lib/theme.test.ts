@@ -4,6 +4,7 @@ import { describe, it } from 'node:test';
 import { DEFAULT_THEME, isThemeId, resolveTheme, THEME_IDS } from './theme.ts';
 
 const themeCss = readFileSync(new URL('../styles/global.css', import.meta.url), 'utf8');
+const brandLogo = readFileSync(new URL('../components/BrandLogo.astro', import.meta.url), 'utf8');
 
 describe('site theme ids', () => {
   it('keeps sand as the only site theme', () => {
@@ -26,9 +27,15 @@ describe('site theme ids', () => {
 
   it('bakes sand colors into the default theme tokens', () => {
     assert.match(themeCss, /--color-bg-primary:\s*#fdf3e7/);
-    assert.match(themeCss, /--color-logo-plate:\s*#111111/);
+    assert.doesNotMatch(themeCss, /--color-logo-plate/);
     assert.doesNotMatch(themeCss, /data-theme='grove'/);
     assert.doesNotMatch(themeCss, /data-theme='deep'/);
     assert.match(themeCss, /\.brand-logo-mark/);
+  });
+});
+
+describe('brand logo', () => {
+  it('hides the wordmark on mobile and shows it on desktop', () => {
+    assert.match(brandLogo, /hidden[\s\S]*lg:inline/);
   });
 });

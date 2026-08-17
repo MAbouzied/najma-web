@@ -33,7 +33,18 @@ const heading = title ?? t(locale, 'contactBranchesHeading');
               <dt class="sr-only">{locale === 'en' ? 'Address' : 'العنوان'}</dt>
               <dd class="flex items-start gap-2">
                 <UiIcon name="location" class="mt-0.5 size-4 text-gold" />
-                <span>{branch.address}</span>
+                {branch.mapsHref ? (
+                  <a
+                    class="min-w-0 break-words transition-colors hover:text-gold"
+                    href={branch.mapsHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {branch.address}
+                  </a>
+                ) : (
+                  <span>{branch.address}</span>
+                )}
               </dd>
             </div>
             <div>
@@ -47,7 +58,13 @@ const heading = title ?? t(locale, 'contactBranchesHeading');
               <dt class="sr-only">{t(locale, 'contactLabelPhone')}</dt>
               <dd class="flex items-start gap-2">
                 <UiIcon name="phone" class="mt-0.5 size-4 text-gold" />
-                <span dir="ltr">{branch.phone}</span>
+                {branch.phoneHref ? (
+                  <a href={branch.phoneHref} dir="ltr" class="transition-colors hover:text-gold">
+                    {branch.phone}
+                  </a>
+                ) : (
+                  <span dir="ltr">{branch.phone}</span>
+                )}
               </dd>
             </div>
           </dl>

@@ -51,6 +51,13 @@ export function buildGeneralContactUrl(locale: 'ar' | 'en' = 'ar'): string {
   return buildWhatsAppUrl(msg);
 }
 
+export function buildOffersContactUrl(locale: 'ar' | 'en' = 'ar'): string {
+  const msg = locale === 'en'
+    ? 'Hello, I would like to see Nagm Spa offers'
+    : 'مرحبا، أرغب بالاطلاع على عروض نجم سبا';
+  return buildWhatsAppUrl(msg);
+}
+
 export function buildCallHref(): string {
   return PHONE_TEL_HREF;
 }

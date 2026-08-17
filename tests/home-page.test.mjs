@@ -7,7 +7,7 @@ const homeHtml = await readFile(new URL('../dist/client/index.html', import.meta
 test('renders every homepage section in design order', () => {
   const headings = [
     'استرخِ، استعد طاقتك،',
-    'تجربة سبا متكاملة',
+    'تجربة مساج وسبا متكاملة',
     'تجربة لا تُنسى',
     'عروض نجم سبا',
     'باقات مختارة بعناية',

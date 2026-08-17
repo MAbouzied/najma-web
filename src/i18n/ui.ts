@@ -56,11 +56,11 @@ export const ui = {
     langSwitchAr: 'العربية',
     langSwitchEn: 'English',
 
-    homeHeroEyebrow: 'تجربة سبا فاخرة في حفر الباطن',
+    homeHeroEyebrow: 'تجربة مساج وسبا فاخرة في حفر الباطن',
     homeHeroTitle: 'استرخِ، استعد طاقتك،',
     homeHeroHighlightedTitle: 'واستمتع بلحظتك',
     homeHeroDescription:
-      'اكتشف تجربة سبا متكاملة صُممت لتجدد جسمك، تهدئ ذهنك، وتمنحك شعورًا عميقًا بالراحة',
+      'اكتشف تجربة مساج وسبا متكاملة صُممت لتجدد جسمك، تهدئ ذهنك، وتمنحك شعورًا عميقًا بالراحة',
     homeHeroDescriptionLine2: 'والاسترخاء.',
     homeHeroPrimary: 'احجز موعدك الآن',
     homeHeroSecondary: 'اكتشف خدماتنا',
@@ -79,11 +79,11 @@ export const ui = {
     homeHeroSliderNext: 'الصورة التالية',
     testimonialRatingAria: 'تقييم 5 من 5',
     homeServicesEyebrow: 'خدماتنا',
-    homeServicesTitle: 'تجربة سبا متكاملة',
+    homeServicesTitle: 'تجربة مساج وسبا متكاملة',
     homeServicesDescription: 'اختر من بين مجموعة واسعة من خدمات المساج والحمام المغربي والعناية الشخصية',
     homeBenefitsEyebrow: 'لماذا نجم سبا؟',
     homeBenefitsTitle: 'تجربة لا تُنسى',
-    homeBenefitsDescription: 'نجم بين الخبرة والاحترافية والأجواء الهادئة لنمنحك أفضل تجربة سبا في المنطقة',
+    homeBenefitsDescription: 'نجم بين الخبرة والاحترافية والأجواء الهادئة لنمنحك أفضل تجربة مساج وسبا في المنطقة',
     homeOffersTitle: 'عروض نجم سبا',
     homeOffersDescription: 'عروض نجم سبا بخصم {discount} على الباقات — اختر العرض الذي يناسبك واحجز عبر واتساب.',
     homeOffersAllLink: 'كل العروض',
@@ -115,7 +115,7 @@ export const ui = {
     aboutHeroDescription:
       'وُلد نجم سبا من شغفٍ عميق بتقديم تجربة استرخاء تتجاوز التوقعات، تجربة تحتفي بالتفاصيل الصغيرة وتمنحك لحظة صافية بعيدًا عن ضجيج الحياة.',
     aboutMissionEyebrow: 'رسالتنا',
-    aboutMissionTitle: 'تجربة سبا لا تُنسى',
+    aboutMissionTitle: 'تجربة مساج وسبا لا تُنسى',
     aboutMissionP1:
       'في نجم سبا نؤمن أن الاسترخاء فنٌّ يستحق أن يُمارَس بأعلى معايير الجودة. نحرص على أن تكون كل جلسة رحلة متكاملة للحواس، من العطر الذي يستقبلك، إلى الموسيقى الهادئة، وصولاً إلى لمسات المعالج المتقنة.',
     aboutMissionP2:
@@ -197,7 +197,12 @@ export const ui = {
 
     formPageTitle: 'تواصل معنا - نجم سبا',
     formPageDescription:
-      'أرسل اسمك ورقم جوالك واختر الخدمة، ثم أكمل التواصل عبر واتساب. مفتوح ٢٤ ساعة في حفر الباطن.',
+      'تواصل مع نجم سبا عبر واتساب، اعرف موقعنا، أو اسأل عن العروض مباشرة. مفتوح ٢٤ ساعة في حفر الباطن.',
+    formActionsAria: 'خيارات التواصل',
+    formWhatsappAction: 'تواصل واتساب',
+    formCallAction: 'اتصال',
+    formLocationAction: 'الموقع',
+    formOffersAction: 'العروض',
 
     servicesHeroBadge: 'خدماتنا',
     servicesHeroTitle: 'خدماتنا',
@@ -480,7 +485,12 @@ export const ui = {
 
     formPageTitle: 'Contact us - Nagm Spa',
     formPageDescription:
-      'Enter your name and mobile number, choose a service, then continue on WhatsApp. Open 24 hours in Hafar Al-Batin.',
+      'Contact Nagm Spa on WhatsApp, see our location, or ask about offers. Open 24 hours in Hafar Al-Batin.',
+    formActionsAria: 'Contact options',
+    formWhatsappAction: 'WhatsApp',
+    formCallAction: 'Call',
+    formLocationAction: 'Location',
+    formOffersAction: 'Offers',
 
     servicesHeroBadge: 'Our Services',
     servicesHeroTitle: 'Our',

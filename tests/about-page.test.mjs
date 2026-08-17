@@ -18,7 +18,7 @@ function firstSplitMediaSection(html) {
 test('renders every About page section', () => {
   for (const heading of [
     'نجم سبا',
-    'تجربة سبا لا تُنسى',
+    'تجربة مساج وسبا لا تُنسى',
     'ما يميزنا',
     'أن نكون وجهتك المفضلة للراحة',
     'لحظتك من الراحة تبدأ هنا',

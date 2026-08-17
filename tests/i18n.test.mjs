@@ -9,9 +9,9 @@ const enAbout = await readFile(new URL('../dist/client/en/about/index.html', imp
 const enServices = await readFile(new URL('../dist/client/en/services/index.html', import.meta.url), 'utf8');
 
 test('hero eyebrow names Hafar Al-Batin, not the whole kingdom', () => {
-  assert.match(uiSource, /homeHeroEyebrow: 'تجربة سبا فاخرة في حفر الباطن'/);
+  assert.match(uiSource, /homeHeroEyebrow: 'تجربة مساج وسبا فاخرة في حفر الباطن'/);
   assert.match(uiSource, /homeHeroEyebrow: 'Premium Spa Experience in Hafar Al-Batin'/);
-  assert.doesNotMatch(uiSource, /homeHeroEyebrow: 'تجربة سبا فاخرة في المملكة'/);
+  assert.doesNotMatch(uiSource, /homeHeroEyebrow: 'تجربة مساج وسبا فاخرة في المملكة'/);
   assert.doesNotMatch(uiSource, /homeHeroEyebrow: 'Premium Spa Experience in Saudi Arabia'/);
 });
 

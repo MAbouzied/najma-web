@@ -32,7 +32,6 @@
   --color-border-card: rgba(74, 44, 29, 0.12);
 
   --color-bg-social: rgba(233, 221, 208, 0.7);
-  --color-logo-plate: #111111;
 }
 
 @utility bg-gold-gradient {
@@ -205,8 +204,7 @@ textarea.form-control {
 }
 
 .brand-logo-mark {
-  background: var(--color-logo-plate);
-  border-radius: 0.75rem;
+  background: transparent;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -194,7 +194,7 @@ const packagesBlock = `export const packages: Package[] = [
   {
     slug: 'luxury',
     name: { ar: 'باقة الرفاهية', en: 'Luxury Package' },
-    subtitle: { ar: 'تجربة سبا شاملة مع مشروب وحلا', en: 'A complete spa experience with drink and dessert' },
+    subtitle: { ar: 'تجربة مساج وسبا شاملة مع مشروب وحلا', en: 'A complete spa experience with drink and dessert' },
     description: {
       ar: 'باقة الرفاهية من نجم سبا تجمع مساج نجم سبا والزيت الحار والكاسات والأحجار مع حمام ملكي وبخار وبدكير وصنفرة، وتشمل مشروبًا وحلا. احجز عبر واتساب الآن.',
       en: 'Luxury package from Nagm Spa combines Nagm Spa massage, hot oil, cupping, and hot stones with royal bath, steam, pedicure, and body scrub — plus drink and dessert. Book via WhatsApp now.',
@@ -413,7 +413,7 @@ s = s.replace(
 s = s.replace(
   /title: \{ ar: 'أجواء فاخرة', en: 'Luxurious Atmosphere' \},\n    description: \{ ar: '[^']+', en: '[^']+' \}/,
   `title: { ar: 'أجواء فاخرة', en: 'Luxurious Atmosphere' },
-    description: { ar: 'تجربة سبا متكاملة تجمع الهدوء والخصوصية وتجديد النشاط', en: 'A complete spa experience that combines tranquility, privacy, and renewed energy' }`,
+    description: { ar: 'تجربة مساج وسبا متكاملة تجمع الهدوء والخصوصية وتجديد النشاط', en: 'A complete spa experience that combines tranquility, privacy, and renewed energy' }`,
 );
 
 writeFileSync(path, s);

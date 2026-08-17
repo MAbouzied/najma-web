@@ -6,7 +6,9 @@ import {
   WHATSAPP_PHONE_DISPLAY,
   buildBookingUrl,
   buildCallHref,
+  buildGeneralContactUrl,
   buildOfferBookingUrl,
+  buildOffersContactUrl,
   buildPackageBookingUrl,
   buildServiceBookingUrl,
   buildWhatsAppUrl,
@@ -36,4 +38,17 @@ test('routes booking links through the customer form with item names', () => {
   assert.equal(buildBookingUrl('en'), '/en/book/');
 
   assert.match(buildWhatsAppUrl(), /phone=966579777407/);
+});
+
+test('opens WhatsApp directly for contact and offers actions', () => {
+  const contactUrl = new URL(buildGeneralContactUrl('ar'));
+  assert.equal(contactUrl.searchParams.get('phone'), '966579777407');
+  assert.equal(contactUrl.searchParams.get('text'), 'أهلاً، أريد التواصل مع نجم سبا');
+
+  const offersUrl = new URL(buildOffersContactUrl('ar'));
+  assert.equal(offersUrl.searchParams.get('phone'), '966579777407');
+  assert.equal(offersUrl.searchParams.get('text'), 'مرحبا، أرغب بالاطلاع على عروض نجم سبا');
+
+  const offersEn = new URL(buildOffersContactUrl('en'));
+  assert.equal(offersEn.searchParams.get('text'), 'Hello, I would like to see Nagm Spa offers');
 });
