@@ -7,6 +7,19 @@ export type SoftNavLocation = Pick<Location, 'href' | 'origin'>;
 
 const PROGRESS_ID = 'nagm-nav-progress';
 
+/** Snapchat Event Setup Tool keeps state in query + hash; soft-nav would tear it down. */
+export function isSnapPixelSetupActive(location: SoftNavLocation): boolean {
+  try {
+    const current = new URL(location.href);
+    return (
+      current.searchParams.has('pixelSetupTool')
+      || current.hash.includes('snap-pixel-setup-tool')
+    );
+  } catch {
+    return false;
+  }
+}
+
 /** Same-origin HTML navigations that should stay in-document (Next.js-style). */
 export function isSoftNavCandidate(
   anchor: HTMLAnchorElement,
@@ -19,6 +32,7 @@ export function isSoftNavCandidate(
   if (anchor.target && anchor.target !== '_self') return false;
   if (anchor.hasAttribute('download')) return false;
   if (anchor.dataset.fullReload != null || anchor.dataset.astroReload != null) return false;
+  if (isSnapPixelSetupActive(location)) return false;
 
   const rawHref = anchor.getAttribute('href');
   if (!rawHref || rawHref.startsWith('#')) return false;
@@ -138,6 +152,12 @@ let navigating = false;
 
 export async function softNavigate(href: string, options: { push?: boolean } = {}) {
   if (navigating) return;
+  // Full reload keeps Snapchat Event Setup Tool URL state / opener handoff intact.
+  if (isSnapPixelSetupActive(window.location)) {
+    window.location.assign(href);
+    return;
+  }
+
   navigating = true;
   setProgressState('loading');
 
@@ -188,6 +208,8 @@ export function initSoftNav() {
   });
 
   window.addEventListener('popstate', () => {
+    // Snapchat setup may drive history; do not swap the document out from under it.
+    if (isSnapPixelSetupActive(window.location)) return;
     void softNavigate(window.location.href, { push: false });
   });
 }

@@ -92,7 +92,18 @@ test('reads booking intent from /book query links', () => {
       item_category: 'offer',
     },
   );
-  assert.equal(contentFromBookingHref('/book/'), null);
+  assert.deepEqual(contentFromBookingHref('/book/'), {
+    item_ids: ['general'],
+    item_category: 'general',
+  });
+  assert.deepEqual(contentFromBookingHref('/en/book/'), {
+    item_ids: ['general'],
+    item_category: 'general',
+  });
+  assert.deepEqual(contentFromBookingHref('/book/?department=general'), {
+    item_ids: ['general'],
+    item_category: 'general',
+  });
   assert.equal(contentFromBookingHref('https://api.whatsapp.com/send/?phone=966579777407'), null);
 });
 

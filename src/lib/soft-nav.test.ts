@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
-import { isSoftNavCandidate } from './soft-nav.ts';
+import { isSnapPixelSetupActive, isSoftNavCandidate } from './soft-nav.ts';
 
 function anchor(href: string, extras: Partial<HTMLAnchorElement> = {}): HTMLAnchorElement {
   const el = {
@@ -32,6 +32,26 @@ const location = {
   href: 'https://nagmspa.com/',
   origin: 'https://nagmspa.com',
 };
+
+describe('isSnapPixelSetupActive', () => {
+  it('detects pixelSetupTool query and snap-pixel-setup-tool hash', () => {
+    assert.equal(
+      isSnapPixelSetupActive({
+        href: 'https://nagmspa.com/?pixelSetupTool=abc',
+        origin: 'https://nagmspa.com',
+      }),
+      true,
+    );
+    assert.equal(
+      isSnapPixelSetupActive({
+        href: 'https://nagmspa.com/#snap-pixel-setup-tool={"mode":"overlay"}',
+        origin: 'https://nagmspa.com',
+      }),
+      true,
+    );
+    assert.equal(isSnapPixelSetupActive(location), false);
+  });
+});
 
 describe('isSoftNavCandidate', () => {
   it('allows same-origin primary navigations', () => {
@@ -74,5 +94,23 @@ describe('isSoftNavCandidate', () => {
       ),
       false,
     );
+  });
+
+  it('disables soft-nav while Snapchat pixel setup tool is open', () => {
+    const setupLocation = {
+      href: 'https://nagmspa.com/?pixelSetupTool=abc#snap-pixel-setup-tool={}',
+      origin: 'https://nagmspa.com',
+    };
+    assert.equal(isSoftNavCandidate(anchor('/book/'), click, setupLocation), false);
+    assert.equal(isSoftNavCandidate(anchor('/services/swedish-massage/'), click, setupLocation), false);
+  });
+
+  it('treats hash-only snap setup marker as active for soft-nav opt-out', () => {
+    const hashOnly = {
+      href: 'https://nagmspa.com/#snap-pixel-setup-tool={"env":"prod"}',
+      origin: 'https://nagmspa.com',
+    };
+    assert.equal(isSnapPixelSetupActive(hashOnly), true);
+    assert.equal(isSoftNavCandidate(anchor('/about/'), click, hashOnly), false);
   });
 });

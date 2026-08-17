@@ -3,14 +3,16 @@ import { describe, it } from 'node:test';
 import { BASELINE_SECURITY_HEADERS, withSecurityHeaders } from './security-headers.ts';
 
 describe('security headers', () => {
-  it('does not ship a Content-Security-Policy header', () => {
+  it('does not ship a Content-Security-Policy or Cross-Origin-Opener-Policy header', () => {
     assert.equal(BASELINE_SECURITY_HEADERS['Content-Security-Policy'], undefined);
+    assert.equal(BASELINE_SECURITY_HEADERS['Cross-Origin-Opener-Policy'], undefined);
     assert.equal(BASELINE_SECURITY_HEADERS['X-Frame-Options'], 'DENY');
   });
 
-  it('applies baseline headers without adding CSP', () => {
+  it('applies baseline headers without adding CSP or COOP', () => {
     const response = withSecurityHeaders(new Response('ok'));
     assert.equal(response.headers.get('Content-Security-Policy'), null);
+    assert.equal(response.headers.get('Cross-Origin-Opener-Policy'), null);
     assert.equal(response.headers.get('X-Frame-Options'), 'DENY');
   });
 

@@ -161,7 +161,10 @@ export function contentFromBookingHref(href: string): SnapContent | null {
   const department = url.searchParams.get('department')?.trim();
   const item = url.searchParams.get('item')?.trim();
   if (!department || department === 'general' || !item) {
-    return null;
+    return {
+      item_ids: ['general'],
+      item_category: 'general',
+    };
   }
 
   return {

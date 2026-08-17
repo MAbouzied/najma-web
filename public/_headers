@@ -4,7 +4,6 @@
   X-Frame-Options: DENY
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
-  Cross-Origin-Opener-Policy: same-origin-allow-popups
   X-XSS-Protection: 0
 
 /_astro/*
