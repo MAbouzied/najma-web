@@ -42,18 +42,8 @@ test('branch definition lists keep icons inside dt/dd groups', () => {
   }
 });
 
-test('frame-ancestors is not shipped in Astro meta CSP directives', () => {
-  assert.doesNotMatch(astroConfig, /"frame-ancestors\b/);
-});
-
-test('frame-ancestors is delivered via Cloudflare _headers', () => {
-  assert.match(
-    publicHeaders,
-    /Content-Security-Policy:\s*frame-ancestors 'none'/,
-  );
-});
-
-test('allows Snap Pixel Setup Tool scripts and frames', () => {
-  assert.match(astroConfig, /resource: 'https:\/\/\*\.snapchat\.com'/);
-  assert.match(astroConfig, /"frame-src[\s\S]*https:\/\/\*\.snapchat\.com"/);
+test('does not ship a Content-Security-Policy in Astro or Cloudflare headers', () => {
+  assert.doesNotMatch(astroConfig, /\bcsp\s*:/);
+  assert.doesNotMatch(astroConfig, /Content-Security-Policy|frame-ancestors|scriptDirective/);
+  assert.doesNotMatch(publicHeaders, /Content-Security-Policy|frame-ancestors/);
 });
