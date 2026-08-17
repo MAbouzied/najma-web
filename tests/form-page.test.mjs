@@ -13,8 +13,10 @@ const actionsSource = await readFile(
 const formHtml = await readFile(new URL('../dist/client/form/index.html', import.meta.url), 'utf8');
 
 test('form landing uses WhatsApp, call, location, and offers actions', () => {
+  assert.match(landingSource, /ContactForm/);
   assert.match(landingSource, /FormActions/);
-  assert.doesNotMatch(landingSource, /ContactForm/);
+  assert.ok(landingSource.indexOf('BranchesSection') < landingSource.indexOf('<FormActions'));
+  assert.ok(landingSource.indexOf('<FormActions') < landingSource.indexOf('<ContactForm'));
   assert.match(actionsSource, /data-form-actions/);
   assert.match(actionsSource, /buildGeneralContactUrl/);
   assert.match(actionsSource, /buildCallHref/);
@@ -30,7 +32,7 @@ test('contact form landing omits chrome and keeps a small breadcrumb title', () 
   assert.match(formHtml, /data-form-landing-crumb/);
   assert.match(formHtml, /<h1[^>]*>[\s\S]*اتصل بنا[\s\S]*<\/h1>/);
   assert.match(formHtml, /data-form-actions/);
-  assert.doesNotMatch(formHtml, /id="contact-form"/);
+  assert.match(formHtml, /id="contact-form"/);
   assert.match(formHtml, /id="branches"/);
   assert.match(formHtml, /حي المصيف/);
   assert.match(formHtml, /٢٤ ساعة|24/);
@@ -39,7 +41,7 @@ test('contact form landing omits chrome and keeps a small breadcrumb title', () 
   assert.doesNotMatch(formHtml, /data-theme-switcher/);
   assert.match(formHtml, /hreflang="en"/);
   assert.doesNotMatch(formHtml, /name="email"/);
-  assert.doesNotMatch(formHtml, /name="message"/);
+  assert.match(formHtml, /name="message"/);
   assert.match(formHtml, /noindex/);
   assert.match(formHtml, /العروض/);
   assert.match(formHtml, /api\.whatsapp\.com|wa\.me/);

@@ -2,6 +2,7 @@
 import BrandLogo from '../components/BrandLogo.astro';
 import BranchesSection from '../components/BranchesSection.astro';
 import FormActions from '../components/FormActions.astro';
+import ContactForm from '../components/ContactForm.astro';
 import LanguageSwitcher from '../components/LanguageSwitcher.astro';
 import SiteLayout from '../layouts/SiteLayout.astro';
 import { getBranches } from '../data/branches';
@@ -57,12 +58,17 @@ const branches = getBranches(locale);
       </nav>
 
       <div class="mt-6 grid w-full min-w-0 flex-1 grid-cols-1 items-start gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
-        <BranchesSection
-          sectionLabel={t(locale, 'homeBranchesEyebrow')}
-          branches={branches}
-          locale={locale}
-        />
-        <FormActions locale={locale} />
+        <div class="min-w-0">
+          <BranchesSection
+            sectionLabel={t(locale, 'homeBranchesEyebrow')}
+            branches={branches}
+            locale={locale}
+          />
+          <FormActions locale={locale} />
+        </div>
+        <div class="order-first min-w-0 lg:order-none">
+          <ContactForm compact locale={locale} />
+        </div>
       </div>
 
       <p class="mt-8 text-center text-xs text-text-muted">

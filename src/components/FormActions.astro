@@ -18,8 +18,8 @@ const callHref = buildCallHref();
 const offersHref = localePath('/offers/', locale);
 ---
 
-<article
-  class="flex w-full min-w-0 flex-col gap-3 rounded-3xl bg-bg-form p-5 sm:p-6"
+<nav
+  class="mt-8 flex w-full min-w-0 flex-col gap-3"
   aria-label={t(locale, 'formActionsAria')}
   data-form-actions
   dir={dir}
@@ -54,4 +54,4 @@ const offersHref = localePath('/offers/', locale);
   <a href={offersHref} class="gold-button w-full min-h-14 text-base">
     {t(locale, 'formOffersAction')}
   </a>
-</article>
+</nav>
