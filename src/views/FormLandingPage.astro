@@ -16,7 +16,6 @@ export interface Props {
 
 const { locale } = Astro.props;
 const dir = locale === 'en' ? 'ltr' : 'rtl';
-const homeHref = localePath('/', locale);
 const formHref = localePath('/form/', locale);
 const branches = getBranches(locale);
 ---
@@ -35,27 +34,15 @@ const branches = getBranches(locale);
   <section class="min-h-dvh bg-bg-primary" dir={dir}>
     <div class="page-container flex min-h-dvh w-full min-w-0 flex-col py-8 sm:py-10">
       <div class="flex items-center justify-between gap-4">
-        <BrandLogo locale={locale} showName={false} />
+        <BrandLogo locale={locale} showName={false} link={false} />
         <div class="flex items-center gap-2">
           <LanguageSwitcher locale={locale} />
         </div>
       </div>
 
-      <nav class="mt-6" aria-label={t(locale, 'breadcrumbsAria')} data-form-landing-crumb>
-        <ol class="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-text-muted">
-          <li class="inline-flex min-w-0 items-center gap-2">
-            <a href={homeHref} class="truncate transition-colors hover:text-gold">
-              {t(locale, 'breadcrumbHome')}
-            </a>
-          </li>
-          <li class="inline-flex min-w-0 items-center gap-2">
-            <span class="shrink-0 text-gold/50" aria-hidden="true">/</span>
-            <h1 class="truncate text-sm font-medium text-text-primary">
-              {t(locale, 'breadcrumbContact')}
-            </h1>
-          </li>
-        </ol>
-      </nav>
+      <h1 class="mt-6 truncate text-sm font-medium text-text-primary">
+        {t(locale, 'breadcrumbContact')}
+      </h1>
 
       <div class="mt-6 grid w-full min-w-0 flex-1 grid-cols-1 items-start gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
         <div class="min-w-0">
@@ -70,12 +57,6 @@ const branches = getBranches(locale);
           <ContactForm compact locale={locale} />
         </div>
       </div>
-
-      <p class="mt-8 text-center text-xs text-text-muted">
-        <a href={homeHref} class="text-gold transition-colors hover:text-gold-light">
-          {t(locale, 'goFullSite')}
-        </a>
-      </p>
     </div>
   </section>
 </SiteLayout>

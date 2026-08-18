@@ -2,10 +2,9 @@
 import UiIcon from './UiIcon.astro';
 import WhatsAppIcon from './WhatsAppIcon.astro';
 import { GTM_EVENTS, gtmContactAttrs } from '../lib/gtm';
-import { localePath } from '../i18n/paths';
 import { t } from '../i18n/t';
 import type { Locale } from '../i18n/types';
-import { buildCallHref, buildGeneralContactUrl, MAPS_HREF } from '../lib/whatsapp';
+import { buildCallHref, buildGeneralContactUrl, buildOffersContactUrl, MAPS_HREF } from '../lib/whatsapp';
 
 export interface Props {
   locale?: Locale;
@@ -15,7 +14,7 @@ const { locale = 'ar' } = Astro.props;
 const dir = locale === 'en' ? 'ltr' : 'rtl';
 const whatsappHref = buildGeneralContactUrl(locale);
 const callHref = buildCallHref();
-const offersHref = localePath('/offers/', locale);
+const offersHref = buildOffersContactUrl(locale);
 ---
 
 <nav
@@ -51,7 +50,14 @@ const offersHref = localePath('/offers/', locale);
     <UiIcon name="location" class="size-5" />
     {t(locale, 'formLocationAction')}
   </a>
-  <a href={offersHref} class="gold-button w-full min-h-14 text-base">
+  <a
+    href={offersHref}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="gold-button w-full min-h-14 text-base"
+    {...gtmContactAttrs(GTM_EVENTS.whatsapp, 'form_landing_offers')}
+  >
+    <WhatsAppIcon class="size-5 text-text-btn" />
     {t(locale, 'formOffersAction')}
   </a>
 </nav>

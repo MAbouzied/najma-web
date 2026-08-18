@@ -10,19 +10,21 @@ export interface Props {
   current?: boolean;
   locale?: Locale;
   showName?: boolean;
+  link?: boolean;
 }
 
-const { size = 'header', current = false, locale = 'ar', showName = true } = Astro.props;
+const { size = 'header', current = false, locale = 'ar', showName = true, link = true } = Astro.props;
 const imageSize = size === 'footer' ? 'size-20' : 'size-12';
 const pixelSize = size === 'footer' ? 160 : 96;
 const homeHref = localePath('/', locale);
+const Tag = link ? 'a' : 'span';
 ---
 
-<a
-  href={homeHref}
+<Tag
+  href={link ? homeHref : undefined}
   class="inline-flex items-center gap-2"
-  aria-label={t(locale, 'brandHomeAria')}
-  aria-current={current ? 'page' : undefined}
+  aria-label={link ? t(locale, 'brandHomeAria') : t(locale, 'brandName')}
+  aria-current={link && current ? 'page' : undefined}
 >
   <Image
     src={siteImage.logo}
@@ -40,4 +42,4 @@ const homeHref = localePath('/', locale);
       {t(locale, 'brandName')}
     </span>
   )}
-</a>
+</Tag>

@@ -21,15 +21,16 @@ test('form landing uses WhatsApp, call, location, and offers actions', () => {
   assert.match(actionsSource, /buildGeneralContactUrl/);
   assert.match(actionsSource, /buildCallHref/);
   assert.match(actionsSource, /MAPS_HREF/);
-  assert.match(actionsSource, /localePath\('\/offers\/'/);
-  assert.doesNotMatch(actionsSource, /buildOffersContactUrl/);
+  assert.match(actionsSource, /buildOffersContactUrl/);
+  assert.doesNotMatch(actionsSource, /localePath\('\/offers\/'/);
 });
 
-test('contact form landing omits chrome and keeps a small breadcrumb title', () => {
+test('contact form landing omits chrome, breadcrumbs, and full-site links', () => {
   assert.doesNotMatch(formHtml, /data-site-header/);
   assert.doesNotMatch(formHtml, /data-site-footer/);
   assert.doesNotMatch(formHtml, /data-floating-contact/);
-  assert.match(formHtml, /data-form-landing-crumb/);
+  assert.doesNotMatch(formHtml, /data-form-landing-crumb/);
+  assert.doesNotMatch(landingSource, /goFullSite/);
   assert.match(formHtml, /<h1[^>]*>[\s\S]*اتصل بنا[\s\S]*<\/h1>/);
   assert.match(formHtml, /data-form-actions/);
   assert.match(formHtml, /id="contact-form"/);
@@ -47,5 +48,6 @@ test('contact form landing omits chrome and keeps a small breadcrumb title', () 
   assert.match(formHtml, /api\.whatsapp\.com|wa\.me/);
   assert.match(formHtml, /tel:\+?966/);
   assert.match(formHtml, /maps\.app\.goo\.gl/);
-  assert.match(formHtml, /href="\/offers\/"/);
+  assert.doesNotMatch(formHtml, /href="\/offers\/"/);
+  assert.doesNotMatch(formHtml, /الموقع الكامل/);
 });
