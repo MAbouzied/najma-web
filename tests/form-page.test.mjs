@@ -10,19 +10,40 @@ const actionsSource = await readFile(
   new URL('../src/components/FormActions.astro', import.meta.url),
   'utf8',
 );
+const contactFormSource = await readFile(
+  new URL('../src/components/ContactForm.astro', import.meta.url),
+  'utf8',
+);
 const formHtml = await readFile(new URL('../dist/client/form/index.html', import.meta.url), 'utf8');
 
 test('form landing uses WhatsApp, call, location, and offers actions', () => {
   assert.match(landingSource, /ContactForm/);
+  assert.match(landingSource, /whatsappOnly/);
   assert.match(landingSource, /FormActions/);
   assert.ok(landingSource.indexOf('BranchesSection') < landingSource.indexOf('<FormActions'));
   assert.ok(landingSource.indexOf('<FormActions') < landingSource.indexOf('<ContactForm'));
   assert.match(actionsSource, /data-form-actions/);
-  assert.match(actionsSource, /buildGeneralContactUrl/);
+  assert.doesNotMatch(actionsSource, /buildGeneralContactUrl/);
   assert.match(actionsSource, /buildCallHref/);
   assert.match(actionsSource, /MAPS_HREF/);
   assert.match(actionsSource, /buildOffersContactUrl/);
   assert.doesNotMatch(actionsSource, /localePath\('\/offers\/'/);
+});
+
+test('keeps the WhatsApp button and drops contact form fields on the landing', () => {
+  assert.match(contactFormSource, /whatsappOnly/);
+  assert.match(contactFormSource, /buildGeneralContactUrl/);
+  assert.match(formHtml, /تواصل واتساب/);
+  assert.doesNotMatch(formHtml, /id="contact-form"/);
+  assert.doesNotMatch(formHtml, /name="phone"/);
+  assert.doesNotMatch(formHtml, /name="message"/);
+  assert.doesNotMatch(formHtml, /name="email"/);
+});
+
+test('form landing uses two equal columns with WhatsApp contact centered', () => {
+  assert.match(landingSource, /lg:grid-cols-2/);
+  assert.match(landingSource, /place-items-center/);
+  assert.match(landingSource, /rtl:lg:order-none/);
 });
 
 test('contact form landing omits chrome, breadcrumbs, and full-site links', () => {
@@ -31,9 +52,8 @@ test('contact form landing omits chrome, breadcrumbs, and full-site links', () =
   assert.doesNotMatch(formHtml, /data-floating-contact/);
   assert.doesNotMatch(formHtml, /data-form-landing-crumb/);
   assert.doesNotMatch(landingSource, /goFullSite/);
-  assert.match(formHtml, /<h1[^>]*>[\s\S]*اتصل بنا[\s\S]*<\/h1>/);
+  assert.match(formHtml, /<h1[^>]*>[\s\S]*تواصل معنا[\s\S]*<\/h1>/);
   assert.match(formHtml, /data-form-actions/);
-  assert.match(formHtml, /id="contact-form"/);
   assert.match(formHtml, /id="branches"/);
   assert.match(formHtml, /حي المحمدية/);
   assert.match(formHtml, /٢٤ ساعة|24/);
@@ -41,8 +61,6 @@ test('contact form landing omits chrome, breadcrumbs, and full-site links', () =
   assert.match(formHtml, /data-language-switcher/);
   assert.doesNotMatch(formHtml, /data-theme-switcher/);
   assert.match(formHtml, /hreflang="en"/);
-  assert.doesNotMatch(formHtml, /name="email"/);
-  assert.match(formHtml, /name="message"/);
   assert.match(formHtml, /noindex/);
   assert.match(formHtml, /العروض/);
   assert.match(formHtml, /api\.whatsapp\.com|wa\.me/);

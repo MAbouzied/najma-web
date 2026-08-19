@@ -1,7 +1,8 @@
 ---
 import UiIcon from './UiIcon.astro';
+import WhatsAppIcon from './WhatsAppIcon.astro';
 import { GTM_EVENTS, gtmContactAttrs } from '../lib/gtm';
-import { WHATSAPP_PHONE } from '../lib/whatsapp';
+import { WHATSAPP_PHONE, buildGeneralContactUrl } from '../lib/whatsapp';
 import { offers, packages, services } from '../data/home';
 import { t } from '../i18n/t';
 import type { Locale } from '../i18n/types';
@@ -12,9 +13,10 @@ export interface Props {
   description?: string;
   locale?: Locale;
   compact?: boolean;
+  whatsappOnly?: boolean;
 }
 
-const { sectionLabel, title, description, locale = 'ar', compact = false } = Astro.props;
+const { sectionLabel, title, description, locale = 'ar', compact = false, whatsappOnly = false } = Astro.props;
 const dir = locale === 'en' ? 'ltr' : 'rtl';
 const labels = {
   phone: t(locale, 'contactFormPhone'),
@@ -33,6 +35,19 @@ const waLabels =
     : { name: 'اسمي', phone: 'رقمي', service: 'الخدمة', message: 'ملاحظات' };
 ---
 
+{whatsappOnly ? (
+  <a
+    href={buildGeneralContactUrl(locale)}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="gold-button min-h-14 text-base"
+    dir={dir}
+    {...gtmContactAttrs(GTM_EVENTS.whatsapp, 'form_landing')}
+  >
+    <WhatsAppIcon class="size-5 text-text-btn" />
+    {t(locale, 'formWhatsappAction')}
+  </a>
+) : (
 <article class:list={['rounded-3xl bg-bg-form', compact ? 'p-5 sm:p-6' : 'p-6 sm:p-8']} dir={dir}>
   {!compact && sectionLabel && <span class="text-sm font-medium text-gold">{sectionLabel}</span>}
   {!compact && title && (
@@ -105,6 +120,7 @@ const waLabels =
     </label>
   </form>
 </article>
+)}
 
 <script>
   import { submitCustomerLead } from '../lib/customer-leads';

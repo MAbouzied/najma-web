@@ -40,21 +40,22 @@ const branches = getBranches(locale);
         </div>
       </div>
 
-      <h1 class="mt-6 truncate text-sm font-medium text-text-primary">
-        {t(locale, 'breadcrumbContact')}
+      <h1 class="mt-6 truncate text-sm font-semibold text-text-primary">
+        {t(locale, 'formHeading')}
       </h1>
 
-      <div class="mt-6 grid w-full min-w-0 flex-1 grid-cols-1 items-start gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
+      <div class="mt-6 grid w-full min-w-0 flex-1 grid-cols-1 items-start gap-10 lg:grid-cols-2 lg:items-stretch lg:gap-16">
         <div class="min-w-0">
           <BranchesSection
             sectionLabel={t(locale, 'homeBranchesEyebrow')}
             branches={branches}
             locale={locale}
+            compact
           />
           <FormActions locale={locale} />
         </div>
-        <div class="order-first min-w-0 lg:order-none">
-          <ContactForm compact locale={locale} />
+        <div class="order-first grid min-w-0 place-items-center rtl:lg:order-none">
+          <ContactForm whatsappOnly locale={locale} />
         </div>
       </div>
     </div>

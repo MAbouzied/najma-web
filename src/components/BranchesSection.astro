@@ -10,14 +10,15 @@ export interface Props {
   title?: string;
   branches: Branch[];
   locale?: Locale;
+  compact?: boolean;
 }
 
-const { sectionLabel, branches, locale = 'ar', title } = Astro.props;
+const { sectionLabel, branches, locale = 'ar', title, compact = false } = Astro.props;
 const dir = locale === 'en' ? 'ltr' : 'rtl';
 const heading = title ?? t(locale, 'contactBranchesHeading');
 ---
 
-<article id="branches" class="py-8" dir={dir}>
+<article id="branches" class:list={[compact ? 'py-0' : 'py-8']} dir={dir}>
   <span class="text-sm font-medium text-gold">{sectionLabel}</span>
   <h2 class="text-gold-gradient mt-2 text-start text-4xl font-bold leading-tight tracking-[0.48px] sm:text-5xl">
     {heading}

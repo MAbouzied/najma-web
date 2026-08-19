@@ -198,6 +198,7 @@ export const ui = {
     formPageTitle: 'تواصل معنا - نجم سبا',
     formPageDescription:
       'تواصل مع نجم سبا عبر واتساب، اعرف موقعنا، أو اسأل عن العروض مباشرة. مفتوح ٢٤ ساعة في حفر الباطن.',
+    formHeading: 'تواصل معنا',
     formActionsAria: 'خيارات التواصل',
     formWhatsappAction: 'تواصل واتساب',
     formCallAction: 'اتصال',
@@ -486,6 +487,7 @@ export const ui = {
     formPageTitle: 'Contact us - Nagm Spa',
     formPageDescription:
       'Contact Nagm Spa on WhatsApp, see our location, or ask about offers. Open 24 hours in Hafar Al-Batin.',
+    formHeading: 'Contact us',
     formActionsAria: 'Contact options',
     formWhatsappAction: 'WhatsApp',
     formCallAction: 'Call',

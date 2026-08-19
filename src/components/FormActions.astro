@@ -4,7 +4,7 @@ import WhatsAppIcon from './WhatsAppIcon.astro';
 import { GTM_EVENTS, gtmContactAttrs } from '../lib/gtm';
 import { t } from '../i18n/t';
 import type { Locale } from '../i18n/types';
-import { buildCallHref, buildGeneralContactUrl, buildOffersContactUrl, MAPS_HREF } from '../lib/whatsapp';
+import { buildCallHref, buildOffersContactUrl, MAPS_HREF } from '../lib/whatsapp';
 
 export interface Props {
   locale?: Locale;
@@ -12,7 +12,6 @@ export interface Props {
 
 const { locale = 'ar' } = Astro.props;
 const dir = locale === 'en' ? 'ltr' : 'rtl';
-const whatsappHref = buildGeneralContactUrl(locale);
 const callHref = buildCallHref();
 const offersHref = buildOffersContactUrl(locale);
 ---
@@ -23,16 +22,6 @@ const offersHref = buildOffersContactUrl(locale);
   data-form-actions
   dir={dir}
 >
-  <a
-    href={whatsappHref}
-    target="_blank"
-    rel="noopener noreferrer"
-    class="gold-button w-full min-h-14 text-base"
-    {...gtmContactAttrs(GTM_EVENTS.whatsapp, 'form_landing')}
-  >
-    <WhatsAppIcon class="size-5 text-text-btn" />
-    {t(locale, 'formWhatsappAction')}
-  </a>
   <a
     href={callHref}
     class="outline-button w-full min-h-14 text-base"
