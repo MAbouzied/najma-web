@@ -16,12 +16,12 @@ export interface Branch {
 
 export function getBranches(locale: Locale): Branch[] {
   const titles: Record<Locale, string> = {
-    ar: 'فرع حفر الباطن — حي المصيف',
-    en: 'Hafar Al-Batin Branch — Al-Musayyif',
+    ar: 'فرع حفر الباطن — حي المحمدية',
+    en: 'Hafar Al-Batin Branch — Al-Muhammadiyah',
   };
   const addresses: Record<Locale, string> = {
-    ar: 'حي المصيف، حفر الباطن',
-    en: 'Al-Musayyif District, Hafar Al-Batin',
+    ar: 'حي المحمدية، حفر الباطن',
+    en: 'Al-Muhammadiyah District, Hafar Al-Batin',
   };
   const hours: Record<Locale, string> = {
     ar: 'على مدار الساعة — ٢٤ ساعة',

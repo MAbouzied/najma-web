@@ -50,18 +50,18 @@ const names: Record<Locale, string> = {
 };
 
 const descriptions: Record<Locale, string> = {
-  ar: 'مركز استرخاء الجسد والعقل والروح في حفر الباطن — حي المصيف. خدمات متميزة بأيدي أخصائيين محترفين على مدار الساعة.',
-  en: 'Body, mind, and soul relaxation center in Hafar Al-Batin — Al-Musayyif district. Premium services by professional therapists, open 24 hours.',
+  ar: 'مركز استرخاء الجسد والعقل والروح في حفر الباطن — حي المحمدية. خدمات متميزة بأيدي أخصائيين محترفين على مدار الساعة.',
+  en: 'Body, mind, and soul relaxation center in Hafar Al-Batin — Al-Muhammadiyah district. Premium services by professional therapists, open 24 hours.',
 };
 
 const addresses: Record<Locale, { streetAddress: string; addressLocality: string; addressRegion: string }> = {
   ar: {
-    streetAddress: 'حي المصيف',
+    streetAddress: 'حي المحمدية',
     addressLocality: 'حفر الباطن',
     addressRegion: 'المنطقة الشرقية',
   },
   en: {
-    streetAddress: 'Al-Musayyif District',
+    streetAddress: 'Al-Muhammadiyah District',
     addressLocality: 'Hafar Al-Batin',
     addressRegion: 'Eastern Province',
   },

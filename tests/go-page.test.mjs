@@ -14,6 +14,6 @@ test('renders a dedicated contact landing with WhatsApp, call, and directions', 
     goHtml,
     /href="https:\/\/maps\.app\.goo\.gl\/4TJpLxDQE7TJ6D1D9"/,
   );
-  assert.match(goHtml, /حي المصيف/);
+  assert.match(goHtml, /حي المحمدية/);
   assert.match(goHtml, /٢٤ ساعة|24/);
 });

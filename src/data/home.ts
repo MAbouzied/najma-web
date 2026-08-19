@@ -77,7 +77,7 @@ export const benefits: Benefit[] = [
   {
     icon: '/assets/home/benefits/quick-booking.png',
     title: { ar: 'موقع مميز', en: 'Prime Location' },
-    description: { ar: 'في قلب حفر الباطن — حي المصيف، نخدمك على مدار الساعة', en: 'In the heart of Hafar Al-Batin — Al-Masif district, serving you around the clock' },
+    description: { ar: 'في قلب حفر الباطن — حي المحمدية، نخدمك على مدار الساعة', en: 'In the heart of Hafar Al-Batin — Al-Muhammadiyah district, serving you around the clock' },
   },
 ];
 

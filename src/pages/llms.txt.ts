@@ -44,10 +44,10 @@ export const GET: APIRoute = ({ site }) => {
 
   const body = `# نجم سبا / Nagm Spa
 
-> مركز مساج وحمام مغربي في حفر الباطن — حي المصيف، المملكة العربية السعودية. مفتوح على مدار الساعة.
-> Massage and Moroccan bath center in Hafar Al-Batin — Al-Musayyif district, Saudi Arabia. Open 24 hours.
+> مركز مساج وحمام مغربي في حفر الباطن — حي المحمدية، المملكة العربية السعودية. مفتوح على مدار الساعة.
+> Massage and Moroccan bath center in Hafar Al-Batin — Al-Muhammadiyah district, Saudi Arabia. Open 24 hours.
 
-Arabic is the default locale (unprefixed). English is available under /en/. The business operates from a single branch in Hafar Al-Batin — Al-Musayyif. There are no branches in Riyadh, Jeddah, or Khobar.
+Arabic is the default locale (unprefixed). English is available under /en/. The business operates from a single branch in Hafar Al-Batin — Al-Muhammadiyah. There are no branches in Riyadh, Jeddah, or Khobar.
 
 ## الصفحات الرئيسية (Arabic)
 
@@ -97,7 +97,7 @@ ${packageLinksEn}
 - [الهاتف / Phone](${buildCallHref()}): ${WHATSAPP_PHONE_DISPLAY}
 - [واتساب للحجز / WhatsApp](${buildGeneralContactUrl()}): Direct booking and inquiries
 - [البريد الإلكتروني / Email](mailto:info@nagmspa.com): info@nagmspa.com
-- [العنوان / Address](${MAPS_HREF}): حي المصيف، حفر الباطن / Al-Musayyif, Hafar Al-Batin
+- [العنوان / Address](${MAPS_HREF}): حي المحمدية، حفر الباطن / Al-Muhammadiyah, Hafar Al-Batin
 - [ساعات العمل / Hours](${link('/contact/')}): على مدار الساعة — ٢٤ ساعة يوميًا / Open 24 hours
 
 ## Social

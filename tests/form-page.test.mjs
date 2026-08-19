@@ -35,7 +35,7 @@ test('contact form landing omits chrome, breadcrumbs, and full-site links', () =
   assert.match(formHtml, /data-form-actions/);
   assert.match(formHtml, /id="contact-form"/);
   assert.match(formHtml, /id="branches"/);
-  assert.match(formHtml, /حي المصيف/);
+  assert.match(formHtml, /حي المحمدية/);
   assert.match(formHtml, /٢٤ ساعة|24/);
   assert.match(formHtml, /dir="ltr"[^>]*>\+?966|dir="ltr">\+966579777407/);
   assert.match(formHtml, /data-language-switcher/);

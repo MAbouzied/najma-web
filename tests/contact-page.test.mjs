@@ -25,7 +25,7 @@ test('renders real phone, call link, and email', () => {
 });
 
 test('renders the single real branch in Al-Musayf', () => {
-  assert.match(contactHtml, /حفر الباطن — حي المصيف/);
+  assert.match(contactHtml, /حفر الباطن — حي المحمدية/);
   assert.match(contactHtml, /٢٤ ساعة/);
 });
 

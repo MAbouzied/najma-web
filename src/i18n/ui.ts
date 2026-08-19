@@ -3,7 +3,7 @@ export const ui = {
     brandName: 'نجم سبا',
     brandHomeAria: 'العودة للصفحة الرئيسية — نجم سبا',
     brandDescription:
-      'مركز مساج وحمام مغربي في حفر الباطن — حي المصيف. خدمات متميزة بأيدي أخصائيين محترفين على مدار الساعة.',
+      'مركز مساج وحمام مغربي في حفر الباطن — حي المحمدية. خدمات متميزة بأيدي أخصائيين محترفين على مدار الساعة.',
 
     navHome: 'الرئيسية',
     navAbout: 'من نحن',
@@ -94,7 +94,7 @@ export const ui = {
     homePackagesDescription: 'تجارب متكاملة تجمع خدماتنا الأكثر تميزًا بقيمة استثنائية.',
     homeBranchesEyebrow: 'موقعنا',
     homeBranchesTitle: 'فرع حفر الباطن',
-    homeBranchesDescription: 'نخدمك من فرعنا في حي المصيف — على مدار الساعة.',
+    homeBranchesDescription: 'نخدمك من فرعنا في حي المحمدية — على مدار الساعة.',
     homeTestimonialsEyebrow: 'آراء العملاء',
     homeTestimonialsTitle: 'آراء من واقع التجربة',
     homeTestimonialsDescription: 'تجارب من عملاء نجم سبا — واطلع على تقييماتنا الإيجابية على خرائط جوجل.',
@@ -154,11 +154,11 @@ export const ui = {
 
     contactPageTitle: 'اتصل بنا - نجم سبا',
     contactPageDescription:
-      'تواصل مع نجم سبا في حفر الباطن — حي المصيف. واتساب واتصال واتجاهات على مدار الساعة.',
+      'تواصل مع نجم سبا في حفر الباطن — حي المحمدية. واتساب واتصال واتجاهات على مدار الساعة.',
     contactHeroBadge: 'تواصل معنا',
     contactHeroTitle: 'اتصل بنا',
     contactHeroDescription:
-      'نسعد بخدمتك في حي المصيف بحفر الباطن — تواصل معنا للحجز أو الاستفسار على مدار الساعة.',
+      'نسعد بخدمتك في حي المحمدية بحفر الباطن — تواصل معنا للحجز أو الاستفسار على مدار الساعة.',
     contactLabelPhone: 'الهاتف',
     contactLabelWhatsapp: 'واتساب',
     contactLabelEmail: 'البريد الإلكتروني',
@@ -188,9 +188,9 @@ export const ui = {
 
     goPageTitle: 'تواصل مع نجم سبا | واتساب · اتصال · اتجاهات',
     goPageDescription:
-      'صفحة تواصل سريعة لنجم سبا في حفر الباطن — حي المصيف: واتساب، اتصال، واتجاهات الموقع. مفتوح ٢٤ ساعة.',
+      'صفحة تواصل سريعة لنجم سبا في حفر الباطن — حي المحمدية: واتساب، اتصال، واتجاهات الموقع. مفتوح ٢٤ ساعة.',
     goTitle: 'تواصل معنا الآن',
-    goSubtitle: 'حي المصيف، حفر الباطن · مفتوح ٢٤ ساعة',
+    goSubtitle: 'حي المحمدية، حفر الباطن · مفتوح ٢٤ ساعة',
     goWhatsappLabel: 'واتساب',
     goCallLabel: 'اتصال',
     goDirectionsLabel: 'الاتجاهات',
@@ -237,7 +237,7 @@ export const ui = {
 
     seoHomeTitle: 'نجم سبا | مساج وحمام مغربي في حفر الباطن',
     seoHomeDescription:
-      'نجم سبا — مركز مساج واسترخاء في حفر الباطن، حي المصيف. مساج سويدي وتايلندي وحمام مغربي بأيدي أخصائيين. مفتوح ٢٤ ساعة.',
+      'نجم سبا — مركز مساج واسترخاء في حفر الباطن، حي المحمدية. مساج سويدي وتايلندي وحمام مغربي بأيدي أخصائيين. مفتوح ٢٤ ساعة.',
     seoServicesTitle: 'خدماتنا - نجم سبا',
     seoServicesDescription: 'استكشف خدمات المساج والحمام المغربي والعناية الشخصية في نجم سبا — حفر الباطن.',
     seoPackagesTitle: 'باقاتنا - نجم سبا',
@@ -291,7 +291,7 @@ export const ui = {
     brandName: 'Nagm Spa',
     brandHomeAria: 'Go to homepage — Nagm Spa',
     brandDescription:
-      'Massage & Moroccan bath center in Hafar Al-Batin — Al-Musayyif district. Premium services by professional therapists, open 24 hours.',
+      'Massage & Moroccan bath center in Hafar Al-Batin — Al-Muhammadiyah district. Premium services by professional therapists, open 24 hours.',
 
     navHome: 'Home',
     navAbout: 'About',
@@ -382,7 +382,7 @@ export const ui = {
     homePackagesDescription: 'Complete experiences combining our most distinguished services at exceptional value.',
     homeBranchesEyebrow: 'Our Location',
     homeBranchesTitle: 'Hafar Al-Batin Branch',
-    homeBranchesDescription: 'We serve you from our branch in Al-Musayyif — around the clock.',
+    homeBranchesDescription: 'We serve you from our branch in Al-Muhammadiyah — around the clock.',
     homeTestimonialsEyebrow: 'Client Reviews',
     homeTestimonialsTitle: 'Reviews from Real Experiences',
     homeTestimonialsDescription: 'Experiences from Nagm Spa clients — check out our positive reviews on Google Maps.',
@@ -442,11 +442,11 @@ export const ui = {
 
     contactPageTitle: 'Contact Us - Nagm Spa',
     contactPageDescription:
-      'Get in touch with Nagm Spa in Hafar Al-Batin — Al-Musayyif district. WhatsApp, call, and directions available 24/7.',
+      'Get in touch with Nagm Spa in Hafar Al-Batin — Al-Muhammadiyah district. WhatsApp, call, and directions available 24/7.',
     contactHeroBadge: 'Get in Touch',
     contactHeroTitle: 'Contact Us',
     contactHeroDescription:
-      'We are happy to serve you in Al-Musayyif district, Hafar Al-Batin — reach out to book or inquire anytime, 24/7.',
+      'We are happy to serve you in Al-Muhammadiyah district, Hafar Al-Batin — reach out to book or inquire anytime, 24/7.',
     contactLabelPhone: 'Phone',
     contactLabelWhatsapp: 'WhatsApp',
     contactLabelEmail: 'Email',
@@ -476,9 +476,9 @@ export const ui = {
 
     goPageTitle: 'Contact Nagm Spa | WhatsApp · Call · Directions',
     goPageDescription:
-      'Quick contact page for Nagm Spa in Hafar Al-Batin — Al-Musayyif: WhatsApp, call, and location directions. Open 24 hours.',
+      'Quick contact page for Nagm Spa in Hafar Al-Batin — Al-Muhammadiyah: WhatsApp, call, and location directions. Open 24 hours.',
     goTitle: 'Contact Us Now',
-    goSubtitle: 'Al-Musayyif, Hafar Al-Batin · Open 24 hours',
+    goSubtitle: 'Al-Muhammadiyah, Hafar Al-Batin · Open 24 hours',
     goWhatsappLabel: 'WhatsApp',
     goCallLabel: 'Call',
     goDirectionsLabel: 'Directions',
@@ -525,7 +525,7 @@ export const ui = {
 
     seoHomeTitle: 'Nagm Spa | Massage & Moroccan Bath in Hafar Al-Batin',
     seoHomeDescription:
-      'Nagm Spa — massage and relaxation center in Hafar Al-Batin, Al-Musayyif district. Swedish & Thai massage and Moroccan bath by professionals. Open 24 hours.',
+      'Nagm Spa — massage and relaxation center in Hafar Al-Batin, Al-Muhammadiyah district. Swedish & Thai massage and Moroccan bath by professionals. Open 24 hours.',
     seoServicesTitle: 'Our Services - Nagm Spa',
     seoServicesDescription: 'Explore massage, Moroccan bath, and personal care services at Nagm Spa — Hafar Al-Batin.',
     seoPackagesTitle: 'Our Packages - Nagm Spa',
