@@ -12,7 +12,8 @@ test('accepts Meta pixel ids and rejects other values', () => {
   assert.equal(isMetaPixelId(DEFAULT_META_PIXEL_ID), true);
   assert.equal(isMetaPixelId(` ${DEFAULT_META_PIXEL_ID} `), true);
   assert.equal(isMetaPixelId('G-KKSXRY8MSN'), false);
-  assert.equal(isMetaPixelId('160347908822423'), false);
+  assert.equal(isMetaPixelId('16034790882242'), false);
+  assert.equal(isMetaPixelId('16034790882242301'), false);
   assert.equal(isMetaPixelId(`${DEFAULT_META_PIXEL_ID}<script>`), false);
   assert.equal(isMetaPixelId(''), false);
   assert.equal(isMetaPixelId(undefined), false);
