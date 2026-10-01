@@ -5,12 +5,14 @@ import FloatingContact from '../components/FloatingContact.astro';
 import Footer from '../components/Footer.astro';
 import Gtm from '../components/Gtm.astro';
 import JsonLd from '../components/JsonLd.astro';
+import MetaPixel from '../components/MetaPixel.astro';
 import SnapPixel from '../components/SnapPixel.astro';
 import SoftNav from '../components/SoftNav.astro';
 import type { Locale } from '../i18n/types';
 import { isBlogPath, localePath, stripLocalePrefix } from '../i18n/paths';
 import { t } from '../i18n/t';
 import { isGaMeasurementId } from '../lib/gtm';
+import { DEFAULT_META_PIXEL_ID } from '../lib/meta-pixel';
 import { DEFAULT_SNAP_PIXEL_ID } from '../lib/snap-pixel';
 import {
   buildStructuredData,
@@ -135,6 +137,7 @@ const gaMeasurementId = analyticsEnabled && PUBLIC_GA_MEASUREMENT_ID
   ? PUBLIC_GA_MEASUREMENT_ID.trim()
   : '';
 const snapPixelId = import.meta.env.PROD ? DEFAULT_SNAP_PIXEL_ID : '';
+const metaPixelId = import.meta.env.PROD ? DEFAULT_META_PIXEL_ID : '';
 ---
 
 <!doctype html>
@@ -277,6 +280,7 @@ const snapPixelId = import.meta.env.PROD ? DEFAULT_SNAP_PIXEL_ID : '';
     <title>{title}</title>
     {structuredData && <JsonLd data={structuredData} />}
     {analyticsEnabled && <Gtm measurementId={gaMeasurementId} />}
+    {metaPixelId && <MetaPixel pixelId={metaPixelId} />}
     {snapPixelId && <SnapPixel pixelId={snapPixelId} />}
   </head>
   <body>
