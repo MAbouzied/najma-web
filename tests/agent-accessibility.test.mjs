@@ -42,8 +42,8 @@ test('branch definition lists keep icons inside dt/dd groups', () => {
   }
 });
 
-test('does not ship a Content-Security-Policy in Astro or Cloudflare headers', () => {
+test('does not ship CSP or frame blocking in Astro or Cloudflare headers', () => {
   assert.doesNotMatch(astroConfig, /\bcsp\s*:/);
   assert.doesNotMatch(astroConfig, /Content-Security-Policy|frame-ancestors|scriptDirective/);
-  assert.doesNotMatch(publicHeaders, /Content-Security-Policy|frame-ancestors/);
+  assert.doesNotMatch(publicHeaders, /Content-Security-Policy|frame-ancestors|X-Frame-Options/);
 });

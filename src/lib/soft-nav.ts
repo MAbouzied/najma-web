@@ -13,10 +13,21 @@ export function isSnapPixelSetupActive(location: SoftNavLocation): boolean {
     const current = new URL(location.href);
     return (
       current.searchParams.has('pixelSetupTool')
+      || current.searchParams.has('setupToolCheckTimestamp')
       || current.hash.includes('snap-pixel-setup-tool')
     );
   } catch {
     return false;
+  }
+}
+
+/** Event setup tools load the site in an iframe. Soft-nav must not steal those clicks. */
+export function isEmbeddedWindow(win: { top: unknown; self: unknown } | null | undefined): boolean {
+  if (!win) return false;
+  try {
+    return win.top == null || win.top !== win.self;
+  } catch {
+    return true;
   }
 }
 
@@ -33,6 +44,7 @@ export function isSoftNavCandidate(
   if (anchor.hasAttribute('download')) return false;
   if (anchor.dataset.fullReload != null || anchor.dataset.astroReload != null) return false;
   if (isSnapPixelSetupActive(location)) return false;
+  if (isEmbeddedWindow(globalThis.window)) return false;
 
   const rawHref = anchor.getAttribute('href');
   if (!rawHref || rawHref.startsWith('#')) return false;
@@ -153,7 +165,7 @@ let navigating = false;
 export async function softNavigate(href: string, options: { push?: boolean } = {}) {
   if (navigating) return;
   // Full reload keeps Snapchat Event Setup Tool URL state / opener handoff intact.
-  if (isSnapPixelSetupActive(window.location)) {
+  if (isSnapPixelSetupActive(window.location) || isEmbeddedWindow(window)) {
     window.location.assign(href);
     return;
   }
@@ -209,7 +221,7 @@ export function initSoftNav() {
 
   window.addEventListener('popstate', () => {
     // Snapchat setup may drive history; do not swap the document out from under it.
-    if (isSnapPixelSetupActive(window.location)) return;
+    if (isSnapPixelSetupActive(window.location) || isEmbeddedWindow(window)) return;
     void softNavigate(window.location.href, { push: false });
   });
 }

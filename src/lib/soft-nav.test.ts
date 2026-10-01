@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
-import { isSnapPixelSetupActive, isSoftNavCandidate } from './soft-nav.ts';
+import { isEmbeddedWindow, isSnapPixelSetupActive, isSoftNavCandidate } from './soft-nav.ts';
 
 function anchor(href: string, extras: Partial<HTMLAnchorElement> = {}): HTMLAnchorElement {
   const el = {
@@ -50,6 +50,32 @@ describe('isSnapPixelSetupActive', () => {
       true,
     );
     assert.equal(isSnapPixelSetupActive(location), false);
+    assert.equal(
+      isSnapPixelSetupActive({
+        href: 'https://nagmspa.com/?setupToolCheckTimestamp=1',
+        origin: 'https://nagmspa.com',
+      }),
+      true,
+    );
+  });
+});
+
+describe('isEmbeddedWindow', () => {
+  it('treats a framed window as embedded and a top window as not', () => {
+    const self = {};
+    assert.equal(isEmbeddedWindow({ top: self, self }), false);
+    assert.equal(isEmbeddedWindow({ top: {}, self }), true);
+    assert.equal(isEmbeddedWindow({ top: null, self }), true);
+    assert.equal(isEmbeddedWindow(null), false);
+    assert.equal(
+      isEmbeddedWindow({
+        get top() {
+          throw new Error('cross-origin');
+        },
+        self,
+      }),
+      true,
+    );
   });
 });
 

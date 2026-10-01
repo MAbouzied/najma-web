@@ -23,7 +23,7 @@ test('does not mark HTML catch-all as immutable', () => {
   assert.doesNotMatch(catchAll, /\/\*\s*\n[^\n]*immutable/);
 });
 
-test('does not ship Content-Security-Policy on catch-all routes', () => {
+test('does not ship Content-Security-Policy or X-Frame-Options on catch-all routes', () => {
   const catchAll = headersText.split('/_astro/*')[0] ?? headersText;
-  assert.doesNotMatch(catchAll, /Content-Security-Policy/);
+  assert.doesNotMatch(catchAll, /Content-Security-Policy|X-Frame-Options/);
 });
