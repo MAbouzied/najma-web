@@ -27,14 +27,17 @@ test('loads the Google tag and Ads config on public pages', () => {
     assert.match(html, new RegExp(`const configIds = \\["${ADS_ID}"\\]`));
   }
   assert.doesNotMatch(homeHtml, /googletagmanager\.com\/ns\.html\?id=/);
-  assert.doesNotMatch(homeHtml, new RegExp(CONVERSION_SEND_TO));
-  assert.doesNotMatch(goHtml, new RegExp(CONVERSION_SEND_TO));
+  assert.match(homeHtml, /const conversionSendTo = ""/);
+  assert.match(goHtml, /const conversionSendTo = ""/);
 });
 
 test('fires the contact conversion only on the contact pages', () => {
   for (const html of [contactHtml, enContactHtml]) {
     assert.match(html, /gtag\('event', 'conversion', \{ send_to: conversionSendTo \}\)/);
     assert.match(html, new RegExp(`const conversionSendTo = "${CONVERSION_SEND_TO}"`));
+  }
+  for (const html of [homeHtml, goHtml]) {
+    assert.doesNotMatch(html, new RegExp(`const conversionSendTo = "${CONVERSION_SEND_TO}"`));
   }
 });
 
