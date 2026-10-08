@@ -1,17 +1,25 @@
 ---
 interface Props {
   measurementId: string;
+  /** Extra gtag config IDs, including the Google Ads account. */
+  configIds?: string[];
+  /** Set on the contact conversion page only. */
+  conversionSendTo?: string;
 }
 
-const { measurementId } = Astro.props;
+const { measurementId, configIds = [], conversionSendTo = '' } = Astro.props;
+const adsId = configIds.find((id) => id.startsWith('AW-')) ?? '';
 ---
 
 <meta name="gtm-container-id" content={measurementId} />
+{adsId && <meta name="google-ads-id" content={adsId} />}
 
 <script
   is:inline
   define:vars={{
     gtmId: measurementId,
+    configIds,
+    conversionSendTo,
   }}
 >
   window.dataLayer = window.dataLayer || [];
@@ -22,6 +30,14 @@ const { measurementId } = Astro.props;
   window.gtag = gtag;
   gtag('js', new Date());
   gtag('config', gtmId);
+  for (var i = 0; i < configIds.length; i += 1) {
+    if (configIds[i] && configIds[i] !== gtmId) {
+      gtag('config', configIds[i]);
+    }
+  }
+  if (conversionSendTo) {
+    gtag('event', 'conversion', { send_to: conversionSendTo });
+  }
 
   var gaScript = document.createElement('script');
   gaScript.async = true;
@@ -30,6 +46,7 @@ const { measurementId } = Astro.props;
 </script>
 
 <script>
+  import { isContactConversionPath, trackGoogleAdsConversion } from '../lib/google-ads';
   import { pushGtmEvent } from '../lib/gtm';
 
   const SAME_TAB_PROTOCOLS = ['tel:', 'mailto:'];
@@ -129,6 +146,11 @@ const { measurementId } = Astro.props;
   if (!window.__nagmGtmBound) {
     document.addEventListener('click', onClick, true);
     document.addEventListener('submit', onSubmit, true);
+    document.addEventListener('nagm:page-load', () => {
+      if (isContactConversionPath(window.location.pathname)) {
+        trackGoogleAdsConversion();
+      }
+    });
     window.__nagmGtmBound = true;
   }
 </script>

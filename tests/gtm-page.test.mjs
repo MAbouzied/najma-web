@@ -2,17 +2,44 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 
-const [homeHtml, contactHtml, goHtml] = await Promise.all([
+const [homeHtml, contactHtml, enContactHtml, goHtml, adminLayout] = await Promise.all([
   readFile(new URL('../dist/client/index.html', import.meta.url), 'utf8'),
   readFile(new URL('../dist/client/contact/index.html', import.meta.url), 'utf8'),
+  readFile(new URL('../dist/client/en/contact/index.html', import.meta.url), 'utf8'),
   readFile(new URL('../dist/client/go/index.html', import.meta.url), 'utf8'),
+  readFile(new URL('../src/layouts/AdminLayout.astro', import.meta.url), 'utf8'),
 ]);
 
-test('keeps analytics unloaded when the production measurement id is unset', () => {
-  assert.doesNotMatch(homeHtml, /name="gtm-container-id"/);
-  assert.doesNotMatch(homeHtml, /googletagmanager\.com\/gtag\/js/);
-  assert.doesNotMatch(homeHtml, /gtag\('config'/);
+const GA_ID = 'G-KKSXRY8MSN';
+const ADS_ID = 'AW-18495815386';
+const CONVERSION_SEND_TO = 'AW-18495815386/DmRmCIfvx5QdENr9vvNE';
+
+test('loads the Google tag and Ads config on public pages', () => {
+  for (const html of [homeHtml, contactHtml, enContactHtml, goHtml]) {
+    assert.match(html, /name="gtm-container-id"/);
+    assert.match(html, new RegExp(`content="${GA_ID}"`));
+    assert.match(html, /name="google-ads-id"/);
+    assert.match(html, new RegExp(`content="${ADS_ID}"`));
+    assert.match(html, /googletagmanager\.com\/gtag\/js\?id=/);
+    assert.match(html, new RegExp(`const gtmId = "${GA_ID}"`));
+    assert.match(html, /gtag\('config', gtmId\)/);
+    assert.match(html, /gtag\('config', configIds\[i\]\)/);
+    assert.match(html, new RegExp(`const configIds = \\["${ADS_ID}"\\]`));
+  }
   assert.doesNotMatch(homeHtml, /googletagmanager\.com\/ns\.html\?id=/);
+  assert.doesNotMatch(homeHtml, new RegExp(CONVERSION_SEND_TO));
+  assert.doesNotMatch(goHtml, new RegExp(CONVERSION_SEND_TO));
+});
+
+test('fires the contact conversion only on the contact pages', () => {
+  for (const html of [contactHtml, enContactHtml]) {
+    assert.match(html, /gtag\('event', 'conversion', \{ send_to: conversionSendTo \}\)/);
+    assert.match(html, new RegExp(`const conversionSendTo = "${CONVERSION_SEND_TO}"`));
+  }
+});
+
+test('keeps the Google tag off admin chrome pages', () => {
+  assert.doesNotMatch(adminLayout, /Gtm|gtag\/js|google-ads-id|AW-18495815386/);
 });
 
 test('marks header and floating contact buttons for GTM events', () => {

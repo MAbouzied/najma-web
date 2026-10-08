@@ -11,6 +11,12 @@ import SoftNav from '../components/SoftNav.astro';
 import type { Locale } from '../i18n/types';
 import { isBlogPath, localePath, stripLocalePrefix } from '../i18n/paths';
 import { t } from '../i18n/t';
+import {
+  CONTACT_CONVERSION_SEND_TO,
+  DEFAULT_GA_MEASUREMENT_ID,
+  googleTagConfigIds,
+  isContactConversionPath,
+} from '../lib/google-ads';
 import { isGaMeasurementId } from '../lib/gtm';
 import { DEFAULT_META_PIXEL_ID } from '../lib/meta-pixel';
 import { DEFAULT_SNAP_PIXEL_ID } from '../lib/snap-pixel';
@@ -131,10 +137,13 @@ if (structuredData && additionalSchemas.length > 0) {
   structuredData['@graph'] = [...structuredData['@graph'], ...additionalSchemas];
 }
 
-const analyticsEnabled =
-  import.meta.env.PROD && isGaMeasurementId(PUBLIC_GA_MEASUREMENT_ID);
-const gaMeasurementId = analyticsEnabled && PUBLIC_GA_MEASUREMENT_ID
+const gaMeasurementId = isGaMeasurementId(PUBLIC_GA_MEASUREMENT_ID)
   ? PUBLIC_GA_MEASUREMENT_ID.trim()
+  : DEFAULT_GA_MEASUREMENT_ID;
+const analyticsEnabled = import.meta.env.PROD && isGaMeasurementId(gaMeasurementId);
+const googleConfigIds = googleTagConfigIds(gaMeasurementId);
+const contactConversionSendTo = isContactConversionPath(pathname)
+  ? CONTACT_CONVERSION_SEND_TO
   : '';
 const snapPixelId = import.meta.env.PROD ? DEFAULT_SNAP_PIXEL_ID : '';
 const metaPixelId = import.meta.env.PROD ? DEFAULT_META_PIXEL_ID : '';
@@ -279,7 +288,13 @@ const metaPixelId = import.meta.env.PROD ? DEFAULT_META_PIXEL_ID : '';
     )}
     <title>{title}</title>
     {structuredData && <JsonLd data={structuredData} />}
-    {analyticsEnabled && <Gtm measurementId={gaMeasurementId} />}
+    {analyticsEnabled && (
+      <Gtm
+        measurementId={gaMeasurementId}
+        configIds={googleConfigIds}
+        conversionSendTo={contactConversionSendTo}
+      />
+    )}
     {metaPixelId && <MetaPixel pixelId={metaPixelId} />}
     {snapPixelId && <SnapPixel pixelId={snapPixelId} />}
   </head>
